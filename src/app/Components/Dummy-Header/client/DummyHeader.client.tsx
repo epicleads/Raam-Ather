@@ -137,37 +137,17 @@ export default function DummyHeaderClient({ data }: DummyHeaderProps) {
     setIsMobileMenuOpen(false);
   };
 
-  // Dynamic styles based on theme
+  // Minimalistic white header styles
   const getHeaderStyles = () => {
-    if (isDarkTheme) {
-      return {
-        className: isScrolled 
-          ? 'bg-black/20 backdrop-blur-2xl shadow-2xl border border-white/20' 
-          : 'bg-black/10 backdrop-blur-xl shadow-xl border border-white/10',
-        hoverClassName: 'hover:bg-black/30 hover:border-white/30 hover:shadow-3xl',
-        background: `
-          radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.1) 0%, transparent 50%),
-          linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%),
-          rgba(0,0,0,0.2)
-        `,
-        textColor: 'text-white',
-        textColorSecondary: 'text-white/80'
-      };
-    } else {
-      return {
-        className: isScrolled 
-          ? 'bg-white/95 backdrop-blur-2xl shadow-2xl border border-gray-200/50' 
-          : 'bg-white/90 backdrop-blur-xl shadow-xl border border-gray-200/30',
-        hoverClassName: 'hover:bg-white/98 hover:border-gray-300/50 hover:shadow-3xl',
-        background: `
-          radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0,0,0,0.05) 0%, transparent 50%),
-          linear-gradient(135deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.02) 100%),
-          rgba(255,255,255,0.95)
-        `,
-        textColor: 'text-gray-900',
-        textColorSecondary: 'text-gray-700'
-      };
-    }
+    return {
+      className: isScrolled
+        ? 'bg-white/98 backdrop-blur-lg shadow-lg border border-gray-200/30'
+        : 'bg-white/95 backdrop-blur-md shadow-md border border-gray-200/20',
+      hoverClassName: 'hover:bg-white hover:shadow-xl',
+      background: 'rgba(255,255,255,0.98)',
+      textColor: 'text-gray-800',
+      textColorSecondary: 'text-gray-600'
+    };
   };
 
   const headerStyles = getHeaderStyles();
@@ -189,44 +169,18 @@ export default function DummyHeaderClient({ data }: DummyHeaderProps) {
           background: headerStyles.background,
         }}
       >
-        {/* Floating particles background */}
-        <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
-          <div className={`absolute inset-0 bg-gradient-to-r from-transparent ${isDarkTheme ? 'via-white/5' : 'via-gray-900/5'} to-transparent animate-pulse`}></div>
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className={`absolute w-1 h-1 ${isDarkTheme ? 'bg-white/40' : 'bg-gray-900/40'} rounded-full`}
-              style={{
-                left: `${20 + i * 15}%`,
-                top: `${30 + (i % 2) * 40}%`,
-              }}
-              animate={{
-                y: [-10, 10, -10],
-                opacity: [0.2, 0.8, 0.2],
-                scale: [0.8, 1.2, 0.8],
-              }}
-              transition={{
-                duration: 3 + i * 0.5,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          ))}
-        </div>
 
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 relative z-10">
           <div className="flex items-center justify-between h-6 md:h-8">
-            {/* Logo with adaptive glow effect */}
-            <div className="flex-shrink-0 relative group">
-              <div className={`absolute inset-0 ${isDarkTheme ? 'bg-gradient-to-r from-blue-400/20 to-purple-400/20' : 'bg-gradient-to-r from-blue-400/10 to-purple-400/10'} rounded-full blur-lg group-hover:blur-xl transition-all duration-500`}></div>
-              <Link href={data.logo.href} className="relative hover:scale-110 transition-all duration-300">
+            {/* Clean minimal logo */}
+            <div className="flex-shrink-0">
+              <Link href={data.logo.href} className="hover:opacity-80 transition-opacity duration-300">
                 <Image
                   src={data.logo.src}
                   alt={data.logo.alt}
                   width={48}
                   height={48}
-                  className="h-6 w-auto sm:h-8 md:h-10 lg:h-12 drop-shadow-lg" 
-                  style={{ height: 'auto' }}
+                  className="h-8 w-auto md:h-10 lg:h-12"
                 />
               </Link>
             </div>
@@ -255,54 +209,39 @@ export default function DummyHeaderClient({ data }: DummyHeaderProps) {
                       >
                         <Link
                           href={item.href}
-                          className={`group relative px-2 sm:px-3 lg:px-3 xl:px-4 py-1.5 sm:py-2 lg:py-2 xl:py-2.5 text-xs sm:text-xs lg:text-xs xl:text-sm font-medium font-neurial rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 backdrop-blur-sm border ${
-                            isDarkTheme
-                              ? 'text-orange-100 bg-gradient-to-r from-orange-500/30 to-amber-500/30 border-orange-400/40 shadow-lg shadow-orange-500/20 hover:from-orange-500/40 hover:to-amber-500/40 hover:border-orange-400/60'
-                              : 'text-orange-900 bg-gradient-to-r from-orange-400/20 to-amber-400/20 border-orange-300/40 shadow-lg shadow-orange-400/20 hover:from-orange-400/30 hover:to-amber-400/30 hover:border-orange-300/60'
-                          }`}
+                          className="group relative px-3 lg:px-4 py-2 text-sm font-medium text-orange-600 bg-orange-50 border border-orange-200 rounded-lg hover:bg-orange-100 hover:border-orange-300 transition-colors duration-200"
                         >
-                          <span className="relative z-10 whitespace-nowrap">{item.label}</span>
-                          <div className="absolute inset-0 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-500 bg-gradient-to-r from-orange-400/0 via-amber-400/0 to-orange-400/0 group-hover:from-orange-400/20 group-hover:via-amber-400/20 group-hover:to-orange-400/20"></div>
+                          <span className="whitespace-nowrap">{item.label}</span>
                         </Link>
                       </motion.div>
                     ) : (
                       <Link
                         href={item.href}
-                        className={`group relative px-2 sm:px-3 lg:px-3 xl:px-4 py-1.5 sm:py-2 lg:py-2 xl:py-2.5 text-xs sm:text-xs lg:text-xs xl:text-sm font-medium font-neurial rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 backdrop-blur-sm border ${
+                        className={`px-3 lg:px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
                           isNavItemActive(item)
-                            ? isDarkTheme 
-                              ? 'text-white bg-white/20 border-white/30 shadow-lg'
-                              : 'text-gray-900 bg-gray-900/10 border-gray-900/30 shadow-lg'
-                            : isDarkTheme
-                              ? 'text-white/80 hover:text-white hover:bg-white/10 border-transparent hover:border-white/20 hover:shadow-md'
-                              : 'text-gray-700 hover:text-gray-900 hover:bg-gray-900/10 border-transparent hover:border-gray-900/20 hover:shadow-md'
+                            ? 'text-gray-900 bg-gray-100 border border-gray-200'
+                            : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 border border-transparent hover:border-gray-200'
                         }`}
                       >
-                        <span className="relative z-10 whitespace-nowrap">{item.label}</span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-purple-400/0 to-pink-400/0 group-hover:from-blue-400/10 group-hover:via-purple-400/10 group-hover:to-pink-400/10 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-500"></div>
+                        <span className="whitespace-nowrap">{item.label}</span>
                       </Link>
                     )
                   ) : (
                     <button
-                      className={`group relative flex items-center px-2 sm:px-3 lg:px-3 xl:px-4 py-1.5 sm:py-2 lg:py-2 xl:py-2.5 text-xs sm:text-xs lg:text-xs xl:text-sm font-medium font-neurial rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 backdrop-blur-sm border ${
+                      className={`flex items-center px-3 lg:px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
                         isNavItemActive(item)
-                          ? isDarkTheme 
-                            ? 'text-white bg-white/20 border-white/30 shadow-lg'
-                            : 'text-gray-900 bg-gray-900/10 border-gray-900/30 shadow-lg'
-                          : isDarkTheme
-                            ? 'text-white/80 hover:text-white hover:bg-white/10 border-transparent hover:border-white/20 hover:shadow-md'
-                            : 'text-gray-700 hover:text-gray-900 hover:bg-gray-900/10 border-transparent hover:border-gray-900/20 hover:shadow-md'
+                          ? 'text-gray-900 bg-gray-100 border border-gray-200'
+                          : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 border border-transparent hover:border-gray-200'
                       }`}
                       aria-expanded={activeDropdown === item.label}
                       aria-haspopup="true"
                     >
-                      <span className="relative z-10 whitespace-nowrap">{item.label}</span>
+                      <span className="whitespace-nowrap">{item.label}</span>
                       {item.dropdown && (
-                        <ChevronDown className={`ml-0.5 sm:ml-1 lg:ml-1 xl:ml-2 w-2.5 sm:w-3 lg:w-3 h-2.5 sm:h-3 lg:h-3 transition-transform duration-300 ${
+                        <ChevronDown className={`ml-1 w-4 h-4 transition-transform duration-200 ${
                           activeDropdown === item.label ? 'rotate-180' : ''
                         }`} />
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-purple-400/0 to-pink-400/0 group-hover:from-blue-400/10 group-hover:via-purple-400/10 group-hover:to-pink-400/10 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-500"></div>
                     </button>
                   )}
 
@@ -315,14 +254,8 @@ export default function DummyHeaderClient({ data }: DummyHeaderProps) {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
                           transition={{ duration: 0.3, type: "spring", damping: 25, stiffness: 300 }}
-                          className={`absolute top-full left-0 mt-3 w-72 ${isDarkTheme ? 'bg-black/30' : 'bg-white/95'} backdrop-blur-2xl rounded-2xl shadow-2xl border ${isDarkTheme ? 'border-white/20' : 'border-gray-200/50'} py-3 z-50 overflow-hidden`}
-                          style={{
-                            backdropFilter: 'blur(24px)',
-                            WebkitBackdropFilter: 'blur(24px)',
-                          }}
+                          className="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg py-2 z-50"
                         >
-                          <div className={`absolute inset-0 bg-gradient-to-br ${isDarkTheme ? 'from-white/10 to-white/5' : 'from-gray-900/5 to-gray-900/2'} rounded-2xl`}></div>
-                          <div className="absolute inset-0 bg-gradient-to-r from-blue-400/10 via-purple-400/10 to-pink-400/10 rounded-2xl"></div>
                           {item.dropdown.map((dropdownItem: DropdownItem, idx) => (
                             <motion.div
                               key={dropdownItem.label}
@@ -332,16 +265,13 @@ export default function DummyHeaderClient({ data }: DummyHeaderProps) {
                             >
                               <Link
                                 href={dropdownItem.href}
-                                className={`relative block px-5 py-3 text-sm ${isDarkTheme ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-900/10'} transition-all duration-200 group`}
+                                className="block px-4 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-200"
                                 onClick={() => setActiveDropdown(null)}
                               >
-                                <div className="relative z-10">
-                                  <div className="font-medium font-neurial">{dropdownItem.label}</div>
-                                  {dropdownItem.description && (
-                                    <div className={`text-xs ${isDarkTheme ? 'text-white/60' : 'text-gray-600'} mt-1`}>{dropdownItem.description}</div>
-                                  )}
-                                </div>
-                                <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 to-purple-400/0 group-hover:from-blue-400/20 group-hover:to-purple-400/20 transition-all duration-300 rounded-lg"></div>
+                                <div className="font-medium">{dropdownItem.label}</div>
+                                {dropdownItem.description && (
+                                  <div className="text-xs text-gray-500 mt-1">{dropdownItem.description}</div>
+                                )}
                               </Link>
                             </motion.div>
                           ))}
@@ -353,99 +283,59 @@ export default function DummyHeaderClient({ data }: DummyHeaderProps) {
               ))}
             </nav>
 
-            {/* Premium Desktop CTAs - responsive sizing */}
-            <div className="hidden lg:flex items-center space-x-2 xl:space-x-3 flex-shrink-0">
+            {/* Clean Desktop CTAs */}
+            <div className="hidden lg:flex items-center space-x-3 flex-shrink-0">
               {data.ctas.map((cta, index) => (
                 cta.label === 'Book Test Ride' ? (
-                  <motion.button
+                  <button
                     key={cta.label}
                     onClick={openTestRideForm}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`group relative inline-flex items-center px-2 sm:px-3 lg:px-4 xl:px-5 py-1.5 sm:py-2 lg:py-2.5 xl:py-2.5 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl font-medium font-neurial text-xs sm:text-xs lg:text-sm xl:text-sm transition-all duration-500 overflow-hidden ${
-                      cta.type === 'primary'
-                        ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg hover:shadow-2xl hover:shadow-green-500/50'
-                        : 'text-white border-2 border-white/30 hover:bg-white/10 backdrop-blur-sm'
-                    }`}
+                    className="inline-flex items-center px-6 py-2.5 text-sm font-medium text-white bg-green-600 border border-green-600 rounded-lg hover:bg-green-700 hover:border-green-700 transition-colors duration-200 focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <Zap className="w-3 sm:w-3 lg:w-4 xl:w-4 h-3 sm:h-3 lg:h-4 xl:h-4 mr-1 sm:mr-1 lg:mr-2 xl:mr-2 relative z-10" />
-                    <span className="relative z-10 whitespace-nowrap">{cta.label}</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-                  </motion.button>
+                    <Zap className="w-4 h-4 mr-2" />
+                    <span className="whitespace-nowrap">{cta.label}</span>
+                  </button>
                 ) : (
                   <Link
                     key={cta.label}
                     href={cta.href}
-                    className={`group relative inline-flex items-center px-2 sm:px-3 lg:px-4 xl:px-5 py-1.5 sm:py-2 lg:py-2.5 xl:py-2.5 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl font-medium font-neurial text-xs sm:text-xs lg:text-sm xl:text-sm transition-all duration-500 overflow-hidden ${
-                      cta.type === 'primary'
-                        ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg hover:shadow-2xl hover:shadow-green-500/50'
-                        : 'text-white border-2 border-white/30 hover:bg-white/10 backdrop-blur-sm'
-                    }`}
+                    className="inline-flex items-center px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-colors duration-200 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    {cta.icon && <span className="mr-1 sm:mr-1 lg:mr-2 xl:mr-2 relative z-10">{cta.icon}</span>}
-                    <span className="relative z-10 whitespace-nowrap">{cta.label}</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+                    {cta.icon && <span className="mr-2">{cta.icon}</span>}
+                    <span className="whitespace-nowrap">{cta.label}</span>
                   </Link>
                 )
               ))}
               
-              {/* Premium Hamburger Menu */}
-              <motion.button
+              {/* Clean Hamburger Menu */}
+              <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                whileHover={{ scale: 1.1, rotate: 90 }}
-                whileTap={{ scale: 0.9 }}
-                className={`relative p-1.5 sm:p-2 lg:p-2.5 xl:p-3 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 backdrop-blur-sm border group ${
-                  isDarkTheme 
-                    ? 'hover:bg-white/10 border-white/20 hover:border-white/40' 
-                    : 'hover:bg-gray-900/10 border-gray-900/20 hover:border-gray-900/40'
-                }`}
+                className="p-2 rounded-lg border border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-colors duration-200 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                 aria-label="Open menu"
               >
-                <Menu className={`w-3 sm:w-4 lg:w-4 xl:w-5 h-3 sm:h-4 lg:h-4 xl:h-5 transition-colors ${isDarkTheme ? 'text-white group-hover:text-white' : 'text-gray-900 group-hover:text-gray-900'}`} />
-                <div className={`absolute inset-0 bg-gradient-to-br rounded-2xl transition-all duration-300 ${
-                  isDarkTheme 
-                    ? 'from-white/5 to-transparent group-hover:from-white/10' 
-                    : 'from-gray-900/5 to-transparent group-hover:from-gray-900/10'
-                }`}></div>
-              </motion.button>
+                <Menu className="w-5 h-5 text-gray-700" />
+              </button>
             </div>
 
-            {/* Mobile Header with premium design - compact sizing */}
-            <div className="lg:hidden flex items-center space-x-2">
-              {/* Premium Call Now Button */}
-              <motion.a
+            {/* Clean Mobile Header */}
+            <div className="lg:hidden flex items-center space-x-3">
+              {/* Clean Call Now Button */}
+              <a
                 href={`tel:${data.contact.phone}`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative inline-flex items-center px-2 sm:px-3 py-1.5 sm:py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg sm:rounded-xl font-medium font-neurial text-xs shadow-lg hover:shadow-2xl hover:shadow-green-500/50 transition-all duration-500 overflow-hidden"
+                className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-green-600 rounded-lg hover:bg-green-700 transition-colors duration-200"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <Phone className="w-2.5 sm:w-3 h-2.5 sm:h-3 mr-0.5 sm:mr-1 relative z-10" />
-                <span className="relative z-10 whitespace-nowrap">{data.contact.displayText}</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-              </motion.a>
-              
-              {/* Premium Mobile Hamburger */}
-              <motion.button
+                <Phone className="w-4 h-4 mr-1" />
+                <span className="whitespace-nowrap">{data.contact.displayText}</span>
+              </a>
+
+              {/* Clean Mobile Hamburger */}
+              <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                whileHover={{ scale: 1.1, rotate: 90 }}
-                whileTap={{ scale: 0.9 }}
-                className={`relative p-1.5 sm:p-2 rounded-lg sm:rounded-xl transition-all duration-300 backdrop-blur-sm border group ${
-                  isDarkTheme 
-                    ? 'hover:bg-white/10 border-white/20 hover:border-white/40' 
-                    : 'hover:bg-gray-900/10 border-gray-900/20 hover:border-gray-900/40'
-                }`}
+                className="p-2 rounded-lg border border-gray-300 hover:bg-gray-50 hover:border-gray-400 transition-colors duration-200"
                 aria-label="Open menu"
               >
-                <Menu className={`w-3 sm:w-4 lg:w-4 xl:w-5 h-3 sm:h-4 lg:h-4 xl:h-5 transition-colors ${isDarkTheme ? 'text-white group-hover:text-white' : 'text-gray-900 group-hover:text-gray-900'}`} />
-                <div className={`absolute inset-0 bg-gradient-to-br rounded-2xl transition-all duration-300 ${
-                  isDarkTheme 
-                    ? 'from-white/5 to-transparent group-hover:from-white/10' 
-                    : 'from-gray-900/5 to-transparent group-hover:from-gray-900/10'
-                }`}></div>
-              </motion.button>
+                <Menu className="w-5 h-5 text-gray-700" />
+              </button>
             </div>
           </div>
         </div>

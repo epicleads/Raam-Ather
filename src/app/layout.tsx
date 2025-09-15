@@ -3,7 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import FloatingWhatsAppButton from './Components/common/FloatingWhatsAppButton';
 import BottomNav from './Components/BottomNav/server/BottomNav';
-import HeaderServer from './Components/New-Header/server/HeaderServer';
+import DummyHeaderServer from './Components/Dummy-Header/server/DummyHeader';
 import { TestDriveModalProvider } from './Components/test-ride-form/TestDriveModalStore';
 import { PopupProvider } from './Components/popups/PopupProvider';
 import TestRideFormModal from './Components/test-ride-form/TestRideFormModal.client';
@@ -155,7 +155,7 @@ export default function RootLayout({
           <PopupProvider>
             <TestDriveModalProvider>
               <ViewportFixClient />
-              <HeaderServer />
+             <DummyHeaderServer />
               <main className="min-h-screen overflow-x-hidden w-full max-w-full">
                 {children}
               </main>
