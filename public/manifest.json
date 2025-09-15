@@ -1,0 +1,16 @@
+{
+  "name": "Raam Ather",
+  "short_name": "Raam Ather",
+  "description": "Premium Electric Scooters",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00E396",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

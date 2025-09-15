@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(rm:*)",
+      "Bash(npm install:*)",
+      "Bash(find:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(npm run build:*)",
+      "Bash(npm run lint)",
+      "Read(/C:\\Users\\Admin\\Downloads\\Raam Group All websites\\Raam-Group-Master-Code\\raam-ather\\src\\app\\Components\\HomeCalculator\\server/**)",
+      "Read(/C:\\Users\\Admin\\Downloads\\Raam Group All websites\\Raam-Group-Master-Code\\raam-ather\\src\\app\\Components\\test-ride-form/**)",
+      "Read(/C:\\Users\\Admin\\Downloads\\Raam Group All websites\\Raam-Group-Master-Code\\raam-ather\\src\\app\\Components\\test-ride-form/**)",
+      "Read(/C:\\Users\\Admin\\Downloads\\Raam Group All websites\\Raam-Group-Master-Code\\raam-ather\\src\\app\\Components\\contactform/**)",
+      "Read(/C:\\Users\\Admin\\Downloads\\Raam Group All websites\\Raam-Group-Master-Code\\raam-ather\\src\\app/**)",
+      "Read(/C:\\Users\\Admin\\Downloads\\Raam Group All websites\\Raam-Group-Master-Code\\raam-ather\\src\\app\\Components\\HomeCalculator\\client/**)",
+      "Read(/C:\\Users\\Admin\\Downloads\\Raam Group All websites\\Raam-Group-Master-Code\\raam-ather\\src\\app\\Components\\CookieConsent/**)",
+      "Read(/C:\\Users\\Admin\\Downloads\\Raam Group All websites\\Raam-Group-Master-Code\\raam-ather\\src\\app\\Components\\CookieConsent/**)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Epic-Toyota--main/src/app/components/hero/**)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Epic-Toyota--main/src/app/components/**)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Raam-Ather-main/src/app/Components/test-ride-form/**)",
+      "WebFetch(domain:chennai.epicleads.in)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/ather_crm_system-main/**)",
+      "Bash(npm run typecheck:*)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Raam-Ather-main/src/app/rizta/**)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Raam-Ather-main/src/lib/**)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Raam-Ather-main/src/app/api/submit-lead/**)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Raam-Ather-main/src/app/AboutUs/components/**)",
+      "Bash(npm audit:*)",
+      "Bash(npm update:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

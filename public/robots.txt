@@ -1,0 +1,56 @@
+User-agent: *
+Allow: /
+
+# Priority pages based on sitemap structure
+Allow: /Services
+Allow: /testimonials
+Allow: /AboutUs
+Allow: /ContactUs
+Allow: /StoreLocator
+Allow: /rizta
+Allow: /ather-450
+Allow: /ather-450-apex
+Allow: /offer
+Allow: /chennai
+Allow: /hyderabad
+Allow: /TermsOfUse
+Allow: /PrivacyPolicy
+
+
+
+
+
+# Block admin and system files
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /temp/
+Disallow: /cache/
+
+# Allow important assets
+Allow: /favicon.ico
+Allow: /manifest.json
+Allow: /assets/
+Allow: /images/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.avif$
+
+# Sitemap location
+Sitemap: https://raamather.com/sitemap.xml
+Sitemap: https://raamather.com/sitemap-hyderabad.xml
+Sitemap: https://raamather.com/sitemap-chennai.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Host directive (helps with canonicalization)
+Host: https://raamather.com

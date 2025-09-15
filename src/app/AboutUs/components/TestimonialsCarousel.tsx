@@ -1,0 +1,188 @@
+"use client";
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { StarIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
+
+const TestimonialsCarousel = () => {
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+  
+  const testimonials = [
+    {
+      name: 'Arjun Reddy',
+      location: 'Hyderabad',
+      rating: 5,
+      text: 'Exceptional service from Raam Ather! The team guided me through every step of my EV journey. My Ather 450X has been perfect for my daily commute.',
+      image: '/assets/customer-1.jpg',
+      video: '/assets/testimonial-1.mp4'
+    },
+    {
+      name: 'Priya Sharma',
+      location: 'Chennai',
+      rating: 5,
+      text: 'The delivery was super fast and the after-sales service is outstanding. Raam Ather truly cares about their customers. Highly recommended!',
+      image: '/assets/customer-2.jpg',
+      video: '/assets/testimonial-2.mp4'
+    },
+    {
+      name: 'Karthik Kumar',
+      location: 'Hyderabad',
+      rating: 5,
+      text: 'Switching to electric was the best decision. Raam Ather made the entire process seamless. The community events are a great bonus!',
+      image: '/assets/customer-3.jpg',
+      video: '/assets/testimonial-3.mp4'
+    },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
+
+  const getVisibleTestimonials = () => {
+    const first = activeTestimonial;
+    const second = (activeTestimonial + 1) % testimonials.length;
+    const third = (activeTestimonial + 2) % testimonials.length;
+    return [testimonials[first], testimonials[second], testimonials[third]];
+  };
+
+  return (
+    <section className="py-12 bg-white">
+      <div className="container mx-auto px-6 lg:px-20">
+        <div className="text-center mb-8">
+          <motion.h2 
+            className="text-2xl md:text-3xl font-bold text-[#1B1B1B] mb-4 font-neurial"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Customer Feedback
+          </motion.h2>
+          <motion.p 
+            className="text-base text-[#666666] max-w-3xl mx-auto font-neurial"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Hear from our satisfied customers
+          </motion.p>
+        </div>
+
+        <div className="max-w-6xl mx-auto">
+          {/* Desktop Grid - 3 testimonials */}
+          <motion.div 
+            className="hidden md:grid md:grid-cols-3 gap-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            key={activeTestimonial}
+          >
+            {getVisibleTestimonials().map((testimonial, index) => (
+              <div key={index} className="bg-gradient-to-br from-[#F8F8F8] to-white p-8 rounded-3xl shadow-2xl">
+                <div className="text-center">
+                  <div className="flex justify-center mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <StarIcon key={i} className="w-6 h-6 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  
+                  <blockquote className="text-sm md:text-base text-[#1B1B1B] font-medium leading-relaxed mb-6 font-neurial">
+                    &quot;{testimonial.text}&quot;
+                  </blockquote>
+                  
+                  <div className="flex items-center justify-center gap-3">
+                    <Image 
+                      src={testimonial.image} 
+                      alt={testimonial.name}
+                      width={48}
+                      height={48}
+                      className="w-12 h-12 rounded-full object-cover border-3 border-[#4A4A4A]"
+                    />
+                    <div className="text-left">
+                      <div className="font-bold text-base text-[#1B1B1B] font-neurial">{testimonial.name}</div>
+                      <div className="text-sm text-[#666666] font-neurial">{testimonial.location}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Mobile Slider - 1 testimonial per slide */}
+          <div className="md:hidden">
+            <div className="relative">
+              {/* Show only the active testimonial */}
+              <motion.div
+                key={activeTestimonial}
+                className="px-4"
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="bg-gradient-to-br from-[#F8F8F8] to-white p-6 rounded-3xl shadow-2xl mx-auto max-w-sm">
+                  <div className="text-center">
+                    <div className="flex justify-center mb-4">
+                      {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
+                        <StarIcon key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    
+                    <blockquote className="text-sm text-[#1B1B1B] font-medium leading-relaxed mb-6 font-neurial">
+                      &quot;{testimonials[activeTestimonial].text}&quot;
+                    </blockquote>
+                    
+                    <div className="flex items-center justify-center gap-3">
+                      <Image 
+                        src={testimonials[activeTestimonial].image} 
+                        alt={testimonials[activeTestimonial].name}
+                        width={40}
+                        height={40}
+                        className="w-10 h-10 rounded-full object-cover border-2 border-[#4A4A4A]"
+                        loading="lazy"
+                      />
+                      <div className="text-left">
+                        <div className="font-bold text-sm text-[#1B1B1B] font-neurial">{testimonials[activeTestimonial].name}</div>
+                        <div className="text-xs text-[#666666] font-neurial">{testimonials[activeTestimonial].location}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+            
+            {/* Mobile Navigation Dots */}
+            <div className="flex justify-center mt-6 space-x-2">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === activeTestimonial ? 'bg-[#4A4A4A] w-6' : 'bg-gray-300'
+                  }`}
+                  onClick={() => setActiveTestimonial(index)}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop Navigation Dots */}
+          <div className="hidden md:flex justify-center mt-8 space-x-2">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                className={`w-3 h-3 rounded-full transition-all ${
+                  activeTestimonial === index ? 'bg-[#4A4A4A] w-8' : 'bg-gray-300'
+                }`}
+                onClick={() => setActiveTestimonial(index)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default TestimonialsCarousel;
