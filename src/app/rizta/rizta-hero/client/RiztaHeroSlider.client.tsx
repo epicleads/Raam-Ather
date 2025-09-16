@@ -13,8 +13,30 @@ interface Props {
 
 export function RiztaHeroSlider({ heroItems, autoPlayInterval = 0 }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const isMobile = useMobileDetection(450);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const modal = useTestDriveModal();
+
+  // Client-side detection
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Mobile detection
+  useEffect(() => {
+    if (!isClient) return;
+    
+    const checkMobile = () => {
+      const isMobileWidth = window.innerWidth < 450;
+      console.log('Rizta Hero - Mobile check:', isMobileWidth, 'Width:', window.innerWidth);
+      setIsMobile(isMobileWidth);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, [isClient]);
 
   const handleCTAClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -47,6 +69,12 @@ export function RiztaHeroSlider({ heroItems, autoPlayInterval = 0 }: Props) {
 
   return (
     <div className="relative w-full h-full">
+      {/* Debug info */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="absolute top-4 left-4 bg-black/80 text-white p-2 rounded text-xs z-50">
+          Client: {isClient ? 'Yes' : 'No'} | Mobile: {isMobile ? 'Yes' : 'No'} | Index: {currentIndex}
+        </div>
+      )}
       {heroItems.map((item, index) => (
         <div
           key={item.id}
@@ -55,13 +83,48 @@ export function RiztaHeroSlider({ heroItems, autoPlayInterval = 0 }: Props) {
           }`}
         >
           {item.type === "image" ? (
-            <Image
-              src={isMobile && item.mobileSrc ? item.mobileSrc : item.src}
-              alt={item.alt}
-              width={1920}
-              height={1080}
-              className={`w-full h-full object-cover ${isMobile && item.mobileSrc ? 'rizta-mobile-image' : ''}`}
-            />
+            <div className="w-full h-full relative">
+              {/* Debug info */}
+              {process.env.NODE_ENV === 'development' && (
+                <div className="absolute top-2 left-2 bg-black/80 text-white p-1 rounded text-xs z-50">
+                  {isMobile ? 'Mobile' : 'Desktop'}: {isMobile && item.mobileSrc ? 'Mobile Image' : 'Desktop Image'}
+                </div>
+              )}
+              
+              {/* Desktop Image */}
+              <Image
+                src={item.src}
+                alt={item.alt}
+                fill
+                className="object-cover hidden md:block"
+                priority={index === 0}
+                onLoad={() => {
+                  console.log('Rizta Hero Desktop Image loaded:', item.src);
+                }}
+                onError={(e) => {
+                  console.error('Rizta Hero Desktop Image failed to load:', e);
+                }}
+              />
+              
+              {/* Mobile Image */}
+              {item.mobileSrc && (
+                <Image
+                  src={item.mobileSrc}
+                  alt={item.alt}
+                  fill
+                  className="object-cover rizta-mobile-image block md:hidden"
+                  priority={index === 0}
+                  onLoad={() => {
+                    console.log('Rizta Hero Mobile Image loaded:', item.mobileSrc);
+                  }}
+                  onError={(e) => {
+                    console.error('Rizta Hero Mobile Image failed to load:', e);
+                    // Hide mobile image if it fails, desktop will show
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+              )}
+            </div>
           ) : (
             <video
               src={item.src}

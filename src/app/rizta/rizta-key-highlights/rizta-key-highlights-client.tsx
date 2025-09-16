@@ -29,12 +29,12 @@ export function RiztaKeyHighlightsClient({
   riztaHighlights, 
   riztaSHighlights
 }: RiztaKeyHighlightsClientProps) {
-  const [activeTab, setActiveTab] = useState<'rizta' | 'rizta-s'>('rizta');
+  const [activeTab, setActiveTab] = useState<'rizta-z' | 'rizta-s'>('rizta-z');
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
-  const currentHighlights = activeTab === 'rizta' ? riztaHighlights : riztaSHighlights;
+  const currentHighlights = activeTab === 'rizta-z' ? riztaHighlights : riztaSHighlights;
 
   // Check if screen is mobile
   useEffect(() => {
@@ -70,8 +70,8 @@ export function RiztaKeyHighlightsClient({
     <div className="bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 py-20">
         {/* Apple-style Header */}
-        <div className="text-center mb-20">
-          <h1 className="text-5xl md:text-6xl font-light text-gray-900 mb-6 tracking-tight">
+        <div className="text-center mb-12 md:mb-16">
+          <h1 className="text-5xl md:text-6xl font-light text-gray-900 mb-4 md:mb-6 tracking-tight">
             Key Highlights
           </h1>
           <p className="text-xl text-gray-500 max-w-2xl mx-auto font-light leading-relaxed">
@@ -80,17 +80,17 @@ export function RiztaKeyHighlightsClient({
         </div>
 
         {/* Apple-style Tab Switcher */}
-        <div className="flex justify-center mb-16">
+        <div className="flex justify-center mb-12 md:mb-16">
           <div className="inline-flex bg-gray-100 rounded-full p-2">
             <button
-              onClick={() => setActiveTab('rizta')}
+              onClick={() => setActiveTab('rizta-z')}
               className={`px-8 py-3 rounded-full font-medium transition-all duration-300 ${
-                activeTab === 'rizta'
+                activeTab === 'rizta-z'
                   ? 'bg-white text-gray-900 shadow-sm'
                   : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              Rizta
+              Rizta Z
             </button>
             <button
               onClick={() => setActiveTab('rizta-s')}
@@ -108,7 +108,7 @@ export function RiztaKeyHighlightsClient({
         {/* Mobile Slider / Desktop Grid */}
         {isMobile ? (
           // Mobile Slider View
-          <div className="relative mb-32">
+          <div className="relative mb-20">
             <div className="overflow-hidden rounded-3xl">
               <div 
                 className="flex transition-transform duration-500 ease-in-out"
@@ -119,25 +119,25 @@ export function RiztaKeyHighlightsClient({
                     key={highlight.id}
                     className="w-full flex-shrink-0 px-4"
                   >
-                    <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
-                      <div className="text-center space-y-6">
+                    <div className="bg-white rounded-3xl p-6 shadow-xl border border-gray-100">
+                      <div className="text-center space-y-4">
                         {/* Icon */}
-                        <div className="text-6xl mb-6">
+                        <div className="flex justify-center mb-4">
                           {highlight.icon}
                         </div>
                         
                         {/* Title */}
-                        <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
                           {highlight.title}
                         </h3>
                         
                         {/* Subtitle */}
-                        <div className="text-3xl font-light text-gray-900 mb-4">
+                        <div className="text-2xl font-light text-gray-900 mb-3">
                           {highlight.subtitle}
                         </div>
                         
                         {/* Description */}
-                        <p className="text-gray-600 leading-relaxed font-light text-lg">
+                        <p className="text-gray-600 leading-relaxed font-light text-base">
                           {highlight.description}
                         </p>
                       </div>

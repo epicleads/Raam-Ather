@@ -20,7 +20,7 @@ const ServicesClient = () => {
       </div>
 
       {/* Section 2: Services Grid (gray) */}
-      <div className="bg-gray-50">
+      <div className="bg-gray-50 pt-8 md:pt-0">
         <ServicesGrid />
       </div>
 

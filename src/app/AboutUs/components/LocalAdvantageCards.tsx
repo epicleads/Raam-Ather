@@ -80,7 +80,7 @@ const LocalAdvantageCards = () => {
                   </h3>
                 </div>
                 
-                <p className="text-xs text-[#666666] mb-4 leading-relaxed font-neurial">
+                <p className="text-xs text-[#666666] mb-4 leading-relaxed font-neurial min-h-[2.5rem] flex items-center">
                   {advantage.description}
                 </p>
                 
@@ -121,7 +121,7 @@ const LocalAdvantageCards = () => {
                     </h3>
                   </div>
                   
-                  <p className="text-xs text-[#666666] mb-4 leading-relaxed font-neurial">
+                  <p className="text-xs text-[#666666] mb-4 leading-relaxed font-neurial min-h-[2.5rem] flex items-center">
                     {advantage.description}
                   </p>
                   

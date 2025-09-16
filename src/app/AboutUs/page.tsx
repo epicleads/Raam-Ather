@@ -37,12 +37,8 @@ export const metadata: Metadata = {
 export default function AboutUsPage() {
   return (
     <div className="font-neurial">
-    <main className="min-h-screen bg-gray-50">
       <AboutUsClient />
-    </main>
-    <footer className="bg-gray-900 text-white pt-0">
-       <Footer />
-      </footer>
+      <Footer />
     </div>
   );
 }

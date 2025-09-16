@@ -6,7 +6,7 @@ const TermsOfUse = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       {/* Header */}
-      <div className="bg-white border-b border-slate-200">
+      <div className="bg-white border-b border-slate-200 mt-20 md:mt-24">
         <div className="max-w-4xl mx-auto px-6 py-8">
           <div className="flex items-center gap-3 mb-4">
             <FileText className="w-8 h-8 text-blue-600" />
@@ -307,48 +307,43 @@ const TermsOfUse = () => {
           <div className="grid md:grid-cols-2 gap-6">
             {/* Chennai */}
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
-              <h3 className="text-xl font-medium text-slate-900 mb-4">Chennai Team</h3>
+              <h3 className="text-xl font-medium text-slate-900 mb-4">Chennai Showroom</h3>
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <MapPin className="w-4 h-4 text-slate-500" />
-                  <span className="text-slate-700">Anna Nagar, Chennai</span>
+                  <span className="text-slate-700">Nungambakkam, Chennai</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-slate-500" />
-                  <span className="text-slate-700">+91 XXX XXX XXXX</span>
+                  <a href="tel:+919240013828" className="text-slate-700 hover:text-blue-600 transition-colors">+91 9240013828</a>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="w-4 h-4 text-slate-500" />
-                  <span className="text-slate-700">chennai@raamather.com</span>
+                  <a href="mailto:marketing@raamather.com-hyd" className="text-slate-700 hover:text-blue-600 transition-colors">marketing@raamather.com-hyd</a>
                 </div>
               </div>
             </div>
 
             {/* Hyderabad */}
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
-              <h3 className="text-xl font-medium text-slate-900 mb-4">Hyderabad Team</h3>
+              <h3 className="text-xl font-medium text-slate-900 mb-4">Hyderabad Showroom</h3>
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <MapPin className="w-4 h-4 text-slate-500" />
-                  <span className="text-slate-700">Banjara Hills, Hyderabad</span>
+                  <span className="text-slate-700">Somajiguda, Hyderabad</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-slate-500" />
-                  <span className="text-slate-700">+91 XXX XXX XXXX</span>
+                  <a href="tel:+919032333833" className="text-slate-700 hover:text-blue-600 transition-colors">+91 9032333833</a>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="w-4 h-4 text-slate-500" />
-                  <span className="text-slate-700">hyderabad@raamather.com</span>
+                  <a href="mailto:marketing@raamather.com-hyd" className="text-slate-700 hover:text-blue-600 transition-colors">marketing@raamather.com-hyd</a>
                 </div>
               </div>
             </div>
           </div>
           
-          <div className="mt-6 bg-blue-50 rounded-2xl p-6 border border-blue-200">
-            <p className="text-blue-800 leading-relaxed">
-              <strong>Legal Questions?</strong> Contact our team at <strong>legal@raamather.com</strong> for terms-related inquiries.
-            </p>
-          </div>
         </section>
 
         {/* Key Terms Summary */}

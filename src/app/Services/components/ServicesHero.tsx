@@ -14,13 +14,13 @@ const ServicesHero = () => {
       <div className="absolute inset-0">
         <div 
           className="w-full h-full bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url('/assets/services-hero.jpg')` }}
+          style={{ backgroundImage: `url('/Ather-Assets/servicehero.png')` }}
         />
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-20 flex items-center min-h-screen">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-20 flex items-center min-h-screen pt-15 md:pt-0 pb-8 md:pb-12">
         <div className="w-full max-w-4xl mx-auto text-center text-white">
           {/* Main Title */}
           <motion.div
@@ -45,15 +45,6 @@ const ServicesHero = () => {
               </span>
             </h1>
             
-            <motion.p
-              className="text-xl sm:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed font-neurial"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              From sales to service, charging to customization - we provide comprehensive 
-              solutions to keep your Ather electric scooter running perfectly.
-            </motion.p>
           </motion.div>
 
           {/* Service Highlights */}
@@ -107,16 +98,6 @@ const ServicesHero = () => {
             </motion.button>
           </motion.div>
 
-          {/* Scroll Indicator */}
-          <motion.div
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white/70 rounded-full mt-2" />
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>

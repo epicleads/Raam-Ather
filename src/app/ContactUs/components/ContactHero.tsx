@@ -59,67 +59,57 @@ const ContactHero = () => {
                 Hyderabad & Chennai
               </motion.p>
 
-              <motion.p 
-                className="text-base text-gray-400 mt-4 max-w-2xl leading-relaxed font-neurial"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.9 }}
-              >
-                Questions, test rides, support – we&apos;re here to help. 
-                Experience premium electric mobility with expert consultation and personalized service.
-              </motion.p>
-
+              {/* Quick Stats */}
               <motion.div 
-                className="flex flex-col sm:flex-row gap-6 mt-10"
+                className="flex flex-wrap gap-8 mt-40 pt-8 border-t border-white/20"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.1 }}
               >
-                <motion.button 
-                  className="bg-[#4A4A4A] hover:bg-[#00B248] text-white px-10 py-5 rounded-xl font-bold text-lg transition-all transform hover:scale-105 flex items-center gap-3 shadow-2xl font-neurial"
-                  onClick={handleBookTestRide}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <PhoneIcon className="w-6 h-6" />
-                  Book Test Ride
-                </motion.button>
-                
-                <motion.a
-  href="tel:+919032333833" // replace with your phone number
-  className="border-2 border-white text-white hover:bg-white hover:text-[#1B1B1B] px-10 py-5 rounded-xl font-bold text-lg transition-all flex items-center gap-3 font-neurial"
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
->
-  <PhoneIcon className="w-6 h-6" />
-  Call Dealer
-</motion.a>
-
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-white font-neurial">20+</div>
+                  <div className="text-sm text-white/80 mt-1 font-neurial">Outlets</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-white font-neurial">24/7</div>
+                  <div className="text-sm text-white/80 mt-1 font-neurial">Support</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-white font-neurial">5000+</div>
+                  <div className="text-sm text-white/80 mt-1 font-neurial">Happy Customers</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-white font-neurial">2</div>
+                  <div className="text-sm text-white/80 mt-1 font-neurial">Major Cities</div>
+                </div>
               </motion.div>
 
-              {/* Quick Stats */}
+              {/* Buttons */}
               <motion.div 
-                className="flex flex-wrap gap-8 mt-12 pt-8 border-t border-white/20"
+                className="flex flex-col sm:flex-row gap-4 mt-8"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.3 }}
               >
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-[#4A4A4A] font-neurial">20+</div>
-                  <div className="text-sm text-gray-400 mt-1 font-neurial">Outlets</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-[#4A4A4A] font-neurial">24/7</div>
-                  <div className="text-sm text-gray-400 mt-1 font-neurial">Support</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-[#4A4A4A] font-neurial">5000+</div>
-                  <div className="text-sm text-gray-400 mt-1 font-neurial">Happy Customers</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-[#4A4A4A] font-neurial">2</div>
-                  <div className="text-sm text-gray-400 mt-1 font-neurial">Major Cities</div>
-                </div>
+                <motion.button 
+                  className="bg-[#4A4A4A] hover:bg-[#00B248] text-white px-6 py-3 rounded-lg font-semibold text-base transition-all transform hover:scale-105 flex items-center gap-2 shadow-xl font-neurial"
+                  onClick={handleBookTestRide}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <PhoneIcon className="w-5 h-5" />
+                  Book Test Ride
+                </motion.button>
+                
+                <motion.a
+                  href="tel:+919032333833"
+                  className="border-2 border-white text-white hover:bg-white hover:text-[#1B1B1B] px-6 py-3 rounded-lg font-semibold text-base transition-all flex items-center gap-2 font-neurial"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <PhoneIcon className="w-5 h-5" />
+                  Call Dealer
+                </motion.a>
               </motion.div>
             </motion.div>
           </div>

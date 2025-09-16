@@ -30,7 +30,7 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="py-12 bg-[#F8F8F8]">
+    <section className="pt-12 pb-0 bg-[#F8F8F8]">
       <div className="container mx-auto px-6 lg:px-20">
         <div className="text-center mb-8">
           <motion.h2 

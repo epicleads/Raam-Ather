@@ -1,13 +1,13 @@
 "use client";
-import React, { useState } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import FormContact from '../../Components/contactform/form';
+import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ChevronRightIcon } from '@heroicons/react/24/outline';
+import { useTestDriveModal } from '../../Components/test-ride-form/TestDriveModalStore';
 
 const HeroSlider = () => {
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const modal = useTestDriveModal();
 
   const heroContent = {
     image: '/assets/Rizta-most.webp',
@@ -82,7 +82,7 @@ const HeroSlider = () => {
                   transition={{ duration: 1, delay: 1.1 }}
                 >
                   <button 
-                    onClick={() => setIsContactModalOpen(true)}
+                    onClick={() => modal.openManually()}
                     className="bg-gradient-to-r from-[#2962FF] to-[#00B248] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all transform hover:scale-105 flex items-center justify-center gap-2 w-full sm:w-auto font-neurial"
                   >
                     Know More
@@ -94,47 +94,6 @@ const HeroSlider = () => {
           </div>
         </div>
       </section>
-
-      {/* Contact Form Modal */}
-      <AnimatePresence>
-        {isContactModalOpen && (
-          <motion.div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsContactModalOpen(false)}
-          >
-            <motion.div
-              className="relative max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-              initial={{ opacity: 0, scale: 0.9, y: 50 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 50 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setIsContactModalOpen(false)}
-                className="absolute top-4 right-4 z-10 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 w-10 h-10 rounded-full flex items-center justify-center transition-all"
-              >
-                <XMarkIcon className="w-6 h-6" />
-              </button>
-              
-              {/* Form Component */}
-              <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-                <div className="bg-gradient-to-r from-[#2962FF] to-[#1E88E5] text-white p-6">
-                  <h2 className="text-2xl font-bold mb-2 font-neurial">Get in Touch</h2>
-                  <p className="text-blue-100 font-neurial">Ready to experience the EV revolution? Contact us now!</p>
-                </div>
-                <div className="p-6">
-                  <FormContact layout="modal" />
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 };

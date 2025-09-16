@@ -83,26 +83,20 @@ export default function MobileHeader({ data }: HeaderProps) {
       <header
         className={`lg:hidden fixed top-4 left-6 right-6 z-40 
           transition-all duration-700 ease-out
-          ${isDarkTheme 
-            ? 'bg-black/20 backdrop-blur-2xl shadow-2xl border border-white/20' 
-            : 'bg-white/95 backdrop-blur-2xl shadow-2xl border border-gray-200/50'}
+          bg-white shadow-lg border border-gray-200
           rounded-3xl ${isVisible ? 'opacity-100 pointer-events-auto transform translate-y-0' : 'opacity-0 pointer-events-none transform -translate-y-full'}`}
-        style={{
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-        }}
       >
         <div className="max-w-7xl mx-auto px-4 py-3 relative z-10">
           <div className="flex items-center justify-between h-6">
             {/* Logo */}
-            <div className="flex-shrink-0 relative group">
-              <Link href={data.logo.href} className="relative hover:scale-110 transition-all duration-300">
+            <div className="flex-shrink-0">
+              <Link href={data.logo.href} className="hover:opacity-80 transition-opacity duration-300">
                 <Image
                   src={data.logo.src}
                   alt={data.logo.alt}
                   width={48}
                   height={48}
-                  className="h-6 w-auto drop-shadow-lg" 
+                  className="h-6 w-auto" 
                   style={{ height: 'auto' }}
                 />
               </Link>
@@ -115,7 +109,7 @@ export default function MobileHeader({ data }: HeaderProps) {
                 href={`tel:${data.contact.phone}`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative inline-flex items-center px-2 py-1.5 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg font-medium font-neurial text-xs shadow-lg hover:shadow-2xl hover:shadow-green-500/50 transition-all duration-500 overflow-hidden"
+                className="inline-flex items-center px-2 py-1.5 text-black border border-gray-400 rounded-xl font-medium font-neurial text-xs hover:bg-gray-100 transition-all duration-500"
               >
                 <Phone className="w-2.5 h-2.5 mr-0.5 relative z-10" />
                 <span className="relative z-10 whitespace-nowrap">{data.contact.displayText}</span>
@@ -126,14 +120,10 @@ export default function MobileHeader({ data }: HeaderProps) {
                 onClick={() => setIsMobileMenuOpen(true)}
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
-                className={`relative p-1.5 rounded-lg transition-all duration-300 backdrop-blur-sm border group ${
-                  isDarkTheme 
-                    ? 'hover:bg-white/10 border-white/20 hover:border-white/40' 
-                    : 'hover:bg-gray-900/10 border-gray-900/20 hover:border-gray-900/40'
-                }`}
+                className="p-1.5 rounded-lg transition-all duration-300 border border-gray-300 hover:bg-gray-50 hover:border-gray-400"
                 aria-label="Open menu"
               >
-                <Menu className={`w-3 h-3 transition-colors ${isDarkTheme ? 'text-white group-hover:text-white' : 'text-gray-900 group-hover:text-gray-900'}`} />
+                <Menu className="w-3 h-3 text-gray-700" />
               </motion.button>
             </div>
           </div>
@@ -162,32 +152,27 @@ export default function MobileHeader({ data }: HeaderProps) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="absolute right-0 top-0 bottom-0 w-80 overflow-y-auto"
-              style={{
-                background: 'linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(30,30,30,0.9) 100%)',
-                backdropFilter: 'blur(24px)',
-                WebkitBackdropFilter: 'blur(24px)',
-              }}
+              className="absolute right-0 top-0 bottom-0 w-80 overflow-y-auto bg-white"
             >
               {/* Header */}
-              <div className="relative flex items-center justify-between p-6 border-b border-white/10">
-                <Link href={data.logo.href} onClick={closeMobileMenu} className="hover:scale-110 transition-transform duration-300">
+              <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                <Link href={data.logo.href} onClick={closeMobileMenu} className="hover:opacity-80 transition-opacity duration-300">
                   <Image
                     src={data.logo.src}
                     alt={data.logo.alt}
                     width={40}
                     height={40}
-                    className="h-10 w-auto drop-shadow-lg"
+                    className="h-10 w-auto"
                   />
                 </Link>
                 <motion.button
                   onClick={closeMobileMenu}
                   whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
-                  className="p-3 hover:bg-white/10 rounded-2xl transition-all duration-300 border border-white/20 hover:border-white/40"
+                  className="p-3 hover:bg-gray-100 rounded-2xl transition-all duration-300 border border-gray-300 hover:border-gray-400"
                   aria-label="Close menu"
                 >
-                  <X className="w-6 h-6 text-white" />
+                  <X className="w-6 h-6 text-gray-700" />
                 </motion.button>
               </div>
 
@@ -228,7 +213,7 @@ export default function MobileHeader({ data }: HeaderProps) {
                         <Link
                           href={cta.href}
                           onClick={closeMobileMenu}
-                          className="relative group block w-full text-center px-6 py-4 rounded-2xl font-medium font-neurial transition-all duration-500 overflow-hidden text-white border-2 border-white/30 hover:bg-white/10 backdrop-blur-sm"
+                          className="block w-full text-center px-6 py-4 rounded-2xl font-medium font-neurial transition-all duration-500 text-black border border-gray-400 hover:bg-gray-100"
                         >
                           <span className="relative z-10">{cta.label}</span>
                         </Link>
@@ -259,10 +244,10 @@ function MobileNavItem({ item, onItemClick, isActive }: MobileNavItemProps) {
       <div className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`group relative flex items-center justify-between w-full text-left px-5 py-4 rounded-2xl transition-all duration-300 backdrop-blur-sm border ${
+          className={`flex items-center justify-between w-full text-left px-5 py-4 rounded-2xl transition-all duration-300 border ${
             isActive 
-              ? 'text-white bg-white/20 border-white/30 shadow-lg' 
-              : 'text-white/80 hover:text-white hover:bg-white/10 border-white/10 hover:border-white/20'
+              ? 'text-gray-900 bg-gray-100 border-gray-300' 
+              : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 border-gray-200 hover:border-gray-300'
           }`}
         >
           <span className="relative z-10 font-medium font-neurial">
@@ -293,7 +278,7 @@ function MobileNavItem({ item, onItemClick, isActive }: MobileNavItemProps) {
                     <Link
                       href={dropdownItem.href}
                       onClick={onItemClick}
-                      className="relative group block px-5 py-3 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-200 backdrop-blur-sm border border-transparent hover:border-white/20"
+                      className="block px-5 py-3 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-xl transition-all duration-200 border border-transparent hover:border-gray-200"
                     >
                       <span className="relative z-10">{dropdownItem.label}</span>
                     </Link>
@@ -323,13 +308,13 @@ function MobileNavItem({ item, onItemClick, isActive }: MobileNavItemProps) {
         <Link
           href={item.href || '#'}
           onClick={onItemClick}
-          className={`group relative block px-5 py-4 rounded-2xl transition-all duration-300 backdrop-blur-sm border font-medium ${
+          className={`block px-5 py-4 rounded-2xl transition-all duration-300 border font-medium ${
             isActive 
-              ? 'text-orange-100 bg-gradient-to-r from-orange-500/30 to-amber-500/30 border-orange-400/40 shadow-lg shadow-orange-500/20' 
-              : 'text-orange-100 bg-gradient-to-r from-orange-500/20 to-amber-500/20 border-orange-400/30 hover:bg-gradient-to-r hover:from-orange-500/30 hover:to-amber-500/30 hover:border-orange-400/50'
+              ? 'text-white bg-green-600 border-green-500' 
+              : 'text-white bg-green-600 hover:bg-green-700 border-green-500'
           }`}
         >
-          <span className="relative z-10 font-neurial">
+          <span className="font-neurial">
             {item.label}
           </span>
         </Link>
@@ -338,13 +323,13 @@ function MobileNavItem({ item, onItemClick, isActive }: MobileNavItemProps) {
       <Link
         href={item.href || '#'}
         onClick={onItemClick}
-        className={`group relative block px-5 py-4 rounded-2xl transition-all duration-300 backdrop-blur-sm border font-medium ${
+        className={`block px-5 py-4 rounded-2xl transition-all duration-300 border font-medium ${
           isActive 
-            ? 'text-white bg-white/20 border-white/30 shadow-lg' 
-            : 'text-white/80 hover:text-white hover:bg-white/10 border-white/10 hover:border-white/20'
+            ? 'text-gray-900 bg-gray-100 border-gray-300' 
+            : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 border-gray-200 hover:border-gray-300'
         }`}
       >
-        <span className="relative z-10 font-neurial">
+        <span className="font-neurial">
           {item.label}
         </span>
       </Link>

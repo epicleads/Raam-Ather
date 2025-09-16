@@ -3,8 +3,9 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Play, Instagram } from 'lucide-react';
+import { Play, Instagram, Pause } from 'lucide-react';
 import { Testimonial } from '../../data/testimonials.types';
+import '../../testimonials.css';
 
 interface TestimonialCardProps {
   testimonial: Testimonial;
@@ -63,16 +64,48 @@ export default function TestimonialCard({ testimonial, index }: TestimonialCardP
       };
 
       const videoPath = getVideoPath(testimonial.id);
+      const thumbnailPath = getThumbnailPath(testimonial.id);
+
+      // If there's an error loading thumbnails, show fallback immediately
+      if (imageError) {
+        return (
+          <div className="relative w-full h-[300px] sm:h-[400px] md:h-[480px] bg-gradient-to-br from-green-400 to-blue-500 rounded-t-xl flex items-center justify-center group">
+            <div className="text-center text-white px-4">
+              <div className="bg-white/20 backdrop-blur-sm p-3 sm:p-4 rounded-full mb-3 mx-auto w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center">
+                <span className="text-xl sm:text-2xl">📹</span>
+              </div>
+              <h3 className="text-sm sm:text-base font-semibold mb-1">{testimonial.name}</h3>
+              <p className="text-xs sm:text-sm opacity-90 mb-2">{testimonial.city} • {testimonial.model}</p>
+              <p className="text-xs sm:text-sm font-medium">Instagram Reel</p>
+            </div>
+
+            <div className="customer-info-overlay">
+              <div className="customer-name">{testimonial.name}</div>
+              <div className="customer-details">{testimonial.city} • {testimonial.model || 'Ather'}</div>
+              <div className="customer-review">&ldquo;{testimonial.content}&rdquo;</div>
+            </div>
+
+            <a
+              href={testimonial.instagramReelUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="instagram-icon"
+              title="View on Instagram"
+            >
+              <Instagram size={16} className="text-purple-600" />
+            </a>
+          </div>
+        );
+      }
 
       return (
-        <div className="relative w-full h-[300px] sm:h-[400px] md:h-[480px] bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center group overflow-hidden">
-          {/* Video Player or Thumbnail */}
+        <div className="testimonial-video-container">
           {videoPath ? (
-            <div className="relative w-full h-full">
+            <>
               <video
                 ref={videoRef}
                 src={videoPath}
-                poster={getThumbnailPath(testimonial.id)}
+                poster={thumbnailPath}
                 className="w-full h-full object-cover"
                 loop
                 muted
@@ -80,45 +113,63 @@ export default function TestimonialCard({ testimonial, index }: TestimonialCardP
                 onPlay={() => setIsVideoPlaying(true)}
                 onPause={() => setIsVideoPlaying(false)}
                 onEnded={() => setIsVideoPlaying(false)}
+                onError={() => {
+                  console.warn(`Video failed to load: ${videoPath}`);
+                  // Fallback to thumbnail image if video fails
+                }}
               />
-              
+
               {/* Play/Pause Button Overlay */}
-              <button
-                onClick={handleVideoPlay}
-                className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              >
-                <div className="bg-white/90 backdrop-blur-sm p-3 sm:p-4 rounded-full shadow-lg">
-                  {isVideoPlaying ? (
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 bg-purple-600 rounded-sm"></div>
-                  ) : (
-                    <Play size={20} className="sm:w-6 sm:h-6 text-purple-600 ml-1" />
-                  )}
-                </div>
-              </button>
-            </div>
+              {!isVideoPlaying && (
+                <button
+                  onClick={handleVideoPlay}
+                  className="play-button-overlay"
+                >
+                  <Play size={24} className="text-purple-600 ml-1" />
+                </button>
+              )}
+
+              {/* Pause Button Overlay when playing */}
+              {isVideoPlaying && (
+                <button
+                  onClick={handleVideoPlay}
+                  className="play-button-overlay opacity-0 hover:opacity-100 transition-opacity duration-300"
+                >
+                  <Pause size={24} className="text-purple-600" />
+                </button>
+              )}
+            </>
           ) : (
             <Image
-              src={getThumbnailPath(testimonial.id)}
+              src={thumbnailPath}
               alt={`Instagram Reel - ${testimonial.title}`}
               fill
               className="object-cover"
               priority={index < 3}
+              onError={() => {
+                console.warn(`Thumbnail failed to load: ${thumbnailPath}`);
+                setImageError(true);
+              }}
             />
           )}
-          
-          {/* Instagram Badge - Top Left */}
-          {/* Removed Instagram badge - keeping only one Instagram button for entire grid */}
 
-          {/* Small Instagram Redirect Button - Top Right */}
-          <a 
+          {/* Instagram Icon - Top Right */}
+          <a
             href={testimonial.instagramReelUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10 bg-white/90 backdrop-blur-sm p-1.5 sm:p-2 rounded-full shadow-sm hover:bg-white transition-all duration-200 hover:scale-110 cursor-pointer"
+            className="instagram-icon"
             title="View on Instagram"
           >
-            <Instagram size={14} className="sm:w-4 sm:h-4 text-purple-600" />
+            <Instagram size={16} className="text-purple-600" />
           </a>
+
+          {/* Customer Info Overlay */}
+          <div className="customer-info-overlay">
+            <div className="customer-name">{testimonial.name}</div>
+            <div className="customer-details">{testimonial.city} • {testimonial.model || 'Ather'}</div>
+            <div className="customer-review">&ldquo;{testimonial.content}&rdquo;</div>
+          </div>
         </div>
       );
     }
@@ -129,7 +180,7 @@ export default function TestimonialCard({ testimonial, index }: TestimonialCardP
         <div className="relative w-full h-[300px] sm:h-[400px] md:h-[480px] bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center group">
           <div className="w-full h-full bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center relative">
             {/* Play Button - Centered and Clickable */}
-            <a 
+            <a
               href={testimonial.video}
               target="_blank"
               rel="noopener noreferrer"
@@ -137,10 +188,17 @@ export default function TestimonialCard({ testimonial, index }: TestimonialCardP
             >
               <Play size={20} className="sm:w-6 sm:h-6 text-blue-600 ml-1" />
             </a>
-            
+
             {/* Video Badge - Top Left */}
             <div className="absolute top-3 sm:top-4 left-3 sm:left-4 bg-white/90 backdrop-blur-sm px-2 sm:px-3 py-1 rounded-full shadow-sm">
               <span className="text-xs sm:text-sm font-semibold text-blue-600">Video</span>
+            </div>
+
+            {/* Customer Info Overlay */}
+            <div className="customer-info-overlay">
+              <div className="customer-name">{testimonial.name}</div>
+              <div className="customer-details">{testimonial.city} • {testimonial.model || 'Ather'}</div>
+              <div className="customer-review">&ldquo;{testimonial.content}&rdquo;</div>
             </div>
           </div>
         </div>
@@ -159,12 +217,19 @@ export default function TestimonialCard({ testimonial, index }: TestimonialCardP
             onError={() => setImageError(true)}
             priority={index < 3}
           />
-          
+
           {/* Play Button Overlay - Centered */}
           <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="bg-white/90 backdrop-blur-sm p-3 sm:p-4 rounded-full shadow-lg">
               <Play size={20} className="sm:w-6 sm:h-6 text-gray-700 ml-1" />
             </div>
+          </div>
+
+          {/* Customer Info Overlay */}
+          <div className="customer-info-overlay">
+            <div className="customer-name">{testimonial.name}</div>
+            <div className="customer-details">{testimonial.city} • {testimonial.model || 'Ather'}</div>
+            <div className="customer-review">&ldquo;{testimonial.content}&rdquo;</div>
           </div>
         </div>
       );
@@ -188,63 +253,10 @@ export default function TestimonialCard({ testimonial, index }: TestimonialCardP
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
-      className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer testimonial-card"
+      className="testimonial-reel-card group cursor-pointer"
       whileHover={{ y: -4, scale: 1.02 }}
     >
-      {/* Media Section - Full height with floating text */}
-      <div className="media-section group">
-        {renderMediaContent()}
-        
-        {/* Floating Text Overlay - Positioned closer to customer details to reduce gap */}
-        <div className="absolute bottom-16 sm:bottom-20 left-0 right-0 p-3 sm:p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-          <h4 className="text-white font-semibold text-sm sm:text-base mb-2 line-clamp-2">
-            {testimonial.title}
-          </h4>
-          <blockquote className="text-white/90 text-xs leading-relaxed line-clamp-2">
-            &ldquo;{testimonial.content}&rdquo;
-          </blockquote>
-        </div>
-
-        {/* Customer Details Floating Directly on Video - REMOVED FOR CLEAN VIDEO REELS */}
-        {/* <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
-          <div className="flex items-center justify-between mb-2 sm:mb-3">
-            <div className="flex items-center gap-2 sm:gap-3">
-              {testimonial.avatar ? (
-                <Image
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  width={28}
-                  height={28}
-                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover"
-                />
-              ) : (
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center">
-                  <span className="text-white text-xs font-semibold">
-                    {testimonial.name.charAt(0)}
-                  </span>
-                </div>
-              )}
-              <div>
-                <p className="text-xs sm:text-sm font-medium text-white">{testimonial.name}</p>
-                <p className="text-xs text-white/80">{testimonial.city} • {testimonial.model || 'Ather'}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap gap-1">
-            {testimonial.tags && testimonial.tags.length > 0 && (
-              {testimonial.tags.slice(0, 2).map(tag => (
-                <span
-                  key={tag}
-                  className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-white/20 backdrop-blur-sm text-white text-xs rounded-full border border-white/30"
-                >
-                  {tag}
-                </span>
-              ))}
-            )}
-          </div>
-        </div> */}
-      </div>
+      {renderMediaContent()}
     </motion.article>
   );
 }

@@ -59,8 +59,7 @@ export default function RiztaComfort() {
      description: 'Enough for helmets, groceries, school bags.',
      icon: 'storage',
      category: 'storage',
-     
-     imagePath: '/assets/images/storage-total.webp'
+     imagePath: '/Ather-Assets/Accessories/Rizta Accessories/Rizta Fronk - IMG_9044copy4_796x670.webp'
    }
  ]
 

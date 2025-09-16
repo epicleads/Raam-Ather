@@ -15,9 +15,9 @@ export function initViewportFix() {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     
-    // Force layout recalculation for hero containers
+    // Force layout recalculation for hero containers - Only for home page
     const heroContainers = document.querySelectorAll(
-      '.hero-container, .rizta-container, .ather450-container, section[class*="h-screen"]'
+      '.home-hero .hero-container, .rizta-container, .ather450-container'
     );
     
     heroContainers.forEach(container => {

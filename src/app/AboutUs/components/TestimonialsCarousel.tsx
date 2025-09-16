@@ -80,19 +80,19 @@ const TestimonialsCarousel = () => {
             key={activeTestimonial}
           >
             {getVisibleTestimonials().map((testimonial, index) => (
-              <div key={index} className="bg-gradient-to-br from-[#F8F8F8] to-white p-8 rounded-3xl shadow-2xl">
-                <div className="text-center">
+              <div key={index} className="bg-gradient-to-br from-[#F8F8F8] to-white p-8 rounded-3xl shadow-2xl flex flex-col h-full">
+                <div className="text-center flex flex-col h-full">
                   <div className="flex justify-center mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <StarIcon key={i} className="w-6 h-6 text-yellow-400 fill-current" />
                     ))}
                   </div>
                   
-                  <blockquote className="text-sm md:text-base text-[#1B1B1B] font-medium leading-relaxed mb-6 font-neurial">
+                  <blockquote className="text-sm md:text-base text-[#1B1B1B] font-medium leading-relaxed mb-6 font-neurial flex-1">
                     &quot;{testimonial.text}&quot;
                   </blockquote>
                   
-                  <div className="flex items-center justify-center gap-3">
+                  <div className="flex items-center justify-center gap-3 mt-auto">
                     <Image 
                       src={testimonial.image} 
                       alt={testimonial.name}
@@ -122,19 +122,19 @@ const TestimonialsCarousel = () => {
                 exit={{ opacity: 0, x: -100 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="bg-gradient-to-br from-[#F8F8F8] to-white p-6 rounded-3xl shadow-2xl mx-auto max-w-sm">
-                  <div className="text-center">
+                <div className="bg-gradient-to-br from-[#F8F8F8] to-white p-6 rounded-3xl shadow-2xl mx-auto max-w-sm flex flex-col h-full min-h-[300px]">
+                  <div className="text-center flex flex-col h-full">
                     <div className="flex justify-center mb-4">
                       {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
                         <StarIcon key={i} className="w-5 h-5 text-yellow-400 fill-current" />
                       ))}
                     </div>
                     
-                    <blockquote className="text-sm text-[#1B1B1B] font-medium leading-relaxed mb-6 font-neurial">
+                    <blockquote className="text-sm text-[#1B1B1B] font-medium leading-relaxed mb-6 font-neurial flex-1">
                       &quot;{testimonials[activeTestimonial].text}&quot;
                     </blockquote>
                     
-                    <div className="flex items-center justify-center gap-3">
+                    <div className="flex items-center justify-center gap-3 mt-auto">
                       <Image 
                         src={testimonials[activeTestimonial].image} 
                         alt={testimonials[activeTestimonial].name}

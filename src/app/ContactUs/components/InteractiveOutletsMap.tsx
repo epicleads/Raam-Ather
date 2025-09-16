@@ -1,24 +1,25 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import PremiumOutletCards from '@/app/StoreLocator/components/PremiumOutletCards';
+import AnalyticsTrust from '@/app/StoreLocator/components/AnalyticsTrust';
 import { PopupProvider } from '@/app/Components/popups/PopupProvider';
 
-// Define Outlet type locally with all required properties as non-optional for compatibility
-export type Outlet = {
+export interface Outlet {
   id: number;
   name: string;
-  type: "showroom" | "test-ride" | "service";
-  city: "Hyderabad" | "Chennai";
+  type: 'showroom' | 'service' | 'test-ride';
+  city: 'Hyderabad' | 'Chennai';
   address: string;
   pincode: string;
   phone: string;
   whatsapp: string;
   hours: string;
   coordinates: { lat: number; lng: number };
+  distance?: number;
   rating: number;
   reviewCount: number;
   isOpen: boolean;
-  busyLevel: "medium" | "low" | "high";
+  busyLevel: 'low' | 'medium' | 'high';
   nextTestRideSlot?: string;
   amenities: string[];
   modelsAvailable: string[];
@@ -28,29 +29,27 @@ export type Outlet = {
   staff: { name: string; role: string; image: string }[];
   responseTime: string;
   testRidesThisWeek: number;
-};
+  directionsUrl?: string;
+}
 
 const InteractiveOutletsMap = () => {
-  const [selectedOutlet, setSelectedOutlet] = React.useState<Outlet | null>(null);
-  
-  // Outlet data from StoreLocator
-  const outlets = [
-    // Hyderabad Locations
+  // Enhanced outlet data with real Hyderabad locations
+  const outlets: Outlet[] = [
     {
       id: 1,
       name: 'Raam Ather Electric Scooter Showroom, Somajiguda',
-      type: 'showroom' as const,
-      city: 'Hyderabad' as const,
+      type: 'showroom',
+      city: 'Hyderabad',
       address: '6-3-885/7/B, G-2, Ground, Amit Plaza, Durga Nagar Colony, Somajiguda, Hyderabad, Telangana 500082',
       pincode: '500082',
-      phone: '+91 9032333833',
-      whatsapp: '+91 9032333833',
+      phone: '+91 9240013781',
+      whatsapp: '+91 9240013781',
       hours: '10:00 AM - 8:30 PM',
       coordinates: { lat: 17.4326, lng: 78.4071 },
       rating: 4.8,
       reviewCount: 124,
       isOpen: true,
-      busyLevel: 'medium' as const,
+      busyLevel: 'medium',
       nextTestRideSlot: '2:30 PM Today',
       amenities: ['WiFi', 'AC Waiting Area', 'Test Track', 'Charging Station'],
       modelsAvailable: ['Rizta', '450X', '450 Apex'],
@@ -59,15 +58,16 @@ const InteractiveOutletsMap = () => {
       offers: ['Special EMI rates', '5 Year Warranty'],
       staff: [{ name: 'Rajesh Kumar', role: 'Sales Manager', image: '/assets/staff1.jpg' }],
       responseTime: '< 5 minutes',
-      testRidesThisWeek: 47
+      testRidesThisWeek: 47,
+      directionsUrl: 'https://maps.app.goo.gl/ryXguVyQSqfoXhiAA',
     },
     {
       id: 2,
-      name: 'Raam Ather Space - Electric Scooter Experience Center Begumpet',
-      type: 'showroom' as const,
-      city: 'Hyderabad' as const,
-      address: '1-10-7 & VISHRANTHI NILAYAM, Prakash Nagar, Begumpet, Secunderabad, Hyderabad, Telangana 500016',
-      pincode: '500016',
+      name: 'Raam Ather Electric Scooter Showroom, Vanasthalipuram',
+      type: 'showroom',
+      city: 'Hyderabad',
+      address: 'Plot No 41, Lecturers Colony Hayat Nagar, Vanasthalipuram, Hyderabad, Telangana 501505',
+      pincode: '501505',
       phone: '+91 9032333833',
       whatsapp: '+91 9032333833',
       hours: '10:00 AM - 7:00 PM',
@@ -75,23 +75,25 @@ const InteractiveOutletsMap = () => {
       rating: 4.7,
       reviewCount: 89,
       isOpen: true,
-      busyLevel: 'low' as const,
-      amenities: ['WiFi', 'AC Waiting Area', 'Experience Center', 'Digital Display'],
-      modelsAvailable: ['Rizta', '450X', '450 Apex'],
-      coverImage: '/assets/begampet.jpg',
-      gallery: ['/assets/begampet1.jpg', '/assets/begumpet2.jpg'],
-      offers: ['Experience Center Special', 'Test Drive Package'],
-      staff: [{ name: 'Priya Sharma', role: 'Experience Manager', image: '/assets/staff2.jpg' }],
-      responseTime: '< 3 minutes',
-      testRidesThisWeek: 35
+      busyLevel: 'low',
+      nextTestRideSlot: '1:00 PM Today',
+      amenities: ['WiFi', 'AC Waiting Area', 'Kids Zone'],
+      modelsAvailable: ['Rizta', '450X'],
+      coverImage: '/assets/vanasthalipuram.jpg',
+      gallery: ['/assets/gallery3.jpg'],
+      offers: ['Festival Discount', 'Exchange Bonus'],
+      staff: [{ name: 'Anil Reddy', role: 'Sales Manager', image: '/assets/staff2.jpg' }],
+      responseTime: '< 4 minutes',
+      testRidesThisWeek: 56,
+      directionsUrl: 'https://maps.app.goo.gl/j4xL2i3t3C9hfS1h8',
     },
     {
       id: 3,
-      name: 'Raam Ather Space - Electric Scooter Experience Center Sri Nagar Colony',
-      type: 'showroom' as const,
-      city: 'Hyderabad' as const,
-      address: 'plot no: 311 & 312, phase 3, Sri Nagar Colony, Kamalapuri Colony, Banjara Hills, Hyderabad, Telangana 500073',
-      pincode: '500073',
+      name: 'Ather Electric Scooter Showroom, Malakpet',
+      type: 'showroom',
+      city: 'Hyderabad',
+      address: 'Ground Floor, No 16/2/705/9/6/1/A, Malakpet, Hyderabad, Telangana 500036',
+      pincode: '500036',
       phone: '+91 9032333833',
       whatsapp: '+91 9032333833',
       hours: '10:00 AM - 9:00 PM',
@@ -99,22 +101,23 @@ const InteractiveOutletsMap = () => {
       rating: 4.9,
       reviewCount: 156,
       isOpen: true,
-      busyLevel: 'medium' as const,
-      nextTestRideSlot: '4:00 PM Today',
-      amenities: ['WiFi', 'AC Waiting Area', 'Premium Experience Center', 'Charging Station'],
+      busyLevel: 'high',
+      nextTestRideSlot: '5:00 PM Today',
+      amenities: ['Test Track', 'Digital Experience Zone'],
       modelsAvailable: ['Rizta', '450X', '450 Apex'],
-      coverImage: '/assets/sri nagar colony.jpg',
-      gallery: ['/assets/srinagar1.jpg', '/assets/srinagar2.jpg'],
-      offers: ['Premium Experience', 'Extended Test Rides'],
-      staff: [{ name: 'Karthik Reddy', role: 'Senior Sales Manager', image: '/assets/staff4.jpg' }],
-      responseTime: '< 2 minutes',
-      testRidesThisWeek: 89
+      coverImage: '/assets/malakpet.jpg',
+      gallery: ['/assets/gallery4.jpg', '/assets/gallery5.jpg'],
+      offers: ['Extended Warranty', 'Free Accessories'],
+      staff: [{ name: 'Praveen Kumar', role: 'Sales Executive', image: '/assets/staff3.jpg' }],
+      responseTime: '< 3 minutes',
+      testRidesThisWeek: 102,
+      directionsUrl: 'https://maps.app.goo.gl/tGGe5bdnfByyCH3D8',
     },
     {
       id: 4,
-      name: 'Raam Ather- Authorised Dealer of Raam Electric Two wheelers Shaikpet',
-      type: 'showroom' as const,
-      city: 'Hyderabad' as const,
+      name: 'Raam Ather Electric Scooter Showroom, Toli Chowki',
+      type: 'showroom',
+      city: 'Hyderabad',
       address: 'Shaikpet, Toli Chowki, Hyderabad, Telangana 500008',
       pincode: '500008',
       phone: '+91 9032333833',
@@ -124,22 +127,23 @@ const InteractiveOutletsMap = () => {
       rating: 4.6,
       reviewCount: 78,
       isOpen: true,
-      busyLevel: 'medium' as const,
-      nextTestRideSlot: '1:00 PM Today',
-      amenities: ['WiFi', 'Service Center', 'Authorized Parts', 'Customer Lounge'],
-      modelsAvailable: ['Rizta', '450X'],
-      coverImage: '/assets/shaikpet.jpg',
-      gallery: ['/assets/shaikpet1.jpg', '/assets/shaikpet2.jpg'],
-      offers: ['Authorized Dealer Discount', 'Service Package'],
-      staff: [{ name: 'Suresh Reddy', role: 'Authorized Dealer', image: '/assets/staff6.jpg' }],
-      responseTime: '< 4 minutes',
-      testRidesThisWeek: 45
+      busyLevel: 'medium',
+      nextTestRideSlot: '12:00 PM Today',
+      amenities: ['WiFi', 'AC Waiting Area'],
+      modelsAvailable: ['450X', '450 Apex'],
+      coverImage: '/assets/tolichowki.jpg',
+      gallery: ['/assets/gallery6.jpg'],
+      offers: ['Student Discount', 'Free Helmet'],
+      staff: [{ name: 'Sana Begum', role: 'Sales Associate', image: '/assets/staff4.jpg' }],
+      responseTime: '< 6 minutes',
+      testRidesThisWeek: 41,
+      directionsUrl: 'https://maps.app.goo.gl/6gGRCqfX6fo6yBkJ9',
     },
     {
       id: 5,
       name: 'Raam Ather Electric Scooter Showroom, Kompally',
-      type: 'showroom' as const,
-      city: 'Hyderabad' as const,
+      type: 'showroom',
+      city: 'Hyderabad',
       address: 'ATHARV PRIDE, Plot No:5 S.Y No:160 Pillar No:12 Kompally, Malkajgiri, Mandal, Telangana 500014',
       pincode: '500014',
       phone: '+91 9032333833',
@@ -149,21 +153,47 @@ const InteractiveOutletsMap = () => {
       rating: 4.8,
       reviewCount: 203,
       isOpen: true,
-      busyLevel: 'low' as const,
-      nextTestRideSlot: '1:30 PM Today',
-      amenities: ['WiFi', 'AC Waiting Area', 'Large Showroom', 'Parking Space'],
-      modelsAvailable: ['Rizta', '450X', '450 Apex'],
+      busyLevel: 'low',
+      nextTestRideSlot: '11:30 AM Today',
+      amenities: ['WiFi', 'AC Waiting Area', 'Charging Station'],
+      modelsAvailable: ['Rizta', '450X'],
       coverImage: '/assets/kompally.jpg',
-      gallery: ['/assets/kompally1.jpg', '/assets/kompally2.jpg'],
-      offers: ['Grand Opening Offer', 'Extended Warranty'],
-      staff: [{ name: 'Ramesh Kumar', role: 'Showroom Manager', image: '/assets/staff7.jpg' }],
-      responseTime: '< 3 minutes',
-      testRidesThisWeek: 63
+      gallery: ['/assets/gallery7.jpg'],
+      offers: ['Festival Offer', 'Cashback on EMI'],
+      staff: [{ name: 'Mahesh Varma', role: 'Sales Lead', image: '/assets/staff5.jpg' }],
+      responseTime: '< 2 minutes',
+      testRidesThisWeek: 87,
+      directionsUrl: 'https://maps.app.goo.gl/oBPjzZVQK1w4aP759',
     },
-
-    // Chennai Locations
     {
       id: 6,
+      name: 'Raam Ather Electric Scooter Showroom, Attapur',
+      type: 'showroom',
+      city: 'Hyderabad',
+      address: 'Survey No.18/4, Number.2-4-126/4, Plot Nos. 8 & 9, Rajendra Nagar Rd, Attapur, Upperpally, Telangana 500048',
+      pincode: '500048',
+      phone: '+91 9032333833',
+      whatsapp: '+91 9032333833',
+      hours: '10:00 AM - 8:30 PM',
+      coordinates: { lat: 17.5425, lng: 78.4911 },
+      rating: 4.8,
+      reviewCount: 203,
+      isOpen: true,
+      busyLevel: 'high',
+      nextTestRideSlot: '4:30 PM Today',
+      amenities: ['WiFi', 'AC Waiting Area', 'Café'],
+      modelsAvailable: ['450X', '450 Apex'],
+      coverImage: '/assets/attapur.jpg',
+      gallery: ['/assets/gallery8.jpg'],
+      offers: ['Cashback Offer', 'Insurance Free'],
+      staff: [{ name: 'Imran Ali', role: 'Sales Executive', image: '/assets/staff6.jpg' }],
+      responseTime: '< 5 minutes',
+      testRidesThisWeek: 76,
+      directionsUrl: 'https://maps.app.goo.gl/Z2aMwwsVQzybvUAf9',
+    },
+    // Chennai Locations
+    {
+      id: 7,
       name: 'Ather Test Ride Zone (RAAM ELECTRIC)',
       type: 'test-ride' as const,
       city: 'Chennai' as const,
@@ -188,7 +218,7 @@ const InteractiveOutletsMap = () => {
       testRidesThisWeek: 67
     },
     {
-      id: 7,
+      id: 8,
       name: 'Ather Electric Scooter Showroom',
       type: 'showroom' as const,
       city: 'Chennai' as const,
@@ -213,7 +243,7 @@ const InteractiveOutletsMap = () => {
       testRidesThisWeek: 79
     },
     {
-      id: 8,
+      id: 9,
       name: 'Ather Electric Scooter Showroom',
       type: 'showroom' as const,
       city: 'Chennai' as const,
@@ -239,17 +269,27 @@ const InteractiveOutletsMap = () => {
     }
   ];
 
+  const [selectedOutlet, setSelectedOutlet] = useState<Outlet | null>(null);
+  const [, setShowWhatsAppChat] = useState(false);
+
 
   return (
     <PopupProvider>
       <div>
         {/* Premium Outlet Cards */}
-        <PremiumOutletCards 
-          outlets={outlets}
-          selectedOutlet={selectedOutlet}
-          setSelectedOutlet={setSelectedOutlet}
-          setShowWhatsAppChat={() => {}}
-        />
+        <div id="outlet-results" className="w-full">
+          <PremiumOutletCards 
+            outlets={outlets}
+            selectedOutlet={selectedOutlet}
+            setSelectedOutlet={setSelectedOutlet}
+            setShowWhatsAppChat={setShowWhatsAppChat}
+          />
+        </div>
+
+        {/* Analytics & Trust Section */}
+        <div className="w-full bg-gray-50">
+          <AnalyticsTrust outlets={outlets} />
+        </div>
       </div>
     </PopupProvider>
   );

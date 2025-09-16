@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { Filters, Testimonial, ExperienceType } from '../../data/testimonials.types';
 import { experienceOptions } from '../../data/testimonials.config';
 import TestimonialCardMobile from './TestimonialCardMobile.client';
+import SimpleVideoCard from './SimpleVideoCard.client';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface TestimonialsFeedMobileProps {
@@ -224,14 +225,59 @@ export default function TestimonialsFeedMobile({
                     transform: `translateX(-${carouselIndexes[activeTab] * 100}%)`
                   }}
                 >
-                  {filteredTestimonials.map((testimonial, index) => (
-                    <div key={testimonial.id} className="w-full flex-shrink-0 px-2">
-                      <TestimonialCardMobile
-                        testimonial={testimonial}
-                        index={index}
-                      />
-                    </div>
-                  ))}
+                  {filteredTestimonials.map((testimonial, index) => {
+                    
+                    // Get video paths for simple video card
+                    const getVideoPath = (id: string) => {
+                      if (id === 'p1') return '/Ather-Assets/thumbnails/CJ1.mp4';
+                      if (id === 'p2') return '/Ather-Assets/thumbnails/CJ2.mp4';
+                      if (id === 'p3') return '/Ather-Assets/thumbnails/CJ3.mp4';
+                      if (id === 's1') return '/Ather-Assets/thumbnails/SE1.mp4';
+                      if (id === 's2') return '/Ather-Assets/thumbnails/SE2.mp4';
+                      if (id === 's3') return '/Ather-Assets/thumbnails/SE3.mp4';
+                      if (id === 'c1') return '/Ather-Assets/thumbnails/CE1.mp4';
+                      if (id === 'c2') return '/Ather-Assets/thumbnails/CE2.mp4';
+                      if (id === 'c3') return '/Ather-Assets/thumbnails/CE3.mp4';
+                      return null;
+                    };
+
+                    const getThumbnailPath = (id: string) => {
+                      const cardNumber = id.charAt(1);
+                      if (id.startsWith('s')) {
+                        const serviceNumber = parseInt(cardNumber) + 3;
+                        return `/Ather-Assets/thumbnails/tb${serviceNumber}.png`;
+                      }
+                      if (id.startsWith('c')) {
+                        const communityNumber = parseInt(cardNumber) + 6;
+                        return `/Ather-Assets/thumbnails/tb${communityNumber}.png`;
+                      }
+                      return `/Ather-Assets/thumbnails/tb${cardNumber}.png`;
+                    };
+
+                    const videoPath = getVideoPath(testimonial.id);
+                    const thumbnailPath = getThumbnailPath(testimonial.id);
+
+                    return (
+                      <div 
+                        key={testimonial.id} 
+                        className="w-full flex-shrink-0 px-2"
+                      >
+                        {videoPath ? (
+                          <SimpleVideoCard
+                            testimonial={testimonial}
+                            videoPath={videoPath}
+                            thumbnailPath={thumbnailPath}
+                            index={index}
+                          />
+                        ) : (
+                          <TestimonialCardMobile
+                            testimonial={testimonial}
+                            index={index}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 

@@ -128,7 +128,7 @@ function FeatureCard({ feature, active, onClick, description }: FeatureCardProps
       </div>
 
       {/* Content Section */}
-      <div className="p-4">
+      <div className="p-4 min-h-[120px] md:min-h-[100px]">
         <div className="flex items-start justify-between mb-2">
           <h3 className="text-lg font-semibold text-black font-[Inter] leading-tight group-hover:text-green-600 transition-colors">
             {feature.title}
@@ -137,7 +137,7 @@ function FeatureCard({ feature, active, onClick, description }: FeatureCardProps
         </div>
         
         {description && (
-          <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">
+          <p className="text-sm text-gray-600 leading-relaxed line-clamp-3 md:line-clamp-2">
             {feature.desc}
           </p>
         )}

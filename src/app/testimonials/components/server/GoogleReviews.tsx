@@ -38,10 +38,22 @@ export default function GoogleReviews() {
         {dealers.map((dealer) => {
           const reviewData = googleReviews[dealer.city];
           
+          // Google My Business URLs for direct review writing
+          const getGMBReviewUrl = (city: string) => {
+            if (city === 'Hyderabad') {
+              // Direct link to Google Maps with review writing option
+              return 'https://www.google.com/maps/search/Raam+Ather+Somajiguda+Hyderabad/@17.4108,78.4612,17z?entry=ttu&hl=en';
+            } else if (city === 'Chennai') {
+              // Direct link to Google Maps with review writing option
+              return 'https://www.google.com/maps/search/Raam+Ather+Nungambakkam+Chennai/@13.0604,80.2496,17z?entry=ttu&hl=en';
+            }
+            return `https://www.google.com/search?q=Raam+Ather+${city}+reviews`;
+          };
+          
           return (
             <div
               key={dealer.id}
-              className="bg-white backdrop-blur-sm border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-8 hover:border-[#4ade80]/30 transition-all duration-300 group shadow-sm"
+              className="bg-white backdrop-blur-sm border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-8 hover:border-[#4ade80]/30 transition-all duration-300 group shadow-sm flex flex-col"
             >
               {/* Header */}
               <div className="flex items-center justify-between mb-4 sm:mb-6">
@@ -75,7 +87,7 @@ export default function GoogleReviews() {
               </div>
 
               {/* Review Highlights */}
-              <div className="space-y-3 mb-4 sm:mb-6">
+              <div className="space-y-3 mb-4 sm:mb-6 flex-1">
                 <div className="bg-gray-50 rounded-lg p-3 sm:p-4 border border-gray-100">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="flex">
@@ -107,8 +119,8 @@ export default function GoogleReviews() {
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+              {/* Action Buttons - Fixed alignment */}
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-auto">
                 <a
                   href={`https://www.google.com/search?q=Raam+Ather+${dealer.city}+reviews`}
                   target="_blank"
@@ -119,7 +131,7 @@ export default function GoogleReviews() {
                   <ExternalLink size={16} />
                 </a>
                 <a
-                  href={`https://www.google.com/search?q=Raam+Ather+${dealer.city}+write+review`}
+                  href={getGMBReviewUrl(dealer.city)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 bg-[#4ade80] text-black hover:bg-[#4ade80]/80 px-4 py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 hover:shadow-lg"

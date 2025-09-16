@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import TestimonialsSEO from './components/server/TestimonialsSEO';
 import TestimonialsPageMobile from './components/client/TestimonialsPageMobile.client';
 import TestimonialsPage from './components/client/TestimonialsPage.client';
+import FooterClient from '../Components/footer/footerclient';
 
 export const revalidate = 120;
 
@@ -28,6 +29,9 @@ export default function TestimonialsPageMain() {
           <TestimonialsPage />
         </Suspense>
       </div>
+
+      {/* Footer */}
+      <FooterClient />
 
       {/* TestRideForm - COMMENTED OUT AS REQUESTED */}
       {/* <TestRideForm timerDelay={7.5} /> */}

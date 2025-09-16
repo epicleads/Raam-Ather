@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import { useTestDriveModal } from "../test-ride-form/TestDriveModalStore";
+import { FaFacebookF, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   const testDriveModal = useTestDriveModal();
@@ -136,7 +137,16 @@ const Footer: React.FC = () => {
                     Contact Us
                   </Link>
                 </li>
-               
+                <li>
+                  <Link href="/TermsOfUse" className="hover:underline">
+                    Terms
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/PrivacyPolicy" className="hover:underline">
+                    Privacy Policy
+                  </Link>
+                </li>
                 
               </ul>
             </div>
@@ -144,24 +154,32 @@ const Footer: React.FC = () => {
             {/* Column 5 */}
             <div>
               <h4 className="text-gray-400 font-medium mb-4">Follow Us</h4>
-              <ul className="space-y-[6px]">
-                <li>
-                  <Link href="#" className="hover:underline">
-                    Facebook
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:underline">
-                    Instagram
-                  </Link>
-                </li>
-                
-                <li>
-                  <Link href="#" className="hover:underline">
-                    LinkedIn
-                  </Link>
-                </li>
-              </ul>
+              <div className="flex gap-4 text-white text-lg">
+                <a
+                  href="https://facebook.com/raamather"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-green-500 transition-colors"
+                >
+                  <FaFacebookF />
+                </a>
+                <a
+                  href="https://www.instagram.com/atherhyderbad_raamgroup?igsh=am1uMmVsaTE0dmZp&utm_source=qr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-green-500 transition-colors"
+                >
+                  <FaInstagram />
+                </a>
+                <a
+                  href="https://linkedin.com/company/raamather"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-green-500 transition-colors"
+                >
+                  <FaLinkedin />
+                </a>
+              </div>
             </div>
           </div>
         </div>

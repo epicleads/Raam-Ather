@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { HeroScrollIndicator } from '../../../Components/home-hero/client/HeroScrollIndicator.client';
 import Image from 'next/image';
 
 export default function HeroSection() {
@@ -18,17 +17,17 @@ export default function HeroSection() {
     return () => clearTimeout(textTimer);
   }, []);
 
-  const scrollToCustomerVoices = () => {
-    const customerVoices = document.getElementById('customer-voices');
-    if (customerVoices) {
-      customerVoices.scrollIntoView({ behavior: 'smooth' });
+  const scrollToSocialMoments = () => {
+    const socialMoments = document.getElementById('social-moments');
+    if (socialMoments) {
+      socialMoments.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
-    <section 
-      aria-label="Testimonials Hero" 
-      className="relative h-screen overflow-hidden bg-gradient-to-b from-gray-50 to-white"
+    <section
+      aria-label="Testimonials Hero"
+      className="relative h-screen min-h-screen overflow-hidden bg-gradient-to-b from-gray-50 to-white"
     >
       {/* Background Video/Image */}
       <div className="absolute inset-0">
@@ -74,15 +73,13 @@ export default function HeroSection() {
       {/* Discover More Button - Shows after 4 seconds */}
       <div className={`absolute bottom-16 sm:bottom-20 left-1/2 transform -translate-x-1/2 z-20 transition-opacity duration-1000 ${showButton ? 'opacity-100' : 'opacity-0'}`}>
         <button
-          onClick={scrollToCustomerVoices}
+          onClick={scrollToSocialMoments}
           className="bg-green-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-base sm:text-lg font-semibold hover:bg-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
         >
           Discover More
         </button>
       </div>
 
-      {/* Scroll Indicator - Using the same one from home page */}
-      <HeroScrollIndicator isVisible={true} />
     </section>
   );
 }

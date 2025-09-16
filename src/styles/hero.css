@@ -1,0 +1,279 @@
+/* Hero Section Styles - Only for Home Page */
+
+/* Mobile-specific hero image handling - Only for home page */
+@media (max-width: 450px) {
+  .home-hero .hero-mobile-image {
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  /* Ensure mobile images fill the container properly - Only for home page */
+  .home-hero .hero-container {
+    overflow: hidden !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+  }
+
+  /* Mobile-specific text and CTA positioning - MATCHING SCREENSHOTS - Only for home page */
+  .home-hero .hero-mobile-content {
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    padding-top: 8rem !important;
+    padding-bottom: 0 !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    margin-top: 0 !important;
+    position: relative !important;
+  }
+
+  .home-hero .hero-mobile-text {
+    margin-bottom: 2rem !important;
+    width: 100% !important;
+    padding-top: 0 !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  /* Ensure CTAs are visible and properly spaced on mobile - Only for home page */
+  .home-hero .hero-mobile-cta {
+    margin-top: 1.5rem !important;
+    width: 100% !important;
+    padding-bottom: 0 !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  /* Force mobile content to upper-middle section - Only for home page */
+  .home-hero .hero-mobile-content > div {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    transform: translateY(0) !important;
+    position: relative !important;
+    top: 0 !important;
+  }
+
+  /* Additional spacing to ensure content is below header - Only for home page */
+  .home-hero .hero-mobile-content .hero-mobile-text {
+    padding-top: 0 !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .home-hero .hero-mobile-content .hero-mobile-cta {
+    padding-bottom: 0 !important;
+    margin-top: 1.5rem !important;
+  }
+
+  /* Ensure content is positioned in upper-middle section - Only for home page */
+  .home-hero .hero-mobile-content {
+    margin-top: 0 !important;
+    top: 0 !important;
+    bottom: auto !important;
+  }
+
+  /* Override any transform that might interfere - Only for home page */
+  .home-hero .hero-mobile-content * {
+    transform: none !important;
+  }
+
+  /* Remove absolute positioning - use flexbox instead - Only for home page */
+  .home-hero .hero-mobile-content {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    z-index: 15 !important;
+  }
+
+  /* Exact positioning from screenshots - Only for home page */
+  .home-hero .hero-mobile-content {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  /* Ensure text and CTAs are left-aligned with proper indentation - Only for home page */
+  .home-hero .hero-mobile-text h1,
+  .home-hero .hero-mobile-text p {
+    text-align: left !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  /* Button container left alignment - Only for home page */
+  .home-hero .hero-mobile-cta > div {
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    flex-direction: row !important;
+  }
+
+  /* Individual button left alignment - Only for home page */
+  .home-hero .hero-mobile-cta a {
+    align-self: flex-start !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    flex: 0 0 auto !important;
+  }
+
+  /* Ensure buttons don't stretch to full width - Only for home page */
+  .home-hero .hero-mobile-cta .flex {
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 1rem !important;
+  }
+
+  /* Mobile button spacing - Only for home page */
+  @media (max-width: 450px) {
+    .home-hero .hero-mobile-cta .flex {
+      gap: 1rem !important;
+    }
+  }
+}
+
+/* Rizta mobile image handling */
+@media (max-width: 450px) {
+  .rizta-mobile-image {
+    object-fit: cover !important;
+    object-position: center !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Ensure Rizta mobile images fill the container properly */
+  .rizta-container {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    overflow: hidden !important;
+    position: relative !important;
+    display: block !important;
+  }
+
+  /* Ensure hero slider is visible on mobile */
+  .rizta-container > div {
+    height: 100% !important;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  /* Force hero content to be visible */
+  .rizta-container section {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    display: block !important;
+  }
+
+  /* Ensure images are visible */
+  .rizta-container img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Force mobile image to show on small screens */
+  .rizta-container .rizta-mobile-image {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Ather 450 mobile image handling */
+@media (max-width: 450px) {
+  .ather450-mobile-image {
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  /* Ensure Ather 450 mobile images fill the container properly */
+  .ather450-container {
+    overflow: hidden !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+  }
+}
+
+/* Fix mobile viewport height issues - must be before other mobile styles */
+@media (max-width: 768px) {
+  /* Set proper viewport height variables */
+  :root {
+    --vh: 1vh;
+  }
+  
+  /* Force immediate viewport height calculation */
+  html {
+    height: -webkit-fill-available;
+    height: fill-available;
+  }
+  
+  body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: fill-available;
+  }
+  
+  /* Ensure hero containers use proper viewport calculations - Only for home page */
+  .home-hero .hero-container,
+  .rizta-container, 
+  .ather450-container {
+    height: calc(var(--vh, 1vh) * 100) !important;
+    height: 100vh !important;
+    height: -webkit-fill-available !important;
+    height: fill-available !important;
+    min-height: calc(var(--vh, 1vh) * 100) !important;
+    min-height: 100vh !important;
+    min-height: -webkit-fill-available !important;
+    min-height: fill-available !important;
+    display: block !important;
+    visibility: visible !important;
+  }
+}
+
+/* Ensure proper viewport handling for all hero sections */
+@media (max-width: 768px) {
+  /* Hero section specific optimizations - Only for home page */
+  .home-hero section[class*="h-screen"] {
+    height: 100vh !important;
+    height: -webkit-fill-available !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  /* Ensure hero content is properly positioned */
+  .hero-content-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 30 !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    padding-bottom: 5rem !important;
+  }
+
+  /* Fix hero slider content positioning */
+  .hero-slider-content {
+    position: absolute !important;
+    bottom: 5rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    text-align: center !important;
+    width: calc(100% - 2rem) !important;
+    max-width: 24rem !important;
+    z-index: 40 !important;
+  }
+
+  /* Ensure hero navigation doesn't interfere */
+  .hero-nav-arrows {
+    z-index: 35 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  /* Fix hero indicators positioning */
+  .hero-indicators {
+    position: absolute !important;
+    bottom: 1.5rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 40 !important;
+  }
+}

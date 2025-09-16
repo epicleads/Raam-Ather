@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Filters, Testimonial, ExperienceType } from '../../data/testimonials.types';
 import { experienceOptions } from '../../data/testimonials.config';
 import TestimonialCard from './TestimonialCard.client';
+import '../../testimonials.css';
 
 interface TestimonialsFeedProps {
   purchaseTestimonials: Testimonial[];
@@ -58,11 +59,11 @@ export default function TestimonialsFeed({
   return (
     <section id="customer-voices" className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
       {/* Section Header */}
-      <div className="text-center mb-8 sm:mb-12">
+      <div className="testimonials-header">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 sm:mb-4"
+          className="testimonials-title"
         >
           Customer <span className="text-gray-700">Voices</span>
         </motion.h2>
@@ -70,45 +71,41 @@ export default function TestimonialsFeed({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto px-2"
+          className="testimonials-subtitle"
         >
           Real experiences from real riders across different touchpoints
         </motion.p>
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex flex-col sm:flex-row justify-center mb-6 sm:mb-8 lg:mb-12">
-        <div className="bg-gray-100 backdrop-blur-sm border border-gray-200 rounded-xl p-1 flex w-full max-w-[400px] sm:max-w-[500px] mx-auto">
-          {(['purchase', 'service', 'community'] as ExperienceType[]).map((experience) => (
-            <motion.button
-              key={experience}
-              onClick={() => setActiveTab(experience)}
-              className={`relative px-4 sm:px-6 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all flex-1 min-h-[32px] sm:min-h-[36px] ${
-                activeTab === experience
-                  ? 'text-white'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-200'
-              }`}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <span className="flex items-center justify-center gap-2">
-                <span className="text-base sm:text-lg">{getTabIcon(experience)}</span>
-                <span className="text-[11px] sm:text-xs font-medium">{getTabTitle(experience)}</span>
-                <span className="bg-white/80 text-[9px] sm:text-[11px] px-2 py-1 rounded-full text-gray-700 font-medium min-w-[18px] h-5 flex items-center justify-center">
-                  {allTestimonials[experience].length}
-                </span>
+      <div className="testimonials-tab-nav">
+        {(['purchase', 'service', 'community'] as ExperienceType[]).map((experience) => (
+          <motion.button
+            key={experience}
+            onClick={() => setActiveTab(experience)}
+            className={`testimonials-tab-button ${
+              activeTab === experience ? 'active' : ''
+            }`}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <span className="flex items-center justify-center gap-2">
+              <span className="text-lg">{getTabIcon(experience)}</span>
+              <span className="font-medium">{getTabTitle(experience)}</span>
+              <span className="bg-white/80 text-xs px-2 py-1 rounded-full text-gray-700 font-medium min-w-[18px] h-5 flex items-center justify-center">
+                {allTestimonials[experience].length}
               </span>
-              
-              {activeTab === experience && (
-                <motion.div
-                  layoutId="activeTab"
-                  className="absolute inset-0 bg-gray-900 rounded-lg -z-10"
-                  transition={{ type: "spring", duration: 0.5 }}
-                />
-              )}
-            </motion.button>
-          ))}
-        </div>
+            </span>
+
+            {activeTab === experience && (
+              <motion.div
+                layoutId="activeTab"
+                className="absolute inset-0 bg-gray-900 rounded-lg -z-10"
+                transition={{ type: "spring", duration: 0.5 }}
+              />
+            )}
+          </motion.button>
+        ))}
       </div>
 
       {/* Results Count */}
@@ -134,7 +131,7 @@ export default function TestimonialsFeed({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto justify-items-center"
+          className="testimonials-grid"
         >
           {filteredTestimonials.length > 0 ? (
             filteredTestimonials.map((testimonial, index) => (

@@ -27,7 +27,7 @@ export default async function Hero() {
         title="Ather Electric Scooters"
         description="Experience the future of mobility with Ather's premium electric scooters. Advanced technology, superior performance, and sustainable transportation."
       />
-      <section className="relative w-full h-screen bg-black" style={{ maxHeight: '100vh', overflow: 'hidden' }}>
+      <section className="home-hero relative w-full h-screen bg-black" style={{ maxHeight: '100vh', overflow: 'hidden' }}>
         <Suspense fallback={<p className="text-white">Loading...</p>}>
           <HeroSlider slides={slides} />
         </Suspense>

@@ -1,48 +1,49 @@
 import React from 'react';
 import { RiztaKeyHighlightsClient } from './rizta-key-highlights-client';
+import { Battery, Zap, Bike, Smartphone, Monitor, Gem } from 'lucide-react';
 
 // Server component for Ather Rizta key highlights
 export default function RiztaKeyHighlights() {
-  // Key highlights data for Rizta and Rizta S
+  // Key highlights data for Rizta Z and Rizta S
   const riztaHighlights = [
     {
       id: 'range',
-      icon: '🔋',
+      icon: <Battery className="w-8 h-8 text-green-600" />,
       title: 'Long Range',
       subtitle: 'Up to 123 km',
       description: 'True range that gets you through your daily commute without range anxiety',
-      variant: 'rizta'
+      variant: 'rizta-z'
     },
     {
       id: 'charging',
-      icon: '⚡',
+      icon: <Zap className="w-8 h-8 text-orange-500" />,
       title: 'Fast Charging',
       subtitle: '0-80% in 65 mins',
       description: 'Quick charging technology that fits your busy lifestyle',
-      variant: 'rizta'
+      variant: 'rizta-z'
     },
     {
       id: 'performance',
-      icon: '🏍️',
+      icon: <Bike className="w-8 h-8 text-red-500" />,
       title: 'Peak Performance',
       subtitle: '4.3 kW Motor',
       description: 'Powerful motor delivering smooth acceleration and reliable performance',
-      variant: 'rizta'
+      variant: 'rizta-z'
     }
   ];
 
   const riztaSHighlights = [
     {
       id: 'range-s',
-      icon: '🔋',
+      icon: <Battery className="w-8 h-8 text-green-600" />,
       title: 'Extended Range',
-      subtitle: 'Up to 159 km',
+      subtitle: 'Up to 160 km',
       description: 'Enhanced battery capacity for longer rides and extended adventures',
       variant: 'rizta-s'
     },
     {
       id: 'charging-s',
-      icon: '⚡',
+      icon: <Zap className="w-8 h-8 text-orange-500" />,
       title: 'Rapid Charging',
       subtitle: '0-80% in 65 mins',
       description: 'Advanced charging technology with enhanced battery management',
@@ -50,7 +51,7 @@ export default function RiztaKeyHighlights() {
     },
     {
       id: 'performance-s',
-      icon: '🚀',
+      icon: <Bike className="w-8 h-8 text-red-500" />,
       title: 'Superior Power',
       subtitle: '4.3 kW Motor',
       description: 'Enhanced motor tuning for superior performance and efficiency',
@@ -58,7 +59,7 @@ export default function RiztaKeyHighlights() {
     },
     {
       id: 'features-s',
-      icon: '📱',
+      icon: <Smartphone className="w-8 h-8 text-blue-500" />,
       title: 'Smart Features',
       subtitle: 'Ather Stack Pro',
       description: 'Advanced connectivity, navigation, and smart features included',
@@ -66,7 +67,7 @@ export default function RiztaKeyHighlights() {
     },
     {
       id: 'display-s',
-      icon: '📺',
+      icon: <Monitor className="w-8 h-8 text-purple-500" />,
       title: 'Smart Display',
       subtitle: '7" Touchscreen',
       description: 'Intuitive touchscreen with navigation and vehicle diagnostics',
@@ -74,7 +75,7 @@ export default function RiztaKeyHighlights() {
     },
     {
       id: 'design-s',
-      icon: '💎',
+      icon: <Gem className="w-8 h-8 text-amber-500" />,
       title: 'Premium Build',
       subtitle: 'Superior Finish',
       description: 'Enhanced build quality with premium materials and finishes',

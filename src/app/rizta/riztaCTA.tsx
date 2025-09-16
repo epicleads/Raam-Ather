@@ -13,7 +13,7 @@ const RiztaCTA = () => {
   return (
     <div className="space-y-12">
       {/* Rizta CTA Banner */}
-      <div className="relative bg-black rounded-3xl p-8 md:p-12 text-center text-white overflow-hidden border border-gray-800">
+      <div className="relative bg-black rounded-3xl p-6 md:p-12 text-center text-white overflow-hidden border border-gray-800 mx-4 md:mx-0">
         {/* Futuristic grid background */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-gradient-to-br from-transparent via-gray-500 to-transparent"></div>
@@ -30,7 +30,7 @@ const RiztaCTA = () => {
         
         <div className="relative z-10">
           <h3 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
-            Ready to Experience <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Ather Rizta</span>?
+            Ready to Experience <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Ather Rizta Z</span>?
           </h3>
           <p className="text-lg md:text-xl mb-8 text-gray-300 max-w-2xl mx-auto leading-relaxed">
             Book a test ride today and discover the future of electric mobility

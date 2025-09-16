@@ -6,8 +6,15 @@ import type { HeroScrollIndicatorProps } from '../home-hero.types';
 export function HeroScrollIndicator({ isVisible }: HeroScrollIndicatorProps) {
   const [shouldShow, setShouldShow] = useState(true);
   const [isAnimating, setIsAnimating] = useState(true);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+    
     const handleScroll = () => {
       const scrolled = window.scrollY > 100;
       setShouldShow(!scrolled && isVisible);
@@ -15,24 +22,24 @@ export function HeroScrollIndicator({ isVisible }: HeroScrollIndicatorProps) {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isVisible]);
+  }, [isVisible, isClient]);
 
   useEffect(() => {
+    if (!isClient) return;
+    
     const timer = setTimeout(() => {
       setIsAnimating(false);
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isClient]);
 
-  if (!shouldShow) return null;
+  // Don't render on server side to prevent hydration mismatch
+  if (!isClient || !shouldShow) return null;
 
   return (
     <div 
       className="absolute bottom-8 left-8 flex flex-col items-center z-20 transition-opacity duration-500"
-      style={{
-        opacity: shouldShow ? 1 : 0
-      }}
     >
       {/* Scroll Text */}
       <span 
@@ -59,9 +66,8 @@ export function HeroScrollIndicator({ isVisible }: HeroScrollIndicatorProps) {
       >
         {/* Moving dot */}
         <div 
-          className="absolute w-2 h-2 bg-black rounded-full left-1/2 transform -translate-x-1/2"
+          className={`absolute w-2 h-2 bg-black rounded-full left-1/2 transform -translate-x-1/2 ${isAnimating ? 'animate-scroll-dot' : ''}`}
           style={{
-            animation: isAnimating ? 'scrollDot 2s ease-in-out infinite' : 'none',
             top: '10px',
             boxShadow: '0 0 10px rgba(0,0,0,0.3)'
           }}
@@ -70,10 +76,7 @@ export function HeroScrollIndicator({ isVisible }: HeroScrollIndicatorProps) {
 
       {/* Arrow */}
       <div 
-        className="mt-4 transform transition-transform duration-300"
-        style={{
-          animation: isAnimating ? 'bounce 2s ease-in-out infinite' : 'none'
-        }}
+        className={`mt-4 transform transition-transform duration-300 ${isAnimating ? 'animate-bounce' : ''}`}
       >
         <svg 
           width="16" 
@@ -108,13 +111,8 @@ export function HeroScrollIndicator({ isVisible }: HeroScrollIndicatorProps) {
           }
         }
 
-        @keyframes bounce {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-4px);
-          }
+        .animate-scroll-dot {
+          animation: scrollDot 2s ease-in-out infinite;
         }
       `}</style>
     </div>

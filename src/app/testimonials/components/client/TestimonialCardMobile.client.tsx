@@ -87,6 +87,23 @@ export default function TestimonialCardMobile({ testimonial, index }: Testimonia
     return () => clearTimeout(timer);
   }, []);
 
+  // DEBUG: Log video element when component mounts
+  useEffect(() => {
+    if (videoRef.current) {
+      console.log(`🔍 Video element mounted for ${testimonial.id}:`, {
+        videoElement: videoRef.current,
+        videoSrc: videoRef.current.src,
+        videoPoster: videoRef.current.poster,
+        elementWidth: videoRef.current.offsetWidth,
+        elementHeight: videoRef.current.offsetHeight,
+        elementVisible: videoRef.current.offsetParent !== null,
+        parentElement: videoRef.current.parentElement,
+        parentWidth: videoRef.current.parentElement?.offsetWidth,
+        parentHeight: videoRef.current.parentElement?.offsetHeight
+      });
+    }
+  }, [testimonial.id]);
+
   const renderMediaContent = () => {
     // Check for Instagram reel first - show video player with thumbnail
     if (testimonial.instagramReelUrl) {
@@ -122,51 +139,141 @@ export default function TestimonialCardMobile({ testimonial, index }: Testimonia
       };
 
       const videoPath = getVideoPath(testimonial.id);
+      const thumbnailPath = getThumbnailPath(testimonial.id);
+      
+      // DEBUG: Log video and thumbnail paths
+      console.log(`🎥 DEBUG - Video paths for ${testimonial.id}:`, {
+        videoPath,
+        thumbnailPath,
+        hasVideoPath: !!videoPath,
+        hasThumbnailPath: !!thumbnailPath
+      });
+
+      // If there's an error loading thumbnails, show fallback immediately
+      if (imageError) {
+        return (
+          <div className="relative w-full h-[300px] bg-gradient-to-br from-green-400 to-blue-500 rounded-t-xl flex items-center justify-center group">
+            <div className="text-center text-white px-4">
+              <div className="bg-white/20 backdrop-blur-sm p-3 sm:p-4 rounded-full mb-3 mx-auto w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center">
+                <span className="text-xl sm:text-2xl">📹</span>
+              </div>
+              <h3 className="text-sm sm:text-base font-semibold mb-1">{testimonial.name}</h3>
+              <p className="text-xs sm:text-sm opacity-90 mb-2">{testimonial.city} • {testimonial.model}</p>
+              <p className="text-xs sm:text-sm font-medium">Instagram Reel</p>
+              <p className="text-xs opacity-80 mt-2 line-clamp-2">&ldquo;{testimonial.content}&rdquo;</p>
+            </div>
+
+            <a
+              href={testimonial.instagramReelUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute top-3 right-3 z-30 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-sm hover:bg-white transition-all duration-200 hover:scale-110 cursor-pointer"
+              title="View on Instagram"
+            >
+              <Instagram size={16} className="text-purple-600" />
+            </a>
+          </div>
+        );
+      }
 
       return (
         <div className="relative w-full h-[300px] bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center group overflow-hidden">
           {/* Video Player or Thumbnail */}
           {videoPath ? (
-            <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-              <video
-                ref={videoRef}
-                src={videoPath}
-                poster={getThumbnailPath(testimonial.id)}
-                className="absolute inset-0 w-full h-full object-cover cursor-pointer object-center"
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                controls={false}
-                webkit-playsinline="true"
-                onPlay={() => {
-                  console.log('Video playing!');
-                  setIsVideoPlaying(true);
-                }}
-                onPause={() => {
-                  console.log('Video paused!');
-                  setIsVideoPlaying(false);
-                }}
-                onEnded={() => setIsVideoPlaying(false)}
-                onLoadedData={() => console.log('Video loaded!')}
-                onError={(e) => console.error('Video error:', e)}
-                onClick={handleVideoPlay}
-                onTouchStart={() => {
-                  console.log('Touch start detected');
-                  playVideo();
-                }}
-                onTouchEnd={() => {
-                  console.log('Touch end detected');
-                  pauseVideo();
-                }}
-              />
+            (() => {
+              // DEBUG: Log when video is being rendered
+              console.log(`🎬 DEBUG - Rendering video for ${testimonial.id}:`, {
+                videoPath,
+                thumbnailPath,
+                testimonialType: testimonial.type,
+                hasInstagramReel: !!testimonial.instagramReelUrl
+              });
+              return (
+                <div 
+                  className="relative w-full h-full flex items-center justify-center overflow-hidden"
+                  style={{
+                    minHeight: '300px',
+                    backgroundColor: 'rgba(255,0,0,0.3)', // DEBUG: More visible red background
+                    border: '2px solid red' // DEBUG: Red border to see container
+                  }}
+                >
+                  <video
+                    ref={videoRef}
+                    src={videoPath}
+                    poster={getThumbnailPath(testimonial.id)}
+                    className="absolute inset-0 w-full h-full object-cover cursor-pointer object-center z-10"
+                    style={{
+                      zIndex: 10,
+                      visibility: 'visible',
+                      opacity: 1,
+                      display: 'block'
+                    }}
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    controls={false}
+                    webkit-playsinline="true"
+                    onPlay={() => {
+                      console.log(`🎬 Video playing for ${testimonial.id}!`);
+                      setIsVideoPlaying(true);
+                    }}
+                    onPause={() => {
+                      console.log(`⏸️ Video paused for ${testimonial.id}!`);
+                      setIsVideoPlaying(false);
+                    }}
+                    onEnded={() => {
+                      console.log(`🏁 Video ended for ${testimonial.id}!`);
+                      setIsVideoPlaying(false);
+                    }}
+                    onLoadedData={() => {
+                      console.log(`✅ Video loaded for ${testimonial.id}!`, {
+                        videoElement: videoRef.current,
+                        videoSrc: videoRef.current?.src,
+                        videoPoster: videoRef.current?.poster,
+                        videoWidth: videoRef.current?.videoWidth,
+                        videoHeight: videoRef.current?.videoHeight,
+                        elementWidth: videoRef.current?.offsetWidth,
+                        elementHeight: videoRef.current?.offsetHeight,
+                        elementVisible: videoRef.current?.offsetParent !== null,
+                        elementDisplay: window.getComputedStyle(videoRef.current!).display,
+                        elementVisibility: window.getComputedStyle(videoRef.current!).visibility
+                      });
+                    }}
+                    onError={(e) => {
+                      console.error(`❌ Video error for ${testimonial.id}:`, {
+                        error: e,
+                        videoSrc: videoPath,
+                        videoElement: videoRef.current
+                      });
+                    }}
+                    onLoadStart={() => {
+                      console.log(`🔄 Video load started for ${testimonial.id}`);
+                    }}
+                    onCanPlay={() => {
+                      console.log(`🎯 Video can play for ${testimonial.id}`);
+                    }}
+                    onClick={handleVideoPlay}
+                    onTouchStart={() => {
+                      console.log(`👆 Touch start detected for ${testimonial.id}`);
+                      playVideo();
+                    }}
+                    onTouchEnd={() => {
+                      console.log(`👆 Touch end detected for ${testimonial.id}`);
+                      pauseVideo();
+                    }}
+                  />
               
-              {/* Play/Pause Button Overlay - ALWAYS VISIBLE ON MOBILE */}
-              <button
-                onClick={handleVideoPlay}
-                className="absolute inset-0 flex items-center justify-center bg-black/10 z-[100] hover:bg-black/20 transition-all duration-200"
-                aria-label={isVideoPlaying ? "Pause video" : "Play video"}
-              >
+                  {/* Play/Pause Button Overlay - ALWAYS VISIBLE ON MOBILE */}
+                  <button
+                    onClick={handleVideoPlay}
+                    className="absolute inset-0 flex items-center justify-center bg-black/10 z-20 hover:bg-black/20 transition-all duration-200"
+                    aria-label={isVideoPlaying ? "Pause video" : "Play video"}
+                    style={{
+                      zIndex: 20,
+                      pointerEvents: 'auto'
+                    }}
+                  >
                 <div className="bg-white/95 backdrop-blur-sm p-4 sm:p-5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-200 hover:scale-110 border-2 border-white/50">
                   {isVideoPlaying ? (
                     <div className="w-6 h-6 sm:w-7 sm:h-7 bg-purple-600 rounded-sm"></div>
@@ -192,20 +299,23 @@ export default function TestimonialCardMobile({ testimonial, index }: Testimonia
                 <Instagram size={16} className="text-purple-600" />
               </a>
             </div>
+              );
+            })()
           ) : (
             <Image
-              src={getThumbnailPath(testimonial.id)}
+              src={thumbnailPath}
               alt={`Instagram Reel - ${testimonial.title}`}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, 100vw"
               className="object-cover"
               priority={index < 3}
+              onError={() => {
+                console.warn(`Mobile thumbnail failed to load: ${thumbnailPath}`);
+                setImageError(true);
+              }}
             />
           )}
           
-          {/* Instagram Badge - Top Left */}
-          {/* Removed Instagram badge - keeping only one Instagram button for entire grid */}
-
           {/* Small Instagram Redirect Button - Top Right */}
           <a 
             href={testimonial.instagramReelUrl}

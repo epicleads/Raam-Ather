@@ -1,0 +1,283 @@
+/* Testimonial Cards Styles */
+
+/* Testimonial card specific styles */
+.testimonial-card {
+  aspect-ratio: 2/3; /* Slimmer and longer - was 3/4 */
+  min-height: 600px; /* Increased height more for better reel view - was 540px */
+  max-width: 320px; /* Keep width the same */
+  width: 100%; /* Ensure full width within constraints */
+  position: relative; /* For absolute positioning of customer details */      
+  overflow: hidden; /* Hide sliding customer details by default */
+}
+
+.testimonial-card .media-section {
+  height: 480px; /* Increased height more for better reel view - was 420px */ 
+  flex-shrink: 0; /* Prevent media section from shrinking */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Customer details sliding section */
+.testimonial-card .customer-details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(229, 231, 235, 0.8);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  min-height: 100px; /* Increased height for better spacing */
+  padding: 1.25rem; /* Slightly more padding */
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for separation */
+}
+
+.testimonial-card:hover .customer-details {
+  transform: translateY(0);
+}
+
+/* Additional spacing and visual improvements */
+.testimonial-card .media-section {
+  padding-bottom: 120px; /* Increased space for customer details and review text */
+}
+
+/* Ensure review text overlay doesn't overlap with customer details */        
+.testimonial-card .media-section .opacity-0 {
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5; /* Lower than customer details */
+  max-width: 90%; /* Prevent text from going too wide */
+  margin: 0 auto; /* Center the text overlay */
+}
+
+.testimonial-card .media-section:hover .opacity-0 {
+  transform: translateY(0);
+}
+
+/* Enhanced gradient for review text to avoid overlap */
+.testimonial-card .media-section .opacity-0 {
+  background: linear-gradient(to top, 
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    rgba(0, 0, 0, 0.3) 80%,
+    transparent 100%
+  );
+  border-radius: 8px; /* Rounded corners for better appearance */
+}
+
+/* Enhanced hover effects for cards */
+.testimonial-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Responsive adjustments for slimmer cards */
+@media (min-width: 640px) {
+  .testimonial-card {
+    max-width: 300px; /* Slightly smaller on tablets */
+  }
+}
+
+@media (min-width: 1024px) {
+  .testimonial-card {
+    max-width: 320px; /* Full size on desktop */
+  }
+}
+
+/* Ensure cards don't stretch too wide on larger screens */
+@media (min-width: 1280px) {
+  .testimonial-card {
+    max-width: 320px; /* Maintain slim proportions */
+  }
+}
+
+/* Video player styling */
+.testimonial-card .media-section video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Video poster (thumbnail) styling */
+.testimonial-card .media-section video[poster] {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Play/Pause button overlay */
+.testimonial-card .media-section .bg-black\/20 {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.testimonial-card .media-section:hover .bg-black\/20 {
+  opacity: 1;
+}
+
+/* Instagram redirect button styling */
+.testimonial-card .media-section a[title="View on Instagram"] {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.testimonial-card .media-section a[title="View on Instagram"]:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Instagram thumbnail styling */
+.testimonial-card .media-section .overflow-hidden {
+  position: relative;
+}
+
+.testimonial-card .media-section img[alt*="Instagram"] {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Ensure play button and badges are above thumbnail */
+.testimonial-card .media-section .z-10 {
+  z-index: 10;
+}
+
+/* Enhanced play button hover effects */
+.testimonial-card .media-section a {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.testimonial-card .media-section a:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* Instagram thumbnail specific styles */
+.testimonial-card .media-section .bg-gradient-to-br {
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Mobile Testimonial Cards - Hide Description & Increase Reel Height */        
+@media (max-width: 640px) {
+  /* Hide all description sections on mobile using simpler selectors */
+  .testimonial-card .absolute.bottom-16,
+  .testimonial-card .absolute.bottom-20,
+  .testimonial-card .absolute.bottom-0.left-0.right-0 {
+    display: none !important;
+  }
+
+  /* Hide floating text overlays on mobile */
+  .testimonial-card .opacity-0,
+  .testimonial-card [class*="group-hover:opacity-100"] {
+    display: none !important;
+  }
+
+  /* Hide any review text overlays that might appear */
+  .testimonial-card [class*="opacity-0"],
+  .testimonial-card [class*="group-hover"] {
+    display: none !important;
+  }
+
+  /* Hide any elements with text content that might be descriptions */
+  .testimonial-card .text-white.text-sm,
+  .testimonial-card .text-white.text-base,
+  .testimonial-card .line-clamp-3,
+  .testimonial-card .line-clamp-2 {
+    display: none !important;
+  }
+
+  /* Hide any blockquote elements that contain review content */
+  .testimonial-card blockquote {
+    display: none !important;
+  }
+
+  /* Hide any h4 elements that contain review titles */
+  .testimonial-card h4 {
+    display: none !important;
+  }
+
+  /* Increase reel height for mobile view */
+  .testimonial-card .media-section {
+    height: 500px !important;
+    min-height: 500px !important;
+  }
+
+  .testimonial-card .media-section > div {
+    height: 500px !important;
+    min-height: 500px !important;
+  }
+
+  /* Ensure video/image takes full height on mobile */
+  .testimonial-card .media-section video,
+  .testimonial-card .media-section img {
+    height: 500px !important;
+    min-height: 500px !important;
+    object-fit: cover !important;
+  }
+
+  /* Ensure customer details are visible but compact on mobile */
+  .testimonial-card .customer-details {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    border-top: 1px solid rgba(229, 231, 235, 0.8) !important;
+    transform: none !important;
+    z-index: 10 !important;
+    min-height: 80px !important;
+    padding: 1rem !important;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Show customer details by default on mobile */
+  .testimonial-card .customer-details {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+  }
+
+  /* Ensure proper spacing for mobile reels */
+  .testimonial-card {
+    height: auto !important;
+    min-height: 500px !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Force hide any remaining description elements */
+  .testimonial-card *[class*="bottom-16"],
+  .testimonial-card *[class*="bottom-20"],
+  .testimonial-card *[class*="opacity-0"] {
+    display: none !important;
+  }
+
+  /* Ensure perfect mobile reel experience */
+  .testimonial-card .media-section {
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  /* Hide any play button overlays that might interfere */
+  .testimonial-card .bg-black\/20 {
+    display: none !important;
+  }
+
+  /* Ensure customer details are always visible on mobile */
+  .testimonial-card .absolute.bottom-0.left-0.right-0.p-3,
+  .testimonial-card .absolute.bottom-0.left-0.right-0.p-4 {
+    display: block !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

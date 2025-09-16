@@ -12,7 +12,7 @@ import {
   PlayIcon,
 } from '@heroicons/react/24/outline';
 import { Outlet } from '../StoreLocatorClient';
-import { usePopup } from '../../Components/popups/PopupProvider';
+import { useTestDriveModal } from '../../Components/test-ride-form/TestDriveModalStore';
 
 interface PremiumOutletCardsProps {
   outlets: Outlet[];
@@ -27,7 +27,7 @@ const PremiumOutletCards: React.FC<PremiumOutletCardsProps> = ({
   setSelectedOutlet,
   
 }) => {
-  const { openFormPopup } = usePopup();
+  const modal = useTestDriveModal();
   const [selectedCity, setSelectedCity] = React.useState<'Hyderabad' | 'Chennai'>('Hyderabad');
 
   // Filter outlets by selected city
@@ -168,7 +168,7 @@ const PremiumOutletCards: React.FC<PremiumOutletCardsProps> = ({
                       <div className="flex items-center gap-2 mb-2">
                         <div className="flex items-center gap-1">
                           <StarIcon className="w-4 h-4 text-yellow-400 fill-current" />
-                          <span className="font-semibold">{outlet.rating}</span>
+                          <span className="font-semibold text-black">{outlet.rating}</span>
                           <span className="text-sm text-gray-500">({outlet.reviewCount})</span>
                         </div>
                         {outlet.distance && (
@@ -197,7 +197,7 @@ const PremiumOutletCards: React.FC<PremiumOutletCardsProps> = ({
                     {/* Primary Actions */}
                     <div className="grid grid-cols-2 gap-3">
                       <motion.button
-                        onClick={() => openFormPopup('testdrive')}
+                        onClick={() => modal.openManually()}
                         className="bg-[#00B248] hover:bg-[#00A041] text-white px-4 py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
@@ -287,7 +287,7 @@ const PremiumOutletCards: React.FC<PremiumOutletCardsProps> = ({
                       <div className="flex items-center gap-2 mb-2">
                         <div className="flex items-center gap-1">
                           <StarIcon className="w-4 h-4 text-yellow-400 fill-current" />
-                          <span className="font-semibold">{outlet.rating}</span>
+                          <span className="font-semibold text-black">{outlet.rating}</span>
                           <span className="text-sm text-gray-500">({outlet.reviewCount})</span>
                         </div>
                         {outlet.distance && (
@@ -322,7 +322,7 @@ const PremiumOutletCards: React.FC<PremiumOutletCardsProps> = ({
                       <motion.button
                         onClick={(e) => {
                           e.stopPropagation();
-                          openFormPopup('testdrive');
+                          modal.openManually();
                         }}
                         className="bg-[#00B248] hover:bg-[#00A041] text-white px-4 py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all"
                         whileHover={{ scale: 1.02 }}

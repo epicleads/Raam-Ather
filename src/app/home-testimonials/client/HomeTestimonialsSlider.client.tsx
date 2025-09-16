@@ -157,17 +157,24 @@ function TestimonialCard({ testimonial, isActive }: TestimonialCardProps) {
 
         {/* Author Info */}
         <footer className="flex items-center">
-          {testimonial.image && (
-            <div className="relative w-12 h-12 mr-4 flex-shrink-0">
+          {/* Always show a default avatar or user icon */}
+          <div className="relative w-12 h-12 mr-4 flex-shrink-0">
+            {testimonial.image ? (
               <Image
                 src={testimonial.image}
                 alt={`${testimonial.name}'s profile picture`}
                 fill
                 className="rounded-full object-cover"
               />
-            </div>
-          )}
-          
+            ) : (
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                </svg>
+              </div>
+            )}
+          </div>
+
           <div>
             <cite className="font-semibold text-gray-900 not-italic">
               {testimonial.name}

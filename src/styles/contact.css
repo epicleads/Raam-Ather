@@ -1,0 +1,322 @@
+/* Contact Section Styles */
+
+/* Premium Contact Section Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.6);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Contact Form Specific Styles */
+.contact-form-container {
+  animation: fadeInScale 0.8s ease-out;
+}
+
+.contact-form-field {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.contact-form-field:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.contact-form-field:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.contact-form-field:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.contact-form-field:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Map Enhancement */
+.map-container {
+  animation: fadeInScale 0.8s ease-out 0.2s both;
+}
+
+.location-card {
+  animation: slideInUp 0.6s ease-out;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.location-card:hover {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Get in Touch Cards */
+.contact-info-card {
+  animation: slideInUp 0.8s ease-out;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-info-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.contact-info-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.contact-info-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Button Hover Effects */
+.premium-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.premium-button:hover::before {
+  left: 100%;
+}
+
+/* Mobile Optimizations for Contact Section */
+@media (max-width: 768px) {
+  .contact-form-container {
+    padding: 1.5rem;
+  }
+
+  .map-container {
+    height: auto;
+    min-height: 400px;
+  }
+
+  .contact-info-card {
+    padding: 1.5rem;
+  }
+
+  /* Reduce animation intensity on mobile for better performance */
+  .location-card:hover {
+    animation: none;
+    transform: translateY(-2px);
+  }
+  
+  /* Prevent any section from blocking scroll - but exclude hero sections */
+  section:not([class*="h-screen"]):not([class*="min-h-screen"]):not([class*="hero"]) {
+    overflow: visible !important;
+    position: relative !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+  
+  /* Specifically ensure hero sections maintain their height */
+  section[class*="h-screen"], 
+  section[class*="min-h-screen"],
+  section[class*="hero"],
+  .hero-container,
+  .rizta-container,
+  .ather450-container {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    overflow: hidden !important;
+  }
+  
+  /* Ensure all containers allow scrolling - but exclude hero containers */
+  div:not(.hero-container):not(.rizta-container):not(.ather450-container), 
+  main:not([class*="hero"]), 
+  article {
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+  
+  /* Fix for scroll locking issues - exclude hero sections */
+  *:not([class*="hero"]):not([class*="container"]) {
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  /* Ensure hero containers work properly */
+  .hero-container, .rizta-container, .ather450-container {
+    overflow: hidden !important;
+    -webkit-overflow-scrolling: auto !important;
+  }
+}
+
+/* Focus states for better accessibility */
+.premium-input:focus,
+.premium-button:focus {
+  outline: 2px solid rgb(34, 197, 94);
+  outline-offset: 2px;
+}
+
+/* Glass morphism effect for contact cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #10b981, #059669, #047857);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Apple-style perfect alignment for contact section */
+.contact-section-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+  min-height: 700px;
+}
+
+@media (max-width: 1024px) {
+  .contact-section-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    min-height: auto;
+  }
+}
+
+/* Perfect height matching */
+.contact-card-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 700px;
+}
+
+.contact-card-header {
+  flex-shrink: 0;
+  padding: 2rem;
+  text-align: center;
+}
+
+.contact-card-content {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+}
+
+.contact-form-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+}
+
+.map-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 500px;
+}
+
+/* Ensure identical border radius and shadows */
+.contact-section-card {
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Perfect spacing for Apple-style design */
+.apple-spacing {
+  margin-bottom: 1rem;
+}
+
+.apple-spacing:last-child {
+  margin-bottom: 0;
+}
+
+/* Communicating headers styling */
+.communicating-header {
+  position: relative;
+}
+
+.communicating-header::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .contact-card-container {
+    min-height: auto;
+  }
+
+  .contact-card-header {
+    padding: 1.5rem;
+  }
+
+  .contact-card-content {
+    padding: 1.5rem;
+  }
+
+  .contact-form-wrapper,
+  .map-wrapper {
+    min-height: 400px;
+  }
+}

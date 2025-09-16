@@ -11,9 +11,9 @@ const heroItems: HeroItem[] = [
     id: "1",
     type: "image",
     src: "/Ather-Assets/Rizta/mother and daughter riding scene-desk-updatedatherrizta.jpg",
-    mobileSrc: "/Ather-Assets/Rizta/mother and daughter riding scene-desk-updatedatherrizta.jpg",
+    mobileSrc: "/Ather-Assets/Rizta/riztacardemomgreenfrontdashboard.jpg",
     alt: "Ather Rizta electric scooter in city",
-    title: "Ather Rizta",
+    title: "Ather Rizta Z",
     subtitle: "Family Meets Performance",
     primaryCTA: {
       label: "Book Test Ride",
@@ -39,14 +39,23 @@ export default function RiztaHero() {
     <>
       <RiztaHeroSEO
         title={heroItems[0].title}
-        description={`${heroItems[0].title} - ${heroItems[0].subtitle}. Spacious, stylish, and powerful — the Ather Rizta is your perfect ride.`}
+        description={`${heroItems[0].title} - ${heroItems[0].subtitle}. Spacious, stylish, and powerful — the Ather Rizta Z is your perfect ride.`}
       />
 
       <section className="relative w-full h-screen overflow-hidden bg-black rizta-container">
+        {/* Debug info */}
+        {process.env.NODE_ENV === 'development' && (
+          <div className="absolute top-4 right-4 bg-red-500 text-white p-2 rounded text-xs z-50">
+            Rizta Hero Container
+          </div>
+        )}
         <Suspense
           fallback={
-            <div className="flex items-center justify-end pb-20 w-full h-full text-white">
-              Loading...
+            <div className="flex items-center justify-center w-full h-full text-white">
+              <div className="text-center">
+                <div className="text-2xl mb-4">Loading Rizta Z...</div>
+                <div className="animate-spin w-8 h-8 border-2 border-white border-t-transparent rounded-full mx-auto"></div>
+              </div>
             </div>
           }
         >
