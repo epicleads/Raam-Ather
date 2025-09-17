@@ -33,17 +33,9 @@ export function Ather450ApexSlider({ heroItems, autoPlayInterval = 5000 }: Ather
   const currentItem = heroItems[currentIndex];
 
   const goToSlide = (index: number) => {
-    console.log('Going to slide:', index);
     setCurrentIndex(index);
     setImageError(null);
   };
-
-  // Debug logging
-  useEffect(() => {
-    console.log('Current index:', currentIndex);
-    console.log('Current item:', currentItem);
-    console.log('Hero items length:', heroItems.length);
-  }, [currentIndex, currentItem, heroItems.length]);
 
   return (
     <div className="relative w-full h-full">
@@ -84,7 +76,7 @@ export function Ather450ApexSlider({ heroItems, autoPlayInterval = 5000 }: Ather
                   className="object-cover"
                   priority
                   onError={() => setImageError(currentItem.src)}
-                  onLoad={() => console.log('Image loaded successfully:', currentItem.src)}
+                  onLoad={() => {}}
                   style={{
                     display: 'block',
                     position: 'absolute',
@@ -96,13 +88,6 @@ export function Ather450ApexSlider({ heroItems, autoPlayInterval = 5000 }: Ather
                     zIndex: 1
                   }}
                 />
-                {/* Debug info */}
-                <div className="absolute top-4 left-4 bg-black/80 text-white p-2 rounded z-50 text-sm">
-                  <p>Index: {currentIndex}/{heroItems.length - 1}</p>
-                  <p>Title: {currentItem.title}</p>
-                  <p>Auto: {autoPlayInterval}ms</p>
-                  <p>Loaded: {imageError ? 'ERROR' : 'OK'}</p>
-                </div>
               </>
             )}
           </>

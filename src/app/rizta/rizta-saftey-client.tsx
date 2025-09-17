@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
@@ -56,16 +56,6 @@ const FEATURES = [
  
 ];
 
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-  return isMobile;
-}
 
 interface FeatureCardProps {
   feature: {
@@ -152,22 +142,13 @@ function FeatureCard({ feature, active, onClick, description }: FeatureCardProps
 }
 
 export default function RiztaSafetyClient() {
-  const isMobile = useIsMobile();
   const [activeIdx, setActiveIdx] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  // Snap to active card on mobile
-  useEffect(() => {
-    if (isMobile && sliderRef.current) {
-      const card = sliderRef.current.children[activeIdx] as HTMLElement;
-      if (card) card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
-  }, [activeIdx, isMobile]);
-
-  // Mobile: single card slider
-  if (isMobile) {
-    return (
-      <div className="space-y-6">
+  return (
+    <>
+      {/* Mobile: single card slider */}
+      <div className="md:hidden space-y-6">
         {/* Single Card View with Full Width */}
         <div className="w-full px-4">
           <div className="w-full">
@@ -225,12 +206,9 @@ export default function RiztaSafetyClient() {
           </button>
         </div>
       </div>
-    );
-  }
 
-  // Desktop: 3 cards in first row, 4 cards in second row
-  return (
-    <div className="space-y-8">
+      {/* Desktop: 3 cards in first row, 4 cards in second row */}
+      <div className="hidden md:block space-y-8">
       {/* First Row - 3 Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {FEATURES.slice(0, 3).map((feature) => (
@@ -255,7 +233,8 @@ export default function RiztaSafetyClient() {
             description={true}
           />
         ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

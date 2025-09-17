@@ -20,7 +20,7 @@ const ServicesHero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-20 flex items-center min-h-screen pt-15 md:pt-0 pb-8 md:pb-12">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-20 flex items-center min-h-screen pt-12 md:pt-0 pb-16 md:pb-12">
         <div className="w-full max-w-4xl mx-auto text-center text-white">
           {/* Main Title */}
           <motion.div
@@ -49,19 +49,19 @@ const ServicesHero = () => {
 
           {/* Service Highlights */}
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             {[
               { icon: ShieldCheckIcon, title: 'Authorized Service', desc: 'Official Ather partner' },
-              { icon: BoltIcon, title: 'Fast Charging', desc: 'Quick turnaround times' },
-              { icon: SparklesIcon, title: 'Premium Care', desc: 'Expert technicians' }
+              { icon: SparklesIcon, title: 'Premium Care', desc: 'Expert technicians' },
+              { icon: BoltIcon, title: 'Fast Charging', desc: 'Quick turnaround times' }
             ].map((item, index) => (
               <motion.div
                 key={index}
-                className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 transition-all duration-300"
+                className={`bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 ${index === 2 ? 'hidden lg:block' : ''}`}
                 whileHover={{ scale: 1.05, y: -5 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

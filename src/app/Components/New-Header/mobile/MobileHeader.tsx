@@ -8,6 +8,7 @@ import { ChevronDown, X, Menu, Phone } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { HeaderProps, NavItem, DropdownItem } from '../header.types';
 import { useTestDriveModal } from '../../test-ride-form/TestDriveModalStore';
+import '../../../../styles/mobile-header.css';
 
 export default function MobileHeader({ data }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -65,6 +66,7 @@ export default function MobileHeader({ data }: HeaderProps) {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'unset';
     return () => {
       document.body.style.overflow = 'unset';
+      document.body.classList.remove('no-horizontal-scroll');
     };
   }, [isMobileMenuOpen]);
 
@@ -80,55 +82,74 @@ export default function MobileHeader({ data }: HeaderProps) {
   return (
     <>
       {/* Mobile Header */}
-      <header
-        className={`lg:hidden fixed top-4 left-6 right-6 z-40 
-          transition-all duration-700 ease-out
-          bg-white shadow-lg border border-gray-200
-          rounded-3xl ${isVisible ? 'opacity-100 pointer-events-auto transform translate-y-0' : 'opacity-0 pointer-events-none transform -translate-y-full'}`}
+      <div
+        className={`lg:hidden mobile-header-emergency mobile-header-fixed z-40 
+          transition-all duration-700 ease-out ${isVisible ? 'opacity-100 pointer-events-auto transform translate-y-0' : 'opacity-0 pointer-events-none transform -translate-y-full'}`}
+        style={{ 
+          top: '0.5rem',
+          position: 'fixed',
+          left: '0',
+          right: '0',
+          width: '100vw',
+          maxWidth: '100vw',
+          boxSizing: 'border-box',
+          padding: '0 0.5rem'
+        }}
       >
-        <div className="max-w-7xl mx-auto px-4 py-3 relative z-10">
-          <div className="flex items-center justify-between h-6">
-            {/* Logo */}
-            <div className="flex-shrink-0">
-              <Link href={data.logo.href} className="hover:opacity-80 transition-opacity duration-300">
-                <Image
-                  src={data.logo.src}
-                  alt={data.logo.alt}
-                  width={48}
-                  height={48}
-                  className="h-6 w-auto" 
-                  style={{ height: 'auto' }}
-                />
-              </Link>
-            </div>
+        <header
+          className="bg-white shadow-lg border border-gray-200 rounded-3xl overflow-hidden"
+          style={{ 
+            width: '100%',
+            maxWidth: '100%',
+            boxSizing: 'border-box'
+          }}
+        >
+          <div className="px-2 sm:px-3" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', paddingTop: '0.45rem', paddingBottom: '0.45rem' }}>
+            <div className="flex items-center justify-between" style={{ width: '100%', minWidth: 0 }}>
+              {/* Logo */}
+              <div className="flex-shrink-0" style={{ minWidth: 0, maxWidth: '50%' }}>
+                <Link href={data.logo.href} className="hover:opacity-80 transition-opacity duration-300">
+                  <Image
+                    src={data.logo.src}
+                    alt={data.logo.alt}
+                    width={48}
+                    height={48}
+                    className="h-6 w-auto" 
+                    style={{ height: 'auto', maxWidth: '100%' }}
+                  />
+                </Link>
+              </div>
 
-            {/* Mobile CTAs */}
-            <div className="flex items-center space-x-2">
-              {/* Call Now Button */}
-              <motion.a
-                href={`tel:${data.contact.phone}`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center px-2 py-1.5 text-black border border-gray-400 rounded-xl font-medium font-neurial text-xs hover:bg-gray-100 transition-all duration-500"
-              >
-                <Phone className="w-2.5 h-2.5 mr-0.5 relative z-10" />
-                <span className="relative z-10 whitespace-nowrap">{data.contact.displayText}</span>
-              </motion.a>
-              
-              {/* Mobile Hamburger */}
-              <motion.button
-                onClick={() => setIsMobileMenuOpen(true)}
-                whileHover={{ scale: 1.1, rotate: 90 }}
-                whileTap={{ scale: 0.9 }}
-                className="p-1.5 rounded-lg transition-all duration-300 border border-gray-300 hover:bg-gray-50 hover:border-gray-400"
-                aria-label="Open menu"
-              >
-                <Menu className="w-3 h-3 text-gray-700" />
-              </motion.button>
+              {/* Mobile CTAs */}
+              <div className="flex items-center flex-shrink-0" style={{ gap: '0.5rem', minWidth: 0, maxWidth: '50%' }}>
+                {/* Call Now Button */}
+                <motion.a
+                  href={`tel:${data.contact.phone}`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center px-2 py-1.5 text-black border border-gray-400 rounded-xl font-medium font-neurial text-xs hover:bg-gray-100 transition-all duration-500"
+                  style={{ minWidth: 0, maxWidth: '100%' }}
+                >
+                  <Phone className="w-2.5 h-2.5 mr-1 flex-shrink-0" />
+                  <span className="hidden sm:inline truncate">Call Now</span>
+                  <span className="sm:hidden">Call</span>
+                </motion.a>
+                
+                {/* Mobile Hamburger */}
+                <motion.button
+                  onClick={() => setIsMobileMenuOpen(true)}
+                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-1.5 rounded-lg transition-all duration-300 border border-gray-300 hover:bg-gray-50 hover:border-gray-400 flex-shrink-0"
+                  aria-label="Open menu"
+                >
+                  <Menu className="w-3 h-3 text-gray-700" />
+                </motion.button>
+              </div>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
+      </div>
 
       {/* Mobile Menu Drawer */}
       <AnimatePresence>
@@ -152,7 +173,12 @@ export default function MobileHeader({ data }: HeaderProps) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="absolute right-0 top-0 bottom-0 w-80 overflow-y-auto bg-white"
+              className="absolute right-0 top-0 bottom-0 overflow-y-auto bg-white"
+              style={{ 
+                width: 'min(320px, calc(100vw - 2rem))',
+                maxWidth: 'calc(100vw - 2rem)',
+                minWidth: '280px'
+              }}
             >
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-gray-200">

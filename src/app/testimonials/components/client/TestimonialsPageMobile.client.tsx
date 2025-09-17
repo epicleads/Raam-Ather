@@ -3,11 +3,9 @@
 import { Suspense, useState } from 'react';
 import TestimonialsSEO from '../server/TestimonialsSEO';
 import HeroSection from './HeroSection.client';
-import FiltersBarMobile from './FiltersBarMobile.client';
 import ReactionsBar from './ReactionsBar.client';
 import UGCWall from '../server/UGCWall';
 import GoogleReviews from '../server/GoogleReviews';
-import { experienceOptions, dealers } from '../../data/testimonials.config';
 import TestimonialsFeedMobile from './TestimonialsFeedMobile.client';
 import type { Filters } from '../../data/testimonials.types';
 import { purchaseTestimonials, serviceTestimonials, communityTestimonials } from '../../data/testimonials.mock';
@@ -81,15 +79,6 @@ export default function TestimonialsPageMobile() {
           <UGCWall />
         </Suspense>
 
-        {/* Filters - Mobile */}
-        <FiltersBarMobile
-          experiences={experienceOptions}
-          dealers={dealers}
-          selectedExperience={''}
-          setSelectedExperience={() => {}}
-          selectedDealer={''}
-          setSelectedDealer={() => {}}
-        />
 
         {/* Customer Voices */}
         <Suspense fallback={<FeedSkeletonMobile />}>

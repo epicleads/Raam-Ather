@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState, useRef, ReactNode } from 'react';
-import { useMobileDetection } from '@/hooks/useHeaderSwap';
 
 interface HeroParallaxProps {
   children: ReactNode;
@@ -11,7 +10,6 @@ export function HeroParallax({ children }: HeroParallaxProps) {
   const [scrollY, setScrollY] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
   const parallaxRef = useRef<HTMLDivElement>(null);
-  const isMobile = useMobileDetection(450);
 
   useEffect(() => {
     setIsMounted(true);
@@ -49,7 +47,7 @@ export function HeroParallax({ children }: HeroParallaxProps) {
   }, [isMounted]);
 
   // Reduce parallax effects on mobile for better performance
-  const parallaxIntensity = isMobile ? 0.3 : 1;
+  const parallaxIntensity = 0.5; // Fixed value instead of mobile detection
   const parallaxTransform = isMounted 
     ? `translate3d(0, ${scrollY * 50 * parallaxIntensity}px, 0) scale(${1 + scrollY * 0.1 * parallaxIntensity})` 
     : 'none';

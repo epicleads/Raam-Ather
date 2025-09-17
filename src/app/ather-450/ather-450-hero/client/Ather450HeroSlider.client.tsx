@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useMobileDetection } from "../../../../hooks/useHeaderSwap";
 import { useTestDriveModal } from "../../../Components/test-ride-form/TestDriveModalStore";
 import type { HeroItem } from "@/app/ather-450/ather-450-hero/ather450Hero.types";
 import Image from "next/image";
@@ -14,7 +13,6 @@ export function Ather450HeroSlider({
   autoPlayInterval?: number;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const isMobile = useMobileDetection(450);
   const testDriveModal = useTestDriveModal();
 
   const handleCTAClick = () => {
@@ -44,13 +42,26 @@ export function Ather450HeroSlider({
           }`}
         >
           {item.type === "image" ? (
-            <Image
-              src={isMobile && item.mobileSrc ? item.mobileSrc : item.src}
-              alt={item.alt}
-              width={1920}
-              height={1080}
-              className={`w-full h-full object-cover ${isMobile && item.mobileSrc ? 'ather-mobile-image' : ''}`}
-            />
+            <>
+              {/* Desktop Image */}
+              <Image
+                src={item.src}
+                alt={item.alt}
+                width={1920}
+                height={1080}
+                className="hidden md:block w-full h-full object-cover"
+              />
+              {/* Mobile Image */}
+              {item.mobileSrc && (
+                <Image
+                  src={item.mobileSrc}
+                  alt={item.alt}
+                  width={1920}
+                  height={1080}
+                  className="block md:hidden w-full h-full object-cover ather-mobile-image"
+                />
+              )}
+            </>
           ) : (
             <video
               src={item.src}

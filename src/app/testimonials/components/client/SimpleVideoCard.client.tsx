@@ -8,9 +8,9 @@ interface SimpleVideoCardProps {
     id: string;
     name: string;
     city: string;
-    model: string;
+    model?: string;
     content: string;
-    instagramReelUrl: string;
+    instagramReelUrl?: string;
   };
   videoPath: string;
   thumbnailPath: string;
@@ -66,19 +66,21 @@ export default function SimpleVideoCard({ testimonial, videoPath, thumbnailPath,
       </button>
 
       {/* Instagram Button */}
-      <a 
-        href={testimonial.instagramReelUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute top-3 right-3 bg-white/90 p-2 rounded-full shadow-lg hover:bg-white transition-all"
-      >
-        <Instagram size={20} className="text-purple-600" />
-      </a>
+      {testimonial.instagramReelUrl && (
+        <a 
+          href={testimonial.instagramReelUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute top-3 right-3 bg-white/90 p-2 rounded-full shadow-lg hover:bg-white transition-all"
+        >
+          <Instagram size={20} className="text-purple-600" />
+        </a>
+      )}
 
       {/* Customer Info */}
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
         <h3 className="font-semibold text-sm">{testimonial.name}</h3>
-        <p className="text-xs opacity-90">{testimonial.city} • {testimonial.model}</p>
+        <p className="text-xs opacity-90">{testimonial.city} • {testimonial.model || 'Ather'}</p>
         <p className="text-xs mt-1 line-clamp-2">&ldquo;{testimonial.content}&rdquo;</p>
       </div>
     </div>

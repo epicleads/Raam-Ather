@@ -43,12 +43,6 @@ export default function RiztaHero() {
       />
 
       <section className="relative w-full h-screen overflow-hidden bg-black rizta-container">
-        {/* Debug info */}
-        {process.env.NODE_ENV === 'development' && (
-          <div className="absolute top-4 right-4 bg-red-500 text-white p-2 rounded text-xs z-50">
-            Rizta Hero Container
-          </div>
-        )}
         <Suspense
           fallback={
             <div className="flex items-center justify-center w-full h-full text-white">

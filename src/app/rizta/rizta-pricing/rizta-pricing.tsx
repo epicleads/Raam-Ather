@@ -47,17 +47,17 @@ export default function RiztaPricing() {
       onRoadPrice: 118000,
       
       emiStarting: 2899,
-      features: ['3.7kWh Battery', '123km Range', 'Smart Dashboard']
+      features: ['2.9 kWh Battery', '123km Range', 'Smart Dashboard']
     },
     {
       id: 'rizta-s',
-      variant: 'Rizta S',
+      variant: 'Rizta Z',
       exShowroomPrice: 129999,
       city: 'Hyderabad',
       onRoadPrice: 142000,
       
       emiStarting: 3499,
-      features: ['4.8kWh Battery', '159km Range', '7" Touchscreen']
+      features: ['3.7kWh Battery', '159km Range', '7" Touchscreen']
     }
   ]
 

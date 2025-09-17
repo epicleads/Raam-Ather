@@ -46,7 +46,7 @@ const HyderabadShowrooms = () => {
     {
       id: 4,
       name: "Raam Ather - Authorised Dealer of Raam Electric Two wheelers Shaikpet",
-      address: "Shaikpet, Toli Chowki, Hyderabad, Telangana 500008",
+      address: "Shaikpet, Hyderabad, Telangana 500008",
       phone: "090323 33833",
       hours: "Open ⋅ Closes 7 pm",
       directionsUrl: "https://www.google.com/maps?s=web&sca_esv=34443d8b2c0c5fa7&lqi=ChRSYWFtIEF0aGVyIEh5ZGVyYWJhZEjGh-SwjLKAgAhaLBAAEAEQAhgAGAEYAiIUcmFhbSBhdGhlciBoeWRlcmFiYWQqCAgCEAAQARACkgEdZWxlY3RyaWNfbW90b3Jfc2Nvb3Rlcl9kZWFsZXKqAUwKDS9nLzExdG15N182bDYQATIfEAEiG-jHaRa2CFpPXwQyMRbUpzdc0chO9tufGZn0lTIYEAIiFHJhYW0gYXRoZXIgaHlkZXJhYmFk&phdesc=FKEldahdM4s&vet=12ahUKEwiZnLnLuq-PAxWHamwGHRnCAvsQ1YkKegQIHhAB..i&cs=0&um=1&ie=UTF-8&fb=1&gl=in&sa=X&geocode=KX25fCPfl8s7MW66oNWtcrwy&daddr=Shaikpet,+Toli+Chowki,+Hyderabad,+Telangana+500008"

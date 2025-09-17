@@ -74,7 +74,7 @@ const hyderabadLocations: Location[] = [
   {
     id: 4,
     name: 'Raam Ather- Authorised Dealer of Raam Electric Two wheelers Toli Chowki',
-    address: 'Shaikpet, Toli Chowki, Hyderabad, Telangana 500008',
+    address: 'Shaikpet, Hyderabad, Telangana 500008',
     pincode: '500008',
     phone: '+91 9032333833',
     whatsapp: '+91 9032333833',
@@ -102,7 +102,7 @@ const hyderabadLocations: Location[] = [
   {
     id: 6,
     name: 'Raam Ather Electric Scooter Showroom, Attapur',
-    address: 'Survey No.18/4, Number.2-4-126/4, Plot Nos. 8 & 9, Rajendra Nagar Rd, Attapur, Upperpally, Telangana 500048',
+    address: 'Rajendra Nagar Road, Attapur, Hyderabad, Telangana 500048',
     pincode: '500048',
     phone: '+91 9032333833',
     whatsapp: '+91 9032333833',

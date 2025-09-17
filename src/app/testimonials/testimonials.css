@@ -242,6 +242,7 @@ video {
   background: transparent;
   border: none;
   cursor: pointer;
+  color: #374151; /* Dark gray text for unselected buttons */
 }
 
 .testimonials-tab-button.active {
@@ -250,7 +251,8 @@ video {
 }
 
 .testimonials-tab-button:not(.active):hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.08);
+  color: #1f2937; /* Darker text on hover */
 }
 
 /* Section header improvements */

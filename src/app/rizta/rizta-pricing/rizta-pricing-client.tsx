@@ -102,7 +102,7 @@ export function RiztaPricingClient({ variants, comparisonData }: RiztaPricingCli
       className="space-y-12"
     >
       {/* Pricing Cards */}
-      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2">
+      <div className="grid gap-8 sm:gap-6 grid-cols-1 lg:grid-cols-2 mt-6">
         {variants.map((variant, index) => (
           <motion.div
             key={variant.id}
@@ -118,9 +118,9 @@ export function RiztaPricingClient({ variants, comparisonData }: RiztaPricingCli
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.98 }}
           >
-            {/* Recommended Badge */}
+            {/* Recommended Badge - Hidden on Mobile */}
             {index === 1 && (
-              <div className="absolute -top-2 sm:-top-3 left-1/2 transform -translate-x-1/2 z-10">
+              <div className="hidden sm:block absolute -top-2 sm:-top-3 left-1/2 transform -translate-x-1/2 z-10">
                 <div className="bg-black text-white px-3 py-1 sm:px-4 sm:py-1 rounded-full text-xs font-semibold font-neurial shadow-lg">
                   RECOMMENDED
                 </div>

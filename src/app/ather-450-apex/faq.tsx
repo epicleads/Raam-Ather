@@ -48,7 +48,7 @@ function FAQAccordion({ item, isOpen, onToggle }: FAQAccordionProps) {
     <div className="border-b border-gray-200 last:border-b-0">
       <motion.button
         onClick={onToggle}
-        className="w-full text-left py-6 px-0 flex items-center justify-between group focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-20 rounded-lg"
+        className="w-full text-left py-5 px-4 flex items-center justify-between group focus:outline-none focus:ring-1 focus:ring-orange-400 focus:ring-opacity-30 rounded-lg m-1"
         whileHover={{ backgroundColor: "rgba(249, 250, 251, 0.5)" }}
         transition={{ duration: 0.2 }}
       >
@@ -87,7 +87,7 @@ function FAQAccordion({ item, isOpen, onToggle }: FAQAccordionProps) {
             }}
             className="overflow-hidden"
           >
-            <div className="pb-6">
+            <div className="pb-4 px-4">
               <p 
                 className="text-base md:text-lg text-gray-600 leading-relaxed"
                 style={{ fontFamily: 'Neurial Grotesk, -apple-system, BlinkMacSystemFont, sans-serif' }}
@@ -110,7 +110,7 @@ export default function FAQ() {
   };
 
   return (
-    <section className="bg-white py-20 md:py-32">
+    <section className="bg-white py-12 md:py-16">
       <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
@@ -119,10 +119,10 @@ export default function FAQ() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.8, ease: [0.4, 0.0, 0.2, 1] }}
-            className="text-center mb-16"
+            className="text-center mb-8"
           >
             <h2 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4"
               style={{ fontFamily: 'Neurial Grotesk, -apple-system, BlinkMacSystemFont, sans-serif' }}
             >
               Frequently Asked Questions –{' '}
@@ -137,7 +137,7 @@ export default function FAQ() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.4, 0.0, 0.2, 1] }}
-            className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+            className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mt-4"
           >
             <div className="divide-y divide-gray-100">
               {faqData.map((item, index) => (

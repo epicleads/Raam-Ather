@@ -255,10 +255,9 @@
     margin-bottom: 1rem !important;
   }
 
-  /* Force hide any remaining description elements */
-  .testimonial-card *[class*="bottom-16"],
-  .testimonial-card *[class*="bottom-20"],
-  .testimonial-card *[class*="opacity-0"] {
+  /* Force hide any remaining description elements - EXCLUDE carousel videos */
+  .testimonial-card:not(.carousel-video-container) *[class*="bottom-16"],
+  .testimonial-card:not(.carousel-video-container) *[class*="bottom-20"] {
     display: none !important;
   }
 
@@ -268,8 +267,8 @@
     overflow: hidden !important;
   }
 
-  /* Hide any play button overlays that might interfere */
-  .testimonial-card .bg-black\/20 {
+  /* Hide any play button overlays that might interfere - EXCLUDE carousel videos */
+  .testimonial-card:not(.carousel-video-container) .bg-black\/20 {
     display: none !important;
   }
 
@@ -280,4 +279,5 @@
     opacity: 1 !important;
     transform: none !important;
   }
+
 }

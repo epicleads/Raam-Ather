@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { forwardRef } from 'react';
-import { useMobileDetection } from '@/hooks/useHeaderSwap';
 import type { HeroMediaProps } from '../home-hero.types';
 
 interface ExtendedHeroMediaProps extends HeroMediaProps {
@@ -12,18 +11,12 @@ interface ExtendedHeroMediaProps extends HeroMediaProps {
 
 export const HeroMedia = forwardRef<HTMLVideoElement, ExtendedHeroMediaProps>(
   ({ item, isActive, priority = false, onVideoLoad, onVideoRegister }, ref) => {
-    const isMobile = useMobileDetection(450);
-    
-    // Hide the 3rd slide (GIF) on mobile - only show 3 slides for mobile
-    if (isMobile && item.id === "3") {
-      return null;
-    }
     
     // Check if it's a GIF to apply different styling
     const isGif = item.src.toLowerCase().endsWith('.gif');
     
-    // Determine which image source to use
-    const imageSrc = isMobile && item.mobileSrc ? item.mobileSrc : item.src;
+    // Use desktop image by default
+    const imageSrc = item.src;
     
     const commonStyles = {
       position: 'absolute' as const,
@@ -38,7 +31,7 @@ export const HeroMedia = forwardRef<HTMLVideoElement, ExtendedHeroMediaProps>(
 
     if (item.type === 'video') {
       // For mobile, show mobile image instead of video if available
-      if (isMobile && item.mobileSrc) {
+      if (item.mobileSrc) {
         return (
           <Image
             src={item.mobileSrc}
@@ -95,7 +88,7 @@ export const HeroMedia = forwardRef<HTMLVideoElement, ExtendedHeroMediaProps>(
           alt={item.alt || ''}
           width={1920}
           height={1080}
-          className={`absolute inset-0 w-full h-full ${isMobile ? 'hero-mobile-image' : ''}`}
+          className="absolute inset-0 w-full h-full"
         />
       );
     }
@@ -109,7 +102,7 @@ export const HeroMedia = forwardRef<HTMLVideoElement, ExtendedHeroMediaProps>(
         priority={priority}
         quality={95}
         sizes="100vw"
-        className={isMobile ? 'hero-mobile-image' : ''}
+        className="hero-mobile-image"
       />
     );
   }

@@ -2,10 +2,29 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { StarIcon } from '@heroicons/react/24/outline';
-import Image from 'next/image';
 
 const TestimonialsCarousel = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  
+  // Function to get initials from name
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase())
+      .join('');
+  };
+
+  // Initial Icon Component
+  const InitialIcon = ({ name, size = 'desktop' }: { name: string; size?: 'desktop' | 'mobile' }) => {
+    const initials = getInitials(name);
+    const sizeClasses = size === 'desktop' ? 'w-12 h-12 text-lg' : 'w-10 h-10 text-sm';
+    
+    return (
+      <div className={`${sizeClasses} rounded-full bg-gradient-to-br from-[#4A4A4A] to-[#2962FF] flex items-center justify-center text-white font-bold font-neurial border-2 border-[#4A4A4A] shadow-lg`}>
+        {initials}
+      </div>
+    );
+  };
   
   const testimonials = [
     {
@@ -93,13 +112,7 @@ const TestimonialsCarousel = () => {
                   </blockquote>
                   
                   <div className="flex items-center justify-center gap-3 mt-auto">
-                    <Image 
-                      src={testimonial.image} 
-                      alt={testimonial.name}
-                      width={48}
-                      height={48}
-                      className="w-12 h-12 rounded-full object-cover border-3 border-[#4A4A4A]"
-                    />
+                    <InitialIcon name={testimonial.name} size="desktop" />
                     <div className="text-left">
                       <div className="font-bold text-base text-[#1B1B1B] font-neurial">{testimonial.name}</div>
                       <div className="text-sm text-[#666666] font-neurial">{testimonial.location}</div>
@@ -135,14 +148,7 @@ const TestimonialsCarousel = () => {
                     </blockquote>
                     
                     <div className="flex items-center justify-center gap-3 mt-auto">
-                      <Image 
-                        src={testimonials[activeTestimonial].image} 
-                        alt={testimonials[activeTestimonial].name}
-                        width={40}
-                        height={40}
-                        className="w-10 h-10 rounded-full object-cover border-2 border-[#4A4A4A]"
-                        loading="lazy"
-                      />
+                      <InitialIcon name={testimonials[activeTestimonial].name} size="mobile" />
                       <div className="text-left">
                         <div className="font-bold text-sm text-[#1B1B1B] font-neurial">{testimonials[activeTestimonial].name}</div>
                         <div className="text-xs text-[#666666] font-neurial">{testimonials[activeTestimonial].location}</div>

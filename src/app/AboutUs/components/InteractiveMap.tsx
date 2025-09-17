@@ -86,7 +86,7 @@ const outlets = [
     name: 'Raam Ather- Authorised Dealer of Raam Electric Two wheelers Toli Chowki',
     type: 'showroom' as const,
     city: 'Hyderabad' as const,
-    address: 'Shaikpet, Toli Chowki, Hyderabad, Telangana 500008',
+    address: 'Shaikpet, Hyderabad, Telangana 500008',
     pincode: '500008',
     phone: '+91 9032333833',
     whatsapp: '+91 9032333833',

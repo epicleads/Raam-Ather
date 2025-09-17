@@ -102,7 +102,7 @@ export function WhatsNewServer({
       range: {
         id: 'higher-range',
         title: 'Higher Range',
-        description: '161 km IDC Range',
+        description: '159 km IDC Range',
         icon: 'range',
         category: 'range'
       }

@@ -20,7 +20,7 @@ const modelData: ModelSpec[] = [
     id: 'ather-450s',
     name: 'Ather',
     variant: '450S',
-    exShowroomPrice: 119841,
+    exShowroomPrice: 130000,
     features: ['Multi-mode Traction Control', '122km Range', 'DeepView™ Display'],
     emiStarting: 3200,
     city: 'Hyderabad'

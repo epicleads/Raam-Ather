@@ -1,10 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  MagnifyingGlassIcon, 
-  ArrowPathIcon 
-} from '@heroicons/react/24/outline';
+import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import PremiumOutletCards from './PremiumOutletCards';
 import AnalyticsTrust from './AnalyticsTrust';
 import { PopupProvider } from '../../Components/popups/PopupProvider';
@@ -15,43 +12,14 @@ interface PremiumExperienceCenterProps {
 }
 
 const PremiumExperienceCenter: React.FC<PremiumExperienceCenterProps> = ({ outlets }) => {
-  const [searchPincode, setSearchPincode] = useState('');
   const [selectedOutlet, setSelectedOutlet] = useState<Outlet | null>(null);
   const [, setShowWhatsAppChat] = useState(false);
-  const [showSearchInput, setShowSearchInput] = useState(false);
-  const [filteredOutlets, setFilteredOutlets] = useState(outlets);
 
   const t = {
     title: 'Premium Experience Centers',
     subtitle: 'Discover Our Locations',
     description: 'Visit our state-of-the-art showrooms, service centers, and test ride facilities',
-    searchPlaceholder: 'Enter pincode or area',
     useLocation: 'Use My Location'
-  };
-
-  const handleSearch = () => {
-    if (!searchPincode.trim()) {
-      setShowSearchInput(true);
-      return;
-    }
-
-    const filtered = outlets.filter(outlet => {
-      const searchTerm = searchPincode.toLowerCase().trim();
-      return (
-        outlet.pincode.includes(searchTerm) ||
-        outlet.address.toLowerCase().includes(searchTerm) ||
-        outlet.city.toLowerCase().includes(searchTerm) ||
-        outlet.name.toLowerCase().includes(searchTerm)
-      );
-    });
-
-    setFilteredOutlets(filtered);
-    
-    // Scroll to results section
-    const resultsSection = document.getElementById('outlet-results');
-    if (resultsSection) {
-      resultsSection.scrollIntoView({ behavior: 'smooth' });
-    }
   };
 
   const handleUseMyLocation = () => {
@@ -60,45 +28,37 @@ const PremiumExperienceCenter: React.FC<PremiumExperienceCenterProps> = ({ outle
         (position) => {
           const { latitude, longitude } = position.coords;
           
-          // Calculate distance to each outlet and sort by nearest
-          const outletsWithDistance = outlets.map(outlet => {
-            const distance = calculateDistance(
-              latitude, longitude,
-              outlet.coordinates.lat, outlet.coordinates.lng
-            );
-            return { ...outlet, distance };
-          }).sort((a, b) => a.distance - b.distance);
-
-          setFilteredOutlets(outletsWithDistance);
-          
-          // Scroll to results
+          // Scroll to results section to show all outlets
           const resultsSection = document.getElementById('outlet-results');
           if (resultsSection) {
             resultsSection.scrollIntoView({ behavior: 'smooth' });
           }
+          
+          // Optional: Show success message
+          alert('Location detected! Showing all available outlets below.');
         },
         (error) => {
           console.error('Error getting location:', error);
-          alert('Unable to get your location. Please enter your pincode or area instead.');
+          alert('Unable to get your location. Showing all available outlets.');
+          
+          // Still scroll to results even if location fails
+          const resultsSection = document.getElementById('outlet-results');
+          if (resultsSection) {
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+          }
         }
       );
     } else {
-      alert('Geolocation is not supported by this browser.');
+      alert('Geolocation is not supported by this browser. Showing all available outlets.');
+      
+      // Scroll to results
+      const resultsSection = document.getElementById('outlet-results');
+      if (resultsSection) {
+        resultsSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
-  // Calculate distance between two coordinates using Haversine formula
-  const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
-    const R = 6371; // Earth's radius in kilometers
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = 
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-      Math.sin(dLon/2) * Math.sin(dLon/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    return R * c;
-  };
 
   return (
     <PopupProvider>
@@ -160,110 +120,17 @@ const PremiumExperienceCenter: React.FC<PremiumExperienceCenterProps> = ({ outle
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.0 }}
               >
-                <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl">
-                  {!showSearchInput ? (
-                    <>
-                      {/* Mobile Layout - Stacked */}
-                      <div className="flex flex-col space-y-4 sm:hidden">
-                        {/* Enter Pincode Button */}
-                        <motion.button
-                          onClick={() => setShowSearchInput(true)}
-                          className="w-full bg-[#2962FF] hover:bg-[#1e4cbf] text-white px-6 py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-3 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <MagnifyingGlassIcon className="w-5 h-5" />
-                          Enter Pincode or Location
-                        </motion.button>
-
-                        {/* OR Divider - Mobile */}
-                        <div className="flex items-center justify-center py-2">
-                          <div className="flex-1 border-t border-gray-300"></div>
-                          <span className="px-4 text-gray-600 font-medium text-sm uppercase tracking-wider">OR</span>
-                          <div className="flex-1 border-t border-gray-300"></div>
-                        </div>
-
-                        {/* Use My Location Button */}
-                        <motion.button
-                          onClick={handleUseMyLocation}
-                          className="w-full bg-[#00B248] hover:bg-[#00A041] text-white px-6 py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-3 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <ArrowPathIcon className="w-5 h-5" />
-                          Use My Location
-                        </motion.button>
-                      </div>
-
-                      {/* Desktop Layout - Same Row */}
-                      <div className="hidden sm:flex items-center gap-6">
-                        {/* Enter Pincode Button */}
-                        <motion.button
-                          onClick={() => setShowSearchInput(true)}
-                          className="flex-1 bg-[#2962FF] hover:bg-[#1e4cbf] text-white px-6 py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-3 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <MagnifyingGlassIcon className="w-5 h-5" />
-                          Pincode or Area
-                        </motion.button>
-
-                        {/* OR Text - Desktop */}
-                        <div className="flex items-center justify-center px-4">
-                          <span className="text-gray-600 font-medium text-sm uppercase tracking-wider whitespace-nowrap">OR</span>
-                        </div>
-
-                        {/* Use My Location Button */}
-                        <motion.button
-                          onClick={handleUseMyLocation}
-                          className="flex-1 bg-[#00B248] hover:bg-[#00A041] text-white px-6 py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-3 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <ArrowPathIcon className="w-5 h-5" />
-                          Use My Location
-                        </motion.button>
-                      </div>
-                    </>
-                  ) : (
-                    /* Search Input Mode */
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <div className="flex-1 relative">
-                        <input
-                          type="text"
-                          placeholder="Enter pincode, area, or city name..."
-                          value={searchPincode}
-                          onChange={(e) => setSearchPincode(e.target.value)}
-                          onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                          className="w-full pl-4 pr-4 py-4 text-lg text-black border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#2962FF] focus:border-transparent outline-none transition-all"
-                          autoFocus
-                        />
-                      </div>
-                      <div className="flex gap-3">
-                        <motion.button
-                          onClick={handleSearch}
-                          className="bg-[#2962FF] hover:bg-[#1e4cbf] text-white px-6 py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-3 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <MagnifyingGlassIcon className="w-5 h-5" />
-                          Search
-                        </motion.button>
-                        <motion.button
-                          onClick={() => {
-                            setShowSearchInput(false);
-                            setSearchPincode('');
-                            setFilteredOutlets(outlets);
-                          }}
-                          className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-4 rounded-xl font-semibold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          Cancel
-                        </motion.button>
-                      </div>
-                    </div>
-                  )}
+                <div className="flex justify-center">
+                  {/* Use My Location Button - Centered and Appropriately Sized */}
+                  <motion.button
+                    onClick={handleUseMyLocation}
+                    className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-xl font-medium text-lg flex items-center justify-center gap-3 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <ArrowPathIcon className="w-5 h-5" />
+                    Use My Location
+                  </motion.button>
                 </div>
               </motion.div>
 
@@ -276,7 +143,7 @@ const PremiumExperienceCenter: React.FC<PremiumExperienceCenterProps> = ({ outle
         {/* Premium Outlet Cards */}
         <div id="outlet-results" className="w-full">
           <PremiumOutletCards 
-            outlets={filteredOutlets}
+            outlets={outlets}
             selectedOutlet={selectedOutlet}
             setSelectedOutlet={setSelectedOutlet}
             setShowWhatsAppChat={setShowWhatsAppChat}

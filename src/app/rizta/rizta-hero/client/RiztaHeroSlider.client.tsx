@@ -1,7 +1,6 @@
     "use client";
 
 import { useState, useEffect } from "react";
-import { useMobileDetection } from "../../../../hooks/useHeaderSwap";
 import { useTestDriveModal } from "../../../Components/test-ride-form/TestDriveModalStore";
 import type { HeroItem } from "../riztaHero.types";
 import Image from "next/image";
@@ -28,7 +27,6 @@ export function RiztaHeroSlider({ heroItems, autoPlayInterval = 0 }: Props) {
     
     const checkMobile = () => {
       const isMobileWidth = window.innerWidth < 450;
-      console.log('Rizta Hero - Mobile check:', isMobileWidth, 'Width:', window.innerWidth);
       setIsMobile(isMobileWidth);
     };
     
@@ -69,12 +67,6 @@ export function RiztaHeroSlider({ heroItems, autoPlayInterval = 0 }: Props) {
 
   return (
     <div className="relative w-full h-full">
-      {/* Debug info */}
-      {process.env.NODE_ENV === 'development' && (
-        <div className="absolute top-4 left-4 bg-black/80 text-white p-2 rounded text-xs z-50">
-          Client: {isClient ? 'Yes' : 'No'} | Mobile: {isMobile ? 'Yes' : 'No'} | Index: {currentIndex}
-        </div>
-      )}
       {heroItems.map((item, index) => (
         <div
           key={item.id}
@@ -84,12 +76,6 @@ export function RiztaHeroSlider({ heroItems, autoPlayInterval = 0 }: Props) {
         >
           {item.type === "image" ? (
             <div className="w-full h-full relative">
-              {/* Debug info */}
-              {process.env.NODE_ENV === 'development' && (
-                <div className="absolute top-2 left-2 bg-black/80 text-white p-1 rounded text-xs z-50">
-                  {isMobile ? 'Mobile' : 'Desktop'}: {isMobile && item.mobileSrc ? 'Mobile Image' : 'Desktop Image'}
-                </div>
-              )}
               
               {/* Desktop Image */}
               <Image
@@ -98,12 +84,6 @@ export function RiztaHeroSlider({ heroItems, autoPlayInterval = 0 }: Props) {
                 fill
                 className="object-cover hidden md:block"
                 priority={index === 0}
-                onLoad={() => {
-                  console.log('Rizta Hero Desktop Image loaded:', item.src);
-                }}
-                onError={(e) => {
-                  console.error('Rizta Hero Desktop Image failed to load:', e);
-                }}
               />
               
               {/* Mobile Image */}
@@ -114,14 +94,6 @@ export function RiztaHeroSlider({ heroItems, autoPlayInterval = 0 }: Props) {
                   fill
                   className="object-cover rizta-mobile-image block md:hidden"
                   priority={index === 0}
-                  onLoad={() => {
-                    console.log('Rizta Hero Mobile Image loaded:', item.mobileSrc);
-                  }}
-                  onError={(e) => {
-                    console.error('Rizta Hero Mobile Image failed to load:', e);
-                    // Hide mobile image if it fails, desktop will show
-                    e.currentTarget.style.display = 'none';
-                  }}
                 />
               )}
             </div>
@@ -136,8 +108,11 @@ export function RiztaHeroSlider({ heroItems, autoPlayInterval = 0 }: Props) {
             />
           )}
 
+          {/* Dark gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50 z-10"></div>
+
           {/* Overlay content */}
-          <div className="absolute inset-0 flex flex-col justify-center items-start text-white px-8 md:px-16 lg:px-24 z-20">
+          <div className="absolute inset-0 flex flex-col justify-center items-start text-white px-8 md:px-16 lg:px-24 z-30">
             <h1 className="text-xl md:text-3xl font-bold mb-3">
               {item.title}
             </h1>
@@ -145,23 +120,22 @@ export function RiztaHeroSlider({ heroItems, autoPlayInterval = 0 }: Props) {
             <div className="flex space-x-3">
               <button
                 onClick={handleCTAClick}
-                className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg transition text-sm cursor-pointer"
+                className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg transition-all duration-300 text-sm font-medium cursor-pointer relative z-40 min-h-[44px] touch-manipulation"
+                type="button"
               >
                 {item.primaryCTA.label}
               </button>
               {item.secondaryCTA && (
                 <button
                   onClick={handleCTAClick}
-                  className="bg-white/80 hover:bg-white text-gray-900 px-4 py-2 rounded-lg transition text-sm cursor-pointer"
+                  className="bg-white/90 hover:bg-white text-gray-900 px-6 py-3 rounded-lg transition-all duration-300 text-sm font-medium cursor-pointer relative z-40 min-h-[44px] touch-manipulation"
+                  type="button"
                 >
                   {item.secondaryCTA.label}
                 </button>
               )}
             </div>
           </div>
-
-          {/* Dark gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50 z-10"></div>
         </div>
       ))}
 

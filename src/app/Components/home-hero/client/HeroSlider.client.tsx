@@ -19,32 +19,13 @@ export default function HeroSlider({ slides }: { slides: VideoSlide[] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
   const [videoEndHandlersRef] = useState<{ current: Map<string, () => void> }>({ current: new Map() });
   const [videoElementsRef] = useState<{ current: Map<string, HTMLVideoElement> }>({ current: new Map() });
 
-  useEffect(() => {
-    const checkMobile = () => {
-      const newIsMobile = window.innerWidth <= 768;
-      if (newIsMobile !== isMobile) {
-        setIsMobile(newIsMobile);
-        setCurrentSlide(0);
-      }
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, [isMobile]);
-
-  const filteredSlides = isMobile 
-    ? slides.filter(slide => !slide.src.includes('.gif'))
-    : slides;
+  const filteredSlides = slides; // Show all slides, let CSS handle responsiveness
 
   const getAssetSource = (item: VideoSlide) => {
-    if (isMobile && item.mobileSrc) {
-      return item.mobileSrc;
-    }
-    return item.src;
+    return item.src; // Use desktop source, mobile will be handled by CSS
   };
 
   useEffect(() => {
@@ -131,7 +112,7 @@ export default function HeroSlider({ slides }: { slides: VideoSlide[] }) {
   };
 
   return (
-    <div className={`relative h-screen bg-black ${isMobile ? 'hero-container' : ''}`} style={{ maxHeight: '100vh', overflow: 'hidden' }}>
+    <div className="relative h-screen bg-black hero-container" style={{ maxHeight: '100vh', overflow: 'hidden' }}>
       {/* Media Background */}
       <div className="absolute inset-0">
         {filteredSlides.map((item, index) => {
@@ -141,18 +122,16 @@ export default function HeroSlider({ slides }: { slides: VideoSlide[] }) {
           const isPrevious = index === (currentSlide - 1 + filteredSlides.length) % filteredSlides.length;
           const isNext = index === (currentSlide + 1) % filteredSlides.length;
           let slideClasses = `absolute inset-0 transition-all ${
-            isMobile ? 'duration-800' : 'duration-1000'
+'duration-1000'
           } ease-out transform will-change-transform`;
           if (isActive) {
             slideClasses += " opacity-100 scale-100 z-20";
-          } else if (isPrevious && !isMobile) {
+          } else if (isPrevious) {
             slideClasses += " opacity-0 scale-105 z-10 -translate-x-full";
-          } else if (isNext && !isMobile) {
+          } else if (isNext) {
             slideClasses += " opacity-0 scale-105 z-10 translate-x-full";
           } else {
-            slideClasses += isMobile 
-              ? " opacity-0 scale-[1.02] z-0" 
-              : " opacity-0 scale-110 z-0";
+            slideClasses += " opacity-0 scale-110 z-0";
           }
           return (
             <div
@@ -181,7 +160,7 @@ export default function HeroSlider({ slides }: { slides: VideoSlide[] }) {
                   alt={item.poster || ''}
                   fill
                   className={`object-cover transform-gpu ${
-                    isMobile 
+                    false 
                       ? 'transition-opacity duration-800 ease-out' 
                       : 'transition-transform duration-1000 ease-out'
                   }`}
@@ -203,12 +182,12 @@ export default function HeroSlider({ slides }: { slides: VideoSlide[] }) {
       {/* Content Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-30">
         <div className={`absolute text-white ${
-          isMobile
+          false
             ? 'bottom-20 left-1/2 -translate-x-1/2 text-center px-4 w-full max-w-sm transition-all duration-500 ease-out'
             : 'bottom-16 left-8 lg:left-16 text-left max-w-lg transition-all duration-700 ease-out'
         } transform`}>
           <div className={`transform ${
-            isMobile 
+            false 
               ? 'transition-all duration-500 delay-200' 
               : 'transition-all duration-700 delay-300'
           } ${currentSlide >= 0 ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
@@ -218,21 +197,21 @@ export default function HeroSlider({ slides }: { slides: VideoSlide[] }) {
             transform: currentSlide >= 0 ? 'translate3d(0, 0, 0)' : 'translate3d(0, 16px, 0)'
           }}>
             <h1 className={`font-bold font-neurial mb-4 leading-tight ${
-              isMobile 
+              false 
                 ? 'text-2xl md:text-3xl' 
                 : 'text-3xl lg:text-5xl xl:text-6xl'
             }`}>
               {currentItem.title}
             </h1>
             <p className={`font-neurial mb-6 leading-relaxed ${
-              isMobile 
+              false 
                 ? 'text-base md:text-lg' 
                 : 'text-lg lg:text-xl xl:text-2xl'
             } opacity-90`}>
               {currentItem.subtitle}
             </p>
             <div className={`transform ${
-              isMobile 
+              false 
                 ? 'transition-all duration-400 delay-300' 
                 : 'transition-all duration-500 delay-500'
             }`}>
@@ -241,7 +220,7 @@ export default function HeroSlider({ slides }: { slides: VideoSlide[] }) {
                   variant="primary"
                   size="lg"
                   className={`bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold font-neurial ${
-                    isMobile 
+                    false 
                       ? 'px-8 py-3 text-base transition-all duration-200 active:scale-95' 
                       : 'px-10 py-4 text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/25'
                   }`}
@@ -257,7 +236,7 @@ export default function HeroSlider({ slides }: { slides: VideoSlide[] }) {
       <button
         onClick={goToPrevious}
         className={`absolute left-4 md:left-6 top-1/2 transform -translate-y-1/2 p-3 md:p-4 bg-white/10 backdrop-blur-md rounded-full border border-white/20 z-40 ${
-          isMobile 
+          false 
             ? 'transition-all duration-200 active:scale-95 active:bg-white/20' 
             : 'hover:bg-white/20 hover:scale-110 transition-all duration-300'
         }`}
@@ -270,7 +249,7 @@ export default function HeroSlider({ slides }: { slides: VideoSlide[] }) {
       <button
         onClick={goToNext}
         className={`absolute right-4 md:right-6 top-1/2 transform -translate-y-1/2 p-3 md:p-4 bg-white/10 backdrop-blur-md rounded-full border border-white/20 z-40 ${
-          isMobile 
+          false 
             ? 'transition-all duration-200 active:scale-95 active:bg-white/20' 
             : 'hover:bg-white/20 hover:scale-110 transition-all duration-300'
         }`}

@@ -17,7 +17,7 @@ const ContactFAQ = () => {
     },
     {
       question: 'What are the contact details for Raam Ather dealerships?',
-      answer: 'Hyderabad Outlets: Jubilee Hills (+91 90323 33833), Banjara Hills (+91 90323 33833). Chennai Outlets: T. Nagar (+91 9240013828), Anna Nagar (+91 09240013814). Email: info@raamother.com. WhatsApp support: +91 9032333833. All outlets are open from 10:00 AM to 8:00 PM, Monday to Sunday.',
+      answer: 'Hyderabad Outlets: Jubilee Hills (+91 90323 33833), Banjara Hills (+91 90323 33833). Chennai Outlets: T. Nagar (+91 9032333833), Anna Nagar (+91 9032333833). Email: info@raamother.com. WhatsApp support: +91 9032333833. All outlets are open from 10:00 AM to 8:00 PM, Monday to Sunday.',
       category: 'contact',
       keywords: 'contact details phone number address email whatsapp hours'
     },

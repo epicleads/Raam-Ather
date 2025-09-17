@@ -182,28 +182,13 @@ export default function Performance() {
   const techRef = useRef(null);
   const [currentMetricIndex, setCurrentMetricIndex] = useState(0);
   const [currentTechIndex, setCurrentTechIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
   
   const sectionInView = useInView(sectionRef, { once: true, margin: '-50px' });
   const metricsInView = useInView(metricsRef, { once: true, margin: '-30px' });
   const techInView = useInView(techRef, { once: true, margin: '-30px' });
 
-  // Check for mobile and handle carousel
+  // Auto-advance carousel for mobile
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  // Auto-advance carousel for mobile only
-  useEffect(() => {
-    if (!isMobile) return;
-    
     const metricsInterval = setInterval(() => {
       setCurrentMetricIndex((prev) => (prev + 1) % performanceMetrics.length);
     }, 3000);
@@ -216,7 +201,7 @@ export default function Performance() {
       clearInterval(metricsInterval);
       clearInterval(techInterval);
     };
-  }, [isMobile]);
+  }, []);
 
   return (
     <section 
@@ -243,39 +228,35 @@ export default function Performance() {
         {/* Performance Metrics - Always show grid on desktop, carousel on mobile */}
         <div className="mb-16">
           {/* Desktop Grid */}
-          {!isMobile && (
-            <motion.div
-              ref={metricsRef}
-              initial={{ opacity: 0 }}
-              animate={metricsInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.8 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-            >
-              {performanceMetrics.map((metric, index) => (
-                <MetricCard 
-                  key={metric.label} 
-                  metric={metric} 
-                  index={index} 
-                  isInView={metricsInView} 
-                />
-              ))}
-            </motion.div>
-          )}
+          <motion.div
+            ref={metricsRef}
+            initial={{ opacity: 0 }}
+            animate={metricsInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.8 }}
+            className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          >
+            {performanceMetrics.map((metric, index) => (
+              <MetricCard 
+                key={metric.label} 
+                metric={metric} 
+                index={index} 
+                isInView={metricsInView} 
+              />
+            ))}
+          </motion.div>
 
           {/* Mobile Carousel */}
-          {isMobile && (
-            <motion.div
-              ref={metricsRef}
-              initial={{ opacity: 0 }}
-              animate={metricsInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.8 }}
-              className="relative"
-            >
-              <div className="relative h-[240px] overflow-hidden">
-                {performanceMetrics.map((metric, index) => (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={metricsInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.8 }}
+            className="md:hidden relative bg-red-100 min-h-[240px]"
+          >
+            <div className="relative h-[240px] overflow-hidden bg-blue-100">
+              {performanceMetrics.map((metric, index) => (
                   <motion.div
                     key={metric.label}
-                    className="absolute inset-0 w-full"
+                    className="absolute inset-0 w-full bg-green-200 p-4"
                     initial={{ opacity: 0, x: 50 }}
                     animate={{
                       opacity: currentMetricIndex === index ? 1 : 0,
@@ -283,29 +264,28 @@ export default function Performance() {
                     }}
                     transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                   >
-                    <MetricCard 
-                      metric={metric} 
-                      index={0} 
-                      isInView={metricsInView}
-                    />
-                  </motion.div>
-                ))}
-              </div>
-              
-              {/* Dots Indicator */}
-              <div className="flex justify-center space-x-2 mt-6">
-                {performanceMetrics.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentMetricIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                      currentMetricIndex === index ? 'bg-black' : 'bg-gray-300'
-                    }`}
+                  <MetricCard 
+                    metric={metric} 
+                    index={0} 
+                    isInView={metricsInView}
                   />
-                ))}
-              </div>
-            </motion.div>
-          )}
+                </motion.div>
+              ))}
+            </div>
+            
+            {/* Dots Indicator */}
+            <div className="flex justify-center space-x-2 mt-6">
+              {performanceMetrics.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentMetricIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                    currentMetricIndex === index ? 'bg-black' : 'bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+          </motion.div>
         </div>
 
         {/* Technology Section */}
@@ -325,55 +305,51 @@ export default function Performance() {
           </div>
 
           {/* Desktop Grid */}
-          {!isMobile && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {techFeatures.map((feature, index) => (
+          <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-4">
+            {techFeatures.map((feature, index) => (
+              <TechFeatureCard 
+                key={feature.title} 
+                feature={feature} 
+                index={index} 
+                isInView={techInView} 
+              />
+            ))}
+          </div>
+
+          {/* Mobile Carousel */}
+          <div className="md:hidden relative h-[140px] overflow-hidden">
+            {techFeatures.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                className="absolute inset-0 w-full"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{
+                  opacity: currentTechIndex === index ? 1 : 0,
+                  x: currentTechIndex === index ? 0 : (currentTechIndex > index ? -50 : 50)
+                }}
+                transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
                 <TechFeatureCard 
-                  key={feature.title} 
                   feature={feature} 
-                  index={index} 
-                  isInView={techInView} 
+                  index={0} 
+                  isInView={techInView}
+                />
+              </motion.div>
+            ))}
+            
+            {/* Dots Indicator */}
+            <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              {techFeatures.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentTechIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                    currentTechIndex === index ? 'bg-black' : 'bg-gray-300'
+                  }`}
                 />
               ))}
             </div>
-          )}
-
-          {/* Mobile Carousel */}
-          {isMobile && (
-            <div className="relative h-[140px] overflow-hidden">
-              {techFeatures.map((feature, index) => (
-                <motion.div
-                  key={feature.title}
-                  className="absolute inset-0 w-full"
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{
-                    opacity: currentTechIndex === index ? 1 : 0,
-                    x: currentTechIndex === index ? 0 : (currentTechIndex > index ? -50 : 50)
-                  }}
-                  transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                >
-                  <TechFeatureCard 
-                    feature={feature} 
-                    index={0} 
-                    isInView={techInView}
-                  />
-                </motion.div>
-              ))}
-              
-              {/* Dots Indicator */}
-              <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                {techFeatures.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentTechIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                      currentTechIndex === index ? 'bg-black' : 'bg-gray-300'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
+          </div>
         </motion.div>
       </div>
     </section>

@@ -15,7 +15,7 @@ const Comfort1Client = () => {
       description: '17.7 cm (7") TFT dashboard. Touch, tap, scroll your way around an intuitive UI.',
       image: '/Ather-Assets/450/comfort/comfort1.webp',
     },
-    '450s': {
+    '450X': {
       title: 'DeepView™ Display',
       description: 'Industry-first 18-segment EBN display. Clearly visible under sunlight and low light.',
       image: '/Ather-Assets/450/comfort/comfort2.webp',
@@ -94,31 +94,37 @@ const Comfort1Client = () => {
             </motion.div>
           </div>
 
-          {/* Mobile: Text and Toggle at Bottom */}
-          <div className="lg:hidden absolute bottom-0 left-0 right-0 p-6">
-            {/* Mobile Text */}
+          {/* Mobile: Text Only - Moved Higher */}
+          <div className="lg:hidden absolute top-4 left-0 right-0 p-6">
             <motion.div
               key={selectedModel}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-3"
+              className="text-center"
             >
               <h3 className="text-white text-lg font-bold mb-2 leading-tight font-neurial">
                 {content[selectedModel as keyof typeof content].title}
               </h3>
-              <p className="text-gray-300 text-xs leading-relaxed font-light tracking-wide mb-3 font-neurial">
+              <p className="text-gray-300 text-xs leading-relaxed font-light tracking-wide font-neurial">
                 {content[selectedModel as keyof typeof content].description}
               </p>
             </motion.div>
+          </div>
 
-            {/* Mobile Toggle */}
-            <div className="flex justify-center">
+          {/* Mobile: Toggle Only - Moved Lower */}
+          <div className="lg:hidden absolute bottom-0 left-0 right-0 p-6">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex justify-center"
+            >
               <ToggleSwitch
                 selectedModel={selectedModel}
                 setSelectedModel={setSelectedModel}
               />
-            </div>
+            </motion.div>
           </div>
 
           {/* Corner Accent */}
@@ -152,14 +158,14 @@ const ToggleSwitch = ({
           450
         </button>
         <button
-          onClick={() => setSelectedModel('450s')}
+          onClick={() => setSelectedModel('450X')}
           className={`relative px-6 py-2 text-xs lg:text-sm font-semibold rounded-full transition-all duration-300 font-neurial ${
-            selectedModel === '450s'
+            selectedModel === '450X'
               ? 'text-black'
               : 'text-gray-400 hover:text-white'
           }`}
         >
-          450s
+          450X
         </button>
       </div>
       

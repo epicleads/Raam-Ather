@@ -348,7 +348,10 @@ const PremiumOutletCards: React.FC<PremiumOutletCardsProps> = ({
                     {/* Secondary Actions */}
                     <div className="grid grid-cols-2 gap-3">
                       <motion.a
-                        href={`https://wa.me/${outlet.whatsapp.replace(/[^\d]/g, '')}`}
+                        href={outlet.city === 'Chennai' 
+                          ? "https://wa.me/918712600672?text=Hi%20I%20am%20interested%20in%20Ather%20scooters!"
+                          : `https://wa.me/${outlet.whatsapp.replace(/[^\d]/g, '')}`
+                        }
                         target="_blank"
                         rel="noopener noreferrer"
                         className="border border-[#00B248] text-[#00B248] hover:bg-[#00B248] hover:text-white px-4 py-2 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-all"

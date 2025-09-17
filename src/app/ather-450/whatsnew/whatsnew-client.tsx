@@ -45,6 +45,11 @@ const FeatureIcons = {
     <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
     </svg>
+  ),
+  connectivity: (
+    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+    </svg>
   )
 }
 
@@ -116,6 +121,7 @@ function AnimatedMetricCard({
   targetValue, 
   suffix, 
   description, 
+  bulletPoints,
   index 
 }: { 
   icon: React.ReactNode; 
@@ -123,6 +129,7 @@ function AnimatedMetricCard({
   targetValue: number; 
   suffix?: string; 
   description?: string; 
+  bulletPoints?: string[];
   index: number 
 }) {
   const cardRef = useRef(null)
@@ -165,31 +172,55 @@ function AnimatedMetricCard({
       className="p-6 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 hover:border-green-500/50 hover:shadow-xl hover:shadow-green-500/10 transition-all duration-500 cursor-pointer group h-full flex flex-col relative"
     >
       {/* Icon + Title at top */}
-      <div className="flex items-center justify-center space-x-3">
-        <div className="text-gray-400 group-hover:text-green-400 transition-colors duration-300">
+      <div className="flex items-center justify-center space-x-3 mb-4">
+        <div className="text-gray-400 group-hover:text-green-400 transition-colors duration-300 relative">
           {icon}
+          {/* Pulsing glow effect for charging icon */}
+          {title === 'Faster Charging' && (
+            <div className="absolute inset-0 rounded-full bg-green-400/20 animate-pulse"></div>
+          )}
         </div>
         <h4 className="text-xl md:text-2xl font-semibold text-white group-hover:text-green-400 transition-colors duration-300">
           {title}
         </h4>
       </div>
 
-      {/* Spacer to push content to bottom */}
-      <div className="flex-1"></div>
-
-      {/* Bottom section: Counter + Description */}
-      <div className="text-center space-y-2">
-        {/* Animated Counter */}
+      {/* Main metric */}
+      <div className="text-center mb-8">
         <div>
           <span className="text-4xl md:text-5xl font-bold text-green-400 tabular-nums">
             {currentValue}{suffix}
           </span>
         </div>
-        {/* Description */}
         <p className="text-lg text-white font-bold">
           {description}
         </p>
       </div>
+
+      {/* Bullet Points */}
+      {bulletPoints && (
+        <div className="space-y-5 flex-1 mt-4">
+          {bulletPoints.map((point, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: -10 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+              transition={{ delay: 0.3 + idx * 0.1 }}
+              className="flex items-center space-x-4 text-lg md:text-xl text-gray-200"
+            >
+              <div className="w-2.5 h-2.5 bg-green-400 rounded-full flex-shrink-0"></div>
+              <span className="font-semibold leading-relaxed">{point}</span>
+            </motion.div>
+          ))}
+        </div>
+      )}
+
+      {/* Background animation for range card */}
+      {title === 'Higher Range' && (
+        <div className="absolute inset-0 overflow-hidden rounded-2xl">
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-green-400/30 to-transparent animate-pulse"></div>
+        </div>
+      )}
 
       {/* Hover Glow Effect */}
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
@@ -243,9 +274,14 @@ export function WhatsNewClient({ data }: WhatsNewClientProps) {
         <div className="hidden lg:grid gap-8 grid-cols-3 h-64">
           {/* First Grid: All Connectivity Features in One Column */}
           <div className="p-6 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 hover:border-green-500/50 hover:shadow-xl hover:shadow-green-500/10 transition-all duration-500 cursor-pointer group h-full flex flex-col">
-            <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-green-400 transition-colors duration-300 mb-4 text-center flex-shrink-0">
-              Smart Connectivity
-            </h3>
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <div className="text-gray-400 group-hover:text-green-400 transition-colors duration-300">
+                {FeatureIcons.connectivity}
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-green-400 transition-colors duration-300 text-center flex-shrink-0">
+                Smart Connectivity
+              </h3>
+            </div>
             
             <div className="flex-1 flex flex-col justify-center min-h-0">
               <div className="space-y-2 overflow-y-auto scrollbar-hide">
@@ -271,6 +307,11 @@ export function WhatsNewClient({ data }: WhatsNewClientProps) {
             targetValue={80}
             suffix="%"
             description="in 3 hr*"
+            bulletPoints={[
+              "Works with Ather Grid fast chargers",
+              "Ride-ready during a coffee break",
+              "Smart battery management"
+            ]}
             index={1}
           />
 
@@ -281,6 +322,11 @@ export function WhatsNewClient({ data }: WhatsNewClientProps) {
             targetValue={161}
             suffix=" km"
             description="IDC Range"
+            bulletPoints={[
+              "Smart range prediction",
+              "Enough for daily + weekend rides",
+              "Real-time efficiency tracking"
+            ]}
             index={2}
           />
         </div>
@@ -289,9 +335,14 @@ export function WhatsNewClient({ data }: WhatsNewClientProps) {
         <div className="lg:hidden space-y-8 px-4">
           {/* Connectivity Features */}
           <div className="p-6 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 hover:border-green-500/50 hover:shadow-xl hover:shadow-green-500/10 transition-all duration-500">
-            <h3 className="text-xl font-bold text-white mb-4 text-center">
-              Smart Connectivity
-            </h3>
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <div className="text-gray-400">
+                {FeatureIcons.connectivity}
+              </div>
+              <h3 className="text-xl font-bold text-white text-center">
+                Smart Connectivity
+              </h3>
+            </div>
             <div className="space-y-3">
               {data.smartFeatures.connectivity.map((feature) => (
                 <div key={feature.id} className="flex items-center space-x-3 p-3 rounded-lg bg-gray-800/30">
@@ -311,6 +362,11 @@ export function WhatsNewClient({ data }: WhatsNewClientProps) {
             targetValue={80}
             suffix="%"
             description="in 3 hr*"
+            bulletPoints={[
+              "Works with Ather Grid fast chargers",
+              "Ride-ready during a coffee break",
+              "Smart battery management"
+            ]}
             index={1}
           />
 
@@ -321,6 +377,11 @@ export function WhatsNewClient({ data }: WhatsNewClientProps) {
             targetValue={161}
             suffix=" km"
             description="IDC Range"
+            bulletPoints={[
+              "Smart range prediction",
+              "Enough for daily + weekend rides",
+              "Real-time efficiency tracking"
+            ]}
             index={2}
           />
         </div>
