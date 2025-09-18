@@ -1,0 +1,203 @@
+/* Awards Section Styles */
+.section {
+  @apply w-full bg-white py-20 px-4 sm:px-6 lg:px-8;
+  position: relative;
+}
+
+.container {
+  @apply max-w-7xl mx-auto;
+}
+
+.header {
+  @apply text-center mb-16;
+}
+
+.headerIcon {
+  @apply w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/30;
+}
+
+.title {
+  @apply text-4xl md:text-5xl font-bold text-gray-900 tracking-tight;
+}
+
+.divider {
+  @apply w-24 h-1 bg-gradient-to-r from-amber-400 via-yellow-500 to-orange-600 mx-auto mb-6 rounded-full;
+}
+
+.description {
+  @apply text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed;
+}
+
+.desktopGrid {
+  @apply hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8;
+}
+
+.mobileSlider {
+  @apply md:hidden relative;
+  min-height: 450px;
+}
+
+.card {
+  @apply group relative bg-white rounded-3xl overflow-hidden h-full border border-gray-100/80 backdrop-blur-sm transition-all duration-700 ease-out;
+  transform-origin: center;
+}
+
+.card::before {
+  content: '';
+  @apply absolute inset-0 rounded-3xl bg-gradient-to-br from-white/50 to-transparent opacity-0 transition-opacity duration-500 z-10;
+}
+
+.card:hover {
+  @apply shadow-2xl -translate-y-2;
+  transform: translateY(-0.5rem) scale(1.02);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.cardImage {
+  @apply relative w-full h-48 sm:h-56 md:h-48 overflow-hidden bg-gray-100;
+}
+
+.cardContent {
+  @apply relative z-10 p-6 flex flex-col;
+  height: calc(100% - 12rem);
+}
+
+.cardTitle {
+  @apply text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-gray-800 transition-colors duration-300;
+}
+
+.cardDescription {
+  @apply text-gray-600 leading-relaxed flex-1 text-sm group-hover:text-gray-700 transition-colors duration-300;
+}
+
+.iconContainer {
+  @apply w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all duration-500 backdrop-blur-sm bg-opacity-90;
+  transform-origin: center;
+}
+
+.card:hover .iconContainer {
+  transform: scale(1.1) rotate(3deg);
+}
+
+.yearBadge {
+  @apply absolute top-4 right-4 bg-black/70 backdrop-blur-sm text-white text-sm font-medium px-3 py-1 rounded-full shadow-lg z-20;
+}
+
+.accentLine {
+  @apply mt-4 h-1 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left;
+}
+
+.fadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.sliderContainer {
+  @apply relative w-full h-[450px] rounded-3xl overflow-hidden;
+  touch-action: pan-y;
+}
+
+.slideItem {
+  @apply absolute inset-0 w-full h-full px-2 transition-all duration-500 ease-in-out;
+}
+
+.slideActive {
+  @apply opacity-100 z-10;
+  transform: translateX(0);
+}
+
+.slidePrev {
+  @apply opacity-0 z-0;
+  transform: translateX(-100%);
+}
+
+.slideNext {
+  @apply opacity-0 z-0;
+  transform: translateX(100%);
+}
+
+.indicators {
+  @apply flex justify-center mt-3 gap-3;
+}
+
+.indicator {
+  @apply w-3 h-3 rounded-full transition-all duration-300;
+}
+
+.indicatorActive {
+  @apply bg-gradient-to-r from-amber-400 to-orange-600 w-8;
+}
+
+.indicatorInactive {
+  @apply bg-gray-300 hover:bg-gray-400;
+}
+
+.backgroundElements {
+  @apply absolute inset-0 overflow-hidden pointer-events-none;
+}
+
+.bgElement1 {
+  @apply absolute top-1/4 left-10 w-32 h-32 bg-gradient-to-br from-amber-100/30 to-orange-100/30 rounded-full blur-3xl;
+}
+
+.bgElement2 {
+  @apply absolute bottom-1/4 right-10 w-40 h-40 bg-gradient-to-br from-blue-100/20 to-purple-100/20 rounded-full blur-3xl;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Image optimization */
+.optimizedImage {
+  @apply object-cover transition-all duration-700;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.card:hover .optimizedImage {
+  transform: scale(1.1);
+}
+
+/* Image overlay gradient */
+.imageOverlay {
+  @apply absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500;
+}
+
+/* Hover gradient overlay */
+.hoverOverlay {
+  @apply absolute inset-0 rounded-3xl bg-gradient-to-br from-transparent via-white/5 to-gray-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10;
+}
+
+/* Focus styles for accessibility */
+.card:focus-visible {
+  @apply outline-none ring-2 ring-amber-500 ring-offset-2;
+}
+
+.indicator:focus-visible {
+  @apply outline-none ring-2 ring-amber-500 ring-offset-2;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+  
+  .fadeInUp {
+    animation: none;
+  }
+  
+  .slideItem {
+    transition: none;
+  }
+}

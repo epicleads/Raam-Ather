@@ -81,15 +81,7 @@ const RaamAtherTimeline: React.FC = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  useEffect(() => {
-    if (isMobile) {
-      const interval = setInterval(() => {
-        setActiveYear((prev: number) => (prev + 1) % milestones.length);
-      }, 5000);
-      
-      return () => clearInterval(interval);
-    }
-  }, [isMobile, milestones.length]);
+  // Removed auto-sliding for mobile since we're using stacked grid now
 
   const TimelineCard: React.FC<{ milestone: TimelineItem; index: number; isActive: boolean }> = ({ 
     milestone, 
@@ -124,7 +116,7 @@ const RaamAtherTimeline: React.FC = () => {
             className="object-cover transition-all duration-1000 group-hover:scale-110"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
             priority={index < 2}
-            quality={95}
+            quality={90}
           />
           
           {/* Premium gradient overlay */}
@@ -179,9 +171,7 @@ const RaamAtherTimeline: React.FC = () => {
     );
   };
 
-  const handleSlideChange = (index: number): void => {
-    setActiveYear(index);
-  };
+  // Removed handleSlideChange function as it's no longer needed
 
   return (
     <section className="w-full bg-gradient-to-br from-gray-50 via-white to-gray-100 py-16 md:py-20 relative overflow-hidden">
@@ -241,57 +231,17 @@ const RaamAtherTimeline: React.FC = () => {
           ))}
         </div>
 
-        {/* Mobile Slider */}
-        <div className="md:hidden px-4">
-          <div className="relative max-w-sm mx-auto">
-            <div className="overflow-hidden rounded-3xl">
-              <TimelineCard 
-                milestone={milestones[activeYear]} 
-                index={activeYear} 
-                isActive={true}
+        {/* Mobile Grid - Stacked Vertically */}
+        <div className="md:hidden space-y-8 px-4">
+          {milestones.map((milestone, index) => (
+            <div key={milestone.id} className="animate-fade-in-up">
+              <TimelineCard
+                milestone={milestone}
+                index={index}
+                isActive={false}
               />
             </div>
-
-            {/* Navigation arrows - positioned outside card */}
-            <button
-              onClick={() => setActiveYear(activeYear > 0 ? activeYear - 1 : milestones.length - 1)}
-              className="absolute -left-6 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 backdrop-blur-xl shadow-lg rounded-full flex items-center justify-center text-gray-700 hover:bg-white hover:scale-110 transition-all duration-300 z-10"
-              type="button"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-              </svg>
-            </button>
-            
-            <button
-              onClick={() => setActiveYear(activeYear < milestones.length - 1 ? activeYear + 1 : 0)}
-              className="absolute -right-6 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 backdrop-blur-xl shadow-lg rounded-full flex items-center justify-center text-gray-700 hover:bg-white hover:scale-110 transition-all duration-300 z-10"
-              type="button"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-              </svg>
-            </button>
-          </div>
-
-          {/* Mobile indicators */}
-          <div className="flex justify-center mt-8 space-x-3">
-            {milestones.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => handleSlideChange(index)}
-                className={`
-                  w-3 h-3 rounded-full transition-all duration-300
-                  ${activeYear === index 
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-600 w-8 shadow-lg' 
-                    : 'bg-gray-300 hover:bg-gray-400'
-                  }
-                `}
-                aria-label={`Go to slide ${index + 1}`}
-                type="button"
-              />
-            ))}
-          </div>
+          ))}
         </div>
 
         {/* Stats Summary - Apple style */}

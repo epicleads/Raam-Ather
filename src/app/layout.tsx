@@ -126,6 +126,20 @@ export default function RootLayout({
           `}
         </Script>
 
+        {/* Preload critical award images for better LCP */}
+        <link
+          rel="preload"
+          as="image"
+          href="/Ather-Assets/thumbnails/smgrid4.jpg"
+          media="(min-width: 768px)"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/Ather-Assets/thumbnails/smgrid5.jpg"
+          media="(min-width: 768px)"
+        />
+
         {/* ✅ Google Tag Manager */}
         <Script id="gtm-script" strategy="afterInteractive">
           {`

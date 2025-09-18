@@ -1,8 +1,25 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import Image from 'next/image';
+import { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import TestRideButton from '../../TestRideButton';
+import { MediaViewer } from '../../ui/MediaViewer';
+
+// Hook to detect mobile screen size
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
+  return isMobile;
+}
 
 interface VideoSlide {
   id: string;
@@ -15,14 +32,18 @@ interface VideoSlide {
   mobileSrc?: string;
 }
 
-export default function HeroSlider({ slides }: { slides: VideoSlide[] }) {
+const HeroSlider = memo(function HeroSlider({ slides }: { slides: VideoSlide[] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [videoEndHandlersRef] = useState<{ current: Map<string, () => void> }>({ current: new Map() });
   const [videoElementsRef] = useState<{ current: Map<string, HTMLVideoElement> }>({ current: new Map() });
 
-  const filteredSlides = slides; // Show all slides, let CSS handle responsiveness
+  // Use the mobile detection hook
+  const isMobile = useIsMobile();
+
+  // Memoize filtered slides
+  const filteredSlides = useMemo(() => slides, [slides]);
 
   const getAssetSource = (item: VideoSlide) => {
     return item.src; // Use desktop source, mobile will be handled by CSS
@@ -72,17 +93,18 @@ export default function HeroSlider({ slides }: { slides: VideoSlide[] }) {
     videoEndHandlersRef.current.set(slideId, onEnd);
   }, [videoEndHandlersRef, videoElementsRef]);
 
-  const goToSlide = (index: number) => {
+  // Memoize navigation functions
+  const goToSlide = useCallback((index: number) => {
     setCurrentSlide(index);
-  };
+  }, []);
 
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     setCurrentSlide((prev) => (prev - 1 + filteredSlides.length) % filteredSlides.length);
-  };
+  }, [filteredSlides.length]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % filteredSlides.length);
-  };
+  }, [filteredSlides.length]);
 
   if (error) {
     return (
@@ -112,7 +134,11 @@ export default function HeroSlider({ slides }: { slides: VideoSlide[] }) {
   };
 
   return (
-    <div className="relative h-screen bg-black hero-container" style={{ maxHeight: '100vh', overflow: 'hidden' }}>
+    <section
+      className="relative h-screen bg-black hero-container max-h-screen overflow-hidden"
+      role="banner"
+      aria-label="Hero carousel showcasing Ather electric scooters"
+    >
       {/* Media Background */}
       <div className="absolute inset-0">
         {filteredSlides.map((item, index) => {
@@ -138,142 +164,158 @@ export default function HeroSlider({ slides }: { slides: VideoSlide[] }) {
               key={item.id}
               className={slideClasses}
             >
-              {mediaType === 'video' ? (
-                <video
-                  ref={(el) => {
-                    if (el) {
-                      registerVideo(item.id, el, handleVideoEnd);
-                    }
-                  }}
-                  src={assetSource}
-                  poster={item.poster}
-                  autoPlay={isActive}
-                  muted
-                  loop={false}
-                  playsInline
-                  className="w-full h-full object-cover"
-                  onError={(e) => handleVideoError(item.id, e.type)}
-                />
-              ) : (
-                <Image
-                  src={assetSource}
-                  alt={item.poster || ''}
-                  fill
-                  className={`object-cover transform-gpu ${
-                    false 
-                      ? 'transition-opacity duration-800 ease-out' 
-                      : 'transition-transform duration-1000 ease-out'
-                  }`}
-                  priority={index === 0}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  style={{ 
-                    backfaceVisibility: 'hidden',
-                    WebkitBackfaceVisibility: 'hidden',
-                    transform: 'translate3d(0, 0, 0)'
-                  }}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 100vw"
-                  quality={index === 0 ? 95 : 80}
-                />
-              )}
+              <MediaViewer
+                src={assetSource}
+                alt={`${item.title} - ${item.subtitle}`}
+                type={mediaType === 'gif' ? 'image' : mediaType}
+                priority={index === 0}
+                isActive={isActive}
+                poster={item.poster}
+                className={
+                  isMobile
+                    ? 'transition-opacity duration-800 ease-out'
+                    : 'transition-transform duration-1000 ease-out'
+                }
+                onVideoEnd={handleVideoEnd}
+                onVideoError={(error) => handleVideoError(item.id, error)}
+                videoRef={mediaType === 'video' ? (el) => {
+                  if (el) {
+                    registerVideo(item.id, el, handleVideoEnd);
+                  }
+                } : undefined}
+              />
             </div>
           );
         })}
       </div>
       {/* Content Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-30">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-30">
         <div className={`absolute text-white ${
-          false
+          isMobile
             ? 'bottom-20 left-1/2 -translate-x-1/2 text-center px-4 w-full max-w-sm transition-all duration-500 ease-out'
             : 'bottom-16 left-8 lg:left-16 text-left max-w-lg transition-all duration-700 ease-out'
         } transform`}>
-          <div className={`transform ${
-            false 
-              ? 'transition-all duration-500 delay-200' 
-              : 'transition-all duration-700 delay-300'
-          } ${currentSlide >= 0 ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
-          style={{ 
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
-            transform: currentSlide >= 0 ? 'translate3d(0, 0, 0)' : 'translate3d(0, 16px, 0)'
-          }}>
-            <h1 className={`font-bold font-neurial mb-4 leading-tight ${
-              false 
-                ? 'text-2xl md:text-3xl' 
-                : 'text-3xl lg:text-5xl xl:text-6xl'
-            }`}>
-              {currentItem.title}
-            </h1>
-            <p className={`font-neurial mb-6 leading-relaxed ${
-              false 
-                ? 'text-base md:text-lg' 
-                : 'text-lg lg:text-xl xl:text-2xl'
-            } opacity-90`}>
-              {currentItem.subtitle}
-            </p>
+          <header>
             <div className={`transform ${
-              false 
-                ? 'transition-all duration-400 delay-300' 
-                : 'transition-all duration-500 delay-500'
-            }`}>
-              {currentItem.ctaText === 'Book Test Ride' ? (
-                <TestRideButton
-                  variant="primary"
-                  size="lg"
-                  className={`bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold font-neurial ${
-                    false 
-                      ? 'px-8 py-3 text-base transition-all duration-200 active:scale-95' 
-                      : 'px-10 py-4 text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/25'
-                  }`}
-                >
-                  {currentItem.ctaText}
-                </TestRideButton>
-              ) : null}
+              isMobile
+                ? 'transition-all duration-500 delay-200'
+                : 'transition-all duration-700 delay-300'
+            } ${currentSlide >= 0 ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+            style={{
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+              transform: currentSlide >= 0 ? 'translate3d(0, 0, 0)' : 'translate3d(0, 16px, 0)'
+            }}>
+              <h1 className={`font-bold font-neurial mb-4 leading-tight drop-shadow-lg ${
+                isMobile
+                  ? 'text-2xl md:text-3xl'
+                  : 'text-3xl lg:text-5xl xl:text-6xl'
+              }`}>
+                {currentItem.title}
+              </h1>
+              <p className={`font-neurial mb-6 leading-relaxed drop-shadow-md ${
+                isMobile
+                  ? 'text-base md:text-lg'
+                  : 'text-lg lg:text-xl xl:text-2xl'
+              } opacity-90`}>
+                {currentItem.subtitle}
+              </p>
             </div>
+          </header>
+          <div className={`transform ${
+            isMobile
+              ? 'transition-all duration-400 delay-300'
+              : 'transition-all duration-500 delay-500'
+          }`}>
+            {currentItem.ctaText === 'Book Test Ride' ? (
+              <TestRideButton
+                variant="primary"
+                size="lg"
+                className={`bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold font-neurial ${
+                  isMobile
+                    ? 'px-8 py-3 text-base transition-all duration-200 active:scale-95'
+                    : 'px-10 py-4 text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/25'
+                }`}
+              >
+                {currentItem.ctaText}
+              </TestRideButton>
+            ) : null}
           </div>
         </div>
       </div>
       {/* Navigation Arrows */}
       <button
         onClick={goToPrevious}
-        className={`absolute left-4 md:left-6 top-1/2 transform -translate-y-1/2 p-3 md:p-4 bg-white/10 backdrop-blur-md rounded-full border border-white/20 z-40 ${
-          false 
-            ? 'transition-all duration-200 active:scale-95 active:bg-white/20' 
+        className={`absolute left-4 md:left-6 top-1/2 transform -translate-y-1/2 p-3 md:p-4 bg-white/10 backdrop-blur-md rounded-full border border-white/20 z-40 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black ${
+          isMobile
+            ? 'transition-all duration-200 active:scale-95 active:bg-white/20'
             : 'hover:bg-white/20 hover:scale-110 transition-all duration-300'
         }`}
-        aria-label="Previous slide"
+        aria-label={`Go to previous slide. Currently on slide ${currentSlide + 1} of ${filteredSlides.length}`}
+        type="button"
       >
-        <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg
+          className="w-5 h-5 md:w-6 md:h-6 text-white"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
       </button>
       <button
         onClick={goToNext}
-        className={`absolute right-4 md:right-6 top-1/2 transform -translate-y-1/2 p-3 md:p-4 bg-white/10 backdrop-blur-md rounded-full border border-white/20 z-40 ${
-          false 
-            ? 'transition-all duration-200 active:scale-95 active:bg-white/20' 
+        className={`absolute right-4 md:right-6 top-1/2 transform -translate-y-1/2 p-3 md:p-4 bg-white/10 backdrop-blur-md rounded-full border border-white/20 z-40 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black ${
+          isMobile
+            ? 'transition-all duration-200 active:scale-95 active:bg-white/20'
             : 'hover:bg-white/20 hover:scale-110 transition-all duration-300'
         }`}
-        aria-label="Next slide"
+        aria-label={`Go to next slide. Currently on slide ${currentSlide + 1} of ${filteredSlides.length}`}
+        type="button"
       >
-        <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg
+          className="w-5 h-5 md:w-6 md:h-6 text-white"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </button>
       {/* Slide Indicators */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-40">
-        {filteredSlides.map((_, index) => (
+      <div
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-40"
+        role="tablist"
+        aria-label="Slide navigation"
+      >
+        {filteredSlides.map((slide, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300 ${
+            role="tab"
+            aria-selected={index === currentSlide}
+            aria-controls={`slide-${index}`}
+            aria-label={`Go to slide ${index + 1}: ${slide.title}`}
+            className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1 ${
               index === currentSlide
                 ? 'bg-white scale-125 shadow-lg'
                 : 'bg-white/40 hover:bg-white/60 hover:scale-110'
             }`}
-            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
-    </div>
+
+      {/* Skip to content link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-white text-black px-4 py-2 rounded z-50"
+      >
+        Skip to main content
+      </a>
+    </section>
   );
-}
+});
+
+export default HeroSlider;

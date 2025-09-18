@@ -57,91 +57,40 @@ const LocalAdvantageCards = () => {
           </motion.p>
         </div>
 
-        {/* Desktop Grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Responsive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {advantages.map((advantage, index) => (
             <motion.div
               key={index}
-              className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
+              className="group relative bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden w-full"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
               whileHover={{ y: -10 }}
+              style={{ maxWidth: '100%', minWidth: '0' }}
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${advantage.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-              
+
               <div className="relative z-10">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className={`inline-flex p-4 rounded-xl bg-gradient-to-br ${advantage.color} text-white group-hover:scale-110 transition-transform duration-300`}>
+                <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
+                  <div className={`inline-flex p-3 md:p-4 rounded-xl bg-gradient-to-br ${advantage.color} text-white group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
                     {advantage.icon}
                   </div>
-                  <h3 className="text-sm font-bold text-[#1B1B1B] group-hover:text-[#4A4A4A] transition-colors font-neurial">
+                  <h3 className="text-lg md:text-sm font-bold text-[#1B1B1B] group-hover:text-[#4A4A4A] transition-colors font-neurial">
                     {advantage.title}
                   </h3>
                 </div>
-                
-                <p className="text-xs text-[#666666] mb-4 leading-relaxed font-neurial min-h-[2.5rem] flex items-center">
+
+                <p className="text-sm md:text-xs text-[#666666] mb-4 leading-relaxed font-neurial md:min-h-[2.5rem] md:flex md:items-center">
                   {advantage.description}
                 </p>
-                
+
                 <div className="text-center">
-                  <span className="text-sm font-bold text-[#4A4A4A] font-neurial">{advantage.stat}</span>
+                  <span className="text-lg md:text-sm font-bold text-[#4A4A4A] font-neurial">{advantage.stat}</span>
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* Mobile Slider */}
-        <div className="md:hidden">
-          <motion.div 
-            className="flex gap-6 pb-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-4"
-            drag="x"
-            dragConstraints={{ left: -800, right: 0 }}
-            style={{ scrollSnapType: 'x mandatory' }}
-          >
-            {advantages.map((advantage, index) => (
-              <motion.div
-                key={index}
-                className="flex-shrink-0 w-72 group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden snap-center"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${advantage.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-                
-                <div className="relative z-10">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className={`inline-flex p-4 rounded-xl bg-gradient-to-br ${advantage.color} text-white group-hover:scale-110 transition-transform duration-300`}>
-                      {advantage.icon}
-                    </div>
-                    <h3 className="text-sm font-bold text-[#1B1B1B] group-hover:text-[#4A4A4A] transition-colors font-neurial">
-                      {advantage.title}
-                    </h3>
-                  </div>
-                  
-                  <p className="text-xs text-[#666666] mb-4 leading-relaxed font-neurial min-h-[2.5rem] flex items-center">
-                    {advantage.description}
-                  </p>
-                  
-                  <div className="text-center">
-                    <span className="text-sm font-bold text-[#4A4A4A] font-neurial">{advantage.stat}</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-          
-          {/* Mobile Navigation Dots */}
-          <div className="flex justify-center mt-6 space-x-2">
-            {advantages.map((_, index) => (
-              <button
-                key={index}
-                className="w-2 h-2 rounded-full bg-gray-300 transition-all"
-              />
-            ))}
-          </div>
         </div>
       </div>
     </section>

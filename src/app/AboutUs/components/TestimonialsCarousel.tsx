@@ -123,54 +123,38 @@ const TestimonialsCarousel = () => {
             ))}
           </motion.div>
 
-          {/* Mobile Slider - 1 testimonial per slide */}
-          <div className="md:hidden">
-            <div className="relative">
-              {/* Show only the active testimonial */}
+          {/* Mobile Grid - Stacked Vertically */}
+          <div className="md:hidden space-y-6 px-4">
+            {testimonials.map((testimonial, index) => (
               <motion.div
-                key={activeTestimonial}
-                className="px-4"
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.3 }}
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <div className="bg-gradient-to-br from-[#F8F8F8] to-white p-6 rounded-3xl shadow-2xl mx-auto max-w-sm flex flex-col h-full min-h-[300px]">
-                  <div className="text-center flex flex-col h-full">
+                <div className="bg-gradient-to-br from-[#F8F8F8] to-white p-6 rounded-3xl shadow-2xl">
+                  <div className="text-center">
                     <div className="flex justify-center mb-4">
-                      {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
+                      {[...Array(testimonial.rating)].map((_, i) => (
                         <StarIcon key={i} className="w-5 h-5 text-yellow-400 fill-current" />
                       ))}
                     </div>
-                    
-                    <blockquote className="text-sm text-[#1B1B1B] font-medium leading-relaxed mb-6 font-neurial flex-1">
-                      &quot;{testimonials[activeTestimonial].text}&quot;
+
+                    <blockquote className="text-sm text-[#1B1B1B] font-medium leading-relaxed mb-6 font-neurial">
+                      &quot;{testimonial.text}&quot;
                     </blockquote>
-                    
-                    <div className="flex items-center justify-center gap-3 mt-auto">
-                      <InitialIcon name={testimonials[activeTestimonial].name} size="mobile" />
+
+                    <div className="flex items-center justify-center gap-3">
+                      <InitialIcon name={testimonial.name} size="mobile" />
                       <div className="text-left">
-                        <div className="font-bold text-sm text-[#1B1B1B] font-neurial">{testimonials[activeTestimonial].name}</div>
-                        <div className="text-xs text-[#666666] font-neurial">{testimonials[activeTestimonial].location}</div>
+                        <div className="font-bold text-sm text-[#1B1B1B] font-neurial">{testimonial.name}</div>
+                        <div className="text-xs text-[#666666] font-neurial">{testimonial.location}</div>
                       </div>
                     </div>
                   </div>
                 </div>
               </motion.div>
-            </div>
-            
-            {/* Mobile Navigation Dots */}
-            <div className="flex justify-center mt-6 space-x-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    index === activeTestimonial ? 'bg-[#4A4A4A] w-6' : 'bg-gray-300'
-                  }`}
-                  onClick={() => setActiveTestimonial(index)}
-                />
-              ))}
-            </div>
+            ))}
           </div>
 
           {/* Desktop Navigation Dots */}

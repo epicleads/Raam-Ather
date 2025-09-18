@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost',
-        port: '3000', 
+        port: '3000',
         pathname: '/**',
       },
     ],
@@ -20,9 +20,10 @@ const nextConfig: NextConfig = {
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    qualities: [75, 90, 100],
     minimumCacheTTL: 31536000, // 1 year cache
     dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://maps.google.com; frame-src 'self' https://www.google.com https://maps.google.com;",
+    contentSecurityPolicy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://maps.google.com https://www.googletagmanager.com https://www.google-analytics.com; frame-src 'self' https://www.google.com https://maps.google.com;",
   },
   
   // Performance optimizations
@@ -73,7 +74,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://maps.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://www.google.com https://maps.google.com; connect-src 'self' https://www.google.com https://maps.google.com;"
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://maps.google.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://www.google.com https://maps.google.com; connect-src 'self' https://www.google.com https://maps.google.com https://www.google-analytics.com https://www.googletagmanager.com;"
           },
           // Performance headers
           {
@@ -138,6 +139,12 @@ const nextConfig: NextConfig = {
         destination: '/chennai',
         permanent: true,
       },
+      // Electric bike/scooter terminology redirect
+      {
+        source: '/electric-bike-in-hyderabad',
+        destination: '/electric-scooter-hyderabad',
+        permanent: true,
+      },
     ]
   },
 
@@ -153,6 +160,36 @@ const nextConfig: NextConfig = {
         destination: '/chennai',
       },
     ]
+  },
+
+  // Webpack configuration to fix module resolution issues
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    // Fix for __webpack_modules__[moduleId] is not a function error
+    config.optimization = {
+      ...config.optimization,
+      splitChunks: {
+        ...config.optimization.splitChunks,
+        cacheGroups: {
+          ...config.optimization.splitChunks.cacheGroups,
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+            enforce: true,
+          },
+        },
+      },
+    };
+
+    // Ensure proper module resolution
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      net: false,
+      tls: false,
+    };
+
+    return config;
   },
 
   typescript: {

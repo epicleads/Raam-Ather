@@ -14,6 +14,14 @@
     min-height: 100vh !important;
   }
 
+  /* Viewport fixed class for dynamic height without hydration issues */
+  .viewport-fixed {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    height: -webkit-fill-available !important;
+    min-height: -webkit-fill-available !important;
+  }
+
   /* Mobile-specific text and CTA positioning - MATCHING SCREENSHOTS - Only for home page */
   .home-hero .hero-mobile-content {
     align-items: flex-start !important;

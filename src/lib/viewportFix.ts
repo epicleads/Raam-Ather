@@ -24,9 +24,8 @@ export function initViewportFix() {
       const element = container as HTMLElement;
       // Force reflow by reading computed style
       void window.getComputedStyle(element).height;
-      // Set explicit height to avoid calculation delays
-      element.style.height = `${window.innerHeight}px`;
-      element.style.minHeight = `${window.innerHeight}px`;
+      // Use CSS classes instead of inline styles to avoid hydration mismatch
+      element.classList.add('viewport-fixed');
     });
   }
 
@@ -72,7 +71,7 @@ export function forceHeroVisibility() {
     element.style.display = 'block';
     element.style.visibility = 'visible';
     element.style.opacity = '1';
-    element.style.height = `${window.innerHeight}px`;
-    element.style.minHeight = `${window.innerHeight}px`;
+    // Use CSS classes instead of inline styles to avoid hydration mismatch
+    element.classList.add('viewport-fixed');
   });
 }
