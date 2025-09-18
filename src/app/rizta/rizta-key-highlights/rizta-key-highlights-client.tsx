@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 interface Highlight {
   id: string;
-  icon: string;
+  icon: React.ReactElement;
   title: string;
   subtitle: string;
   description: string;
@@ -13,7 +13,7 @@ interface Highlight {
 
 interface CommonFeature {
   id: string;
-  icon: string;
+  icon: React.ReactElement;
   title: string;
   subtitle: string;
   description: string;
@@ -77,7 +77,7 @@ export function RiztaKeyHighlightsClient({
         <div className="md:hidden mb-20">
           {/* Mobile Vertical Stack */}
           <div className="space-y-6">
-            {currentHighlights.map((highlight, index) => (
+            {currentHighlights.map((highlight) => (
               <div
                 key={highlight.id}
                 className="w-full"

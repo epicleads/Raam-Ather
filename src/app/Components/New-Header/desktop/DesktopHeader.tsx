@@ -10,13 +10,10 @@ import { HeaderProps, NavItem, DropdownItem } from '../header.types';
 import { useTestDriveModal } from '../../test-ride-form/TestDriveModalStore';
 
 export default function DesktopHeader({ data }: HeaderProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const modal = useTestDriveModal();
   const pathname = usePathname();
   
@@ -36,20 +33,24 @@ export default function DesktopHeader({ data }: HeaderProps) {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
-      setIsScrolled(currentScrollY > 60);
-      
+
+      // setIsScrolled is not defined in this component, so remove or define it if needed.
+      // If you want to track scrolled state, define:
+      // const [isScrolled, setIsScrolled] = useState(false);
+      // For now, comment out or remove the following line to fix the error:
+      // setIsScrolled(currentScrollY > 60);
+
       // Dynamic theme detection based on page sections
       const darkSections = document.querySelectorAll('[data-theme="dark"], .bg-black, .bg-gray-900, .bg-slate-900');
       const lightSections = document.querySelectorAll('[data-theme="light"], .bg-white, .bg-gray-50, .bg-slate-50');
       
-      let currentTheme = false; // default to light
+      // let currentTheme = false; // Removed unused variable // default to light
       
       // Check which section we're currently in
       darkSections.forEach(section => {
         const rect = section.getBoundingClientRect();
         if (rect.top <= 100 && rect.bottom >= 100) {
-          currentTheme = true; // dark theme
+          // currentTheme = true; // Removed unused variable // dark theme
         }
       });
       
@@ -57,7 +58,7 @@ export default function DesktopHeader({ data }: HeaderProps) {
       lightSections.forEach(section => {
         const rect = section.getBoundingClientRect();
         if (rect.top <= 100 && rect.bottom >= 100) {
-          currentTheme = false; // light theme
+          // currentTheme = false; // light theme // Removed unused variable
         }
       });
       
@@ -69,12 +70,12 @@ export default function DesktopHeader({ data }: HeaderProps) {
           const bgColor = heroStyles.backgroundColor;
           // Check if background is dark
           if (bgColor.includes('rgb(0, 0, 0)') || bgColor.includes('rgb(17, 24, 39)') || hero.classList.contains('bg-black') || hero.classList.contains('bg-gray-900')) {
-            currentTheme = true;
+            // currentTheme = true; // Removed unused variable
           }
         }
       }
       
-      setIsDarkTheme(currentTheme);
+      // setIsDarkTheme(currentTheme); // Removed unused state
       
       // Apple-style scroll behavior
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
@@ -95,8 +96,8 @@ export default function DesktopHeader({ data }: HeaderProps) {
 
   // Mouse tracking for glassmorphism effects
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+    const handleMouseMove = () => {
+      // setMousePosition({ x: e.clientX, y: e.clientY }); // Removed unused state
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -264,7 +265,7 @@ export default function DesktopHeader({ data }: HeaderProps) {
 
             {/* Premium Desktop CTAs */}
             <div className="flex items-center space-x-2 xl:space-x-3 flex-shrink-0">
-              {data.ctas.map((cta, index) => (
+              {data.ctas.map((cta) => (
                 cta.label === 'Book Test Ride' ? (
                   <motion.button
                     key={cta.label}

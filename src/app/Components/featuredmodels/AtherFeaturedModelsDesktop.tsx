@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useMotionValue } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useTestDriveModal } from '../test-ride-form/TestDriveModalStore';
 import { 
   Battery,
@@ -104,10 +104,10 @@ const AtherFeaturedModelsDesktop: React.FC = () => {
   const [selectedModel, setSelectedModel] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [mounted, setMounted] = useState(false);
-  const [preloadedImages, setPreloadedImages] = useState(new Set<string>());
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [hoveredModelIndex, setHoveredModelIndex] = useState<number | null>(null);
+  const [, setPreloadedImages] = useState<Set<string>>(new Set());
+  const [isHovered] = useState(false);
+  const [isTransitioning] = useState(false);
+  const [, setHoveredModelIndex] = useState<number | null>(null);
   
   // Performance refs
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);

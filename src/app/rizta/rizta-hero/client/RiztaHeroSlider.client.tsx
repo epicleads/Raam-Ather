@@ -12,29 +12,9 @@ interface Props {
 
 export function RiztaHeroSlider({ heroItems, autoPlayInterval = 0 }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isClient, setIsClient] = useState(false);
   const modal = useTestDriveModal();
 
-  // Client-side detection
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
-  // Mobile detection
-  useEffect(() => {
-    if (!isClient) return;
-    
-    const checkMobile = () => {
-      const isMobileWidth = window.innerWidth < 450;
-      setIsMobile(isMobileWidth);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
-  }, [isClient]);
 
   const handleCTAClick = (e: React.MouseEvent) => {
     e.preventDefault();

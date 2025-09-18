@@ -1,10 +1,10 @@
-import { MetadataRoute } from 'next'
+import { NextResponse } from 'next/server'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export async function GET() {
   const baseUrl = 'https://raamather.com'
   const lastModified = '2025-09-07T18:53:42+00:00'
 
-  return [
+  const urls = [
     // Homepage - Highest priority
     {
       url: `${baseUrl}/`,
@@ -102,4 +102,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
   ]
+
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(item => `  <url>
+    <loc>${item.url}</loc>
+    <lastmod>${item.lastModified}</lastmod>
+    <changefreq>${item.changeFrequency}</changefreq>
+    <priority>${item.priority}</priority>
+  </url>`).join('\n')}
+</urlset>`
+
+  return new NextResponse(sitemap, {
+    headers: {
+      'Content-Type': 'application/xml',
+      'Cache-Control': 'public, max-age=86400, s-maxage=86400'
+    }
+  })
 }

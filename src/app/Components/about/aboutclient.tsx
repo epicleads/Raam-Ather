@@ -26,7 +26,6 @@ export default function AboutClient({ content }: { content: AboutContent }) {
   const modal = useTestDriveModal();
   const [isVisible, setIsVisible] = useState(false);
   const [activeLocation, setActiveLocation] = useState(0);
-  const [activeFeature, setActiveFeature] = useState(0);
 
   const features = [
     {
@@ -48,15 +47,10 @@ export default function AboutClient({ content }: { content: AboutContent }) {
       setActiveLocation((prev) => (prev + 1) % content.locations.length);
     }, 3000);
     
-    const featureInterval = setInterval(() => {
-      setActiveFeature((prev) => (prev + 1) % features.length);
-    }, 4000);
-    
     return () => {
       clearInterval(locationInterval);
-      clearInterval(featureInterval);
     };
-  }, [content.locations.length, features.length]);
+  }, [content.locations.length]);
 
   return (
     <>

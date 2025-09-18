@@ -25,9 +25,7 @@ const PremiumExperienceCenter: React.FC<PremiumExperienceCenterProps> = ({ outle
   const handleUseMyLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          
+        () => {
           // Scroll to results section to show all outlets
           const resultsSection = document.getElementById('outlet-results');
           if (resultsSection) {

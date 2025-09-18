@@ -1,6 +1,6 @@
 import React from 'react';
 import { RiztaKeyHighlightsClient } from './rizta-key-highlights-client';
-import { Battery, Zap, Bike, Smartphone, Monitor, Gem } from 'lucide-react';
+import { Battery, Zap, Bike, Smartphone, Monitor, Gem, Shield, Wrench, Lock, MapPin } from 'lucide-react';
 
 // Server component for Ather Rizta key highlights
 export default function RiztaKeyHighlights() {
@@ -86,28 +86,28 @@ export default function RiztaKeyHighlights() {
   const commonFeatures = [
     {
       id: 'warranty',
-      icon: '🛡️',
+      icon: <Shield className="w-8 h-8 text-blue-600" />,
       title: '8-Year Warranty',
       subtitle: 'Battery & Motor',
       description: 'Comprehensive warranty coverage for peace of mind'
     },
     {
       id: 'maintenance',
-      icon: '🔧',
+      icon: <Wrench className="w-8 h-8 text-purple-600" />,
       title: 'Low Maintenance',
       subtitle: 'Hassle-Free',
       description: 'Electric powertrain requires minimal maintenance'
     },
     {
       id: 'safety',
-      icon: '🛡️',
+      icon: <Lock className="w-8 h-8 text-red-600" />,
       title: 'Advanced Safety',
       subtitle: 'Multiple Systems',
       description: 'Comprehensive safety features for secure riding'
     },
     {
       id: 'network',
-      icon: '📍',
+      icon: <MapPin className="w-8 h-8 text-green-600" />,
       title: 'Charging Network',
       subtitle: '2000+ Points',
       description: 'Extensive Ather Grid charging network across India'

@@ -11,11 +11,9 @@ import { useTestDriveModal } from '../../test-ride-form/TestDriveModalStore';
 import '../../../../styles/mobile-header.css';
 
 export default function MobileHeader({ data }: HeaderProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const modal = useTestDriveModal();
   const pathname = usePathname();
 
@@ -36,16 +34,16 @@ export default function MobileHeader({ data }: HeaderProps) {
 
       // Theme detection
       const darkSections = document.querySelectorAll('[data-theme="dark"], .bg-black, .bg-gray-900');
-      let currentTheme = false;
+      // let currentTheme = false; // Removed unused variable
       
       darkSections.forEach(section => {
         const rect = section.getBoundingClientRect();
         if (rect.top <= 100 && rect.bottom >= 100) {
-          currentTheme = true;
+          // currentTheme = true; // Removed unused variable
         }
       });
       
-      setIsDarkTheme(currentTheme);
+      // setIsDarkTheme(currentTheme); // Removed unused state
       
       // Hide/show header
       if (currentScrollY > lastScrollY && currentScrollY > 100) {

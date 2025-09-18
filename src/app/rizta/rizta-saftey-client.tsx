@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
@@ -143,7 +143,6 @@ function FeatureCard({ feature, active, onClick, description }: FeatureCardProps
 
 export default function RiztaSafetyClient() {
   const [activeIdx, setActiveIdx] = useState(0);
-  const sliderRef = useRef<HTMLDivElement>(null);
 
   return (
     <>

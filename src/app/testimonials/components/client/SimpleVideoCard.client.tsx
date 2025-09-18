@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { Play, Pause, Instagram } from 'lucide-react';
+import { Play, Instagram } from 'lucide-react';
 
 interface SimpleVideoCardProps {
   testimonial: {
@@ -17,7 +17,7 @@ interface SimpleVideoCardProps {
   index: number;
 }
 
-export default function SimpleVideoCard({ testimonial, videoPath, thumbnailPath, index }: SimpleVideoCardProps) {
+export default function SimpleVideoCard({ testimonial, videoPath, thumbnailPath }: SimpleVideoCardProps) {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
