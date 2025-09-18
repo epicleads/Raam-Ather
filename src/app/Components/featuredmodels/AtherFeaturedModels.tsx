@@ -32,7 +32,7 @@ const AtherFeaturedModels: React.FC = () => {
       {/* SEO-optimized heading structure */}
       <header className="sr-only">
         <h2>Raam Ather Collection</h2>
-        <p>Experience the future of electric mobility with Ather's innovative smart scooters</p>
+        <p>Experience the future of electric mobility with Ather&apos;s innovative smart scooters</p>
       </header>
 
       {/* Mobile View */}
