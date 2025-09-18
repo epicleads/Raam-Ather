@@ -68,11 +68,16 @@ export async function GET() {
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
-    // Special pages
     {
-      url: `${baseUrl}/offer`,
+      url: `${baseUrl}/models`,
       lastModified: lastModified,
-      changeFrequency: 'daily' as const,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/test-drive`,
+      lastModified: lastModified,
+      changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
     // Location pages
@@ -87,6 +92,30 @@ export async function GET() {
       lastModified: lastModified,
       changeFrequency: 'weekly' as const,
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/ather-dealer-chennai`,
+      lastModified: lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/ather-dealer-hyderabad`,
+      lastModified: lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/electric-scooter-hyderabad`,
+      lastModified: lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/raam-ather-locations`,
+      lastModified: lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
     },
     // Legal pages
     {
