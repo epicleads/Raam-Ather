@@ -1,6 +1,4 @@
-import type { Metadata } from 'next';
 //import FloatingHeader from './Components/Header/FloatingHeader';
-import Hero from './Components/home-hero/Hero';
 import AtherFeaturedModels from './Components/featuredmodels/AtherFeaturedModels';
 
 import HomeCalculator from './Components/HomeCalculator/server/HomeCalculator';
@@ -12,6 +10,7 @@ import HomeTestimonials from './home-testimonials/server/HomeTestimonials';
 import Footer from './Components/footer/footerclient';
 import AboutServer from './Components/about/aboutserver';
 import ContactPage from './Components/contactform/contactserver';
+import HeroClient from './Components/home-hero/HeroClient';
 import dynamic from 'next/dynamic';
 
 const Awards = dynamic(() => import('./Components/awards'), {
@@ -36,82 +35,6 @@ const Awards = dynamic(() => import('./Components/awards'), {
   )
 });
 
-export const metadata: Metadata = {
-  title: 'Raam Ather | Premium Electric Scooters in Chennai & Hyderabad',
-  description: 'Experience the future of mobility with Ather\'s premium electric scooters. Advanced technology, superior performance, and sustainable transportation in Chennai and Hyderabad. Book your test ride today.',
-  keywords: [
-    'electric scooter',
-    'Ather',
-    'Chennai',
-    'Hyderabad',
-    'EV',
-    'electric vehicle',
-    'sustainable transport',
-    'smart scooter',
-    'battery scooter',
-    'Ather 450S',
-    'Ather 450X',
-    'Ather Rizta',
-    'test ride',
-    'dealership'
-  ].join(', '),
-  authors: [{ name: 'Raam Ather' }],
-  creator: 'Raam Ather',
-  publisher: 'Raam Ather',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  metadataBase: new URL('https://raamather.com'),
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'en_IN',
-    url: 'https://raamather.com',
-    siteName: 'Raam Ather',
-    title: 'Raam Ather | Premium Electric Scooters in Chennai & Hyderabad',
-    description: 'Experience the future of mobility with Ather\'s premium electric scooters. Advanced technology, superior performance, and sustainable transportation.',
-    images: [
-      {
-        url: '/ather-hero-og.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Ather Electric Scooters - Premium Smart EVs',
-        type: 'image/jpeg',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Raam Ather | Premium Electric Scooters',
-    description: 'Experience the future of mobility with Ather\'s premium electric scooters. Book your test ride today.',
-    images: ['/ather-hero-og.jpg'],
-    creator: '@raamather',
-    site: '@raamather',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
-      index: true,
-      follow: true,
-      noimageindex: false,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
-    yahoo: 'your-yahoo-verification-code',
-  },
-  category: 'Electric Vehicles',
-};
 export default function Page() {
   return (
     <>
@@ -126,7 +49,7 @@ export default function Page() {
       />
       <main id="main-content" className="overflow-x-hidden w-full max-w-full">
       {/* <FloatingHeader /> */}
-      <Hero />
+      <HeroClient />
       
       {/* Featured Models Section */}
       <AtherFeaturedModels />

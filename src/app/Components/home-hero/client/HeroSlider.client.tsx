@@ -246,7 +246,7 @@ const HeroSlider = memo(function HeroSlider({ slides }: { slides: VideoSlide[] }
       {/* Navigation Arrows */}
       <button
         onClick={goToPrevious}
-        className={`absolute left-4 md:left-6 top-1/2 transform -translate-y-1/2 p-3 md:p-4 bg-white/10 backdrop-blur-md rounded-full border border-white/20 z-40 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black ${
+        className={`absolute left-4 md:left-6 top-1/2 transform -translate-y-1/2 p-3 md:p-4 bg-white/20 rounded-full border border-white/30 z-40 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black ${
           isMobile
             ? 'transition-all duration-200 active:scale-95 active:bg-white/20'
             : 'hover:bg-white/20 hover:scale-110 transition-all duration-300'
@@ -266,7 +266,7 @@ const HeroSlider = memo(function HeroSlider({ slides }: { slides: VideoSlide[] }
       </button>
       <button
         onClick={goToNext}
-        className={`absolute right-4 md:right-6 top-1/2 transform -translate-y-1/2 p-3 md:p-4 bg-white/10 backdrop-blur-md rounded-full border border-white/20 z-40 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black ${
+        className={`absolute right-4 md:right-6 top-1/2 transform -translate-y-1/2 p-3 md:p-4 bg-white/20 rounded-full border border-white/30 z-40 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black ${
           isMobile
             ? 'transition-all duration-200 active:scale-95 active:bg-white/20'
             : 'hover:bg-white/20 hover:scale-110 transition-all duration-300'

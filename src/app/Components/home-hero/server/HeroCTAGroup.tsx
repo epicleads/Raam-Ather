@@ -43,7 +43,7 @@ export function HeroCTAGroup({ primaryCTA, secondaryCTA, slideIndex }: ExtendedH
     letterSpacing: '0.5px',
     minWidth: '100px',
     textAlign: 'center' as const,
-    backdropFilter: 'blur(10px)'
+    backgroundColor: 'rgba(255, 255, 255, 0.15)'
   };
 
   return (
