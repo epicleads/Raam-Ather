@@ -1,6 +1,41 @@
 import React from 'react';
 import ContactPage from '../Components/contactform/contactserver';
 import FooterClient from '../Components/footer/footerclient';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Raam Ather Showroom Locations in Hyderabad | Electric Scooter Dealer',
+  description: 'Find Raam Ather electric scooter showrooms across Hyderabad. Visit our authorized dealers in Somajiguda, Vanasthalipuram, Malakpet, Kompally, Attapur & more locations.',
+  keywords: 'Raam Ather locations, Ather showroom Hyderabad, electric scooter dealer locations, Ather dealer near me, Hyderabad electric scooter showrooms',
+  openGraph: {
+    title: 'Raam Ather Showroom Locations in Hyderabad',
+    description: 'Find Raam Ather electric scooter showrooms across Hyderabad. Visit our authorized dealers in multiple locations.',
+    url: 'https://raamather.com/raam-ather-locations',
+    siteName: 'Raam Ather',
+    images: [
+      {
+        url: 'https://raamather.com/assets/locations-og.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Raam Ather Showroom Locations in Hyderabad',
+      }
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Raam Ather Showroom Locations in Hyderabad',
+    description: 'Find Raam Ather electric scooter showrooms across Hyderabad.',
+    images: ['https://raamather.com/assets/locations-twitter.jpg'],
+  },
+  alternates: {
+    canonical: 'https://raamather.com/raam-ather-locations',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 // Define types for our data structures
 interface Coordinates {
