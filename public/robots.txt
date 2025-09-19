@@ -10,9 +10,16 @@ Allow: /StoreLocator
 Allow: /rizta
 Allow: /ather-450
 Allow: /ather-450-apex
+Allow: /models
+Allow: /test-drive
 Allow: /offer
 Allow: /chennai
 Allow: /hyderabad
+Allow: /ather-dealer-chennai
+Allow: /ather-dealer-hyderabad
+Allow: /electric-scooter-hyderabad
+Allow: /electric-bike-in-hyderabad
+Allow: /raam-ather-locations
 Allow: /TermsOfUse
 Allow: /PrivacyPolicy
 
@@ -46,8 +53,6 @@ Allow: /*.avif$
 
 # Sitemap location
 Sitemap: https://raamather.com/sitemap.xml
-Sitemap: https://raamather.com/sitemap-hyderabad.xml
-Sitemap: https://raamather.com/sitemap-chennai.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1

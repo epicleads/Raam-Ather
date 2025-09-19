@@ -27,7 +27,9 @@
       "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Raam-Ather-main/src/app/api/submit-lead/**)",
       "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Raam-Ather-main/src/app/AboutUs/components/**)",
       "Bash(npm audit:*)",
-      "Bash(npm update:*)"
+      "Bash(npm update:*)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Raam-Ather-main/src/app/sitemap.xml/**)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Raam-Ather-main/**)"
     ],
     "deny": [],
     "ask": []

@@ -145,6 +145,89 @@ const nextConfig: NextConfig = {
         destination: '/electric-scooter-hyderabad',
         permanent: true,
       },
+      // WordPress to Next.js URL structure redirects
+      {
+        source: '/about-us',
+        destination: '/AboutUs',
+        permanent: true,
+      },
+      {
+        source: '/about',
+        destination: '/AboutUs',
+        permanent: true,
+      },
+      {
+        source: '/contact-us',
+        destination: '/ContactUs',
+        permanent: true,
+      },
+      {
+        source: '/contact',
+        destination: '/ContactUs',
+        permanent: true,
+      },
+      {
+        source: '/services',
+        destination: '/Services',
+        permanent: true,
+      },
+      {
+        source: '/store-locator',
+        destination: '/StoreLocator',
+        permanent: true,
+      },
+      {
+        source: '/stores',
+        destination: '/StoreLocator',
+        permanent: true,
+      },
+      {
+        source: '/privacy-policy',
+        destination: '/PrivacyPolicy',
+        permanent: true,
+      },
+      {
+        source: '/terms-of-use',
+        destination: '/TermsOfUse',
+        permanent: true,
+      },
+      {
+        source: '/terms',
+        destination: '/TermsOfUse',
+        permanent: true,
+      },
+      // Model redirects
+      {
+        source: '/ather-450x',
+        destination: '/ather-450',
+        permanent: true,
+      },
+      {
+        source: '/ather450',
+        destination: '/ather-450',
+        permanent: true,
+      },
+      {
+        source: '/ather-rizta',
+        destination: '/rizta',
+        permanent: true,
+      },
+      // Location variations
+      {
+        source: '/hyd',
+        destination: '/hyderabad',
+        permanent: true,
+      },
+      {
+        source: '/chennai-showroom',
+        destination: '/chennai',
+        permanent: true,
+      },
+      {
+        source: '/hyderabad-showroom',
+        destination: '/hyderabad',
+        permanent: true,
+      },
     ]
   },
 

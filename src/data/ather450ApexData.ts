@@ -82,12 +82,7 @@ export const APEX_PERFORMANCE_METRICS: ApexPerformanceMetric[] = [
   }
 ];
 
-// Convert tech features to match original structure
-export const techFeatures = APEX_TECH_FEATURES.map(feature => ({
-  title: feature.title,
-  description: feature.description,
-  icon: feature.icon
-}));
+// Move these declarations to the end of the file after APEX_TECH_FEATURES is defined
 
 // Convert metrics to match original structure
 export const performanceMetrics = APEX_PERFORMANCE_METRICS.map(metric => ({
@@ -339,3 +334,10 @@ export const APEX_STRUCTURED_DATA = {
     }
   ]
 };
+
+// Convert tech features to match original structure (moved to end to avoid hoisting issues)
+export const techFeatures = APEX_TECH_FEATURES.map(feature => ({
+  title: feature.title,
+  description: feature.description,
+  icon: feature.icon
+}));
