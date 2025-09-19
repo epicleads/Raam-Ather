@@ -162,20 +162,6 @@ const nextConfig: NextConfig = {
     ]
   },
 
-  // Webpack configuration for module resolution
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Only apply fallback for client-side builds
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        net: false,
-        tls: false,
-      };
-    }
-
-    return config;
-  },
 
   typescript: {
     ignoreBuildErrors: false,
