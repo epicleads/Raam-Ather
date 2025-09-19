@@ -86,12 +86,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/electric-bike-in-hyderabad`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
       url: `${baseUrl}/ather-dealer-hyderabad`,
       lastModified: new Date(),
       changeFrequency: 'weekly',

@@ -18,7 +18,6 @@ Allow: /hyderabad
 Allow: /ather-dealer-chennai
 Allow: /ather-dealer-hyderabad
 Allow: /electric-scooter-hyderabad
-Allow: /electric-bike-in-hyderabad
 Allow: /raam-ather-locations
 Allow: /TermsOfUse
 Allow: /PrivacyPolicy
