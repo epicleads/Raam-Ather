@@ -1,5 +1,12 @@
+import { Metadata } from 'next';
 //import FloatingHeader from './Components/Header/FloatingHeader';
 import AtherFeaturedModels from './Components/featuredmodels/AtherFeaturedModels';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: 'https://raamather.com',
+  },
+};
 
 import HomeCalculator from './Components/HomeCalculator/server/HomeCalculator';
 import AccessoriesSection from './Components/accessories/server/AccessoriesSection';

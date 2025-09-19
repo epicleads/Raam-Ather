@@ -84,12 +84,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  //need to be added
-  verification: {
-    google: 'your-google-site-verification',
-    yandex: 'your-yandex-verification',
-    yahoo: 'your-yahoo-verification',
-  },
   alternates: {
     canonical: 'https://raamather.com',
   },
