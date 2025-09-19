@@ -7,7 +7,7 @@ const RiztaHero = lazy(() => import('./rizta-hero/RiztaHero'));
 const RiztaKeyHighlights = lazy(() => import('./rizta-key-highlights/rizta-key-highlights.optimized'));
 const RiztaComfort = lazy(() => import('./rizta-comfort/rizta-comfort'));
 const RiztaPricing = lazy(() => import('./rizta-pricing/rizta-pricing'));
-const RiztaSafety = lazy(() => import('./rizta-safety'));
+const RiztaSafety = lazy(() => import('./rizta-saftey-client'));
 const RiztaFaq = lazy(() => import('@/app/faq/RiztaFaq'));
 const RiztaCTA = lazy(() => import('./riztaCTA.optimized'));
 const FooterClient = lazy(() => import('../Components/footer/footerclient'));

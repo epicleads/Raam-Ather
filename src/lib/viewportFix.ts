@@ -17,7 +17,7 @@ export function initViewportFix() {
     
     // Force layout recalculation for hero containers - Only for home page
     const heroContainers = document.querySelectorAll(
-      '.home-hero .hero-container, .rizta-container, .ather450-container'
+      '.home-hero .hero-container'
     );
     
     heroContainers.forEach(container => {
@@ -63,7 +63,7 @@ export function forceHeroVisibility() {
   if (typeof window === 'undefined') return;
   
   const heroContainers = document.querySelectorAll(
-    '.hero-container, .rizta-container, .ather450-container'
+    '.home-hero .hero-container'
   );
   
   heroContainers.forEach(container => {

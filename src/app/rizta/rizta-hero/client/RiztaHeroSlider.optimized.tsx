@@ -203,13 +203,13 @@ export const RiztaHeroSlider = memo(({ heroItems, autoPlayInterval = 0 }: Props)
       </div>
 
       {/* Content Overlay */}
-      <div className="absolute inset-0 flex items-center justify-center z-30">
-        <div className="text-center text-white px-4 max-w-4xl">
+      <div className="absolute inset-0 flex items-center z-30">
+        <div className="text-left text-white px-8 md:px-16 max-w-2xl">
           <header>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 tracking-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 tracking-tight">
               {currentItem.title}
             </h2>
-            <p className="text-xl md:text-2xl lg:text-3xl mb-8 font-light">
+            <p className="text-lg md:text-xl mb-8 font-light">
               {currentItem.subtitle}
             </p>
           </header>

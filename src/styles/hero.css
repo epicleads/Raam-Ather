@@ -220,9 +220,7 @@
   }
   
   /* Ensure hero containers use proper viewport calculations - Only for home page */
-  .home-hero .hero-container,
-  .rizta-container, 
-  .ather450-container {
+  .home-hero .hero-container {
     height: calc(var(--vh, 1vh) * 100) !important;
     height: 100vh !important;
     height: -webkit-fill-available !important;
@@ -231,6 +229,15 @@
     min-height: 100vh !important;
     min-height: -webkit-fill-available !important;
     min-height: fill-available !important;
+    display: block !important;
+    visibility: visible !important;
+  }
+  
+  /* Rizta and Ather450 containers - static height to prevent hydration mismatch */
+  .rizta-container, 
+  .ather450-container {
+    height: 100vh !important;
+    min-height: 100vh !important;
     display: block !important;
     visibility: visible !important;
   }
