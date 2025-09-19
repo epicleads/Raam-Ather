@@ -94,6 +94,7 @@ export default function Ather450Page() {
         "@id": "https://raamather.com/ather-450#product",
         "name": "Ather 450 Electric Scooter",
         "description": "Revolutionary electric scooter with smart features, 90 km/h top speed, and 161 km range. Zero emissions, maximum performance.",
+        "productGroupID": "ather-450-series",
         "brand": {
           "@type": "Brand",
           "name": "Ather Energy",

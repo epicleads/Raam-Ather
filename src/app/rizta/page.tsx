@@ -77,6 +77,7 @@ const riztaPageSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Ather Rizta Z",
+  "productGroupID": "ather-rizta-series",
   "brand": {
     "@type": "Brand",
     "name": "Ather Energy"

@@ -88,6 +88,7 @@ const apexPageSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Ather 450 Apex",
+  "productGroupID": "ather-450-series",
   "brand": {
     "@type": "Brand",
     "name": "Ather Energy"
