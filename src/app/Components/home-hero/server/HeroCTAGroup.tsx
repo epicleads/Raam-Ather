@@ -30,7 +30,7 @@ export function HeroCTAGroup({ primaryCTA, secondaryCTA, slideIndex }: ExtendedH
   };
 
   const secondaryButtonStyles = {
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
     color: '#ffffff',
     padding: '10px 24px',
     borderRadius: '25px',
@@ -42,8 +42,7 @@ export function HeroCTAGroup({ primaryCTA, secondaryCTA, slideIndex }: ExtendedH
     border: '2px solid rgba(255,255,255,0.8)',
     letterSpacing: '0.5px',
     minWidth: '100px',
-    textAlign: 'center' as const,
-    backgroundColor: 'rgba(255, 255, 255, 0.15)'
+    textAlign: 'center' as const
   };
 
   return (

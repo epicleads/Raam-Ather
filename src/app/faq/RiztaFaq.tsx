@@ -37,3 +37,6 @@ export function RiztaFaqChennai() {
 export function RiztaFaqGeneral() {
   return <RiztaFaq showLocationSpecific={false} />
 }
+
+// Default export for dynamic imports
+export default RiztaFaq;
