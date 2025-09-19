@@ -3,6 +3,7 @@ export interface HeroItem {
   type: "image" | "video";
   src: string;
   mobileSrc?: string; // Mobile-specific image source
+  poster?: string; // Video poster image
   alt: string;
   title: string;
   subtitle: string;

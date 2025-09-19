@@ -1,5 +1,6 @@
 // rizta-pricing.tsx
 import { RiztaPricingClient } from './rizta-pricing-client'
+import { RIZTA_VARIANTS, RIZTA_STRUCTURED_DATA } from '@/data/riztaData'
 
 export interface PricingData {
   id: string
@@ -38,28 +39,15 @@ export interface DealerBadge {
 
 export default function RiztaPricing() {
   
-  const pricingVariants: PricingData[] = [
-    {
-      id: 'rizta-base',
-      variant: 'Rizta',
-      exShowroomPrice: 109999,
-      city: 'Hyderabad',
-      onRoadPrice: 118000,
-      
-      emiStarting: 2899,
-      features: ['2.9 kWh Battery', '123km Range', 'Smart Dashboard']
-    },
-    {
-      id: 'rizta-s',
-      variant: 'Rizta Z',
-      exShowroomPrice: 129999,
-      city: 'Hyderabad',
-      onRoadPrice: 142000,
-      
-      emiStarting: 3499,
-      features: ['3.7kWh Battery', '159km Range', '7" Touchscreen']
-    }
-  ]
+  const pricingVariants: PricingData[] = RIZTA_VARIANTS.map(variant => ({
+    id: variant.id,
+    variant: variant.name,
+    exShowroomPrice: variant.price,
+    city: 'Hyderabad',
+    onRoadPrice: variant.price + (variant.price * 0.08), // Estimated on-road price
+    emiStarting: Math.floor(variant.price / 36), // Estimated EMI for 36 months
+    features: variant.features
+  }))
 
   const emiConfig: EMIConfig = {
     minDownPayment: 10000,
@@ -102,15 +90,9 @@ export default function RiztaPricing() {
     }
   ]
 
-  // JSON-LD for SEO
+  // JSON-LD for SEO - Enhanced with multiple offers
   const pricingJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    'name': 'Ather Rizta',
-    'brand': {
-      '@type': 'Brand',
-      'name': 'Ather Energy'
-    },
+    ...RIZTA_STRUCTURED_DATA,
     'offers': pricingVariants.map(variant => ({
       '@type': 'Offer',
       'name': variant.variant,
@@ -119,8 +101,14 @@ export default function RiztaPricing() {
       'availability': 'https://schema.org/InStock',
       'priceValidUntil': '2024-12-31',
       'seller': {
-        '@type': 'Organization',
-        'name': 'Ather Energy'
+        '@type': 'LocalBusiness',
+        'name': 'Raam Ather',
+        'address': {
+          '@type': 'PostalAddress',
+          'addressLocality': 'Hyderabad',
+          'addressRegion': 'Telangana',
+          'addressCountry': 'IN'
+        }
       }
     }))
   }
@@ -131,16 +119,23 @@ export default function RiztaPricing() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pricingJsonLd) }}
       />
-      <section className="bg-white py-12 sm:py-16 lg:py-24">
+      <section 
+        className="bg-white py-12 sm:py-16 lg:py-24"
+        id="pricing"
+        aria-labelledby="pricing-heading"
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-black mb-4 font-neurial">
+          <header className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 
+              id="pricing-heading"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-black mb-4 font-neurial"
+            >
               Pricing & Finance
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto font-neurial">
               Choose your perfect Rizta and discover how affordable electric mobility can be
             </p>
-          </div>
+          </header>
           
           <RiztaPricingClient 
             variants={pricingVariants}
