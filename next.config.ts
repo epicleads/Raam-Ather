@@ -162,32 +162,17 @@ const nextConfig: NextConfig = {
     ]
   },
 
-  // Webpack configuration to fix module resolution issues
+  // Webpack configuration for module resolution
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Fix for __webpack_modules__[moduleId] is not a function error
-    config.optimization = {
-      ...config.optimization,
-      splitChunks: {
-        ...config.optimization.splitChunks,
-        cacheGroups: {
-          ...config.optimization.splitChunks.cacheGroups,
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-            enforce: true,
-          },
-        },
-      },
-    };
-
-    // Ensure proper module resolution
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-      net: false,
-      tls: false,
-    };
+    // Only apply fallback for client-side builds
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      };
+    }
 
     return config;
   },
