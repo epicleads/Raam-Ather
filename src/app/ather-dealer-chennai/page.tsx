@@ -20,6 +20,13 @@ export const metadata: Metadata = {
       }
     ],
   },
+  alternates: {
+    canonical: 'https://raamather.com/ather-dealer-chennai',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function AtherDealerChennaiPage() {

@@ -68,6 +68,9 @@ export const metadata: Metadata = {
       },
     ],
   },
+  alternates: {
+    canonical: 'https://raamather.com/ather-450',
+  },
   manifest: '/manifest.json',
   category: 'technology',
   classification: 'Electric Vehicles, Transportation, Technology'

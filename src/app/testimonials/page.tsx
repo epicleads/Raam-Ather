@@ -10,6 +10,13 @@ export const metadata = {
   title: 'Raam Ather Reviews & Testimonials — Real Riders. Real Trust.',
   description: 'Verified customer reviews of Raam Ather across Hyderabad & Chennai. Hear purchase journeys, service experiences, and community stories.',
   keywords: 'Raam Ather reviews, customer testimonials, electric scooter reviews, Hyderabad, Chennai, verified reviews',
+  alternates: {
+    canonical: 'https://raamather.com/testimonials',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function TestimonialsPageMain() {

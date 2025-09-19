@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     description: 'Expert electric scooter services, maintenance, and support in Hyderabad & Chennai.',
   },
   alternates: {
-    canonical: '/Services',
+    canonical: 'https://raamather.com/Services',
   },
   robots: {
     index: true,

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description: 'Get expert EV consultation, book test rides & find nearest outlets in Hyderabad & Chennai.',
   },
   alternates: {
-    canonical: '/ContactUs',
+    canonical: 'https://raamather.com/ContactUs',
   },
   robots: {
     index: true,

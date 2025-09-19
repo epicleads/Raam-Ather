@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: '/AboutUs',
+    canonical: 'https://raamather.com/AboutUs',
   },
 };
 

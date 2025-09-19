@@ -21,6 +21,13 @@ export const metadata: Metadata = {
       }
     ],
   },
+  alternates: {
+    canonical: 'https://raamather.com/ather-dealer-hyderabad',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function AtherDealerHyderabadPage() {
