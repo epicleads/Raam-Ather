@@ -75,8 +75,10 @@ export function HomeTestimonialsSEO({ testimonials }: HomeTestimonialsSEOProps) 
         "name": "Ather Electric Scooter",
         "brand": {
           "@type": "Brand",
-          "name": "Ather"
-        }
+          "name": "Ather Energy"
+        },
+        "description": "Premium electric scooter with smart features and sustainable mobility",
+        "category": "Electric Scooter"
       }
     })),
     "aggregateRating": {

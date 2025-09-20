@@ -46,8 +46,10 @@ export default function TestimonialsSEO() {
       "name": "Ather Electric Scooter",
       "brand": {
         "@type": "Brand",
-        "name": "Ather"
-      }
+        "name": "Ather Energy"
+      },
+      "description": "Premium electric scooter with smart features and sustainable mobility",
+      "category": "Electric Scooter"
     },
     "reviewRating": {
       "@type": "Rating",
@@ -58,7 +60,8 @@ export default function TestimonialsSEO() {
       "@type": "Person",
       "name": "Verified Customer"
     },
-    "reviewBody": "Excellent service and product quality from Raam Ather. The purchase experience was seamless and the after-sales support is outstanding."
+    "reviewBody": "Excellent service and product quality from Raam Ather. The purchase experience was seamless and the after-sales support is outstanding.",
+    "datePublished": "2024-01-15"
   };
 
   return (

@@ -109,6 +109,40 @@ export default function RiztaPricing() {
           'addressRegion': 'Telangana',
           'addressCountry': 'IN'
         }
+      },
+      'hasMerchantReturnPolicy': {
+        '@type': 'MerchantReturnPolicy',
+        'returnPolicyCategory': 'https://schema.org/MerchantReturnFiniteReturnWindow',
+        'merchantReturnDays': 15,
+        'returnMethod': 'https://schema.org/ReturnByMail',
+        'returnFees': 'https://schema.org/FreeReturn'
+      },
+      'shippingDetails': {
+        '@type': 'OfferShippingDetails',
+        'shippingRate': {
+          '@type': 'MonetaryAmount',
+          'value': '0',
+          'currency': 'INR'
+        },
+        'shippingDestination': {
+          '@type': 'DefinedRegion',
+          'addressCountry': 'IN'
+        },
+        'deliveryTime': {
+          '@type': 'ShippingDeliveryTime',
+          'handlingTime': {
+            '@type': 'QuantitativeValue',
+            'minValue': 1,
+            'maxValue': 3,
+            'unitCode': 'DAY'
+          },
+          'transitTime': {
+            '@type': 'QuantitativeValue',
+            'minValue': 5,
+            'maxValue': 7,
+            'unitCode': 'DAY'
+          }
+        }
       }
     }))
   }

@@ -119,7 +119,41 @@ export default function Ather450Page() {
             },
             "validFrom": "2024-01-01",
             "priceValidUntil": "2024-12-31",
-            "url": "https://raamather.com/ather-450#450s"
+            "url": "https://raamather.com/ather-450#450s",
+            "hasMerchantReturnPolicy": {
+              "@type": "MerchantReturnPolicy",
+              "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+              "merchantReturnDays": 15,
+              "returnMethod": "https://schema.org/ReturnByMail",
+              "returnFees": "https://schema.org/FreeReturn"
+            },
+            "shippingDetails": {
+              "@type": "OfferShippingDetails",
+              "shippingRate": {
+                "@type": "MonetaryAmount",
+                "value": "0",
+                "currency": "INR"
+              },
+              "shippingDestination": {
+                "@type": "DefinedRegion",
+                "addressCountry": "IN"
+              },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": {
+                  "@type": "QuantitativeValue",
+                  "minValue": 1,
+                  "maxValue": 3,
+                  "unitCode": "DAY"
+                },
+                "transitTime": {
+                  "@type": "QuantitativeValue",
+                  "minValue": 5,
+                  "maxValue": 7,
+                  "unitCode": "DAY"
+                }
+              }
+            }
           },
           {
             "@type": "Offer",
@@ -133,7 +167,41 @@ export default function Ather450Page() {
             },
             "validFrom": "2024-01-01",
             "priceValidUntil": "2024-12-31",
-            "url": "https://raamather.com/ather-450#450x"
+            "url": "https://raamather.com/ather-450#450x",
+            "hasMerchantReturnPolicy": {
+              "@type": "MerchantReturnPolicy",
+              "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+              "merchantReturnDays": 15,
+              "returnMethod": "https://schema.org/ReturnByMail",
+              "returnFees": "https://schema.org/FreeReturn"
+            },
+            "shippingDetails": {
+              "@type": "OfferShippingDetails",
+              "shippingRate": {
+                "@type": "MonetaryAmount",
+                "value": "0",
+                "currency": "INR"
+              },
+              "shippingDestination": {
+                "@type": "DefinedRegion",
+                "addressCountry": "IN"
+              },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": {
+                  "@type": "QuantitativeValue",
+                  "minValue": 1,
+                  "maxValue": 3,
+                  "unitCode": "DAY"
+                },
+                "transitTime": {
+                  "@type": "QuantitativeValue",
+                  "minValue": 5,
+                  "maxValue": 7,
+                  "unitCode": "DAY"
+                }
+              }
+            }
           }
         ],
         "aggregateRating": {
@@ -146,6 +214,14 @@ export default function Ather450Page() {
         "review": [
           {
             "@type": "Review",
+            "itemReviewed": {
+              "@type": "Product",
+              "name": "Ather 450 Electric Scooter",
+              "brand": {
+                "@type": "Brand",
+                "name": "Ather Energy"
+              }
+            },
             "reviewRating": {
               "@type": "Rating",
               "ratingValue": "5",
