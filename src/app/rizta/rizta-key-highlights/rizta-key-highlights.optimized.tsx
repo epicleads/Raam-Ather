@@ -294,20 +294,20 @@ export default function RiztaKeyHighlights() {
         .highlight-title {
           font-size: 1.25rem;
           font-weight: 700;
-          color: #111827;
+          color: #111827 !important;
           margin-bottom: 8px;
         }
 
         .highlight-subtitle {
           font-size: 1rem;
           font-weight: 600;
-          color: #059669;
+          color: #059669 !important;
           margin-bottom: 8px;
         }
 
         .highlight-description {
           font-size: 0.875rem;
-          color: #6b7280;
+          color: #374151 !important;
           line-height: 1.5;
           margin-bottom: 16px;
         }
@@ -315,7 +315,7 @@ export default function RiztaKeyHighlights() {
         .highlight-variant-badge {
           display: inline-block;
           background: #f3f4f6;
-          color: #374151;
+          color: #374151 !important;
           font-size: 0.75rem;
           font-weight: 500;
           padding: 4px 8px;

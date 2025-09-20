@@ -285,10 +285,10 @@ export const RiztaHeroSlider = memo(({ heroItems, autoPlayInterval = 0 }: Props)
         }
 
         .hero-cta-button {
-          background: linear-gradient(135deg, #ffffff, #f3f4f6);
-          color: #111827;
+          background: linear-gradient(135deg, #10b981, #059669);
+          color: #ffffff;
           padding: 16px 32px;
-          border-radius: 50px;
+          border-radius: 8px;
           font-weight: 600;
           font-size: 1.1rem;
           border: none;
@@ -301,7 +301,7 @@ export const RiztaHeroSlider = memo(({ heroItems, autoPlayInterval = 0 }: Props)
         .hero-cta-button:hover {
           transform: translateY(-2px) scale(1.05);
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-          background: linear-gradient(135deg, #f9fafb, #ffffff);
+          background: linear-gradient(135deg, #059669, #047857);
         }
 
         .hero-cta-button:active {
@@ -309,7 +309,7 @@ export const RiztaHeroSlider = memo(({ heroItems, autoPlayInterval = 0 }: Props)
         }
 
         .hero-cta-button:focus-visible {
-          outline: 3px solid rgba(255, 255, 255, 0.5);
+          outline: 3px solid rgba(16, 185, 129, 0.5);
           outline-offset: 2px;
         }
 

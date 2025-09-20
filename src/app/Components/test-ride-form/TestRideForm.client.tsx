@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import PersistentModal from "../PersistentModal";
 import { submitTestRideLead } from "@/lib/leadSubmission";
 
@@ -107,26 +107,15 @@ export default function TestRideForm({ timerDelay = 10, onClose }: TestRideFormP
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log('🚀 TestRideForm: Form submission started');
-    console.log('📋 Form values:', values);
     
     const newErrors = validate(values);
-    console.log('✅ Validation check results:', newErrors);
     setErrors(newErrors);
     
     if (Object.keys(newErrors).length > 0) {
-      console.log('❌ Form has validation errors, submission blocked:', newErrors);
       return;
     }
 
-    console.log('✅ Form validation passed, proceeding with API submission');
-    console.log('🎯 Will route to CRM based on location:', {
-      location: values.location,
-      expectedEndpoint: values.location.toLowerCase() === 'chennai' ? 'Chennai CRM' : 'Hyderabad CRM'
-    });
-
     try {
-      console.log('📡 Calling submitTestRideLead API...');
       const result = await submitTestRideLead({
         name: values.name,
         mobileNumber: values.mobileNumber,
@@ -134,24 +123,13 @@ export default function TestRideForm({ timerDelay = 10, onClose }: TestRideFormP
         modelInterested: values.modelInterested
       });
       
-      console.log('📨 API Response received:', result);
-      
       if (result.success) {
-        console.log('🎉 Form submitted successfully to CRM!');
         setSubmitted(true);
       } else {
-        console.error('❌ API returned success: false');
-        console.error('💬 API error message:', result.message);
         throw new Error(result.message || 'Submission failed');
       }
-    } catch (error) {
-      console.error('💥 Form submission failed with error:', error);
-      console.error('🔍 Error details:', {
-        name: (error as Error)?.name,
-        message: (error as Error)?.message,
-        stack: (error as Error)?.stack
-      });
-      setErrors({ submit: "Submission failed, please try again. Check console for details." });
+    } catch {
+      setErrors({ submit: "Submission failed, please try again." });
     }
   }
 
@@ -169,66 +147,35 @@ export default function TestRideForm({ timerDelay = 10, onClose }: TestRideFormP
     setErrors({});
   };
 
-  const handleInputChange = (field: string, value: string) => {
-    console.log(`📝 TestRideForm field '${field}' changed to:`, value);
+  const handleInputChange = useCallback((field: string, value: string) => {
     setValues((prev: FormValues) => ({ ...prev, [field]: value }));
     if (errors[field as keyof FormErrors]) {
-      console.log(`🧹 Clearing error for field '${field}'`);
       setErrors((prev: FormErrors) => ({ ...prev, [field]: "" }));
     }
-  };
+  }, [errors]);
 
-  const handleMobileNumberChange = (value: string) => {
-    console.log('📱 TestRideForm mobile number input changed:', value);
-    // BULLETPROOF: Only allow digits, no fake characters
+  const handleMobileNumberChange = useCallback((value: string) => {
     const digitsOnly = value.replace(/\D/g, '');
-    console.log('🔢 Digits only:', digitsOnly);
     
-    // Limit to exactly 10 digits
     if (digitsOnly.length <= 10) {
-      console.log('✅ Mobile number length acceptable, updating state');
       setValues((prev: FormValues) => ({ ...prev, mobileNumber: digitsOnly }));
       
       // Clear error when user starts typing valid input
       if (errors.mobileNumber) {
-        console.log('🧹 Clearing mobile number error');
         setErrors((prev: FormErrors) => ({ ...prev, mobileNumber: "" }));
       }
-      
-      // Real-time validation feedback
-      if (digitsOnly.length === 10) {
-        console.log('✅ Mobile number is 10 digits, running validation');
-        const validation = validate({ ...values, mobileNumber: digitsOnly });
-        if (validation.mobileNumber) {
-          console.log('⚠️ Mobile number validation error:', validation.mobileNumber);
-          setErrors((prev: FormErrors) => ({ ...prev, mobileNumber: validation.mobileNumber }));
-        } else {
-          console.log('✅ Mobile number is valid');
-        }
-      }
-    } else {
-      console.log('❌ Mobile number too long, ignoring input');
     }
-  };
+  }, [errors.mobileNumber]);
 
-  // Helper function to check if submit button should be disabled
-  const getSubmitButtonState = () => {
+  // Memoized form validation for better performance
+  const isFormValid = useMemo(() => {
     const validationErrors = validate(values);
     const hasValidationErrors = Object.keys(validationErrors).length > 0;
     const hasRequiredFields = values.name.trim() && values.location && values.mobileNumber.length === 10 && values.modelInterested;
     const hasSubmitErrors = !!errors.submit;
-    const isDisabled = !hasRequiredFields || hasValidationErrors || hasSubmitErrors;
     
-    console.log('🔍 TestRideForm submit button state:', {
-      hasRequiredFields,
-      hasValidationErrors,
-      hasSubmitErrors,
-      isDisabled,
-      values
-    });
-    
-    return isDisabled;
-  };
+    return hasRequiredFields && !hasValidationErrors && !hasSubmitErrors;
+  }, [values, errors.submit]);
 
   return (
     <PersistentModal 
@@ -362,40 +309,14 @@ export default function TestRideForm({ timerDelay = 10, onClose }: TestRideFormP
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  disabled={getSubmitButtonState()}
-                  onClick={(e) => {
-                    console.log('🖱️ TestRideForm submit button clicked');
-                    const validationErrors = validate(values);
-                    const hasValidationErrors = Object.keys(validationErrors).length > 0;
-                    const hasRequiredFields = values.name.trim() && values.location && values.mobileNumber.length === 10 && values.modelInterested;
-                    const isValid = hasRequiredFields && !hasValidationErrors;
-                    
-                    console.log('📊 Form valid status:', isValid);
-                    if (!isValid) {
-                      console.log('⚠️ Form is not valid, preventing submission');
-                      e.preventDefault();
-                    }
-                  }}
-                  className={`w-full font-semibold py-3 px-6 rounded-lg transition-colors duration-200 ${(() => {
-                    const validationErrors = validate(values);
-                    const hasValidationErrors = Object.keys(validationErrors).length > 0;
-                    const hasRequiredFields = values.name.trim() && values.location && values.mobileNumber.length === 10 && values.modelInterested;
-                    const isDisabled = !hasRequiredFields || hasValidationErrors || !!errors.submit;
-                    
-                    return isDisabled
+                  disabled={!isFormValid}
+                  className={`w-full font-semibold py-3 px-6 rounded-lg transition-colors duration-200 ${
+                    !isFormValid
                       ? 'bg-gray-400 cursor-not-allowed'
-                      : 'bg-[#00E396] hover:bg-[#00D4AA] transform hover:scale-105 active:scale-95';
-                  })()} text-white`}
+                      : 'bg-[#00E396] hover:bg-[#00D4AA] transform hover:scale-105 active:scale-95'
+                  } text-white`}
                 >
-                  {(() => {
-                    const validationErrors = validate(values);
-                    const hasValidationErrors = Object.keys(validationErrors).length > 0;
-                    const hasRequiredFields = values.name.trim() && values.location && values.mobileNumber.length === 10 && values.modelInterested;
-                    
-                    if (!hasRequiredFields) return 'Fill All Required Fields';
-                    if (hasValidationErrors) return 'Fix Errors First';
-                    return 'Book Test Ride';
-                  })()}
+                  {!isFormValid ? 'Fill All Required Fields' : 'Book Test Ride'}
                 </button>
               </form>
             ) : (

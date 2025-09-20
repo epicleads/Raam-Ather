@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useTestDriveModal } from './TestDriveModalStore';
 import { submitTestRideLead } from '@/lib/leadSubmission';
 import { trackAtherEvents } from '../CookieConsent/MetaPixel';
@@ -47,7 +47,6 @@ export default function TestRideFormModal() {
   // Reset form when modal opens
   useEffect(() => {
     if (modal.state.open) {
-      console.log('Modal opened, resetting form');
       setValues({ name: "", location: "", mobileNumber: "", modelInterested: "" });
       setErrors({});
       setSubmitted(false);
@@ -101,60 +100,31 @@ export default function TestRideFormModal() {
     return e;
   }
 
-  // Check if form is valid for submission
-  const isFormValid = () => {
+  // Memoized form validation for better performance
+  const isFormValid = useMemo(() => {
     const hasRequiredFields = values.name.trim() && 
                              values.location && 
                              values.mobileNumber.length === 10 && 
                              values.modelInterested;
     
-    // Only check for submit errors, not field validation errors
     const hasSubmitErrors = !!errors.submit;
-    
-    // Run validation to check if there would be any blocking errors
     const validationErrors = validate(values);
     const hasValidationErrors = Object.keys(validationErrors).length > 0;
     
-    const isValid = hasRequiredFields && !hasValidationErrors && !hasSubmitErrors;
-    
-    // Debug logging
-    console.log('🔍 Form validation check:', {
-      values,
-      hasRequiredFields,
-      validationErrors,
-      hasValidationErrors,
-      hasSubmitErrors,
-      isValid
-    });
-    
-    return isValid;
-  };
+    return hasRequiredFields && !hasValidationErrors && !hasSubmitErrors;
+  }, [values, errors.submit]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log('🚀 TestRideFormModal: Form submission started');
-    console.log('📋 Form values:', values);
-    console.log('📍 Selected location:', values.location);
-    console.log('🏍️ Selected model:', values.modelInterested);
-    console.log('📱 Mobile number:', values.mobileNumber);
     
     const newErrors = validate(values);
-    console.log('✅ Validation check results:', newErrors);
     setErrors(newErrors);
     
     if (Object.keys(newErrors).length > 0) {
-      console.log('❌ Form has validation errors, submission blocked:', newErrors);
       return;
     }
     
-    console.log('✅ Form validation passed, proceeding with API submission');
-    console.log('🎯 Will route to CRM based on location:', {
-      location: values.location,
-      expectedEndpoint: values.location.toLowerCase() === 'chennai' ? 'Chennai CRM' : 'Hyderabad CRM'
-    });
-    
     try {
-      console.log('📡 Calling submitTestRideLead API...');
       const result = await submitTestRideLead({
         name: values.name,
         mobileNumber: values.mobileNumber,
@@ -162,32 +132,19 @@ export default function TestRideFormModal() {
         modelInterested: values.modelInterested
       });
       
-      console.log('📨 API Response received:', result);
-      
       if (result.success) {
-        console.log('🎉 Form submitted successfully to CRM!');
-        console.log('💾 Setting form as submitted and showing success message');
         setSubmitted(true);
         
         // Track successful test ride request for retargeting
-        console.log('📊 Tracking test ride event for retargeting');
         trackAtherEvents.testRideRequest(
           values.modelInterested,
           values.location
         );
       } else {
-        console.error('❌ API returned success: false');
-        console.error('💬 API error message:', result.message);
         throw new Error(result.message || 'Submission failed');
       }
-    } catch (error) {
-      console.error('💥 Form submission failed with error:', error);
-      console.error('🔍 Error details:', {
-        name: (error as Error)?.name,
-        message: (error as Error)?.message,
-        stack: (error as Error)?.stack
-      });
-      setErrors({ submit: "Submission failed, please try again. Check console for details." });
+    } catch {
+      setErrors({ submit: "Submission failed, please try again." });
     }
   }
 
@@ -201,53 +158,27 @@ export default function TestRideFormModal() {
     setErrors({});
   };
 
-  const handleInputChange = (field: string, value: string) => {
-    console.log(`📝 Field '${field}' changed to:`, value);
+  const handleInputChange = useCallback((field: string, value: string) => {
     setValues((prev: FormValues) => ({ ...prev, [field]: value }));
     
     // Clear error for this field immediately
     if (errors[field as keyof FormErrors]) {
-      console.log(`🧹 Clearing error for field '${field}'`);
       setErrors((prev: FormErrors) => ({ ...prev, [field]: "" }));
     }
-    
-    // Validate field in real-time
-    const tempValues = { ...values, [field]: value };
-    const tempErrors = validate(tempValues);
-    if (tempErrors[field as keyof FormErrors]) {
-      console.log(`⚠️ Validation error for field '${field}':`, tempErrors[field as keyof FormErrors]);
-      setErrors((prev: FormErrors) => ({ ...prev, [field]: tempErrors[field as keyof FormErrors] }));
-    }
-  };
+  }, [errors]);
 
-  const handleMobileNumberChange = (value: string) => {
-    console.log('📱 Mobile number input changed:', value);
+  const handleMobileNumberChange = useCallback((value: string) => {
     const digitsOnly = value.replace(/\D/g, '');
-    console.log('🔢 Digits only:', digitsOnly);
     
     if (digitsOnly.length <= 10) {
-      console.log('✅ Mobile number length acceptable, updating state');
       setValues((prev: FormValues) => ({ ...prev, mobileNumber: digitsOnly }));
       
       // Clear error immediately
       if (errors.mobileNumber) {
-        console.log('🧹 Clearing mobile number error');
         setErrors((prev: FormErrors) => ({ ...prev, mobileNumber: "" }));
       }
-      
-      // Validate in real-time
-      const tempValues = { ...values, mobileNumber: digitsOnly };
-      const tempErrors = validate(tempValues);
-      if (tempErrors.mobileNumber) {
-        console.log('⚠️ Mobile number validation error:', tempErrors.mobileNumber);
-        setErrors((prev: FormErrors) => ({ ...prev, mobileNumber: tempErrors.mobileNumber }));
-      } else if (digitsOnly.length === 10) {
-        console.log('✅ Mobile number is valid (10 digits)');
-      }
-    } else {
-      console.log('❌ Mobile number too long, ignoring input');
     }
-  };
+  }, [errors.mobileNumber]);
 
   if (!modal.state.open) return null;
 
@@ -393,22 +324,14 @@ export default function TestRideFormModal() {
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={!isFormValid()}
-                onClick={(e) => {
-                  console.log('🖱️ Submit button clicked');
-                  console.log('📊 Form valid status:', isFormValid());
-                  if (!isFormValid()) {
-                    console.log('⚠️ Form is not valid, button should be disabled');
-                    e.preventDefault();
-                  }
-                }}
+                disabled={!isFormValid}
                 className={`w-full font-semibold py-3 px-6 rounded-lg transition-all duration-200 ${
-                  !isFormValid()
+                  !isFormValid
                     ? 'bg-gray-400 cursor-not-allowed text-gray-600'
                     : 'bg-[#4ade80] hover:bg-[#22c55e] text-white transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg'
                 }`}
               >
-                {!isFormValid() ? 'Fill All Required Fields' : 'Book Test Ride'}
+                {!isFormValid ? 'Fill All Required Fields' : 'Book Test Ride'}
               </button>
             </form>
           ) : (
