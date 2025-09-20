@@ -9,7 +9,6 @@ const RiztaComfort = lazy(() => import('./rizta-comfort/rizta-comfort'));
 const RiztaPricing = lazy(() => import('./rizta-pricing/rizta-pricing'));
 const RiztaSafety = lazy(() => import('./rizta-saftey-client'));
 const RiztaFaq = lazy(() => import('@/app/faq/RiztaFaq'));
-const RiztaCTA = lazy(() => import('./riztaCTA.optimized'));
 const FooterClient = lazy(() => import('../Components/footer/footerclient'));
 
 // Loading skeletons for better UX
@@ -178,8 +177,8 @@ export default function RiztaPage() {
       />
 
       {/* Critical resource preloads */}
-      <link rel="preload" href="/Ather-Assets/Rizta/rizta-hero-main.webp" as="image" />
-      <link rel="preload" href="/fonts/NeuralGrotesk-Bold.woff2" as="font" type="font/woff2" crossOrigin="" />
+      <link rel="preload" href="/Ather-Assets/Rizta/mother and daughter riding scene-desk-updatedatherrizta.jpg" as="image" />
+      <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
 
       <main className="min-h-screen bg-gray-50">
         {/* Hidden H1 for SEO */}
@@ -208,11 +207,6 @@ export default function RiztaPage() {
         {/* Safety Features */}
         <Suspense fallback={<SectionSkeleton />}>
           <RiztaSafety />
-        </Suspense>
-
-        {/* CTA Section */}
-        <Suspense fallback={<SectionSkeleton />}>
-          <RiztaCTA />
         </Suspense>
 
         {/* FAQ Section */}

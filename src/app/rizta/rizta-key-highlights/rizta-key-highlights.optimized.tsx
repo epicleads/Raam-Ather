@@ -44,19 +44,56 @@ const HighlightCard = memo(({
       <div className="highlight-content">
         <h3
           id={`highlight-${highlight.id}-title`}
-          className="highlight-title"
+          style={{
+            fontSize: '1.25rem',
+            fontWeight: '700',
+            color: '#000000',
+            marginBottom: '8px',
+            textShadow: 'none',
+            opacity: '1',
+            visibility: 'visible'
+          }}
         >
           {highlight.title}
         </h3>
-        <p className="highlight-subtitle">
+        <p style={{
+          fontSize: '1rem',
+          fontWeight: '600',
+          color: '#0a5a3d',
+          marginBottom: '8px',
+          textShadow: 'none',
+          opacity: '1',
+          visibility: 'visible'
+        }}>
           {highlight.subtitle}
         </p>
-        <p className="highlight-description">
+        <p style={{
+          fontSize: '0.875rem',
+          color: '#1f2937',
+          lineHeight: '1.5',
+          marginBottom: '16px',
+          textShadow: 'none',
+          opacity: '1',
+          visibility: 'visible'
+        }}>
           {highlight.description}
         </p>
       </div>
 
-      <div className="highlight-variant-badge">
+      <div style={{
+        display: 'inline-block',
+        background: '#f3f4f6',
+        color: '#000000',
+        fontSize: '0.75rem',
+        fontWeight: '500',
+        padding: '4px 8px',
+        borderRadius: '6px',
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em',
+        textShadow: 'none',
+        opacity: '1',
+        visibility: 'visible'
+      }}>
         {highlight.variant === 'rizta-z' ? 'Rizta Z' : 'Rizta S'}
       </div>
     </article>
@@ -188,18 +225,19 @@ export default function RiztaKeyHighlights() {
           <header className="highlights-header text-center mb-12">
             <h2
               id="highlights-heading"
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4"
+              style={{ color: '#000000' }}
             >
               Key Highlights
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg max-w-3xl mx-auto" style={{ color: '#1f2937' }}>
               Discover what makes Ather Rizta the perfect choice for modern families
             </p>
           </header>
 
           {/* Performance Highlights */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+            <h3 className="text-2xl font-bold mb-8 text-center" style={{ color: '#000000' }}>
               Performance & Range
             </h3>
             <div
@@ -218,7 +256,7 @@ export default function RiztaKeyHighlights() {
 
           {/* Smart Features */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+            <h3 className="text-2xl font-bold mb-8 text-center" style={{ color: '#000000' }}>
               Smart Features
             </h3>
             <div
@@ -237,7 +275,7 @@ export default function RiztaKeyHighlights() {
 
           {/* Premium Rizta S Highlights */}
           <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+            <h3 className="text-2xl font-bold mb-8 text-center" style={{ color: '#000000' }}>
               Rizta S Premium Features
             </h3>
             <div
@@ -292,38 +330,6 @@ export default function RiztaKeyHighlights() {
           margin-bottom: 16px;
         }
 
-        .highlight-title {
-          font-size: 1.25rem;
-          font-weight: 700;
-          color: #111827 !important;
-          margin-bottom: 8px;
-        }
-
-        .highlight-subtitle {
-          font-size: 1rem;
-          font-weight: 600;
-          color: #059669 !important;
-          margin-bottom: 8px;
-        }
-
-        .highlight-description {
-          font-size: 0.875rem;
-          color: #374151 !important;
-          line-height: 1.5;
-          margin-bottom: 16px;
-        }
-
-        .highlight-variant-badge {
-          display: inline-block;
-          background: #f3f4f6;
-          color: #374151 !important;
-          font-size: 0.75rem;
-          font-weight: 500;
-          padding: 4px 8px;
-          border-radius: 6px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
 
         .highlights-grid {
           gap: 24px;
