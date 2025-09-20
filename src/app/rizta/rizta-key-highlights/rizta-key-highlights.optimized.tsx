@@ -179,8 +179,9 @@ export default function RiztaKeyHighlights() {
       />
 
       <section
-        className="highlights-section bg-gray-50 py-12 sm:py-16 lg:py-24"
+        className="highlights-section bg-white py-12 sm:py-16 lg:py-24"
         aria-labelledby="highlights-heading"
+        style={{ backgroundColor: '#ffffff' }}
       >
         <div className="highlights-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
@@ -258,7 +259,7 @@ export default function RiztaKeyHighlights() {
       {/* Optimized CSS */}
       <style jsx>{`
         .highlight-card {
-          background: white;
+          background: #ffffff !important;
           border-radius: 16px;
           padding: 24px;
           box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);

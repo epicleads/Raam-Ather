@@ -4,6 +4,8 @@
   background-color: white;
   padding: 5rem 1rem;
   position: relative;
+  /* Prevent layout shifts */
+  contain: layout style;
 }
 
 @media (min-width: 640px) {
@@ -24,6 +26,8 @@
   max-width: 80rem;
   margin-left: auto;
   margin-right: auto;
+  /* Prevent layout shifts */
+  contain: layout style;
 }
 
 .header {

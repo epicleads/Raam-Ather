@@ -167,11 +167,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/services',
-        destination: '/Services',
-        permanent: true,
-      },
-      {
         source: '/store-locator',
         destination: '/StoreLocator',
         permanent: true,

@@ -168,8 +168,8 @@ const HeroSlider = memo(function HeroSlider({ slides }: { slides: VideoSlide[] }
         })}
       </div>
       {/* Content Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-30">
-        <div className="absolute text-white bottom-20 left-1/2 -translate-x-1/2 text-center px-4 w-full max-w-sm transition-all duration-500 ease-out md:bottom-16 md:left-8 lg:left-16 md:text-left md:max-w-lg md:duration-700 md:-translate-x-0 md:translate-x-0 transform">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-30" style={{ contain: 'layout style' }}>
+        <div className="absolute text-white bottom-20 left-1/2 -translate-x-1/2 text-center px-4 w-full max-w-sm transition-all duration-500 ease-out md:bottom-16 md:left-8 lg:left-16 md:text-left md:max-w-lg md:duration-700 md:-translate-x-0 md:translate-x-0 transform" style={{ contain: 'layout style' }}>
           <header>
             <div className={`transform transition-all duration-500 delay-200 md:duration-700 md:delay-300 ${currentSlide >= 0 ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
             style={{

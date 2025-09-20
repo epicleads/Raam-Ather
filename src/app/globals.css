@@ -1,7 +1,41 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* CLS Prevention - Global Layout Stability */
+* {
+  /* Prevent layout shifts from font loading */
+  font-display: swap;
+}
+
+/* Prevent layout shifts on images */
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+/* Prevent layout shifts on dynamic content */
+[data-dynamic-content] {
+  contain: layout style;
+  min-height: 1px; /* Ensure space is reserved */
+}
+
+/* Prevent layout shifts on grid items */
+.grid > * {
+  contain: layout style;
+}
+
+/* Prevent layout shifts on flex items */
+.flex > * {
+  flex-shrink: 0;
+}
+
+/* Prevent layout shifts on absolute positioned elements */
+.absolute, .fixed {
+  will-change: transform;
+}
+
 /* Import page-specific styles */
+@import '../styles/cls-prevention.css';
 @import '../styles/hero.css';
 @import '../styles/testimonials.css';
 @import '../styles/contact.css';

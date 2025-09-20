@@ -1,0 +1,183 @@
+/* CLS (Cumulative Layout Shift) Prevention Utilities */
+
+/* Prevent layout shifts from font loading */
+@font-face {
+  font-display: swap;
+}
+
+/* Prevent layout shifts on images */
+img, picture, video, canvas, svg {
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+
+/* Prevent layout shifts on dynamic content containers */
+.layout-stable {
+  contain: layout style;
+  min-height: 1px;
+}
+
+/* Prevent layout shifts on grid containers */
+.grid-stable {
+  contain: layout style;
+}
+
+.grid-stable > * {
+  contain: layout style;
+}
+
+/* Prevent layout shifts on flex containers */
+.flex-stable {
+  contain: layout style;
+}
+
+.flex-stable > * {
+  flex-shrink: 0;
+  contain: layout style;
+}
+
+/* Prevent layout shifts on absolute/fixed positioned elements */
+.positioned-stable {
+  contain: layout style;
+  will-change: transform;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* Prevent layout shifts on hero sections */
+.hero-stable {
+  min-height: 100vh;
+  max-height: 100vh;
+  contain: layout style;
+  overflow: hidden;
+}
+
+/* Prevent layout shifts on modal/overlay elements */
+.modal-stable {
+  contain: layout style;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Prevent layout shifts on animated elements */
+.animated-stable {
+  contain: layout style;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Prevent layout shifts on backdrop blur elements */
+.backdrop-stable {
+  contain: layout style;
+  transform: translateZ(0);
+  will-change: backdrop-filter;
+}
+
+/* Prevent layout shifts on text content */
+.text-stable {
+  contain: layout style;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+/* Prevent layout shifts on button elements */
+.button-stable {
+  contain: layout style;
+  min-height: 44px; /* Touch target size */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Prevent layout shifts on form elements */
+.form-stable {
+  contain: layout style;
+}
+
+.form-stable input,
+.form-stable textarea,
+.form-stable select {
+  contain: layout style;
+  min-height: 44px;
+}
+
+/* Prevent layout shifts on loading states */
+.loading-stable {
+  contain: layout style;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Prevent layout shifts on card components */
+.card-stable {
+  contain: layout style;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Prevent layout shifts on navigation elements */
+.nav-stable {
+  contain: layout style;
+  min-height: 60px;
+}
+
+/* Prevent layout shifts on footer elements */
+.footer-stable {
+  contain: layout style;
+  min-height: 200px;
+}
+
+/* Media queries for responsive layout stability */
+@media (max-width: 768px) {
+  .hero-stable {
+    min-height: 100vh;
+    max-height: 100vh;
+  }
+  
+  .card-stable {
+    min-height: 150px;
+  }
+  
+  .loading-stable {
+    min-height: 150px;
+  }
+}
+
+/* Prevent layout shifts during page transitions */
+.page-stable {
+  contain: layout style;
+  min-height: 100vh;
+}
+
+/* Utility classes for specific CLS fixes */
+.prevent-cls {
+  contain: layout style;
+}
+
+.prevent-cls-content {
+  contain: layout style;
+  min-height: 1px;
+}
+
+.prevent-cls-grid {
+  contain: layout style;
+}
+
+.prevent-cls-flex {
+  contain: layout style;
+}
+
+.prevent-cls-absolute {
+  contain: layout style;
+  will-change: transform;
+}
+
+.prevent-cls-backdrop {
+  contain: layout style;
+  transform: translateZ(0);
+}

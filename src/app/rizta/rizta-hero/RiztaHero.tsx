@@ -23,7 +23,7 @@ const heroItems: HeroItem[] = [
   {
     id: "2",
     type: "video",
-    src: "/Ather-Assets/Rizta/Space Story_desk_2.mp4",
+    src: "/Ather-Assets/Rizta/Space%20Story_desk_2.mp4",
     alt: "Ather Rizta electric scooter performance video",
     title: "Smooth. Smart. Spacious.",
     subtitle: "Built for Every Journey",

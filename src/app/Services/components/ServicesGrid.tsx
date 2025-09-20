@@ -30,7 +30,7 @@ const ServicesGrid = () => {
       title: 'Expert Maintenance',
       description: 'Comprehensive maintenance services by certified technicians.',
       icon: WrenchScrewdriverIcon,
-      image: '/api/placeholder/400/300',
+      image: '/assets/Blog1.webp',
       features: ['Regular servicing', 'Battery health check', 'Software updates', 'Genuine parts replacement'],
       color: 'from-blue-500 to-blue-600',
       category: 'maintenance'
@@ -40,7 +40,7 @@ const ServicesGrid = () => {
       title: 'Fast Charging Solutions',
       description: 'Quick and reliable charging services with our state-of-the-art.',
       icon: BoltIcon,
-      image: '/api/placeholder/400/300',
+      image: '/assets/Blog1.webp',
       features: ['Rapid charging', '24/7 availability', 'Multiple locations', 'Smart charging management'],
       color: 'from-yellow-500 to-orange-500',
       category: 'support'
@@ -50,7 +50,7 @@ const ServicesGrid = () => {
       title: 'Home Delivery',
       description: 'Convenient doorstep delivery and pickup services for your ultimate convenience.',
       icon: TruckIcon,
-      image: '/api/placeholder/400/300',
+      image: '/assets/Blog1.webp',
       features: ['Free pickup & drop', 'Scheduled delivery', 'Real-time tracking', 'Contactless service'],
       color: 'from-green-500 to-green-600',
       category: 'support'
@@ -60,7 +60,7 @@ const ServicesGrid = () => {
       title: 'Test Ride Experience',
       description: 'Experience the future of mobility with our comprehensive test ride program.',
       icon: PlayIcon,
-      image: '/api/placeholder/400/300',
+      image: '/assets/Blog1.webp',
       features: ['Multiple models', 'Extended test rides', 'Expert guidance', 'No commitment'],
       color: 'from-purple-500 to-purple-600',
       category: 'sales'
@@ -70,7 +70,7 @@ const ServicesGrid = () => {
       title: 'Flexible Financing',
       description: 'Easy EMI options and financing solutions to make your electric dream affordable.',
       icon: CreditCardIcon,
-      image: '/api/placeholder/400/300',
+      image: '/assets/Blog1.webp',
       features: ['Zero down payment', 'Competitive rates', 'Quick approval', 'Flexible tenure'],
       color: 'from-indigo-500 to-indigo-600',
       category: 'sales'
@@ -80,7 +80,7 @@ const ServicesGrid = () => {
       title: 'Extended Warranty',
       description: 'Comprehensive warranty coverage for complete peace of mind.',
       icon: ShieldCheckIcon,
-      image: '/api/placeholder/400/300',
+      image: '/assets/Blog1.webp',
       features: ['Extended coverage', 'Roadside assistance', 'Battery warranty', '24/7 support'],
       color: 'from-red-500 to-red-600',
       category: 'support'

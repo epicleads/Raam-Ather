@@ -56,7 +56,7 @@ export default function ContactPage() {
 
     <div className="contact-section-grid lg:grid-cols-2">
       {/* Left: Enhanced Contact Form */}
-      <div className="order-2 lg:order-1 contact-card-container contact-section-card bg-white/80 backdrop-blur-xl border border-gray-200/50">
+      <div className="order-2 lg:order-1 contact-card-container contact-section-card bg-white/80 backdrop-blur-xl border border-gray-200/50 card-stable backdrop-stable">
         {/* Form Header */}
         <div className="contact-card-header bg-gradient-to-r from-green-600 to-green-700 rounded-t-3xl communicating-header">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full mb-4">
@@ -78,7 +78,7 @@ export default function ContactPage() {
       </div>
 
       {/* Right: Enhanced Map */}
-      <div className="order-1 lg:order-2 contact-card-container contact-section-card bg-white/80 backdrop-blur-xl border border-gray-200/50">
+      <div className="order-1 lg:order-2 contact-card-container contact-section-card bg-white/80 backdrop-blur-xl border border-gray-200/50 card-stable backdrop-stable">
         {/* Map Header */}
         <div className="contact-card-header bg-gradient-to-r from-gray-800 to-gray-900 rounded-t-3xl communicating-header">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full mb-4">

@@ -34,8 +34,7 @@ const ServicesHero = () => {
               animate={{ scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-             {/* <WrenchScrewdriverIcon className="w-6 h-6" />
-              <span className="font-medium">Premium Services</span> */}
+              <span className="font-medium">Premium Services</span>
             </motion.div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 font-neurial">

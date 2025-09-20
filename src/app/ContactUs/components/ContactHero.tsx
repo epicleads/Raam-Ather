@@ -2,15 +2,16 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { PhoneIcon } from '@heroicons/react/24/outline';
-import { usePopup } from '../../Components/popups/PopupProvider';
+import { useTestDriveModal } from '../../Components/test-ride-form/TestDriveModalStore';
+import TestRideFormModal from '../../Components/test-ride-form/TestRideFormModal.client';
 
 const ContactHero = () => {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
-  const { openFormPopup } = usePopup();
+  const modal = useTestDriveModal();
 
   const handleBookTestRide = () => {
-    openFormPopup('testdrive');
+    modal.openManually();
   };
 
   return (
@@ -118,7 +119,7 @@ const ContactHero = () => {
 
 
       {/* Scroll Indicator */}
-      <motion.div 
+      <motion.div
         className="absolute bottom-8 right-8 text-white/60 flex flex-col items-center"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
@@ -126,6 +127,8 @@ const ContactHero = () => {
         <span className="text-sm mb-2 font-neurial">Scroll</span>
         <div className="w-px h-12 bg-gradient-to-b from-white/60 to-transparent"></div>
       </motion.div>
+
+      <TestRideFormModal />
     </section>
   );
 };

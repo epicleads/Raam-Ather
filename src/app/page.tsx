@@ -54,9 +54,11 @@ export default function Page() {
           `,
         }}
       />
-      <main id="main-content" className="overflow-x-hidden w-full max-w-full">
+      <main id="main-content" className="overflow-x-hidden w-full max-w-full page-stable">
       {/* <FloatingHeader /> */}
-      <HeroClient />
+      <div className="hero-stable">
+        <HeroClient />
+      </div>
       
       {/* Featured Models Section */}
       <AtherFeaturedModels />

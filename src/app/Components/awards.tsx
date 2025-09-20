@@ -109,7 +109,7 @@ const Awards: React.FC = () => {
       />
       
       <section 
-        className={styles.section} 
+        className={`${styles.section} layout-stable`} 
         aria-labelledby="awards-heading"
         role="region"
       >
@@ -136,7 +136,7 @@ const Awards: React.FC = () => {
 
           {/* Awards Grid - Desktop */}
           <div 
-            className={styles.desktopGrid}
+            className={`${styles.desktopGrid} grid-stable`}
             role="list"
             aria-label="Awards and achievements"
           >

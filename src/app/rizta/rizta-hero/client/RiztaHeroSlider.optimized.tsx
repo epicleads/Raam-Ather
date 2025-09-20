@@ -14,7 +14,7 @@ interface Props {
 const useRiztaHeroSlider = (heroItems: HeroItem[], autoPlayInterval: number) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true); // Start as loaded to prevent infinite loading
 
   // Preload next slide for better performance
   const preloadNextSlide = useCallback((index: number) => {
@@ -28,7 +28,7 @@ const useRiztaHeroSlider = (heroItems: HeroItem[], autoPlayInterval: number) => 
   }, [heroItems]);
 
   useEffect(() => {
-    if (!autoPlayInterval || !isPlaying || !isLoaded) return;
+    if (!autoPlayInterval || !isPlaying) return;
 
     const timer = setInterval(() => {
       setCurrentIndex((prev) => {
@@ -39,7 +39,7 @@ const useRiztaHeroSlider = (heroItems: HeroItem[], autoPlayInterval: number) => 
     }, autoPlayInterval);
 
     return () => clearInterval(timer);
-  }, [autoPlayInterval, isPlaying, isLoaded, heroItems.length, preloadNextSlide]);
+  }, [autoPlayInterval, isPlaying, heroItems.length, preloadNextSlide]);
 
   const goToSlide = useCallback((index: number) => {
     setCurrentIndex(index);
@@ -74,6 +74,21 @@ const HeroSlide = memo(({
   isActive: boolean;
   onLoad: () => void;
 }) => {
+  const videoRef = useCallback((video: HTMLVideoElement | null) => {
+    if (video && item.type === "video") {
+      if (isActive) {
+        // Load and play video only when slide is active
+        video.load();
+        video.play().catch(() => {
+          // Fallback: try again after a short delay
+          setTimeout(() => video.play().catch(() => {}), 100);
+        });
+      } else {
+        video.pause();
+      }
+    }
+  }, [isActive, item.type]);
+
   const handleVideoLoad = useCallback(() => {
     onLoad();
   }, [onLoad]);
@@ -85,22 +100,17 @@ const HeroSlide = memo(({
   if (item.type === "video") {
     return (
       <video
+        ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover"
-        autoPlay={isActive}
         muted
         loop
         playsInline
-        onLoadedData={handleVideoLoad}
+        onCanPlay={handleVideoLoad}
         aria-label={item.alt}
-        poster={item.mobileSrc} // Use mobile image as poster
+        preload={isActive ? "auto" : "none"}
+        controls={false}
       >
         <source src={item.src} type="video/mp4" />
-        <track
-          kind="captions"
-          src={`${item.src.replace('.mp4', '.vtt')}`}
-          srcLang="en"
-          label="English captions"
-        />
         <p>Your browser does not support the video tag. {item.alt}</p>
       </video>
     );
@@ -129,7 +139,6 @@ export const RiztaHeroSlider = memo(({ heroItems, autoPlayInterval = 0 }: Props)
   const {
     currentIndex,
     isPlaying,
-    isLoaded,
     goToSlide,
     setIsPlaying,
     handleLoad
@@ -268,15 +277,7 @@ export const RiztaHeroSlider = memo(({ heroItems, autoPlayInterval = 0 }: Props)
         )}
       </button>
 
-      {/* Loading Indicator */}
-      {!isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black z-50">
-          <div className="text-center text-white">
-            <div className="animate-spin w-12 h-12 border-4 border-white border-t-transparent rounded-full mx-auto mb-4"></div>
-            <p className="text-lg">Loading Rizta Experience...</p>
-          </div>
-        </div>
-      )}
+      {/* Removed loading indicator to prevent blocking */}
 
       {/* Optimized CSS */}
       <style jsx>{`

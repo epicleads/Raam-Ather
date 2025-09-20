@@ -128,11 +128,11 @@ export default function GetInTouchClient({ contactInfo }: { contactInfo: Contact
               Join thousands of satisfied customers who have made the switch to sustainable, premium electric mobility.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
+              <button
                 onClick={() => modal.openManually()}
                 className="px-8 py-4 bg-gradient-to-r from-green-500 via-green-600 to-green-700 text-white rounded-2xl font-bold font-neurial shadow-xl hover:shadow-2xl hover:scale-[1.02] transform transition-all duration-300 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/0 before:via-white/20 before:to-white/0 before:transform before:-skew-x-12 before:-translate-x-full before:transition-transform before:duration-1000 hover:before:translate-x-full"
               >
-                Know More
+                Book Test Ride
               </button>
               
             </div>

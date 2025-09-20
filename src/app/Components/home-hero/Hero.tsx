@@ -25,7 +25,7 @@ export default function Hero() {
         title="Ather Electric Scooters"
         description="Experience the future of mobility with Ather's premium electric scooters. Advanced technology, superior performance, and sustainable transportation."
       />
-      <section className="home-hero relative w-full h-screen bg-black" style={{ maxHeight: '100vh', overflow: 'hidden' }}>
+      <section className="home-hero relative w-full h-screen bg-black" style={{ minHeight: '100vh', maxHeight: '100vh', overflow: 'hidden' }}>
         <HeroErrorBoundary>
           <HeroSlider slides={slides} />
         </HeroErrorBoundary>

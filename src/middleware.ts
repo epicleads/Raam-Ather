@@ -8,7 +8,6 @@ const goneURLs = [
   "/450-apex",
   "/electric-bike-in-hyderabad",
   "/hello-world",
-  "/services",
 ];
 
 export function middleware(req: NextRequest) {

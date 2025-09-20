@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Mobile Row 2 → Col2 + Col3 in one row */}
-          <div className="grid grid-cols-2 gap-6 md:contents col-span-1 md:col-span-1">
+          <div className="grid grid-cols-2 gap-6 md:contents col-span-1 md:col-span-1 grid-stable" style={{ contain: 'layout style' }}>
             {/* Column 2 */}
             <div>
               <h4 className="text-gray-400 font-medium mb-4">
@@ -121,7 +121,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Mobile Row 3 → Col4 + Col5 in one row */}
-          <div className="grid grid-cols-2 gap-6 md:contents col-span-1 md:col-span-1">
+          <div className="grid grid-cols-2 gap-6 md:contents col-span-1 md:col-span-1 grid-stable" style={{ contain: 'layout style' }}>
             {/* Column 4 */}
             <div>
               <h4 className="text-gray-400 font-medium mb-4">Support</h4>
