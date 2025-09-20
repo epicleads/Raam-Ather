@@ -43,8 +43,11 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
   icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.ico', type: 'image/x-icon' }
+    ],
+    apple: '/favicon.ico',
     shortcut: '/favicon.ico',
   },
   openGraph: {
@@ -119,6 +122,12 @@ export default function RootLayout({
             gtag('config', 'G-KGK8PQ2QS3');
           `}
         </Script>
+
+        {/* Favicon and app icons */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
 
         {/* Preload critical award images for better LCP */}
         <link
