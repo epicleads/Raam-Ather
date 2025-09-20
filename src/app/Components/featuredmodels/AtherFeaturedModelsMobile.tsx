@@ -43,7 +43,7 @@ const atherModels: AtherModel[] = [
     imageUrl: "/Ather-Assets/Home/images/450stillwhite.png",
     isNew: false,
     description: "Perfect balance of performance and efficiency for daily commuting.",
-    url: "/ather-450s",
+    url: "/ather-450",
     topSpeed: "80 km/h",
     motorPower: "6.2 kW"
   },
@@ -59,7 +59,7 @@ const atherModels: AtherModel[] = [
     imageUrl: "/Ather-Assets/Home/images/450xlr.png",
     isNew: false,
     description: "Advanced features with premium performance for the modern rider.",
-    url: "/ather-450x",
+    url: "/ather-450",
     topSpeed: "80 km/h",
     motorPower: "6.2 kW"
   },

@@ -186,7 +186,7 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
             "mpn": "450S-2024",
             "offers": {
               "@type": "Offer",
-              "url": "https://raamather.com/ather-450s",
+              "url": "https://raamather.com/ather-450",
               "priceCurrency": "INR",
               "price": "119999",
               "priceValidUntil": "2024-12-31",
@@ -211,7 +211,7 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
             "mpn": "450X-2024",
             "offers": {
               "@type": "Offer",
-              "url": "https://raamather.com/ather-450x",
+              "url": "https://raamather.com/ather-450",
               "priceCurrency": "INR",
               "price": "139999",
               "priceValidUntil": "2024-12-31",

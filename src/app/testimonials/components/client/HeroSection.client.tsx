@@ -5,24 +5,15 @@ import Image from 'next/image';
 
 export default function HeroSection() {
   const [showText, setShowText] = useState(true);
-  const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
     // Hide text after 4 seconds (reduced from 5 seconds)
     const textTimer = setTimeout(() => {
       setShowText(false);
-      setShowButton(true); // Show button at the same time text hides
     }, 4000);
 
     return () => clearTimeout(textTimer);
   }, []);
-
-  const scrollToSocialMoments = () => {
-    const socialMoments = document.getElementById('social-moments');
-    if (socialMoments) {
-      socialMoments.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section
@@ -68,16 +59,6 @@ export default function HeroSection() {
             Discover authentic experiences from Raam Ather customers across Hyderabad and Chennai
           </p>
         </div>
-      </div>
-
-      {/* Discover More Button - Shows after 4 seconds */}
-      <div className={`absolute bottom-16 sm:bottom-20 left-1/2 transform -translate-x-1/2 z-20 transition-opacity duration-1000 ${showButton ? 'opacity-100' : 'opacity-0'}`}>
-        <button
-          onClick={scrollToSocialMoments}
-          className="bg-green-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-base sm:text-lg font-semibold hover:bg-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-        >
-          Discover More
-        </button>
       </div>
 
     </section>
