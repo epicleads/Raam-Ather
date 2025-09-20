@@ -77,8 +77,21 @@ export default function Performance() {
         },
         "offers": {
           "@type": "Offer",
+          "price": "146999",
+          "priceCurrency": "INR",
           "availability": "https://schema.org/InStock",
-          "areaServed": ["Hyderabad", "Chennai"]
+          "areaServed": ["Hyderabad", "Chennai"],
+          "seller": {
+            "@type": "Organization",
+            "name": "Raam Ather"
+          }
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.7",
+          "reviewCount": "1800",
+          "bestRating": "5",
+          "worstRating": "1"
         },
         "manufacturer": {
           "@type": "Organization",

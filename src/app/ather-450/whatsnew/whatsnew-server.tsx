@@ -124,7 +124,24 @@ export function WhatsNewServer({
       ...whatsNewData.smartFeatures.connectivity.map(feature => feature.title),
       whatsNewData.smartFeatures.charging.title,
       whatsNewData.smartFeatures.range.title
-    ]
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "146999",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "Raam Ather"
+      }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.7",
+      "reviewCount": "2500",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
   }
 
   return (

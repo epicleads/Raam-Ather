@@ -80,33 +80,47 @@ export default function LocalBusinessStructuredData({
       "itemListElement": [
         {
           "@type": "Offer",
+          "price": "146926",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
           "itemOffered": {
             "@type": "Product",
             "name": "Ather 450X",
             "description": "Premium electric scooter with 105km range and smart features",
-            "brand": "Ather Energy",
+            "brand": {
+              "@type": "Brand",
+              "name": "Ather Energy"
+            },
             "category": "Electric Scooter",
-            "offers": {
-              "@type": "Offer",
-              "priceRange": "₹1,46,926 - ₹1,75,000",
-              "priceCurrency": "INR",
-              "availability": "InStock"
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.7",
+              "reviewCount": "1500",
+              "bestRating": "5",
+              "worstRating": "1"
             }
           }
         },
         {
-          "@type": "Offer", 
+          "@type": "Offer",
+          "price": "129999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
           "itemOffered": {
             "@type": "Product",
             "name": "Ather Rizta",
             "description": "Family electric scooter with excellent storage and comfort",
-            "brand": "Ather Energy",
+            "brand": {
+              "@type": "Brand",
+              "name": "Ather Energy"
+            },
             "category": "Electric Scooter",
-            "offers": {
-              "@type": "Offer",
-              "priceRange": "₹1,09,999 - ₹1,29,999",
-              "priceCurrency": "INR",
-              "availability": "InStock"
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.8",
+              "reviewCount": "800",
+              "bestRating": "5",
+              "worstRating": "1"
             }
           }
         }

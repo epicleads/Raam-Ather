@@ -105,8 +105,14 @@ export default function Safety() {
         ],
         "offers": {
           "@type": "Offer",
+          "price": "146999",
+          "priceCurrency": "INR",
           "availability": "https://schema.org/InStock",
-          "areaServed": ["Hyderabad", "Chennai", "Telangana", "Tamil Nadu"]
+          "areaServed": ["Hyderabad", "Chennai", "Telangana", "Tamil Nadu"],
+          "seller": {
+            "@type": "Organization",
+            "name": "Raam Ather"
+          }
         },
         "manufacturer": {
           "@type": "Organization",

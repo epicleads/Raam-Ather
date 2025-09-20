@@ -29,7 +29,8 @@
       "Bash(npm audit:*)",
       "Bash(npm update:*)",
       "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Raam-Ather-main/src/app/sitemap.xml/**)",
-      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Raam-Ather-main/**)"
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Raam-Ather-main/**)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []

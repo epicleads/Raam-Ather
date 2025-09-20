@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
     qualities: [75, 90, 100],
     minimumCacheTTL: 31536000, // 1 year cache
     dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://maps.google.com https://www.googletagmanager.com https://www.google-analytics.com; frame-src 'self' https://www.google.com https://maps.google.com;",
+    contentSecurityPolicy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://maps.google.com https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; frame-src 'self' https://www.google.com https://maps.google.com;",
   },
   
   // Performance optimizations
@@ -74,7 +74,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://maps.google.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://www.google.com https://maps.google.com; connect-src 'self' https://www.google.com https://maps.google.com https://www.google-analytics.com https://www.googletagmanager.com;"
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://maps.google.com https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://www.google.com https://maps.google.com; connect-src 'self' https://www.google.com https://maps.google.com https://www.google-analytics.com https://www.googletagmanager.com https://connect.facebook.net;"
           },
           // Performance headers
           {

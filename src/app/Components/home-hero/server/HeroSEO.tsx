@@ -116,26 +116,47 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
           "itemListElement": [
             {
               "@type": "Offer",
+              "price": "119841",
+              "priceCurrency": "INR",
+              "availability": "https://schema.org/InStock",
               "itemOffered": {
                 "@type": "Product",
                 "name": "Ather 450S",
-                "category": "Electric Scooter"
+                "category": "Electric Scooter",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "Ather Energy"
+                }
               }
             },
             {
               "@type": "Offer",
+              "price": "146999",
+              "priceCurrency": "INR",
+              "availability": "https://schema.org/InStock",
               "itemOffered": {
                 "@type": "Product",
                 "name": "Ather 450X",
-                "category": "Electric Scooter"
+                "category": "Electric Scooter",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "Ather Energy"
+                }
               }
             },
             {
               "@type": "Offer",
+              "price": "129999",
+              "priceCurrency": "INR",
+              "availability": "https://schema.org/InStock",
               "itemOffered": {
                 "@type": "Product",
                 "name": "Ather Rizta",
-                "category": "Electric Scooter"
+                "category": "Electric Scooter",
+                "brand": {
+                  "@type": "Brand",
+                  "name": "Ather Energy"
+                }
               }
             }
           ]

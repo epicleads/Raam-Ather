@@ -38,10 +38,17 @@ export default function ContactUsServer() {
       itemListElement: [
         {
           '@type': 'Offer',
+          price: '146999',
+          priceCurrency: 'INR',
+          availability: 'https://schema.org/InStock',
           itemOffered: {
             '@type': 'Product',
             name: 'Ather 450X Electric Scooter',
-            description: 'Premium electric scooter with fast charging and smart features'
+            description: 'Premium electric scooter with fast charging and smart features',
+            brand: {
+              '@type': 'Brand',
+              name: 'Ather Energy'
+            }
           }
         },
         {

@@ -51,7 +51,18 @@ export function FaqServer({
     "product": {
       "@type": "Product",
       "name": productName,
-      "category": "Electric Scooter"
+      "category": "Electric Scooter",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ather Energy"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.6",
+        "reviewCount": "1250",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
     }
   } : null
 

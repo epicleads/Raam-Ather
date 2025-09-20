@@ -160,21 +160,6 @@ export default function AboutServer() {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
-        {/* Preload Neural Grotesk Font */}
-        <link
-          rel="preload"
-          href="/fonts/NeueGroteskBold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/NeueGroteskMedium.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
 
         {/* Structured Data */}
         <script

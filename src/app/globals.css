@@ -11,18 +11,9 @@
 @import '../styles/mobile-toggles.css';
 @import '../styles/utilities.css';
 
-/* Custom font definitions */
-@font-face {
-  font-family: 'Neurial Grotesk';
-  src: local('Neurial Grotesk'), local('neurial-grotesk');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* Custom font utilities */
 .font-neurial {
-  font-family: 'Neurial Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-feature-settings: 'kern' 1, 'liga' 1;
 }
 

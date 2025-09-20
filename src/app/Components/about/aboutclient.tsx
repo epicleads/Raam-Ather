@@ -54,34 +54,9 @@ export default function AboutClient({ content }: { content: AboutContent }) {
 
   return (
     <>
-      {/* Neural Grotesk Font Loading */}
       <style jsx global>{`
-        @font-face {
-          font-family: 'Neural Grotesk';
-          src: url('/fonts/NeueGroteskBold.woff2') format('woff2');
-          font-weight: 700;
-          font-style: normal;
-          font-display: swap;
-        }
-        
-        @font-face {
-          font-family: 'Neural Grotesk';
-          src: url('/fonts/NeueGroteskMedium.woff2') format('woff2');
-          font-weight: 500;
-          font-style: normal;
-          font-display: swap;
-        }
-        
-        @font-face {
-          font-family: 'Neural Grotesk';
-          src: url('/fonts/NeueGroteskRegular.woff2') format('woff2');
-          font-weight: 400;
-          font-style: normal;
-          font-display: swap;
-        }
-
         * {
-          font-family: 'Neural Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
       `}</style>
 

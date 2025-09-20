@@ -4,22 +4,6 @@ import { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import TestRideButton from '../../TestRideButton';
 import { MediaViewer } from '../../ui/MediaViewer';
 
-// Hook to detect mobile screen size
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkIsMobile();
-    window.addEventListener('resize', checkIsMobile);
-    return () => window.removeEventListener('resize', checkIsMobile);
-  }, []);
-
-  return isMobile;
-}
 
 interface VideoSlide {
   id: string;
@@ -39,8 +23,6 @@ const HeroSlider = memo(function HeroSlider({ slides }: { slides: VideoSlide[] }
   const [videoEndHandlersRef] = useState<{ current: Map<string, () => void> }>({ current: new Map() });
   const [videoElementsRef] = useState<{ current: Map<string, HTMLVideoElement> }>({ current: new Map() });
 
-  // Use the mobile detection hook
-  const isMobile = useIsMobile();
 
   // Memoize filtered slides
   const filteredSlides = useMemo(() => slides, [slides]);
@@ -138,6 +120,7 @@ const HeroSlider = memo(function HeroSlider({ slides }: { slides: VideoSlide[] }
       className="relative h-screen bg-black hero-container max-h-screen overflow-hidden"
       role="banner"
       aria-label="Hero carousel showcasing Ather electric scooters"
+      suppressHydrationWarning
     >
       {/* Media Background */}
       <div className="absolute inset-0">
@@ -171,11 +154,7 @@ const HeroSlider = memo(function HeroSlider({ slides }: { slides: VideoSlide[] }
                 priority={index === 0}
                 isActive={isActive}
                 poster={item.poster}
-                className={
-                  isMobile
-                    ? 'transition-opacity duration-800 ease-out'
-                    : 'transition-transform duration-1000 ease-out'
-                }
+                className="transition-opacity duration-800 ease-out md:transition-transform md:duration-1000"
                 onVideoEnd={handleVideoEnd}
                 onVideoError={(error) => handleVideoError(item.id, error)}
                 videoRef={mediaType === 'video' ? (el) => {
@@ -190,52 +169,28 @@ const HeroSlider = memo(function HeroSlider({ slides }: { slides: VideoSlide[] }
       </div>
       {/* Content Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-30">
-        <div className={`absolute text-white ${
-          isMobile
-            ? 'bottom-20 left-1/2 -translate-x-1/2 text-center px-4 w-full max-w-sm transition-all duration-500 ease-out'
-            : 'bottom-16 left-8 lg:left-16 text-left max-w-lg transition-all duration-700 ease-out'
-        } transform`}>
+        <div className="absolute text-white bottom-20 left-1/2 -translate-x-1/2 text-center px-4 w-full max-w-sm transition-all duration-500 ease-out md:bottom-16 md:left-8 lg:left-16 md:text-left md:max-w-lg md:duration-700 md:-translate-x-0 md:translate-x-0 transform">
           <header>
-            <div className={`transform ${
-              isMobile
-                ? 'transition-all duration-500 delay-200'
-                : 'transition-all duration-700 delay-300'
-            } ${currentSlide >= 0 ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+            <div className={`transform transition-all duration-500 delay-200 md:duration-700 md:delay-300 ${currentSlide >= 0 ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
             style={{
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden',
               transform: currentSlide >= 0 ? 'translate3d(0, 0, 0)' : 'translate3d(0, 16px, 0)'
             }}>
-              <h1 className={`font-bold font-neurial mb-4 leading-tight drop-shadow-lg ${
-                isMobile
-                  ? 'text-2xl md:text-3xl'
-                  : 'text-3xl lg:text-5xl xl:text-6xl'
-              }`}>
+              <h1 className="font-bold font-neurial mb-4 leading-tight drop-shadow-lg text-2xl md:text-3xl lg:text-5xl xl:text-6xl">
                 {currentItem.title}
               </h1>
-              <p className={`font-neurial mb-6 leading-relaxed drop-shadow-md ${
-                isMobile
-                  ? 'text-base md:text-lg'
-                  : 'text-lg lg:text-xl xl:text-2xl'
-              } opacity-90`}>
+              <p className="font-neurial mb-6 leading-relaxed drop-shadow-md text-base md:text-lg lg:text-xl xl:text-2xl opacity-90">
                 {currentItem.subtitle}
               </p>
             </div>
           </header>
-          <div className={`transform ${
-            isMobile
-              ? 'transition-all duration-400 delay-300'
-              : 'transition-all duration-500 delay-500'
-          }`}>
+          <div className="transform transition-all duration-400 delay-300 md:duration-500 md:delay-500">
             {currentItem.ctaText === 'Book Test Ride' ? (
               <TestRideButton
                 variant="primary"
                 size="lg"
-                className={`bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold font-neurial ${
-                  isMobile
-                    ? 'px-8 py-3 text-base transition-all duration-200 active:scale-95'
-                    : 'px-10 py-4 text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/25'
-                }`}
+                className="bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold font-neurial px-8 py-3 text-base transition-all duration-200 active:scale-95 md:px-10 md:py-4 md:text-lg md:duration-300 md:hover:scale-105 md:hover:shadow-lg md:hover:shadow-green-500/25"
               >
                 {currentItem.ctaText}
               </TestRideButton>
@@ -246,11 +201,7 @@ const HeroSlider = memo(function HeroSlider({ slides }: { slides: VideoSlide[] }
       {/* Navigation Arrows */}
       <button
         onClick={goToPrevious}
-        className={`absolute left-4 md:left-6 top-1/2 transform -translate-y-1/2 p-3 md:p-4 bg-white/20 rounded-full border border-white/30 z-40 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black ${
-          isMobile
-            ? 'transition-all duration-200 active:scale-95 active:bg-white/20'
-            : 'hover:bg-white/20 hover:scale-110 transition-all duration-300'
-        }`}
+        className="absolute left-4 md:left-6 top-1/2 transform -translate-y-1/2 p-3 md:p-4 bg-white/20 rounded-full border border-white/30 z-40 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black transition-all duration-200 active:scale-95 active:bg-white/20 md:hover:bg-white/20 md:hover:scale-110 md:duration-300"
         aria-label={`Go to previous slide. Currently on slide ${currentSlide + 1} of ${filteredSlides.length}`}
         type="button"
       >
@@ -266,11 +217,7 @@ const HeroSlider = memo(function HeroSlider({ slides }: { slides: VideoSlide[] }
       </button>
       <button
         onClick={goToNext}
-        className={`absolute right-4 md:right-6 top-1/2 transform -translate-y-1/2 p-3 md:p-4 bg-white/20 rounded-full border border-white/30 z-40 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black ${
-          isMobile
-            ? 'transition-all duration-200 active:scale-95 active:bg-white/20'
-            : 'hover:bg-white/20 hover:scale-110 transition-all duration-300'
-        }`}
+        className="absolute right-4 md:right-6 top-1/2 transform -translate-y-1/2 p-3 md:p-4 bg-white/20 rounded-full border border-white/30 z-40 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black transition-all duration-200 active:scale-95 active:bg-white/20 md:hover:bg-white/20 md:hover:scale-110 md:duration-300"
         aria-label={`Go to next slide. Currently on slide ${currentSlide + 1} of ${filteredSlides.length}`}
         type="button"
       >

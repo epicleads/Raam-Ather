@@ -14,8 +14,8 @@
     min-height: 100vh !important;
   }
 
-  /* Viewport fixed class for dynamic height without hydration issues */
-  .viewport-fixed {
+  /* Viewport fixed using custom property to avoid hydration issues */
+  .home-hero .hero-container[style*="--viewport-fixed"] {
     height: 100vh !important;
     min-height: 100vh !important;
     height: -webkit-fill-available !important;
