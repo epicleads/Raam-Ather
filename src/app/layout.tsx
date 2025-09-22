@@ -9,6 +9,7 @@ import { PopupProvider } from './Components/popups/PopupProvider';
 import TestRideFormModal from './Components/test-ride-form/TestRideFormModal.client';
 import ViewportFixClient from './Components/ViewportFixClient';
 import CookieConsentManager from './Components/CookieConsent/CookieConsentManager';
+import { SidebarProvider } from './Components/contexts/SidebarContext';
 import Script from 'next/script';  // ✅ Needed for Google scripts
 
 const inter = Inter({
@@ -171,15 +172,17 @@ export default function RootLayout({
         <CookieConsentManager>
           <PopupProvider>
             <TestDriveModalProvider>
-              <ViewportFixClient />
-              <HeaderServer />
-              <main className="min-h-screen overflow-x-hidden w-full max-w-full">
-                {children}
-              </main>
-              <BottomNav />
-              <FloatingWhatsAppButton />
-              {/* Global Test Ride Modal */}
-              <TestRideFormModal />
+              <SidebarProvider>
+                <ViewportFixClient />
+                <HeaderServer />
+                <main className="min-h-screen overflow-x-hidden w-full max-w-full">
+                  {children}
+                </main>
+                <BottomNav />
+                <FloatingWhatsAppButton />
+                {/* Global Test Ride Modal */}
+                <TestRideFormModal />
+              </SidebarProvider>
             </TestDriveModalProvider>
           </PopupProvider>
         </CookieConsentManager>

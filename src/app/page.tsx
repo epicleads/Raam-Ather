@@ -19,6 +19,7 @@ import AboutServer from './Components/about/aboutserver';
 import ContactPage from './Components/contactform/contactserver';
 import HeroClient from './Components/home-hero/HeroClient';
 import dynamic from 'next/dynamic';
+import FloatingWhatsAppButton from './Components/common/FloatingWhatsAppButton';
 
 const Awards = dynamic(() => import('./Components/awards'), {
   loading: () => (
@@ -81,6 +82,7 @@ export default function Page() {
       <ContactPage />
       {/* Footer Section */}
       <Footer />
+      <FloatingWhatsAppButton />
       </main>
     </>
   );

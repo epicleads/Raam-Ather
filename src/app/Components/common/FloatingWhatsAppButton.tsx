@@ -1,5 +1,9 @@
 "use client";
 
+import { useState, useEffect } from 'react';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import { useSidebar } from '../contexts/SidebarContext';
+
 // Configurable WhatsApp number
 const WHATSAPP_NUMBER = "919032333833";
 
@@ -17,20 +21,80 @@ const WhatsAppIcon = () => (
 );
 
 export default function FloatingWhatsAppButton() {
+  const [isVisible, setIsVisible] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const { isSidebarOpen } = useSidebar();
+
+  // Detect mobile devices
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || 'ontouchstart' in window);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const handleWhatsAppClick = () => {
-    const message = encodeURIComponent("Hi Team, I want to know more about Ather!");
+    const message = encodeURIComponent("Hi Raam Ather, I want to know more about the scooter!");
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
     window.open(whatsappUrl, '_blank');
   };
 
+  const handleCloseClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent WhatsApp click when closing
+    setIsVisible(false);
+    
+    // Auto-reappear after 30 seconds
+    setTimeout(() => {
+      setIsVisible(true);
+    }, 30000); // 30 seconds
+  };
+
+  // Hide floating WhatsApp button only if manually closed
+  if (!isVisible) {
+    return null;
+  }
+
+  // Show close button on mobile always, on desktop only on hover
+  const shouldShowCloseButton = isMobile || isHovered;
+
   return (
-    <button
-      onClick={handleWhatsAppClick}
-      className="fixed bottom-20 right-4 w-14 h-14 rounded-full bg-green-400 hover:bg-green-500 shadow-lg flex items-center justify-center text-white text-2xl hover:scale-110 transition-transform duration-200 z-50"
-      aria-label="Chat on WhatsApp"
-      title="Chat with us on WhatsApp"
+    <div 
+      className={`fixed bottom-20 right-2 p-2 transition-all duration-300 ${
+        isSidebarOpen ? 'z-10' : 'z-50'
+      }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <WhatsAppIcon />
-    </button>
+      {/* Close button - always visible on mobile, hover on desktop */}
+      {shouldShowCloseButton && (
+        <button
+          onClick={handleCloseClick}
+          className="absolute top-0 right-0 w-6 h-6 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center text-gray-700 hover:text-gray-900 shadow-lg transition-all duration-200 hover:scale-105 z-10"
+          aria-label="Close WhatsApp button"
+          title="Close"
+        >
+          <XMarkIcon className="w-4 h-4" />
+        </button>
+      )}
+      
+      {/* WhatsApp button */}
+      <button
+        onClick={handleWhatsAppClick}
+        className={`w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-white text-2xl transition-all duration-300 mt-2 ml-2 ${
+          isSidebarOpen 
+            ? 'bg-green-300 hover:bg-green-400 opacity-60 hover:opacity-80' 
+            : 'bg-green-400 hover:bg-green-500 hover:scale-110'
+        }`}
+        aria-label="Chat on WhatsApp"
+        title={isSidebarOpen ? "WhatsApp available in sidebar" : "Chat with us on WhatsApp"}
+      >
+        <WhatsAppIcon />
+      </button>
+    </div>
   );
 }

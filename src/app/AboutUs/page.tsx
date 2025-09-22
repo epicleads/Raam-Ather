@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import AboutUsClient from './AboutUsClient';
-import Footer from '../Components/footer/page'; // Importing Footer component
+import FooterClient from '../Components/footer/footerclient'; // Importing Footer component
 
 export const metadata: Metadata = {
   title: 'About Us | Raam Ather - Leading EV Dealer in Hyderabad & Chennai',
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
 
 export default function AboutUsPage() {
   return (
-    <div className="font-neurial">
+    <div className="font-neurial m-0 p-0">
       <AboutUsClient />
-      <Footer />
+      <FooterClient />
     </div>
   );
 }

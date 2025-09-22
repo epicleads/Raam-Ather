@@ -8,6 +8,7 @@ import { ChevronDown, Menu, Zap, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { HeaderProps, NavItem, DropdownItem } from '../header.types';
 import { useTestDriveModal } from '../../test-ride-form/TestDriveModalStore';
+import { useSidebar } from '../../contexts/SidebarContext';
 
 export default function DesktopHeader({ data }: HeaderProps) {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -16,6 +17,7 @@ export default function DesktopHeader({ data }: HeaderProps) {
   const [lastScrollY, setLastScrollY] = useState(0);
   const modal = useTestDriveModal();
   const pathname = usePathname();
+  const { setIsSidebarOpen } = useSidebar();
   
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -303,7 +305,10 @@ export default function DesktopHeader({ data }: HeaderProps) {
               
               {/* Premium Hamburger Menu */}
               <motion.button
-                onClick={() => setIsMobileMenuOpen(true)}
+                onClick={() => {
+                  setIsMobileMenuOpen(true);
+                  setIsSidebarOpen(true);
+                }}
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
                 className="p-1.5 sm:p-2 lg:p-2.5 xl:p-3 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 border border-gray-300 hover:bg-gray-50 hover:border-gray-400"
@@ -329,7 +334,10 @@ export default function DesktopHeader({ data }: HeaderProps) {
             {/* Backdrop */}
             <div 
               className="absolute inset-0 bg-black/60 backdrop-blur-xl"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setIsSidebarOpen(false);
+              }}
             />
             
             {/* Drawer */}
@@ -352,7 +360,10 @@ export default function DesktopHeader({ data }: HeaderProps) {
                   />
                 </Link>
                 <motion.button
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => {
+                setIsMobileMenuOpen(false);
+                setIsSidebarOpen(false);
+              }}
                   whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
                   className="p-3 hover:bg-gray-100 rounded-2xl transition-all duration-300 border border-gray-300 hover:border-gray-400"
@@ -373,14 +384,17 @@ export default function DesktopHeader({ data }: HeaderProps) {
                   >
                     <DesktopMobileNavItem
                       item={item}
-                      onItemClick={() => setIsMobileMenuOpen(false)}
+                      onItemClick={() => {
+                        setIsMobileMenuOpen(false);
+                        setIsSidebarOpen(false);
+                      }}
                       isActive={isNavItemActive(item)}
                     />
                   </motion.div>
                 ))}
 
                 {/* CTAs */}
-                <div className="pt-6 border-t border-white/10 space-y-4">
+                <div className="pt-6 border-t border-gray-200 space-y-4">
                   {data.ctas.map((cta, index) => (
                     <motion.div
                       key={cta.label}
@@ -393,6 +407,7 @@ export default function DesktopHeader({ data }: HeaderProps) {
                           onClick={() => {
                             modal.openManually();
                             setIsMobileMenuOpen(false);
+                            setIsSidebarOpen(false);
                           }}
                           className="relative group block w-full text-center px-6 py-4 rounded-2xl font-medium font-neurial transition-all duration-500 overflow-hidden bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg hover:shadow-2xl hover:shadow-green-500/50"
                         >
@@ -401,14 +416,48 @@ export default function DesktopHeader({ data }: HeaderProps) {
                       ) : (
                         <Link
                           href={cta.href}
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          className="relative group block w-full text-center px-6 py-4 rounded-2xl font-medium font-neurial transition-all duration-500 overflow-hidden text-white border-2 border-white/30 hover:bg-white/10 backdrop-blur-sm"
+                          onClick={() => {
+                setIsMobileMenuOpen(false);
+                setIsSidebarOpen(false);
+              }}
+                          className="relative group block w-full text-center px-6 py-4 rounded-2xl font-medium font-neurial transition-all duration-500 overflow-hidden text-black border border-gray-400 hover:bg-gray-100"
                         >
                           <span className="relative z-10">{cta.label}</span>
                         </Link>
                       )}
                     </motion.div>
                   ))}
+                  
+                  {/* WhatsApp Button */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: (data.navigation.length + data.ctas.length) * 0.1 }}
+                  >
+                    <button
+                      onClick={() => {
+                        const message = encodeURIComponent("Hi Raam Ather, I want to know more about the scooter!");
+                        const whatsappUrl = `https://wa.me/919032333833?text=${message}`;
+                        window.open(whatsappUrl, '_blank');
+                        setIsMobileMenuOpen(false);
+                        setIsSidebarOpen(false);
+                      }}
+                      className="block w-full text-center px-6 py-4 rounded-2xl font-medium font-neurial transition-all duration-500 text-white bg-green-400 hover:bg-green-500 shadow-lg hover:shadow-xl"
+                    >
+                      <div className="flex items-center justify-center space-x-2">
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                        </svg>
+                        <span>WhatsApp</span>
+                      </div>
+                    </button>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
@@ -433,10 +482,10 @@ function DesktopMobileNavItem({ item, onItemClick, isActive }: DesktopMobileNavI
       <div className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`group relative flex items-center justify-between w-full text-left px-5 py-4 rounded-2xl transition-all duration-300 backdrop-blur-sm border ${
-            isActive 
-              ? 'text-white bg-white/20 border-white/30 shadow-lg' 
-              : 'text-white/80 hover:text-white hover:bg-white/10 border-white/10 hover:border-white/20'
+          className={`group relative flex items-center justify-between w-full text-left px-5 py-4 rounded-2xl transition-all duration-300 border ${
+            isActive
+              ? 'text-gray-900 bg-gray-100 border-gray-300 shadow-lg'
+              : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 border-gray-200 hover:border-gray-300'
           }`}
         >
           <span className="relative z-10 font-medium font-neurial">
@@ -467,7 +516,7 @@ function DesktopMobileNavItem({ item, onItemClick, isActive }: DesktopMobileNavI
                     <Link
                       href={dropdownItem.href}
                       onClick={onItemClick}
-                      className="relative group block px-5 py-3 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-200 backdrop-blur-sm border border-transparent hover:border-white/20"
+                      className="relative group block px-5 py-3 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-xl transition-all duration-200 border border-transparent hover:border-gray-200"
                     >
                       <span className="relative z-10">{dropdownItem.label}</span>
                     </Link>

@@ -9,7 +9,7 @@ import FAQSection from './components/FAQSection';
 
 export default function AboutUsClient() {
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full overflow-x-hidden mb-0">
       {/* Section 1: Hero (white) */}
       <section className="bg-white w-full">
         <HeroSlider />

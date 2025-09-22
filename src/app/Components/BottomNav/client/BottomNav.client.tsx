@@ -94,82 +94,55 @@ export function BottomNavClient({ items }: BottomNavClientProps) {
   // Don't render until hydrated to prevent mismatch
   if (!isHydrated) {
     return (
-      <nav className="bottom-nav fixed bottom-0 inset-x-0 bg-gray-900/95 backdrop-blur-md shadow-xl border-t border-gray-700 flex justify-between items-center px-1 py-1.5 z-50 md:hidden translate-y-full">
-        {items.map((item) => {
-          const IconComponent = iconMap[item.icon as keyof typeof iconMap];
-          
-          if (item.id === "test-drive") {
-            return (
-              <button
-                key={item.id}
-                onClick={handleTestDriveClick}
-                className="flex flex-col items-center justify-center space-y-1 transition-all duration-200 p-2 rounded-xl text-gray-400 flex-1 min-w-0 cursor-pointer"
-              >
-                <IconComponent className="w-5 h-5 stroke-[1.5] text-gray-400" />
-                <span className="text-xs font-medium text-center truncate w-full">{item.label}</span>
-              </button>
-            );
-          }
-          
-          return (
-            <Link
-              key={item.id}
-              href={item.href}
-              className="flex flex-col items-center justify-center space-y-1 transition-all duration-200 p-2 rounded-xl text-gray-400 flex-1 min-w-0"
-            >
-              <IconComponent className="w-5 h-5 stroke-[1.5] text-gray-400" />
-              <span className="text-xs font-medium text-center truncate w-full">{item.label}</span>
-            </Link>
-          );
-        })}
+      <nav className="bottom-nav fixed bottom-0 inset-x-0 bg-gray-900/95 backdrop-blur-md shadow-xl border-t border-gray-700 flex items-center z-50 md:hidden translate-y-full">
+        {/* Test Drive Button - Left 50% */}
+        <button
+          onClick={handleTestDriveClick}
+          className="flex-1 flex flex-col items-center justify-center space-y-1 transition-all duration-200 hover:scale-105 py-3 px-2 text-gray-400 hover:text-green-400 cursor-pointer hover:bg-gray-800/30 border-r border-gray-700/50"
+        >
+          <Calendar className="w-5 h-5 stroke-[1.5] transition-colors duration-200" />
+          <span className="text-xs font-medium text-center">Test Drive</span>
+        </button>
+        
+        {/* Contact Us Button - Right 50% */}
+        <Link
+          href="/ContactUs"
+          className="flex-1 flex flex-col items-center justify-center space-y-1 transition-all duration-200 hover:scale-105 py-3 px-2 text-gray-400 hover:text-green-400 hover:bg-gray-800/30"
+        >
+          <MapPin className="w-5 h-5 stroke-[1.5] transition-colors duration-200" />
+          <span className="text-xs font-medium text-center">Contact Us</span>
+        </Link>
       </nav>
     );
   }
 
   return (
     <nav
-      className={`bottom-nav fixed bottom-0 inset-x-0 bg-gray-900/95 backdrop-blur-md shadow-xl border-t border-gray-700 flex justify-between items-center px-1 py-1.5 z-50 md:hidden transition-all duration-500 ease-out ${
+      className={`bottom-nav fixed bottom-0 inset-x-0 bg-gray-900/95 backdrop-blur-md shadow-xl border-t border-gray-700 flex items-center z-50 md:hidden transition-all duration-500 ease-out ${
         isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
       }`}
     >
-      {items.map((item) => {
-        const isActive = pathname === item.href;
-        const IconComponent = iconMap[item.icon as keyof typeof iconMap];
-        
-        if (item.id === "test-drive") {
-          return (
-            <button
-              key={item.id}
-              onClick={handleTestDriveClick}
-              className="flex flex-col items-center justify-center space-y-1 transition-all duration-200 hover:scale-105 p-2 rounded-xl hover:bg-gray-800/50 flex-1 min-w-0 text-gray-400 hover:text-green-400 cursor-pointer"
-            >
-              <IconComponent className="w-5 h-5 stroke-[1.5] text-gray-400 hover:text-green-400 transition-colors duration-200" />
-              <span className="text-xs font-medium text-center truncate w-full">{item.label}</span>
-            </button>
-          );
-        }
-        
-        return (
-          <Link
-            key={item.id}
-            href={item.href}
-            className={`flex flex-col items-center justify-center space-y-1 transition-all duration-200 hover:scale-105 p-2 rounded-xl hover:bg-gray-800/50 flex-1 min-w-0 ${
-              isActive 
-                ? "text-green-400 bg-gray-800/30" 
-                : "text-gray-400 hover:text-green-400"
-            }`}
-          >
-            <IconComponent 
-              className={`w-5 h-5 stroke-[1.5] ${
-                isActive 
-                  ? "text-green-400" 
-                  : "text-gray-400 hover:text-green-400"
-              } transition-colors duration-200`} 
-            />
-            <span className="text-xs font-medium text-center truncate w-full">{item.label}</span>
-          </Link>
-        );
-      })}
+      {/* Test Drive Button - Left 50% */}
+      <button
+        onClick={handleTestDriveClick}
+        className="flex-1 flex flex-col items-center justify-center space-y-1 transition-all duration-200 hover:scale-105 py-3 px-2 text-gray-400 hover:text-green-400 cursor-pointer hover:bg-gray-800/30 border-r border-gray-700/50"
+      >
+        <Calendar className="w-5 h-5 stroke-[1.5] transition-colors duration-200" />
+        <span className="text-xs font-medium text-center">Test Drive</span>
+      </button>
+      
+      {/* Contact Us Button - Right 50% */}
+      <Link
+        href="/ContactUs"
+        className={`flex-1 flex flex-col items-center justify-center space-y-1 transition-all duration-200 hover:scale-105 py-3 px-2 hover:bg-gray-800/30 ${
+          pathname === "/ContactUs" 
+            ? "text-green-400 bg-gray-800/30" 
+            : "text-gray-400 hover:text-green-400"
+        }`}
+      >
+        <MapPin className="w-5 h-5 stroke-[1.5] transition-colors duration-200" />
+        <span className="text-xs font-medium text-center">Contact Us</span>
+      </Link>
     </nav>
   );
 }

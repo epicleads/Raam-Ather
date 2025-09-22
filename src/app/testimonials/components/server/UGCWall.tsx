@@ -1,6 +1,6 @@
 "use client";
 import { Instagram, ExternalLink } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import UGCModal from '../client/UGCModal.client';
 import Image from 'next/image';
 
@@ -13,6 +13,84 @@ export default function UGCWall() {
     badge?: string;
   } | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+  const [visibleVideos, setVisibleVideos] = useState(new Set());
+
+  useEffect(() => {
+    const checkDeviceType = () => {
+      const width = window.innerWidth;
+      setIsMobile(width <= 767);
+      setIsTablet(width >= 768 && width <= 1023);
+    };
+
+    checkDeviceType();
+    window.addEventListener('resize', checkDeviceType);
+
+    return () => window.removeEventListener('resize', checkDeviceType);
+  }, []);
+
+  // Intersection Observer for video performance optimization
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '50px',
+      threshold: 0.3
+    };
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) {
+          setVisibleVideos(prev => new Set(prev).add(video.src));
+          if (video.paused) {
+            video.play().catch(() => {
+              // Silently handle autoplay restrictions
+            });
+          }
+        } else {
+          setVisibleVideos(prev => {
+            const newSet = new Set(prev);
+            newSet.delete(video.src);
+            return newSet;
+          });
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+
+    // Observe all videos after component mounts
+    setTimeout(() => {
+      const videos = document.querySelectorAll('#social-moments video');
+      videos.forEach(video => observer.observe(video));
+    }, 100);
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Handle user interaction to enable autoplay if restricted
+  useEffect(() => {
+    const enableAutoplay = () => {
+      const videos = document.querySelectorAll('#social-moments video');
+      videos.forEach((video: HTMLVideoElement) => {
+        if (video.paused) {
+          video.play().catch(() => {
+            // Silently handle if still restricted
+          });
+        }
+      });
+    };
+
+    // Try to play videos on first user interaction
+    document.addEventListener('touchstart', enableAutoplay, { once: true });
+    document.addEventListener('click', enableAutoplay, { once: true });
+
+    return () => {
+      document.removeEventListener('touchstart', enableAutoplay);
+      document.removeEventListener('click', enableAutoplay);
+    };
+  }, []);
 
   const openModal = (content: typeof modalContent) => {
     setModalContent(content);
@@ -37,21 +115,51 @@ export default function UGCWall() {
           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
         }
         
-        @media (max-width: 1023px) {
+        /* TABLET SPECIFIC LAYOUT - 768px to 1023px ONLY */
+        @media (min-width: 768px) and (max-width: 1023px) {
           .social-grid {
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(4, 180px);
-            gap: 12px;
-            padding: 16px;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(5, 200px);
+            gap: 8px;
+            padding: 0;
+            border-radius: 0;
+          }
+
+          .tile-featured {
+            grid-column: 1 / span 2;
+            grid-row: 1 / span 1;
+          }
+          .tile-awards {
+            grid-column: 1 / span 1;
+            grid-row: 2 / span 1;
+          }
+          .tile-chennai {
+            grid-column: 2 / span 1;
+            grid-row: 2 / span 1;
+          }
+          .tile-quick {
+            grid-column: 1 / span 1;
+            grid-row: 3 / span 1;
+          }
+          .tile-community {
+            grid-column: 2 / span 1;
+            grid-row: 3 / span 1;
+          }
+          .tile-ather {
+            grid-column: 1 / span 2;
+            grid-row: 4 / span 1;
           }
         }
-        
-        @media (max-width: 639px) {
+
+        @media (max-width: 767px) {
           .social-grid {
             grid-template-columns: repeat(2, 1fr);
             grid-template-rows: repeat(6, 160px);
-            gap: 8px;
-            padding: 12px;
+            gap: 4px;
+            padding: 0;
+            touch-action: pan-y;
+            overflow: visible;
+            border-radius: 0;
           }
         }
         
@@ -91,35 +199,8 @@ export default function UGCWall() {
            grid-row: 3 / span 1;
          }
         
-                 /* Responsive adjustments */
-         @media (max-width: 1023px) {
-           .tile-featured {
-             grid-column: 1 / span 2;
-             grid-row: 1 / span 2;
-           }
-           .tile-awards {
-             grid-column: 3 / span 1;
-             grid-row: 1 / span 2;
-           }
-           .tile-chennai {
-             grid-column: 1 / span 1;
-             grid-row: 3 / span 2;
-           }
-           .tile-quick {
-             grid-column: 2 / span 1;
-             grid-row: 3 / span 1;
-           }
-           .tile-community {
-             grid-column: 1 / span 2;
-             grid-row: 5 / span 1;
-           }
-           .tile-ather {
-             grid-column: 3 / span 1;
-             grid-row: 5 / span 1;
-           }
-         }
          
-         @media (max-width: 639px) {
+         @media (max-width: 767px) {
            .tile-featured {
              grid-column: 1 / span 2;
              grid-row: 1 / span 2;
@@ -141,7 +222,7 @@ export default function UGCWall() {
              grid-row: 5 / span 1;
            }
            .tile-ather {
-             grid-column: 1 / span 1;
+             grid-column: 1 / span 2;
              grid-row: 6 / span 1;
            }
          }
@@ -157,11 +238,14 @@ export default function UGCWall() {
           border: 2px solid rgba(255, 255, 255, 0.8);
         }
         
-        .collage-tile:hover {
-          transform: translateY(-4px) scale(1.02);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2) !important;
-          border-color: #4ade80;
-          z-index: 10;
+        /* Only apply hover effects on desktop */
+        @media (min-width: 1024px) {
+          .collage-tile:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2) !important;
+            border-color: #4ade80;
+            z-index: 10;
+          }
         }
         
         .collage-tile img,
@@ -171,167 +255,49 @@ export default function UGCWall() {
           object-fit: cover;
           display: block;
           transition: transform 0.6s ease;
-        }
-        
-        .collage-tile:hover img,
-        .collage-tile:hover video {
-          transform: scale(1.08);
-        }
-        
-        /* Tile overlays */
-        .tile-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            135deg,
-            rgba(0, 0, 0, 0.7) 0%,
-            transparent 40%,
-            transparent 60%,
-            rgba(0, 0, 0, 0.8) 100%
-          );
-          opacity: 0;
-          transition: opacity 0.3s ease;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          padding: 16px;
-        }
-        
-        .collage-tile:hover .tile-overlay {
-          opacity: 1;
-        }
-        
-        /* Badges and labels */
-        .tile-badge {
-          position: absolute;
-          top: 12px;
-          left: 12px;
-          background: linear-gradient(135deg, #4ade80, #22c55e);
-          color: white;
-          padding: 8px 16px;
-          border-radius: 25px;
-          font-size: 11px;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
-          z-index: 3;
-        }
-        
-        .tile-instagram {
-          position: absolute;
-          top: 12px;
-          right: 12px;
-          background: linear-gradient(135deg, #E1306C, #F56040, #F77737);
-          padding: 10px;
-          border-radius: 12px;
-          opacity: 0;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 12px rgba(225, 48, 108, 0.3);
-          z-index: 3;
-        }
-        
-        .collage-tile:hover .tile-instagram {
-          opacity: 1;
-          transform: translateY(-2px);
+          will-change: transform;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
         }
 
-        /* Click indicator overlay */
-        .collage-tile::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(34, 197, 94, 0.1));
-          opacity: 0;
-          transition: opacity 0.3s ease;
-          z-index: 1;
+        /* Performance optimizations for videos */
+        .collage-tile video {
+          transform: translateZ(0);
+          -webkit-transform: translateZ(0);
+          image-rendering: optimizeSpeed;
+          image-rendering: -webkit-optimize-contrast;
         }
 
-        .collage-tile:hover::before {
-          opacity: 1;
-        }
+        /* Mobile video handling to prevent scroll interference */
+        @media (max-width: 767px) {
+          .collage-tile video {
+            pointer-events: none;
+            touch-action: pan-y;
+          }
 
-        .collage-tile::after {
-          content: '👆 Click to view';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%) scale(0.8);
-          background: rgba(0, 0, 0, 0.8);
-          color: white;
-          padding: 8px 16px;
-          border-radius: 20px;
-          font-size: 12px;
-          font-weight: 500;
-          opacity: 0;
-          transition: all 0.3s ease;
-          z-index: 2;
-          white-space: nowrap;
-        }
+          #social-moments {
+            touch-action: pan-y;
+            overflow: visible;
+          }
 
-        .collage-tile:hover::after {
-          opacity: 1;
-          transform: translate(-50%, -50%) scale(1);
+          .collage-tile {
+            touch-action: pan-y;
+          }
         }
         
-        .tile-content {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          padding: 16px;
-          color: white;
-          background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-          transform: translateY(100%);
-          transition: transform 0.4s ease;
+        /* Only apply image/video scaling on desktop hover */
+        @media (min-width: 1024px) {
+          .collage-tile:hover img,
+          .collage-tile:hover video {
+            transform: scale(1.08);
+          }
         }
         
-        .collage-tile:hover .tile-content {
-          transform: translateY(0);
-        }
-        
-        .tile-content h4 {
-          font-size: 14px;
-          font-weight: 600;
-          margin-bottom: 8px;
-          line-height: 1.3;
-        }
-        
-        .tile-content p {
-          font-size: 12px;
-          opacity: 0.9;
-          line-height: 1.4;
-          margin-bottom: 12px;
-        }
-        
-        .tile-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          background: rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(10px);
-          color: white;
-          padding: 6px 12px;
-          border-radius: 8px;
-          font-size: 10px;
-          font-weight: 500;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .tile-link:hover {
-          background: rgba(255, 255, 255, 0.3);
-          border-color: rgba(255, 255, 255, 0.5);
-          transform: translateY(-1px);
-        }
+
       `}</style>
       
-      <section id="social-moments" className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <div className="text-center mb-12">
+      <section id="social-moments" className="w-full max-w-none md:max-w-7xl mx-auto px-0 md:px-4 lg:px-6 py-12 sm:py-16">
+        <div className="text-center mb-12 px-4 md:px-0">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
                        Social <span className="text-[#4ade80]">Moments</span>
         </h2>
@@ -343,8 +309,8 @@ export default function UGCWall() {
         {/* Clean 3x4 Grid Layout */}
         <div className="social-grid">
           {/* Community Video - Large horizontal (spans 2x2) */}
-          <div 
-            className="tile-featured collage-tile cursor-pointer hover:scale-[1.02] transition-transform duration-300"
+          <div
+            className="tile-featured collage-tile cursor-pointer lg:hover:scale-[1.02] transition-transform duration-300"
             onClick={() => openModal({
               src: "/Ather-Assets/thumbnails/smgrid6.mp4",
               type: "video",
@@ -359,29 +325,14 @@ export default function UGCWall() {
             muted
             loop
             playsInline
+            preload="metadata"
+            style={{ pointerEvents: isMobile ? 'none' : 'auto' }}
           />
-            <div className="tile-badge">Community</div>
-            <div className="tile-instagram">
-              <Instagram size={16} className="text-white" />
-            </div>
-            <div className="tile-content">
-              <h4>Community Stories</h4>
-              <p>Join thousands of Ather riders sharing their journey</p>
-            <a
-              href="https://www.instagram.com/atherhyderbad_raamgroup/?hl=en"
-              target="_blank"
-              rel="noopener noreferrer"
-                className="tile-link"
-            >
-                <span>Join Community</span>
-                <ExternalLink size={10} />
-            </a>
-          </div>
         </div>
 
                   {/* Ather Official - Tall vertical (spans 1x2) */}
-        <div 
-          className="tile-awards collage-tile cursor-pointer hover:scale-[1.02] transition-transform duration-300"
+        <div
+          className="tile-awards collage-tile cursor-pointer lg:hover:scale-[1.02] transition-transform duration-300"
           onClick={() => openModal({
             src: "/Ather-Assets/thumbnails/smgrid2.mp4",
             type: "video",
@@ -396,29 +347,14 @@ export default function UGCWall() {
             muted
             loop
             playsInline
+            preload="metadata"
+            style={{ pointerEvents: isMobile ? 'none' : 'auto' }}
           />
-          <div className="tile-badge">Chennai</div>
-          <div className="tile-instagram">
-            <Instagram size={16} className="text-white" />
-            </div>
-          <div className="tile-content">
-            <h4>Chennai Moments</h4>
-            <p>Behind the scenes and Chennai Ather content</p>
-            <a
-              href="https://www.instagram.com/atherhyderbad_raamgroup/?hl=en"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="tile-link"
-            >
-              <span>Watch Chennai</span>
-              <ExternalLink size={10} />
-            </a>
-          </div>
         </div>
 
           {/* Chennai Reel - Tall vertical (spans 1x2) */}
-          <div 
-            className="tile-chennai collage-tile cursor-pointer hover:scale-[1.02] transition-transform duration-300"
+          <div
+            className="tile-chennai collage-tile cursor-pointer lg:hover:scale-[1.02] transition-transform duration-300"
             onClick={() => openModal({
               src: "/Ather-Assets/thumbnails/smgrid3.mp4",
               type: "video",
@@ -429,36 +365,20 @@ export default function UGCWall() {
           >
           <video
               src="/Ather-Assets/thumbnails/smgrid3.mp4"
-            autoPlay
+            autoPlay={!isMobile}
             muted
             loop
             playsInline
               controls={false}
               preload="metadata"
               className="w-full h-full object-cover"
+              style={{ pointerEvents: isMobile ? 'none' : 'auto' }}
             />
-            <div className="tile-badge">Hyderabad</div>
-            <div className="tile-instagram">
-              <Instagram size={14} className="text-white" />
-            </div>
-            <div className="tile-content">
-              <h4>Hyderabad Rides</h4>
-              <p>Experience the Ather journey across Hyderabad streets</p>
-            <a
-              href="https://www.instagram.com/atherhyderbad_raamgroup/?hl=en"
-              target="_blank"
-              rel="noopener noreferrer"
-                className="tile-link"
-            >
-                <span>Watch Reel</span>
-                <ExternalLink size={8} />
-            </a>
-          </div>
         </div>
 
           {/* Quick - Small square */}
-          <div 
-            className="tile-quick collage-tile cursor-pointer hover:scale-[1.02] transition-transform duration-300"
+          <div
+            className="tile-quick collage-tile cursor-pointer lg:hover:scale-[1.02] transition-transform duration-300"
             onClick={() => openModal({
               src: "/Ather-Assets/thumbnails/smgrid1.mp4",
               type: "video",
@@ -473,16 +393,14 @@ export default function UGCWall() {
             muted
             loop
             playsInline
+            preload="metadata"
+            style={{ pointerEvents: isMobile ? 'none' : 'auto' }}
           />
-            <div className="tile-badge">Quick</div>
-            <div className="tile-instagram">
-              <Instagram size={14} className="text-white" />
-            </div>
           </div>
 
                                                                                                                                        {/* Featured Order - Full width bottom row */}
-              <div 
-                className="tile-community collage-tile cursor-pointer hover:scale-[1.02] transition-transform duration-300"
+              <div
+                className="tile-community collage-tile cursor-pointer lg:hover:scale-[1.02] transition-transform duration-300"
                 onClick={() => openModal({
                   src: "/Ather-Assets/thumbnails/smgrid4.jpg",
                   type: "image",
@@ -498,30 +416,13 @@ export default function UGCWall() {
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
-              <div className="tile-badge">Featured</div>
-              <div className="tile-instagram">
-                <Instagram size={16} className="text-white" />
-              </div>
-              <div className="tile-content">
-                <h4>Delivery Day Joy</h4>
-                <p>Celebrate your Ather delivery moments with our community</p>
-                <a
-                  href="https://www.instagram.com/atherhyderbad_raamgroup/?hl=en"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="tile-link"
-                >
-                  <span>View on Instagram</span>
-                  <ExternalLink size={10} />
-                </a>
-            </div>
           </div>
 
            
 
            {/* Awards - Moved to bottom right */}
-          <div 
-            className="tile-empty collage-tile cursor-pointer hover:scale-[1.02] transition-transform duration-300"
+          <div
+            className="tile-ather collage-tile cursor-pointer lg:hover:scale-[1.02] transition-transform duration-300"
             onClick={() => openModal({
               src: "/Ather-Assets/thumbnails/smgrid5.jpg",
               type: "image",
@@ -537,28 +438,11 @@ export default function UGCWall() {
               sizes="(max-width: 768px) 100vw, 50vw"
               className="w-full h-full object-cover"
             />
-            <div className="tile-badge">Awards</div>
-            <div className="tile-instagram">
-              <Instagram size={16} className="text-white" />
-            </div>
-            <div className="tile-content">
-              <h4>Excellence Recognized</h4>
-              <p>Celebrating achievements in electric mobility innovation</p>
-            <a
-              href="https://www.instagram.com/atherhyderbad_raamgroup/?hl=en"
-              target="_blank"
-              rel="noopener noreferrer"
-                className="tile-link"
-            >
-              <span>View on Instagram</span>
-                <ExternalLink size={10} />
-            </a>
-          </div>
         </div>
       </div>
 
       {/* Call to Action */}
-        <div className="text-center bg-white backdrop-blur-sm rounded-xl p-8 border border-gray-200 shadow-sm mt-10">
+        <div className="text-center bg-white backdrop-blur-sm rounded-xl p-8 border border-gray-200 shadow-sm mt-10 mx-4 md:mx-0">
         <h3 className="text-2xl font-bold text-gray-900 mb-4">
           Share Your Ather Story
         </h3>
@@ -594,7 +478,7 @@ export default function UGCWall() {
       </div>
 
       {/* Social Stats */}
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center mt-8 px-4 md:px-0">
         <div className="flex items-center gap-8 text-gray-600 text-sm">
           <div className="flex items-center gap-2">
             <span className="text-[#4ade80]">📸</span>
