@@ -108,6 +108,7 @@ const riztaPageSchema = {
     "itemCondition": "https://schema.org/NewCondition",
     "hasMerchantReturnPolicy": {
       "@type": "MerchantReturnPolicy",
+      "applicableCountry": "IN",
       "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
       "merchantReturnDays": 15,
       "returnMethod": "https://schema.org/ReturnByMail",
@@ -178,7 +179,6 @@ export default function RiztaPage() {
 
       {/* Critical resource preloads */}
       <link rel="preload" href="/Ather-Assets/Rizta/mother and daughter riding scene-desk-updatedatherrizta.jpg" as="image" />
-      <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
 
       <main className="min-h-screen bg-gray-50">
         {/* Hidden H1 for SEO */}

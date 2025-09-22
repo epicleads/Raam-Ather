@@ -122,6 +122,7 @@ export default function Ather450Page() {
             "url": "https://raamather.com/ather-450#450s",
             "hasMerchantReturnPolicy": {
               "@type": "MerchantReturnPolicy",
+              "applicableCountry": "IN",
               "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
               "merchantReturnDays": 15,
               "returnMethod": "https://schema.org/ReturnByMail",
@@ -170,6 +171,7 @@ export default function Ather450Page() {
             "url": "https://raamather.com/ather-450#450x",
             "hasMerchantReturnPolicy": {
               "@type": "MerchantReturnPolicy",
+              "applicableCountry": "IN",
               "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
               "merchantReturnDays": 15,
               "returnMethod": "https://schema.org/ReturnByMail",

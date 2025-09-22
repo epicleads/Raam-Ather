@@ -1,5 +1,5 @@
 "use client";
-import { Instagram, ExternalLink } from 'lucide-react';
+import { Instagram } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import UGCModal from '../client/UGCModal.client';
 import Image from 'next/image';
@@ -14,14 +14,11 @@ export default function UGCWall() {
   } | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [isTablet, setIsTablet] = useState(false);
-  const [visibleVideos, setVisibleVideos] = useState(new Set());
 
   useEffect(() => {
     const checkDeviceType = () => {
       const width = window.innerWidth;
       setIsMobile(width <= 767);
-      setIsTablet(width >= 768 && width <= 1023);
     };
 
     checkDeviceType();
@@ -42,18 +39,11 @@ export default function UGCWall() {
       entries.forEach((entry) => {
         const video = entry.target as HTMLVideoElement;
         if (entry.isIntersecting) {
-          setVisibleVideos(prev => new Set(prev).add(video.src));
           if (video.paused) {
             video.play().catch(() => {
               // Silently handle autoplay restrictions
             });
           }
-        } else {
-          setVisibleVideos(prev => {
-            const newSet = new Set(prev);
-            newSet.delete(video.src);
-            return newSet;
-          });
         }
       });
     };
@@ -73,9 +63,10 @@ export default function UGCWall() {
   useEffect(() => {
     const enableAutoplay = () => {
       const videos = document.querySelectorAll('#social-moments video');
-      videos.forEach((video: HTMLVideoElement) => {
-        if (video.paused) {
-          video.play().catch(() => {
+      videos.forEach((video) => {
+        const videoElement = video as HTMLVideoElement;
+        if (videoElement.paused) {
+          videoElement.play().catch(() => {
             // Silently handle if still restricted
           });
         }

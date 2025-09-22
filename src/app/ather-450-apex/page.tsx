@@ -120,6 +120,7 @@ const apexPageSchema = {
     "itemCondition": "https://schema.org/NewCondition",
     "hasMerchantReturnPolicy": {
       "@type": "MerchantReturnPolicy",
+      "applicableCountry": "IN",
       "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
       "merchantReturnDays": 15,
       "returnMethod": "https://schema.org/ReturnByMail",

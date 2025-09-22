@@ -3,23 +3,10 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Home, Calendar, Car, MapPin } from "lucide-react";
+import { Calendar, MapPin } from "lucide-react";
 import { useTestDriveModal } from "../../test-ride-form/TestDriveModalStore";
-import type { NavItem } from "../bottomNav.types";
 
-type BottomNavClientProps = {
-  items: NavItem[];
-};
-
-// Icon mapping
-const iconMap = {
-  home: Home,
-  calendar: Calendar,
-  car: Car,
-  "map-pin": MapPin,
-};
-
-export function BottomNavClient({ items }: BottomNavClientProps) {
+export function BottomNavClient() {
   const pathname = usePathname();
   const testDriveModal = useTestDriveModal();
   const [isVisible, setIsVisible] = useState(false);
