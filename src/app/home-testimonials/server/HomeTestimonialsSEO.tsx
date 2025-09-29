@@ -78,7 +78,25 @@ export function HomeTestimonialsSEO({ testimonials }: HomeTestimonialsSEOProps) 
           "name": "Ather Energy"
         },
         "description": "Premium electric scooter with smart features and sustainable mobility",
-        "category": "Electric Scooter"
+        "category": "Electric Scooter",
+        "offers": {
+          "@type": "Offer",
+          "price": "146999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2025-12-31",
+          "seller": {
+            "@type": "Organization",
+            "name": "Raam Ather"
+          }
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.7",
+          "reviewCount": "2500",
+          "bestRating": "5",
+          "worstRating": "1"
+        }
       }
     })),
     "aggregateRating": {
@@ -94,7 +112,25 @@ export function HomeTestimonialsSEO({ testimonials }: HomeTestimonialsSEOProps) 
           "name": "Ather Energy"
         },
         "description": "Premium electric scooter with smart features and sustainable mobility",
-        "category": "Electric Scooter"
+        "category": "Electric Scooter",
+        "offers": {
+          "@type": "Offer",
+          "price": "146999",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2025-12-31",
+          "seller": {
+            "@type": "Organization",
+            "name": "Raam Ather"
+          }
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.7",
+          "reviewCount": "2500",
+          "bestRating": "5",
+          "worstRating": "1"
+        }
       }
     }
   };
