@@ -119,10 +119,50 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
               "price": "119841",
               "priceCurrency": "INR",
               "availability": "https://schema.org/InStock",
+              "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "IN",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                "merchantReturnDays": 15,
+                "returnMethod": "https://schema.org/ReturnByMail",
+                "returnFees": "https://schema.org/FreeReturn"
+              },
+              "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingRate": {
+                  "@type": "MonetaryAmount",
+                  "value": "0",
+                  "currency": "INR"
+                },
+                "shippingDestination": {
+                  "@type": "DefinedRegion",
+                  "addressCountry": "IN"
+                },
+                "deliveryTime": {
+                  "@type": "ShippingDeliveryTime",
+                  "handlingTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 1,
+                    "maxValue": 3,
+                    "unitCode": "DAY"
+                  },
+                  "transitTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 5,
+                    "maxValue": 7,
+                    "unitCode": "DAY"
+                  }
+                }
+              },
               "itemOffered": {
                 "@type": "Product",
                 "name": "Ather 450S",
+                "description": "Entry-level smart electric scooter with essential features and reliable performance",
                 "category": "Electric Scooter",
+                "image": [
+                  "https://raamather.com/Ather-Assets/450S/ather-450s-main.webp",
+                  "https://raamather.com/Ather-Assets/450S/ather-450s-dashboard.webp"
+                ],
                 "brand": {
                   "@type": "Brand",
                   "name": "Ather Energy"
@@ -152,10 +192,50 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
               "price": "146999",
               "priceCurrency": "INR",
               "availability": "https://schema.org/InStock",
+              "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "IN",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                "merchantReturnDays": 15,
+                "returnMethod": "https://schema.org/ReturnByMail",
+                "returnFees": "https://schema.org/FreeReturn"
+              },
+              "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingRate": {
+                  "@type": "MonetaryAmount",
+                  "value": "0",
+                  "currency": "INR"
+                },
+                "shippingDestination": {
+                  "@type": "DefinedRegion",
+                  "addressCountry": "IN"
+                },
+                "deliveryTime": {
+                  "@type": "ShippingDeliveryTime",
+                  "handlingTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 1,
+                    "maxValue": 3,
+                    "unitCode": "DAY"
+                  },
+                  "transitTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 5,
+                    "maxValue": 7,
+                    "unitCode": "DAY"
+                  }
+                }
+              },
               "itemOffered": {
                 "@type": "Product",
                 "name": "Ather 450X",
+                "description": "Premium smart electric scooter with advanced features, touchscreen dashboard, and superior performance",
                 "category": "Electric Scooter",
+                "image": [
+                  "https://raamather.com/Ather-Assets/450X/ather-450x-main.webp",
+                  "https://raamather.com/Ather-Assets/450X/ather-450x-dashboard.webp"
+                ],
                 "brand": {
                   "@type": "Brand",
                   "name": "Ather Energy"
@@ -185,10 +265,50 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
               "price": "129999",
               "priceCurrency": "INR",
               "availability": "https://schema.org/InStock",
+              "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "IN",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                "merchantReturnDays": 15,
+                "returnMethod": "https://schema.org/ReturnByMail",
+                "returnFees": "https://schema.org/FreeReturn"
+              },
+              "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingRate": {
+                  "@type": "MonetaryAmount",
+                  "value": "0",
+                  "currency": "INR"
+                },
+                "shippingDestination": {
+                  "@type": "DefinedRegion",
+                  "addressCountry": "IN"
+                },
+                "deliveryTime": {
+                  "@type": "ShippingDeliveryTime",
+                  "handlingTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 1,
+                    "maxValue": 3,
+                    "unitCode": "DAY"
+                  },
+                  "transitTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 5,
+                    "maxValue": 7,
+                    "unitCode": "DAY"
+                  }
+                }
+              },
               "itemOffered": {
                 "@type": "Product",
                 "name": "Ather Rizta",
+                "description": "Family-friendly electric scooter with spacious design, 159km range, and comfortable seating for two",
                 "category": "Electric Scooter",
+                "image": [
+                  "https://raamather.com/Ather-Assets/Rizta/rizta-main-image.webp",
+                  "https://raamather.com/Ather-Assets/Rizta/rizta-family-riding.webp"
+                ],
                 "brand": {
                   "@type": "Brand",
                   "name": "Ather Energy"
@@ -218,6 +338,7 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
       },
       {
         "@type": "ProductGroup",
+        "productGroupID": "ather-electric-scooters",
         "name": title,
         "description": description,
         "brand": {
