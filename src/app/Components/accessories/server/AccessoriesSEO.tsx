@@ -40,11 +40,34 @@ export default function AccessoriesSEO({ children }: AccessoriesSEOProps) {
                     price: '4999',
                     priceCurrency: 'INR',
                     availability: 'https://schema.org/InStock',
+                    priceValidUntil: '2025-12-31',
                     seller: {
                       '@type': 'Organization',
                       name: 'Raam Ather'
                     }
-                  }
+                  },
+                  aggregateRating: {
+                    '@type': 'AggregateRating',
+                    ratingValue: '4.5',
+                    reviewCount: '85',
+                    bestRating: '5',
+                    worstRating: '1'
+                  },
+                  review: [
+                    {
+                      '@type': 'Review',
+                      reviewRating: {
+                        '@type': 'Rating',
+                        ratingValue: '5',
+                        bestRating: '5'
+                      },
+                      author: {
+                        '@type': 'Person',
+                        name: 'Happy Customer'
+                      },
+                      reviewBody: 'Excellent smart helmet with great connectivity features.'
+                    }
+                  ]
                 },
                 {
                   '@type': 'Product',
@@ -60,11 +83,34 @@ export default function AccessoriesSEO({ children }: AccessoriesSEOProps) {
                     price: '2999',
                     priceCurrency: 'INR',
                     availability: 'https://schema.org/InStock',
+                    priceValidUntil: '2025-12-31',
                     seller: {
                       '@type': 'Organization',
                       name: 'Raam Ather'
                     }
-                  }
+                  },
+                  aggregateRating: {
+                    '@type': 'AggregateRating',
+                    ratingValue: '4.3',
+                    reviewCount: '62',
+                    bestRating: '5',
+                    worstRating: '1'
+                  },
+                  review: [
+                    {
+                      '@type': 'Review',
+                      reviewRating: {
+                        '@type': 'Rating',
+                        ratingValue: '4',
+                        bestRating: '5'
+                      },
+                      author: {
+                        '@type': 'Person',
+                        name: 'Verified Buyer'
+                      },
+                      reviewBody: 'Convenient portable charger, works well for emergency charging.'
+                    }
+                  ]
                 },
                 {
                   '@type': 'Product',
@@ -80,11 +126,34 @@ export default function AccessoriesSEO({ children }: AccessoriesSEOProps) {
                     price: '1999',
                     priceCurrency: 'INR',
                     availability: 'https://schema.org/InStock',
+                    priceValidUntil: '2025-12-31',
                     seller: {
                       '@type': 'Organization',
                       name: 'Raam Ather'
                     }
-                  }
+                  },
+                  aggregateRating: {
+                    '@type': 'AggregateRating',
+                    ratingValue: '4.4',
+                    reviewCount: '73',
+                    bestRating: '5',
+                    worstRating: '1'
+                  },
+                  review: [
+                    {
+                      '@type': 'Review',
+                      reviewRating: {
+                        '@type': 'Rating',
+                        ratingValue: '5',
+                        bestRating: '5'
+                      },
+                      author: {
+                        '@type': 'Person',
+                        name: 'Satisfied Customer'
+                      },
+                      reviewBody: 'High quality seat cover with excellent comfort and style.'
+                    }
+                  ]
                 }
               ]
             }

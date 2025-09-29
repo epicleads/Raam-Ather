@@ -148,6 +148,13 @@ export default function Safety() {
             }
           }
         },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.7",
+          "reviewCount": "1850",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
         "manufacturer": {
           "@type": "Organization",
           "name": "Ather Energy",

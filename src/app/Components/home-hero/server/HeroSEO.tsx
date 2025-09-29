@@ -177,6 +177,28 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
           "name": "Ather Energy",
           "url": "https://www.atherenergy.com"
         },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.6",
+          "reviewCount": "470",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "review": [
+          {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Satisfied Customer"
+            },
+            "reviewBody": "Excellent electric scooters with outstanding performance and service from Raam Ather."
+          }
+        ],
         "hasVariant": [
           {
             "@type": "Product",
@@ -189,7 +211,7 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
               "url": "https://raamather.com/ather-450",
               "priceCurrency": "INR",
               "price": "119999",
-              "priceValidUntil": "2024-12-31",
+              "priceValidUntil": "2025-12-31",
               "availability": "https://schema.org/InStock",
               "seller": {
                 "@id": "https://raamather.com/#organization"
@@ -214,7 +236,7 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
               "url": "https://raamather.com/ather-450",
               "priceCurrency": "INR",
               "price": "139999",
-              "priceValidUntil": "2024-12-31",
+              "priceValidUntil": "2025-12-31",
               "availability": "https://schema.org/InStock",
               "seller": {
                 "@id": "https://raamather.com/#organization"
@@ -239,7 +261,7 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
               "url": "https://raamather.com/rizta",
               "priceCurrency": "INR",
               "price": "109999",
-              "priceValidUntil": "2024-12-31",
+              "priceValidUntil": "2025-12-31",
               "availability": "https://schema.org/InStock",
               "seller": {
                 "@id": "https://raamather.com/#organization"

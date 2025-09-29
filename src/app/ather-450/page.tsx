@@ -117,8 +117,8 @@ export default function Ather450Page() {
               "@type": "Organization",
               "name": "Raam Ather"
             },
-            "validFrom": "2024-01-01",
-            "priceValidUntil": "2024-12-31",
+            "validFrom": "2025-01-01",
+            "priceValidUntil": "2025-12-31",
             "url": "https://raamather.com/ather-450#450s",
             "hasMerchantReturnPolicy": {
               "@type": "MerchantReturnPolicy",
@@ -166,8 +166,8 @@ export default function Ather450Page() {
               "@type": "Organization",
               "name": "Raam Ather"
             },
-            "validFrom": "2024-01-01",
-            "priceValidUntil": "2024-12-31",
+            "validFrom": "2025-01-01",
+            "priceValidUntil": "2025-12-31",
             "url": "https://raamather.com/ather-450#450x",
             "hasMerchantReturnPolicy": {
               "@type": "MerchantReturnPolicy",

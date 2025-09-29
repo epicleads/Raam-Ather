@@ -94,7 +94,7 @@ const riztaPageSchema = {
     "price": "129999",
     "priceCurrency": "INR",
     "availability": "https://schema.org/InStock",
-    "priceValidUntil": "2024-12-31",
+    "priceValidUntil": "2025-12-31",
     "seller": {
       "@type": "LocalBusiness",
       "name": "Raam Ather",

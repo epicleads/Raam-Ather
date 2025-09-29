@@ -56,6 +56,17 @@ export function FaqServer({
         "@type": "Brand",
         "name": "Ather Energy"
       },
+      "offers": {
+        "@type": "Offer",
+        "price": "146999",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Raam Ather"
+        },
+        "priceValidUntil": "2025-12-31"
+      },
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.6",
