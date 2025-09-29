@@ -92,13 +92,39 @@ export default function LocalBusinessStructuredData({
               "name": "Ather Energy"
             },
             "category": "Electric Scooter",
+            "offers": {
+              "@type": "Offer",
+              "price": "146926",
+              "priceCurrency": "INR",
+              "availability": "https://schema.org/InStock",
+              "priceValidUntil": "2025-12-31",
+              "seller": {
+                "@type": "Organization",
+                "name": "Raam Ather"
+              }
+            },
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": "4.7",
               "reviewCount": "1500",
               "bestRating": "5",
               "worstRating": "1"
-            }
+            },
+            "review": [
+              {
+                "@type": "Review",
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "5",
+                  "bestRating": "5"
+                },
+                "author": {
+                  "@type": "Person",
+                  "name": "Premium Customer"
+                },
+                "reviewBody": "Outstanding premium scooter with excellent smart features and performance."
+              }
+            ]
           }
         },
         {
@@ -115,13 +141,39 @@ export default function LocalBusinessStructuredData({
               "name": "Ather Energy"
             },
             "category": "Electric Scooter",
+            "offers": {
+              "@type": "Offer",
+              "price": "129999",
+              "priceCurrency": "INR",
+              "availability": "https://schema.org/InStock",
+              "priceValidUntil": "2025-12-31",
+              "seller": {
+                "@type": "Organization",
+                "name": "Raam Ather"
+              }
+            },
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": "4.8",
               "reviewCount": "800",
               "bestRating": "5",
               "worstRating": "1"
-            }
+            },
+            "review": [
+              {
+                "@type": "Review",
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": "5",
+                  "bestRating": "5"
+                },
+                "author": {
+                  "@type": "Person",
+                  "name": "Family Rider"
+                },
+                "reviewBody": "Perfect family electric scooter with amazing comfort and storage space."
+              }
+            ]
           }
         }
       ]

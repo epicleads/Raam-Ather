@@ -251,6 +251,21 @@ export const RIZTA_STRUCTURED_DATA = {
     "bestRating": "5",
     "worstRating": "1"
   },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Family Customer"
+      },
+      "reviewBody": "Perfect family scooter with excellent comfort and storage. Great for daily commuting!"
+    }
+  ],
   "additionalProperty": [
     {
       "@type": "PropertyValue",

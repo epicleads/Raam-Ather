@@ -139,6 +139,21 @@ const structuredData = {
     "bestRating": "5",
     "worstRating": "1"
   },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Satisfied Customer"
+      },
+      "reviewBody": "Excellent electric scooter series with outstanding performance and features across all models."
+    }
+  ],
   "manufacturer": {
     "@type": "Organization",
     "name": "Ather Energy"

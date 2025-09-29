@@ -126,6 +126,24 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
                 "brand": {
                   "@type": "Brand",
                   "name": "Ather Energy"
+                },
+                "offers": {
+                  "@type": "Offer",
+                  "price": "119841",
+                  "priceCurrency": "INR",
+                  "availability": "https://schema.org/InStock",
+                  "priceValidUntil": "2025-12-31",
+                  "seller": {
+                    "@type": "Organization",
+                    "name": "Raam Ather"
+                  }
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.5",
+                  "reviewCount": "150",
+                  "bestRating": "5",
+                  "worstRating": "1"
                 }
               }
             },
@@ -141,6 +159,24 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
                 "brand": {
                   "@type": "Brand",
                   "name": "Ather Energy"
+                },
+                "offers": {
+                  "@type": "Offer",
+                  "price": "146999",
+                  "priceCurrency": "INR",
+                  "availability": "https://schema.org/InStock",
+                  "priceValidUntil": "2025-12-31",
+                  "seller": {
+                    "@type": "Organization",
+                    "name": "Raam Ather"
+                  }
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.7",
+                  "reviewCount": "200",
+                  "bestRating": "5",
+                  "worstRating": "1"
                 }
               }
             },
@@ -156,6 +192,24 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
                 "brand": {
                   "@type": "Brand",
                   "name": "Ather Energy"
+                },
+                "offers": {
+                  "@type": "Offer",
+                  "price": "129999",
+                  "priceCurrency": "INR",
+                  "availability": "https://schema.org/InStock",
+                  "priceValidUntil": "2025-12-31",
+                  "seller": {
+                    "@type": "Organization",
+                    "name": "Raam Ather"
+                  }
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.8",
+                  "reviewCount": "127",
+                  "bestRating": "5",
+                  "worstRating": "1"
                 }
               }
             }

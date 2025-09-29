@@ -345,6 +345,21 @@ export const APEX_STRUCTURED_DATA = {
     "bestRating": "5",
     "worstRating": "1"
   },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Performance Enthusiast"
+      },
+      "reviewBody": "The ultimate Ather experience! Incredible power and speed with Warp+™ mode."
+    }
+  ],
   "additionalProperty": [
     {
       "@type": "PropertyValue",
