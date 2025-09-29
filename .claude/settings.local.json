@@ -30,7 +30,15 @@
       "Bash(npm update:*)",
       "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Raam-Ather-main/src/app/sitemap.xml/**)",
       "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/Raam-Ather-main/**)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/raam-honda/src/app/components/Header/**)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/raam-honda/src/app/components/Hero/**)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/raam-honda/src/app/components/whyChooseUs/**)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/raam-honda/src/app/**)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/raam-honda/**)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/raam-mg/src/app/components/featuredModels/**)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/raam-mg/src/app/components/**)",
+      "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/raam-mg/**)"
     ],
     "deny": [],
     "ask": []
