@@ -35,6 +35,10 @@ export default function AccessoriesSEO({ children }: AccessoriesSEOProps) {
                     '@type': 'Brand',
                     name: 'Ather Energy'
                   },
+                  image: [
+                    'https://raamather.com/Ather-Assets/accessories/smart-helmet-main.webp',
+                    'https://raamather.com/Ather-Assets/accessories/smart-helmet-features.webp'
+                  ],
                   offers: {
                     '@type': 'Offer',
                     price: '4999',
@@ -44,6 +48,41 @@ export default function AccessoriesSEO({ children }: AccessoriesSEOProps) {
                     seller: {
                       '@type': 'Organization',
                       name: 'Raam Ather'
+                    },
+                    hasMerchantReturnPolicy: {
+                      '@type': 'MerchantReturnPolicy',
+                      applicableCountry: 'IN',
+                      returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+                      merchantReturnDays: 7,
+                      returnMethod: 'https://schema.org/ReturnByMail',
+                      returnFees: 'https://schema.org/FreeReturn'
+                    },
+                    shippingDetails: {
+                      '@type': 'OfferShippingDetails',
+                      shippingRate: {
+                        '@type': 'MonetaryAmount',
+                        value: '0',
+                        currency: 'INR'
+                      },
+                      shippingDestination: {
+                        '@type': 'DefinedRegion',
+                        addressCountry: 'IN'
+                      },
+                      deliveryTime: {
+                        '@type': 'ShippingDeliveryTime',
+                        handlingTime: {
+                          '@type': 'QuantitativeValue',
+                          minValue: 1,
+                          maxValue: 2,
+                          unitCode: 'DAY'
+                        },
+                        transitTime: {
+                          '@type': 'QuantitativeValue',
+                          minValue: 2,
+                          maxValue: 5,
+                          unitCode: 'DAY'
+                        }
+                      }
                     }
                   },
                   aggregateRating: {
@@ -78,6 +117,10 @@ export default function AccessoriesSEO({ children }: AccessoriesSEOProps) {
                     '@type': 'Brand',
                     name: 'Ather Energy'
                   },
+                  image: [
+                    'https://raamather.com/Ather-Assets/accessories/portable-charger-main.webp',
+                    'https://raamather.com/Ather-Assets/accessories/portable-charger-use.webp'
+                  ],
                   offers: {
                     '@type': 'Offer',
                     price: '2999',
@@ -87,6 +130,41 @@ export default function AccessoriesSEO({ children }: AccessoriesSEOProps) {
                     seller: {
                       '@type': 'Organization',
                       name: 'Raam Ather'
+                    },
+                    hasMerchantReturnPolicy: {
+                      '@type': 'MerchantReturnPolicy',
+                      applicableCountry: 'IN',
+                      returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+                      merchantReturnDays: 7,
+                      returnMethod: 'https://schema.org/ReturnByMail',
+                      returnFees: 'https://schema.org/FreeReturn'
+                    },
+                    shippingDetails: {
+                      '@type': 'OfferShippingDetails',
+                      shippingRate: {
+                        '@type': 'MonetaryAmount',
+                        value: '0',
+                        currency: 'INR'
+                      },
+                      shippingDestination: {
+                        '@type': 'DefinedRegion',
+                        addressCountry: 'IN'
+                      },
+                      deliveryTime: {
+                        '@type': 'ShippingDeliveryTime',
+                        handlingTime: {
+                          '@type': 'QuantitativeValue',
+                          minValue: 1,
+                          maxValue: 2,
+                          unitCode: 'DAY'
+                        },
+                        transitTime: {
+                          '@type': 'QuantitativeValue',
+                          minValue: 2,
+                          maxValue: 5,
+                          unitCode: 'DAY'
+                        }
+                      }
                     }
                   },
                   aggregateRating: {
@@ -121,6 +199,10 @@ export default function AccessoriesSEO({ children }: AccessoriesSEOProps) {
                     '@type': 'Brand',
                     name: 'Ather Energy'
                   },
+                  image: [
+                    'https://raamather.com/Ather-Assets/accessories/premium-seat-cover-main.webp',
+                    'https://raamather.com/Ather-Assets/accessories/premium-seat-cover-installed.webp'
+                  ],
                   offers: {
                     '@type': 'Offer',
                     price: '1999',
@@ -130,6 +212,41 @@ export default function AccessoriesSEO({ children }: AccessoriesSEOProps) {
                     seller: {
                       '@type': 'Organization',
                       name: 'Raam Ather'
+                    },
+                    hasMerchantReturnPolicy: {
+                      '@type': 'MerchantReturnPolicy',
+                      applicableCountry: 'IN',
+                      returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+                      merchantReturnDays: 7,
+                      returnMethod: 'https://schema.org/ReturnByMail',
+                      returnFees: 'https://schema.org/FreeReturn'
+                    },
+                    shippingDetails: {
+                      '@type': 'OfferShippingDetails',
+                      shippingRate: {
+                        '@type': 'MonetaryAmount',
+                        value: '0',
+                        currency: 'INR'
+                      },
+                      shippingDestination: {
+                        '@type': 'DefinedRegion',
+                        addressCountry: 'IN'
+                      },
+                      deliveryTime: {
+                        '@type': 'ShippingDeliveryTime',
+                        handlingTime: {
+                          '@type': 'QuantitativeValue',
+                          minValue: 1,
+                          maxValue: 2,
+                          unitCode: 'DAY'
+                        },
+                        transitTime: {
+                          '@type': 'QuantitativeValue',
+                          minValue: 2,
+                          maxValue: 5,
+                          unitCode: 'DAY'
+                        }
+                      }
                     }
                   },
                   aggregateRating: {

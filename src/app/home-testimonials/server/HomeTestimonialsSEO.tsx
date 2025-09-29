@@ -85,7 +85,17 @@ export function HomeTestimonialsSEO({ testimonials }: HomeTestimonialsSEOProps) 
       "@type": "AggregateRating",
       "ratingValue": avgRating.toFixed(1),
       "reviewCount": testimonials.length,
-      "bestRating": 5
+      "bestRating": 5,
+      "itemReviewed": {
+        "@type": "Product",
+        "name": "Ather Electric Scooter",
+        "brand": {
+          "@type": "Brand",
+          "name": "Ather Energy"
+        },
+        "description": "Premium electric scooter with smart features and sustainable mobility",
+        "category": "Electric Scooter"
+      }
     }
   };
 

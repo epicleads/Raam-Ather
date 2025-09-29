@@ -203,9 +203,15 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
           {
             "@type": "Product",
             "name": "Ather 450S",
+            "description": "Entry-level smart electric scooter with essential features and reliable performance",
+            "productGroupID": "ather-450-series",
             "model": "450S",
             "sku": "ATHER-450S",
             "mpn": "450S-2024",
+            "image": [
+              "https://raamather.com/Ather-Assets/450S/ather-450s-main.webp",
+              "https://raamather.com/Ather-Assets/450S/ather-450s-side-view.webp"
+            ],
             "offers": {
               "@type": "Offer",
               "url": "https://raamather.com/ather-450",
@@ -215,6 +221,41 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
               "availability": "https://schema.org/InStock",
               "seller": {
                 "@id": "https://raamather.com/#organization"
+              },
+              "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "IN",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                "merchantReturnDays": 15,
+                "returnMethod": "https://schema.org/ReturnByMail",
+                "returnFees": "https://schema.org/FreeReturn"
+              },
+              "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingRate": {
+                  "@type": "MonetaryAmount",
+                  "value": "0",
+                  "currency": "INR"
+                },
+                "shippingDestination": {
+                  "@type": "DefinedRegion",
+                  "addressCountry": "IN"
+                },
+                "deliveryTime": {
+                  "@type": "ShippingDeliveryTime",
+                  "handlingTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 1,
+                    "maxValue": 3,
+                    "unitCode": "DAY"
+                  },
+                  "transitTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 5,
+                    "maxValue": 7,
+                    "unitCode": "DAY"
+                  }
+                }
               }
             },
             "aggregateRating": {
@@ -228,9 +269,15 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
           {
             "@type": "Product",
             "name": "Ather 450X",
+            "description": "Premium smart electric scooter with advanced features, touchscreen dashboard, and superior performance",
+            "productGroupID": "ather-450-series",
             "model": "450X",
             "sku": "ATHER-450X",
             "mpn": "450X-2024",
+            "image": [
+              "https://raamather.com/Ather-Assets/450X/ather-450x-main.webp",
+              "https://raamather.com/Ather-Assets/450X/ather-450x-dashboard.webp"
+            ],
             "offers": {
               "@type": "Offer",
               "url": "https://raamather.com/ather-450",
@@ -240,6 +287,41 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
               "availability": "https://schema.org/InStock",
               "seller": {
                 "@id": "https://raamather.com/#organization"
+              },
+              "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "IN",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                "merchantReturnDays": 15,
+                "returnMethod": "https://schema.org/ReturnByMail",
+                "returnFees": "https://schema.org/FreeReturn"
+              },
+              "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingRate": {
+                  "@type": "MonetaryAmount",
+                  "value": "0",
+                  "currency": "INR"
+                },
+                "shippingDestination": {
+                  "@type": "DefinedRegion",
+                  "addressCountry": "IN"
+                },
+                "deliveryTime": {
+                  "@type": "ShippingDeliveryTime",
+                  "handlingTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 1,
+                    "maxValue": 3,
+                    "unitCode": "DAY"
+                  },
+                  "transitTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 5,
+                    "maxValue": 7,
+                    "unitCode": "DAY"
+                  }
+                }
               }
             },
             "aggregateRating": {
@@ -253,9 +335,15 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
           {
             "@type": "Product",
             "name": "Ather Rizta",
+            "description": "Family-friendly electric scooter with spacious design, 159km range, and comfortable seating for two",
+            "productGroupID": "ather-rizta-series",
             "model": "Rizta",
             "sku": "ATHER-RIZTA",
             "mpn": "RIZTA-2024",
+            "image": [
+              "https://raamather.com/Ather-Assets/Rizta/rizta-main-image.webp",
+              "https://raamather.com/Ather-Assets/Rizta/rizta-family-riding.webp"
+            ],
             "offers": {
               "@type": "Offer",
               "url": "https://raamather.com/rizta",
@@ -265,6 +353,41 @@ export function HeroSEO({ title, description }: HeroSEOProps) {
               "availability": "https://schema.org/InStock",
               "seller": {
                 "@id": "https://raamather.com/#organization"
+              },
+              "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "IN",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                "merchantReturnDays": 15,
+                "returnMethod": "https://schema.org/ReturnByMail",
+                "returnFees": "https://schema.org/FreeReturn"
+              },
+              "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingRate": {
+                  "@type": "MonetaryAmount",
+                  "value": "0",
+                  "currency": "INR"
+                },
+                "shippingDestination": {
+                  "@type": "DefinedRegion",
+                  "addressCountry": "IN"
+                },
+                "deliveryTime": {
+                  "@type": "ShippingDeliveryTime",
+                  "handlingTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 1,
+                    "maxValue": 3,
+                    "unitCode": "DAY"
+                  },
+                  "transitTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 5,
+                    "maxValue": 7,
+                    "unitCode": "DAY"
+                  }
+                }
               }
             },
             "aggregateRating": {
