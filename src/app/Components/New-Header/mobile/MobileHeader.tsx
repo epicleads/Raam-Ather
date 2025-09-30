@@ -108,14 +108,15 @@ export default function MobileHeader({ data }: HeaderProps) {
           <div className="px-2 sm:px-3" style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box', paddingTop: '0.45rem', paddingBottom: '0.45rem' }}>
             <div className="flex items-center justify-between" style={{ width: '100%', minWidth: 0 }}>
               {/* Logo */}
-              <div className="flex-shrink-0" style={{ minWidth: 0, maxWidth: '50%' }}>
+              <div className="flex-shrink-0" style={{ minWidth: 0, maxWidth: '55%' }}>
                 <Link href={data.logo.href} className="hover:opacity-80 transition-opacity duration-300">
                   <Image
                     src={data.logo.src}
                     alt={data.logo.alt}
-                    width={48}
-                    height={48}
-                    className="h-6 w-auto" 
+                    width={130}
+                    height={33}
+                    className="h-7 w-auto sm:h-8"
+                    priority
                     style={{ height: 'auto', maxWidth: '100%' }}
                   />
                 </Link>
@@ -190,9 +191,10 @@ export default function MobileHeader({ data }: HeaderProps) {
                   <Image
                     src={data.logo.src}
                     alt={data.logo.alt}
-                    width={40}
-                    height={40}
+                    width={140}
+                    height={35}
                     className="h-10 w-auto"
+                    style={{ maxHeight: '40px' }}
                   />
                 </Link>
                 <motion.button

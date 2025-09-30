@@ -159,10 +159,11 @@ export default function DesktopHeader({ data }: HeaderProps) {
                 <Image
                   src={data.logo.src}
                   alt={data.logo.alt}
-                  width={48}
-                  height={48}
-                  className="h-6 w-auto sm:h-8 md:h-10 lg:h-12" 
-                  style={{ height: 'auto' }}
+                  width={180}
+                  height={45}
+                  className="h-9 w-auto sm:h-10 md:h-11 lg:h-12 xl:h-13"
+                  priority
+                  style={{ height: 'auto', maxHeight: '52px' }}
                 />
               </Link>
             </div>
@@ -354,9 +355,10 @@ export default function DesktopHeader({ data }: HeaderProps) {
                   <Image
                     src={data.logo.src}
                     alt={data.logo.alt}
-                    width={40}
-                    height={40}
+                    width={140}
+                    height={35}
                     className="h-10 w-auto"
+                    style={{ maxHeight: '40px' }}
                   />
                 </Link>
                 <motion.button
