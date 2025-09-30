@@ -18,7 +18,6 @@ interface PerformanceData {
     description: string;
   }>;
   seoContent: {
-    structuredData: Record<string, unknown>;
     locationInfo: {
       hyderabad: string;
       chennai: string;

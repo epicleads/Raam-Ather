@@ -216,14 +216,6 @@ export default function Ather450Page() {
         "review": [
           {
             "@type": "Review",
-            "itemReviewed": {
-              "@type": "Product",
-              "name": "Ather 450 Electric Scooter",
-              "brand": {
-                "@type": "Brand",
-                "name": "Ather Energy"
-              }
-            },
             "reviewRating": {
               "@type": "Rating",
               "ratingValue": "5",
@@ -297,26 +289,14 @@ export default function Ather450Page() {
         ],
         "priceRange": "₹₹₹",
         "servedCuisine": "Electric Vehicles",
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Electric Scooter Collection",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Product",
-                "name": "Ather 450S"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Product",
-                "name": "Ather 450X"
-              }
+        "makesOffer": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@id": "https://raamather.com/ather-450#product"
             }
-          ]
-        }
+          }
+        ]
       },
       {
         "@type": "BreadcrumbList",

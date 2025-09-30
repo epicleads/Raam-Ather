@@ -109,85 +109,8 @@ export function WhatsNewServer({
     }
   }
 
-  // Generate structured data for SEO
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Ather 450",
-    "brand": {
-      "@type": "Brand",
-      "name": "Ather Energy"
-    },
-    "category": "Electric Scooter",
-    "features": [
-      ...whatsNewData.videoFeatures.map(feature => feature.title),
-      ...whatsNewData.smartFeatures.connectivity.map(feature => feature.title),
-      whatsNewData.smartFeatures.charging.title,
-      whatsNewData.smartFeatures.range.title
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "146999",
-      "priceCurrency": "INR",
-      "availability": "https://schema.org/InStock",
-      "seller": {
-        "@type": "Organization",
-        "name": "Raam Ather"
-      },
-      "hasMerchantReturnPolicy": {
-        "@type": "MerchantReturnPolicy",
-        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-        "merchantReturnDays": 15,
-        "returnMethod": "https://schema.org/ReturnByMail",
-        "returnFees": "https://schema.org/FreeReturn"
-      },
-      "shippingDetails": {
-        "@type": "OfferShippingDetails",
-        "shippingRate": {
-          "@type": "MonetaryAmount",
-          "value": "0",
-          "currency": "INR"
-        },
-        "shippingDestination": {
-          "@type": "DefinedRegion",
-          "addressCountry": "IN"
-        },
-        "deliveryTime": {
-          "@type": "ShippingDeliveryTime",
-          "handlingTime": {
-            "@type": "QuantitativeValue",
-            "minValue": 1,
-            "maxValue": 3,
-            "unitCode": "DAY"
-          },
-          "transitTime": {
-            "@type": "QuantitativeValue",
-            "minValue": 5,
-            "maxValue": 7,
-            "unitCode": "DAY"
-          }
-        }
-      }
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.7",
-      "reviewCount": "2500",
-      "bestRating": "5",
-      "worstRating": "1"
-    }
-  }
-
   return (
     <>
-      {/* SEO Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData)
-        }}
-      />
-      
       {/* What's New Section */}
       <section className="bg-black py-20 md:py-24 overflow-hidden">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">

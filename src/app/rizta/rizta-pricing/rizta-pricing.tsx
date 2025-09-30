@@ -90,69 +90,8 @@ export default function RiztaPricing() {
     }
   ]
 
-  // JSON-LD for SEO - Enhanced with multiple offers
-  const pricingJsonLd = {
-    ...RIZTA_STRUCTURED_DATA,
-    'offers': pricingVariants.map(variant => ({
-      '@type': 'Offer',
-      'name': variant.variant,
-      'price': variant.exShowroomPrice.toString(),
-      'priceCurrency': 'INR',
-      'availability': 'https://schema.org/InStock',
-      'priceValidUntil': '2024-12-31',
-      'seller': {
-        '@type': 'LocalBusiness',
-        'name': 'Raam Ather',
-        'address': {
-          '@type': 'PostalAddress',
-          'addressLocality': 'Hyderabad',
-          'addressRegion': 'Telangana',
-          'addressCountry': 'IN'
-        }
-      },
-      'hasMerchantReturnPolicy': {
-        '@type': 'MerchantReturnPolicy',
-        'returnPolicyCategory': 'https://schema.org/MerchantReturnFiniteReturnWindow',
-        'merchantReturnDays': 15,
-        'returnMethod': 'https://schema.org/ReturnByMail',
-        'returnFees': 'https://schema.org/FreeReturn'
-      },
-      'shippingDetails': {
-        '@type': 'OfferShippingDetails',
-        'shippingRate': {
-          '@type': 'MonetaryAmount',
-          'value': '0',
-          'currency': 'INR'
-        },
-        'shippingDestination': {
-          '@type': 'DefinedRegion',
-          'addressCountry': 'IN'
-        },
-        'deliveryTime': {
-          '@type': 'ShippingDeliveryTime',
-          'handlingTime': {
-            '@type': 'QuantitativeValue',
-            'minValue': 1,
-            'maxValue': 3,
-            'unitCode': 'DAY'
-          },
-          'transitTime': {
-            '@type': 'QuantitativeValue',
-            'minValue': 5,
-            'maxValue': 7,
-            'unitCode': 'DAY'
-          }
-        }
-      }
-    }))
-  }
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(pricingJsonLd) }}
-      />
       <section 
         className="bg-white py-12 sm:py-16 lg:py-24"
         id="pricing"

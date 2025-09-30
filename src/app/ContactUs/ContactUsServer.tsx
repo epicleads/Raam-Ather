@@ -38,50 +38,10 @@ export default function ContactUsServer() {
       itemListElement: [
         {
           '@type': 'Offer',
-          price: '146999',
-          priceCurrency: 'INR',
-          availability: 'https://schema.org/InStock',
           itemOffered: {
-            '@type': 'Product',
-            name: 'Ather 450X Electric Scooter',
-            description: 'Premium electric scooter with fast charging and smart features',
-            brand: {
-              '@type': 'Brand',
-              name: 'Ather Energy'
-            },
-            offers: {
-              '@type': 'Offer',
-              price: '146999',
-              priceCurrency: 'INR',
-              availability: 'https://schema.org/InStock',
-              priceValidUntil: '2025-12-31',
-              seller: {
-                '@type': 'Organization',
-                name: 'Raam Ather'
-              }
-            },
-            aggregateRating: {
-              '@type': 'AggregateRating',
-              ratingValue: '4.7',
-              reviewCount: '2000',
-              bestRating: '5',
-              worstRating: '1'
-            },
-            review: [
-              {
-                '@type': 'Review',
-                reviewRating: {
-                  '@type': 'Rating',
-                  ratingValue: '5',
-                  bestRating: '5'
-                },
-                author: {
-                  '@type': 'Person',
-                  name: 'Contact Customer'
-                },
-                reviewBody: 'Excellent customer service and premium electric scooter experience.'
-              }
-            ]
+            '@type': 'Service',
+            name: 'Ather Electric Scooter Sales',
+            description: 'Premium electric scooter sales and delivery in Hyderabad and Chennai'
           }
         },
         {

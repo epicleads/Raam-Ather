@@ -24,7 +24,6 @@ interface PerformanceData {
     description: string;
   }>;
   seoContent: {
-  structuredData: Record<string, unknown>;
     locationInfo: {
       hyderabad: string;
       chennai: string;
@@ -66,76 +65,6 @@ export default function Performance() {
       }
     ],
     seoContent: {
-      structuredData: {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": "Ather 450X Electric Scooter",
-        "description": "High-performance electric scooter with 6kW motor and advanced features",
-        "brand": {
-          "@type": "Brand",
-          "name": "Ather Energy"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": "146999",
-          "priceCurrency": "INR",
-          "availability": "https://schema.org/InStock",
-          "areaServed": ["Hyderabad", "Chennai"],
-          "seller": {
-            "@type": "Organization",
-            "name": "Raam Ather"
-          },
-          "hasMerchantReturnPolicy": {
-            "@type": "MerchantReturnPolicy",
-            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-            "merchantReturnDays": 15,
-            "returnMethod": "https://schema.org/ReturnByMail",
-            "returnFees": "https://schema.org/FreeReturn"
-          },
-          "shippingDetails": {
-            "@type": "OfferShippingDetails",
-            "shippingRate": {
-              "@type": "MonetaryAmount",
-              "value": "0",
-              "currency": "INR"
-            },
-            "shippingDestination": {
-              "@type": "DefinedRegion",
-              "addressCountry": "IN"
-            },
-            "deliveryTime": {
-              "@type": "ShippingDeliveryTime",
-              "handlingTime": {
-                "@type": "QuantitativeValue",
-                "minValue": 1,
-                "maxValue": 3,
-                "unitCode": "DAY"
-              },
-              "transitTime": {
-                "@type": "QuantitativeValue",
-                "minValue": 5,
-                "maxValue": 7,
-                "unitCode": "DAY"
-              }
-            }
-          }
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.7",
-          "reviewCount": "1800",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
-        "manufacturer": {
-          "@type": "Organization",
-          "name": "Ather Energy",
-          "address": {
-            "@type": "PostalAddress",
-            "addressRegion": "Telangana, Tamil Nadu"
-          }
-        }
-      },
       locationInfo: {
         hyderabad: "Experience Ather 450X performance in Hyderabad - the perfect electric scooter for navigating the bustling streets of the City of Pearls.",
         chennai: "Discover Ather 450X in Chennai - engineered for the dynamic urban landscape of the Detroit of South India."
@@ -145,12 +74,6 @@ export default function Performance() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(performanceData.seoContent.structuredData),
-        }}
-      />
       <section className="bg-black text-white py-16 md:py-24">
         <div className="container mx-auto px-4">
           <PerformanceClient data={performanceData} />

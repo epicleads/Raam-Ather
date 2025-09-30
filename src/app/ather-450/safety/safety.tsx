@@ -25,7 +25,6 @@ export interface SafetyFeature {
 export interface SafetyData {
   features: SafetyFeature[];
   seoContent: {
-    structuredData: object;
     locationInfo: {
       hyderabad: string;
       chennai: string;
@@ -72,98 +71,6 @@ export default function Safety() {
       }
     ],
     seoContent: {
-      structuredData: {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": "Ather 450X Electric Scooter Safety Features",
-        "description": "Advanced safety features including Emergency Stop Signal, Dual Disc Brakes, FallSafe™ technology, and comprehensive theft protection",
-        "brand": {
-          "@type": "Brand",
-          "name": "Ather Energy"
-        },
-        "hasFeature": [
-          {
-            "@type": "ProductFeature",
-            "name": "Emergency Stop Signal",
-            "description": "Smart taillight alerts for sudden braking situations"
-          },
-          {
-            "@type": "ProductFeature", 
-            "name": "Dual Disc Brakes",
-            "description": "Superior stopping power with responsive dual disc brake system"
-          },
-          {
-            "@type": "ProductFeature",
-            "name": "FallSafe™ Technology",
-            "description": "Intelligent motor cut-off system to prevent accidental acceleration during falls"
-          },
-          {
-            "@type": "ProductFeature",
-            "name": "Tow & Theft Protection",
-            "description": "Real-time alerts and notifications for unauthorized vehicle movement"
-          }
-        ],
-        "offers": {
-          "@type": "Offer",
-          "price": "146999",
-          "priceCurrency": "INR",
-          "availability": "https://schema.org/InStock",
-          "areaServed": ["Hyderabad", "Chennai", "Telangana", "Tamil Nadu"],
-          "seller": {
-            "@type": "Organization",
-            "name": "Raam Ather"
-          },
-          "hasMerchantReturnPolicy": {
-            "@type": "MerchantReturnPolicy",
-            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-            "merchantReturnDays": 15,
-            "returnMethod": "https://schema.org/ReturnByMail",
-            "returnFees": "https://schema.org/FreeReturn"
-          },
-          "shippingDetails": {
-            "@type": "OfferShippingDetails",
-            "shippingRate": {
-              "@type": "MonetaryAmount",
-              "value": "0",
-              "currency": "INR"
-            },
-            "shippingDestination": {
-              "@type": "DefinedRegion",
-              "addressCountry": "IN"
-            },
-            "deliveryTime": {
-              "@type": "ShippingDeliveryTime",
-              "handlingTime": {
-                "@type": "QuantitativeValue",
-                "minValue": 1,
-                "maxValue": 3,
-                "unitCode": "DAY"
-              },
-              "transitTime": {
-                "@type": "QuantitativeValue",
-                "minValue": 5,
-                "maxValue": 7,
-                "unitCode": "DAY"
-              }
-            }
-          }
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.7",
-          "reviewCount": "1850",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
-        "manufacturer": {
-          "@type": "Organization",
-          "name": "Ather Energy",
-          "address": {
-            "@type": "PostalAddress",
-            "addressRegion": "Telangana, Tamil Nadu"
-          }
-        }
-      },
       locationInfo: {
         hyderabad: "Experience next-generation safety in Hyderabad with Ather 450X's advanced protection systems, designed for the bustling traffic conditions of the Cyberabad metropolitan area.",
         chennai: "Navigate Chennai's dynamic urban environment with confidence using Ather 450X's comprehensive safety suite, engineered for the busy streets of the Detroit of South India."
@@ -181,12 +88,6 @@ export default function Safety() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(safetyData.seoContent.structuredData),
-        }}
-      />
       <section className="bg-black text-white py-16 md:py-24 overflow-hidden">
         <div className="container mx-auto px-4">
           {/* Section Header */}

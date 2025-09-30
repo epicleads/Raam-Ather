@@ -10,7 +10,7 @@ async function getHeaderData(): Promise<HeaderData> {
   
   return {
     logo: {
-      src: '/Ather-Assets/Home/raamather.png',
+      src: '/assets/raamatherlogo11.png',
       alt: 'Raam Ather',
       href: '/'
     },

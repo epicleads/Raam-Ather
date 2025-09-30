@@ -63,24 +63,8 @@ export default function RiztaComfort() {
    }
  ]
 
- const jsonLd = {
-   '@context': 'https://schema.org',
-   '@type': 'Product',
-   'name': 'Ather Rizta',
-   'hasPart': comfortFeatures.map(feature => ({
-     '@type': 'ProductFeature',
-     'name': feature.title,
-     'description': feature.description,
-     'category': feature.category
-   }))
- }
-
  return (
    <>
-     <script
-       type="application/ld+json"
-       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-     />
      <section className="bg-white py-2 md:py-2">
        <div className="container mx-auto px-4 md:px-6 lg:px-8">
          <div className="max-w-7xl mx-auto">
