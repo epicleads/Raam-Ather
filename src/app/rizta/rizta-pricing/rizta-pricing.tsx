@@ -1,6 +1,6 @@
 // rizta-pricing.tsx
 import { RiztaPricingClient } from './rizta-pricing-client'
-import { RIZTA_VARIANTS, RIZTA_STRUCTURED_DATA } from '@/data/riztaData'
+import { RIZTA_VARIANTS } from '@/data/riztaData'
 
 export interface PricingData {
   id: string

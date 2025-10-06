@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { Quote, Star } from 'lucide-react';
 import { Testimonial } from '../home-testimonials.types';
 
@@ -9,7 +10,8 @@ interface QuoteBubbles3DProps {
 }
 
 export default function QuoteBubbles3D({ testimonials }: QuoteBubbles3DProps) {
-  const cardVariants = {
+  const easeCurve: [number, number, number, number] = [0.25, 0.4, 0.25, 1];
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 50, scale: 0.9 },
     visible: (i: number) => ({
       opacity: 1,
@@ -18,7 +20,7 @@ export default function QuoteBubbles3D({ testimonials }: QuoteBubbles3DProps) {
       transition: {
         delay: i * 0.2,
         duration: 0.6,
-        ease: [0.25, 0.4, 0.25, 1],
+        ease: easeCurve,
       },
     }),
   };
@@ -87,7 +89,7 @@ export default function QuoteBubbles3D({ testimonials }: QuoteBubbles3DProps) {
               {/* Review text */}
               <p className="text-gray-700 text-base leading-relaxed mb-6 flex-grow
                          group-hover:text-gray-900 transition-colors duration-300">
-                "{testimonial.review}"
+                &ldquo;{testimonial.review}&rdquo;
               </p>
 
               {/* Divider with animation */}
