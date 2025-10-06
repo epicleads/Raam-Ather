@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 import HomeCalculator from './Components/HomeCalculator/server/HomeCalculator';
 import AccessoriesSection from './Components/accessories/server/AccessoriesSection';
-import ExtendedWarrantySection from "./Components/HomeExtendedWarranty/server/ExtendedWarrantySection";
+
 
 import TrustBadges from './Components/TrustBadges/TrustBadges';
 import HomeTestimonials from './home-testimonials/server/HomeTestimonials';
@@ -72,7 +72,7 @@ export default function Page() {
       <HomeCalculator />
       <AccessoriesSection />
       {/* Extended Warranty Section */}
-      <ExtendedWarrantySection/>
+     
       {/* Accessories Section */}
       {/* Trust Badges Section */}
       <TrustBadges />

@@ -126,15 +126,12 @@ const AtherWhyChooseUsCube = () => {
           quality={90}
           priority
         />
-        {/* Dark overlay to ensure text readability */}
+        {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/40"></div>
-
-        {/* Optional: Subtle vignette effect */}
-        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/60"></div>
       </div>
 
       {/* Section Title */}
-      <div className="absolute z-10 top-32 md:top-24 left-0 right-0 flex flex-col items-center">
+      <div className="absolute z-10 top-32 md:top-24 left-0 right-0 flex flex-col items-center pointer-events-none">
         <h1 className="text-white text-3xl md:text-5xl font-black tracking-wider uppercase drop-shadow-[0_4px_20px_rgba(34,197,94,0.6)] px-4 text-center filter brightness-110">
           Why Choose RAAM ATHER
         </h1>
@@ -242,39 +239,12 @@ const AtherWhyChooseUsCube = () => {
           font-family: 'Arial', sans-serif;
         }
 
-        /* Radial gradient for vignette */
-        .bg-gradient-radial {
-          background: radial-gradient(circle at center, var(--tw-gradient-stops));
-        }
-
         /* Scene */
         .scene {
           width: 250px;
           height: 250px;
           perspective: 1000px;
           margin: 0 auto;
-          position: relative;
-        }
-
-        .scene::before {
-          content: '';
-          position: absolute;
-          inset: -50px;
-          background: radial-gradient(circle, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
-          filter: blur(30px);
-          z-index: -1;
-          animation: scenePulse 3s ease-in-out infinite;
-        }
-
-        @keyframes scenePulse {
-          0%, 100% {
-            opacity: 0.5;
-            transform: scale(0.95);
-          }
-          50% {
-            opacity: 0.8;
-            transform: scale(1.05);
-          }
         }
 
         @media (min-width: 768px) {
