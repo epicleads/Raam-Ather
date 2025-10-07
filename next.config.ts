@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
     qualities: [75, 90, 100],
     minimumCacheTTL: 31536000, // 1 year cache
     dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://maps.google.com https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; frame-src 'self' https://www.google.com https://maps.google.com;",
+    contentSecurityPolicy: "default-src 'self'; script-src 'self' https://www.google.com https://maps.google.com https://www.googletagmanager.com https://www.google-analytics.com; frame-src 'self' https://www.google.com https://maps.google.com;",
   },
   
   // Performance optimizations
@@ -70,11 +70,19 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin'
+            value: 'strict-origin-when-cross-origin'
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains; preload'
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()'
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://maps.google.com https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://www.google.com https://maps.google.com; connect-src 'self' https://www.google.com https://maps.google.com https://www.google-analytics.com https://www.googletagmanager.com https://connect.facebook.net;"
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.google.com https://maps.google.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://www.google.com https://maps.google.com; connect-src 'self' https://www.google.com https://maps.google.com https://www.google-analytics.com https://www.googletagmanager.com;"
           },
           // Performance headers
           {
@@ -126,6 +134,17 @@ const nextConfig: NextConfig = {
           },
         ],
         destination: 'https://raamather.com/:path*',
+        permanent: true,
+      },
+      // Redirect /home to homepage (fix for Google crawl issue)
+      {
+        source: '/home',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/home/',
+        destination: '/',
         permanent: true,
       },
       // Legacy URL redirects for SEO value preservation

@@ -48,7 +48,11 @@ const AtherWhyChooseUsCube = () => {
 
   const updateCubeRotation = useCallback(() => {
     if (cubeRef.current) {
-      cubeRef.current.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+      const transformValue = `translateZ(0) rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+      cubeRef.current.style.transform = transformValue;
+      // WebKit/Safari explicit transform for reliable 3D on mobile
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (cubeRef.current.style as any).webkitTransform = transformValue;
     }
   }, [rotationX, rotationY]);
 
@@ -244,7 +248,12 @@ const AtherWhyChooseUsCube = () => {
           width: 250px;
           height: 250px;
           perspective: 1000px;
+          -webkit-perspective: 1000px; /* iOS Safari */
           margin: 0 auto;
+          /* Do NOT transform the perspective element; it breaks perspective on iOS */
+          perspective-origin: 50% 50%;
+          position: relative;
+          z-index: 20;
         }
 
         @media (min-width: 768px) {
@@ -260,10 +269,13 @@ const AtherWhyChooseUsCube = () => {
           height: 100%;
           position: relative;
           transform-style: preserve-3d;
-          transform: rotateX(0deg) rotateY(0deg);
+          -webkit-transform-style: preserve-3d; /* iOS Safari */
+          transform: translateZ(0) rotateX(0deg) rotateY(0deg);
+          -webkit-transform: translateZ(0) rotateX(0deg) rotateY(0deg);
           cursor: grab;
           touch-action: none;
           will-change: transform;
+          z-index: 21;
         }
 
         .cube:active {
@@ -275,7 +287,8 @@ const AtherWhyChooseUsCube = () => {
           position: absolute;
           width: 100%;
           height: 100%;
-          backface-visibility: visible;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden; /* iOS Safari */
           overflow: hidden;
           display: flex;
           justify-content: center;
@@ -285,6 +298,9 @@ const AtherWhyChooseUsCube = () => {
           box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
           background: rgba(0, 0, 0, 0.8);
           transform-style: preserve-3d;
+          -webkit-transform-style: preserve-3d; /* iOS Safari */
+          transform: translate3d(0,0,0);
+          -webkit-transform: translate3d(0,0,0);
           transition: all 0.3s ease;
         }
 
@@ -298,6 +314,7 @@ const AtherWhyChooseUsCube = () => {
         .left { transform: rotateY(-90deg) translateZ(125px); }
         .top { transform: rotateX(90deg) translateZ(125px); }
         .bottom { transform: rotateX(-90deg) translateZ(125px); }
+        .back, .right, .left, .top, .bottom { transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
 
         @media (min-width: 768px) {
           .front { transform: translateZ(160px); }
@@ -321,6 +338,7 @@ const AtherWhyChooseUsCube = () => {
           background: rgba(20, 30, 40, 0.7);
           border-radius: 8px;
           transform: translateZ(1px);
+          -webkit-transform: translateZ(1px);
         }
 
         /* Icon container */
@@ -387,16 +405,17 @@ const AtherWhyChooseUsCube = () => {
         /* Mobile optimizations */
         @media (max-width: 767px) {
           .scene {
-            width: 280px;
-            height: 280px;
+            width: 260px;
+            height: 260px;
           }
 
-          .front { transform: translateZ(140px); }
-          .back { transform: rotateY(180deg) translateZ(140px); }
-          .right { transform: rotateY(90deg) translateZ(140px); }
-          .left { transform: rotateY(-90deg) translateZ(140px); }
-          .top { transform: rotateX(90deg) translateZ(140px); }
-          .bottom { transform: rotateX(-90deg) translateZ(140px); }
+          .front { transform: translateZ(130px); }
+          .back { transform: rotateY(180deg) translateZ(130px); }
+          .right { transform: rotateY(90deg) translateZ(130px); }
+          .left { transform: rotateY(-90deg) translateZ(130px); }
+          .top { transform: rotateX(90deg) translateZ(130px); }
+          .bottom { transform: rotateX(-90deg) translateZ(130px); }
+          .back, .right, .left, .top, .bottom { transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
 
           .icon-container {
             width: 160px;
@@ -417,16 +436,17 @@ const AtherWhyChooseUsCube = () => {
         /* Small mobile optimizations */
         @media (max-width: 374px) {
           .scene {
-            width: 240px;
-            height: 240px;
+            width: 220px;
+            height: 220px;
           }
 
-          .front { transform: translateZ(120px); }
-          .back { transform: rotateY(180deg) translateZ(120px); }
-          .right { transform: rotateY(90deg) translateZ(120px); }
-          .left { transform: rotateY(-90deg) translateZ(120px); }
-          .top { transform: rotateX(90deg) translateZ(120px); }
-          .bottom { transform: rotateX(-90deg) translateZ(120px); }
+          .front { transform: translateZ(110px); }
+          .back { transform: rotateY(180deg) translateZ(110px); }
+          .right { transform: rotateY(90deg) translateZ(110px); }
+          .left { transform: rotateY(-90deg) translateZ(110px); }
+          .top { transform: rotateX(90deg) translateZ(110px); }
+          .bottom { transform: rotateX(-90deg) translateZ(110px); }
+          .back, .right, .left, .top, .bottom { transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
 
           .icon-container {
             width: 140px;

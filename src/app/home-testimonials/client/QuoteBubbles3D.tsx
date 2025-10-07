@@ -89,7 +89,7 @@ export default function QuoteBubbles3D({ testimonials }: QuoteBubbles3DProps) {
               {/* Review text */}
               <p className="text-gray-700 text-base leading-relaxed mb-6 flex-grow
                          group-hover:text-gray-900 transition-colors duration-300">
-                &ldquo;{testimonial.review}&rdquo;
+                {testimonial.review}
               </p>
 
               {/* Divider with animation */}
