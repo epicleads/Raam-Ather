@@ -5,8 +5,8 @@ export const heroFallbackData: HeroItem[] = [
   {
     id: "1",
     type: "image",
-    src: "/Ather-Assets/Home/The-2025-ather-450-launch.webp",
-    mobileSrc: "/Ather-Assets/Home/The-2025-Ather-450-m.webp",
+    src: "/assets/desktophero.jpeg",
+    mobileSrc: "/assets/mobilehero.jpeg",
     alt: "Ather 450 electric scooter on city road",
     title: "The 2025 Ather",
     subtitle: "Bike of Scooters",
@@ -39,40 +39,40 @@ export const heroFallbackData: HeroItem[] = [
       href: "/test-ride",
     },
   },
-  {
-    id: "3",
-    type: "image",
-    src: "/assets/Blog8.webp",
-    mobileSrc: "/Ather-Assets/Home/Ride-Warp.gif", // Add mobile version
-    alt: "Ather smart features and connectivity",
-    title: "Smart Connected",
-    subtitle: "Intelligent Mobility Solutions",
-    duration: 3000, // 3 seconds for GIFs
-    primaryCTA: {
-      label: "Book Test Ride",
-      href: "/book-ride",
-    },
-    secondaryCTA: {
-      label: "Learn More",
-      href: "/smart-features",
-    },
-  },
-  {
-    id: "4",
-    type: "image",
-    src: "/assets/Blog12.webp",
-    mobileSrc: "/Ather-Assets/Home/Mob - BaaS Banner.webp",
-    alt: "Ather charging network and ecosystem",
-    title: "Ather Ecosystem",
-    subtitle: "Charging Network & Beyond",
-    duration: 5000, // 5 seconds for images
-    primaryCTA: {
-      label: "Book Test Ride",
-      href: "/book-ride",
-    },
-    secondaryCTA: {
-      label: "Join Network",
-      href: "/ather-network",
-    },
-  },
+  // {
+  //   id: "3",
+  //   type: "image",
+  //   src: "/assets/Blog8.webp",
+  //   mobileSrc: "/Ather-Assets/Home/Ride-Warp.gif", // Add mobile version
+  //   alt: "Ather smart features and connectivity",
+  //   title: "Smart Connected",
+  //   subtitle: "Intelligent Mobility Solutions",
+  //   duration: 3000, // 3 seconds for GIFs
+  //   primaryCTA: {
+  //     label: "Book Test Ride",
+  //     href: "/book-ride",
+  //   },
+  //   secondaryCTA: {
+  //     label: "Learn More",
+  //     href: "/smart-features",
+  //   },
+  // },
+  // {
+  //   id: "4",
+  //   type: "image",
+  //   src: "/assets/Blog12.webp",
+  //   mobileSrc: "/Ather-Assets/Home/Mob - BaaS Banner.webp",
+  //   alt: "Ather charging network and ecosystem",
+  //   title: "Ather Ecosystem",
+  //   subtitle: "Charging Network & Beyond",
+  //   duration: 5000, // 5 seconds for images
+  //   primaryCTA: {
+  //     label: "Book Test Ride",
+  //     href: "/book-ride",
+  //   },
+  //   secondaryCTA: {
+  //     label: "Join Network",
+  //     href: "/ather-network",
+  //   },
+  // },
 ];

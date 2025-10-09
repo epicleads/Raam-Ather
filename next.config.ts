@@ -44,6 +44,7 @@ const nextConfig: NextConfig = {
   compress: true,
   generateEtags: true,
   reactStrictMode: true,
+  trailingSlash: false, // Removes trailing slashes for consistency
   
   // Headers for SEO and performance
   async headers() {
@@ -82,7 +83,9 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.google.com https://maps.google.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://www.google.com https://maps.google.com; connect-src 'self' https://www.google.com https://maps.google.com https://www.google-analytics.com https://www.googletagmanager.com;"
+            value: process.env.NODE_ENV === 'development' 
+              ? "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://maps.google.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://www.google.com https://maps.google.com; connect-src 'self' https://www.google.com https://maps.google.com https://www.google-analytics.com https://www.googletagmanager.com;"
+              : "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.google.com https://maps.google.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://www.google.com https://maps.google.com; connect-src 'self' https://www.google.com https://maps.google.com https://www.google-analytics.com https://www.googletagmanager.com;"
           },
           // Performance headers
           {

@@ -39,7 +39,9 @@
       "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/raam-mg/src/app/components/featuredModels/**)",
       "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/raam-mg/src/app/components/**)",
       "Read(//c/Users/RaamGroup Digital/Documents/Downloads/raam group main/Raam-Group-Master-Code/raam-mg/**)",
-      "Bash(explorer:*)"
+      "Bash(explorer:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:raamather.com)"
     ],
     "deny": [],
     "ask": []

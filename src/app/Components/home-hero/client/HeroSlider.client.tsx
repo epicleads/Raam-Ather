@@ -22,14 +22,49 @@ const HeroSlider = memo(function HeroSlider({ slides }: { slides: VideoSlide[] }
   const [error, setError] = useState<string | null>(null);
   const [videoEndHandlersRef] = useState<{ current: Map<string, () => void> }>({ current: new Map() });
   const [videoElementsRef] = useState<{ current: Map<string, HTMLVideoElement> }>({ current: new Map() });
+  const [isMobile, setIsMobile] = useState(false);
 
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      if (typeof window !== 'undefined') {
+        const isMobileView = window.innerWidth < 720; // 720px breakpoint for mobile
+        setIsMobile(isMobileView);
+        console.log('🔍 Mobile Detection:', {
+          screenWidth: window.innerWidth,
+          isMobile: isMobileView,
+          breakpoint: '720px'
+        });
+      }
+    };
+    
+    // Check on mount
+    checkMobile();
+    
+    // Add resize listener
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', checkMobile);
+      return () => window.removeEventListener('resize', checkMobile);
+    }
+  }, []);
 
   // Memoize filtered slides
   const filteredSlides = useMemo(() => slides, [slides]);
 
-  const getAssetSource = (item: VideoSlide) => {
-    return item.src; // Use desktop source, mobile will be handled by CSS
-  };
+  // Memoize asset source getter to avoid recreation on every render
+  const getAssetSource = useCallback((item: VideoSlide) => {
+    // Use mobileSrc for mobile devices if available, otherwise fallback to desktop src
+    const selectedSrc = isMobile && item.mobileSrc ? item.mobileSrc : item.src;
+    console.log('🖼️ Image Selection:', {
+      slideId: item.id,
+      isMobile,
+      mobileSrc: item.mobileSrc,
+      desktopSrc: item.src,
+      selectedSrc,
+      condition: `isMobile=${isMobile} && mobileSrc=${!!item.mobileSrc}`
+    });
+    return selectedSrc;
+  }, [isMobile]);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
