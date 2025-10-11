@@ -5,6 +5,18 @@ import { useTestDriveModal } from './TestDriveModalStore';
 import { submitTestRideLead } from '@/lib/leadSubmission';
 import { trackAtherEvents } from '../CookieConsent/MetaPixel';
 
+// Extend Window interface to include gtag
+declare global {
+  interface Window {
+    gtag?: (
+      command: 'config' | 'event' | 'js' | 'set',
+      targetId: string | Date,
+      config?: Record<string, unknown>
+    ) => void;
+    dataLayer?: unknown[];
+  }
+}
+
 const MODEL_OPTIONS = [
   'Rizta',
   '450S', 
@@ -135,11 +147,43 @@ export default function TestRideFormModal() {
       if (result.success) {
         setSubmitted(true);
         
-        // Track successful test ride request for retargeting
+        // Track successful test ride request for retargeting (Meta Pixel)
         trackAtherEvents.testRideRequest(
           values.modelInterested,
           values.location
         );
+        
+        // 🎯 Google Analytics Conversion Tracking for Marketing Team
+        if (typeof window !== 'undefined' && window.gtag) {
+          // Send conversion event to GA4 (G-C6RZDEXVMD)
+          window.gtag('event', 'test_ride_booked', {
+            event_category: 'Lead Generation',
+            event_label: `${values.modelInterested} - ${values.location}`,
+            model: values.modelInterested,
+            location: values.location,
+            phone_number: values.mobileNumber,
+            value: 1, // Conversion value
+            currency: 'INR'
+          });
+          
+          // Also send to GTM Data Layer for additional tracking
+          if (window.dataLayer) {
+            window.dataLayer.push({
+              event: 'test_ride_conversion',
+              lead_type: 'test_ride',
+              model: values.modelInterested,
+              location: values.location,
+              phone_number: values.mobileNumber,
+              timestamp: new Date().toISOString()
+            });
+          }
+          
+          console.log('✅ GA4 Conversion Tracked:', {
+            event: 'test_ride_booked',
+            model: values.modelInterested,
+            location: values.location
+          });
+        }
       } else {
         throw new Error(result.message || 'Submission failed');
       }

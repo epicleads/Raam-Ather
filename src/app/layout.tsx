@@ -110,9 +110,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
-        {/* ✅ Google Analytics (gtag.js) */}
+        {/* ✅ Google Analytics (gtag.js) - Marketing Tracking */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-KGK8PQ2QS3"
+          src="https://www.googletagmanager.com/gtag/js?id=G-C6RZDEXVMD"
           strategy="afterInteractive"
         />
         <Script id="ga-script" strategy="afterInteractive">
@@ -120,6 +120,14 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
+            
+            // Primary GA4 Property for Marketing Team (Lead Conversion Tracking)
+            gtag('config', 'G-C6RZDEXVMD', {
+              page_path: window.location.pathname,
+              send_page_view: true
+            });
+            
+            // Secondary GA4 Property (existing)
             gtag('config', 'G-KGK8PQ2QS3');
           `}
         </Script>

@@ -20,6 +20,7 @@ import ContactPage from './Components/contactform/contactserver';
 import HeroClient from './Components/home-hero/HeroClient';
 import dynamic from 'next/dynamic';
 import FloatingWhatsAppButton from './Components/common/FloatingWhatsAppButton';
+import FestiveRocketsWrapper from './Components/effects/FestiveRocketsWrapper';
 
 const Awards = dynamic(() => import('./Components/awards'), {
   loading: () => (
@@ -84,6 +85,9 @@ export default function Page() {
       <Footer />
       <FloatingWhatsAppButton />
       </main>
+      
+      {/* Fireworks Effect - Outside main to avoid overflow clipping */}
+      <FestiveRocketsWrapper />
     </>
   );
 }

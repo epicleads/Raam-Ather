@@ -121,13 +121,11 @@ export default function MobileHeader({ data }: HeaderProps) {
               {/* Mobile CTAs */}
               <div className="flex items-center flex-shrink-0" style={{ gap: '0.5rem', minWidth: 0, maxWidth: '50%' }}>
                 {/* Call Now Button */}
-                <motion.a
+                <a
                   href={`tel:${data.contact.phone}`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`flex items-center px-2 py-1.5 rounded-xl font-semibold font-neurial text-xs transition-all duration-500 ${
+                  className={`flex items-center px-2 py-1.5 rounded-xl font-semibold font-neurial text-xs transition-all duration-300 ${
                     isScrolled
-                      ? 'text-black border border-gray-400 hover:bg-gray-100'
+                      ? 'text-black border border-gray-400 hover:bg-gray-100 shadow-sm hover:shadow-md'
                       : 'text-white border border-white/80 hover:bg-white/15 hover:backdrop-blur-md hover:shadow-lg [text-shadow:_0_1px_6px_rgb(0_0_0_/_50%)]'
                   }`}
                   style={{ minWidth: 0, maxWidth: '100%' }}
@@ -135,25 +133,23 @@ export default function MobileHeader({ data }: HeaderProps) {
                   <Phone className="w-2.5 h-2.5 mr-1 flex-shrink-0" />
                   <span className="hidden sm:inline truncate">Call Now</span>
                   <span className="sm:hidden">Call</span>
-                </motion.a>
+                </a>
 
                 {/* Mobile Hamburger */}
-                <motion.button
+                <button
                   onClick={() => {
                     setIsMobileMenuOpen(true);
                     setIsSidebarOpen(true);
                   }}
-                  whileHover={{ scale: 1.1, rotate: 90 }}
-                  whileTap={{ scale: 0.9 }}
                   className={`p-1.5 rounded-lg transition-all duration-300 flex-shrink-0 ${
                     isScrolled
-                      ? 'border border-gray-300 hover:bg-gray-50 hover:border-gray-400'
+                      ? 'border border-gray-300 hover:bg-gray-50 hover:border-gray-400 shadow-sm hover:shadow-md'
                       : 'border border-white/80 hover:bg-white/15 hover:border-white hover:backdrop-blur-md hover:shadow-lg'
                   }`}
                   aria-label="Open menu"
                 >
                   <Menu className={`w-3 h-3 ${isScrolled ? 'text-gray-700' : 'text-white [filter:_drop-shadow(0_1px_4px_rgb(0_0_0_/_50%))]'}`} />
-                </motion.button>
+                </button>
               </div>
             </div>
           </div>
@@ -201,15 +197,13 @@ export default function MobileHeader({ data }: HeaderProps) {
                     style={{ maxHeight: '40px' }}
                   />
                 </Link>
-                <motion.button
+                <button
                   onClick={closeMobileMenu}
-                  whileHover={{ scale: 1.1, rotate: 90 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-3 hover:bg-gray-100 rounded-2xl transition-all duration-300 border border-gray-300 hover:border-gray-400"
+                  className="p-3 hover:bg-gray-100 rounded-2xl transition-all duration-300 border border-gray-300 hover:border-gray-400 shadow-sm hover:shadow-md"
                   aria-label="Close menu"
                 >
                   <X className="w-6 h-6 text-gray-700" />
-                </motion.button>
+                </button>
               </div>
 
               {/* Navigation */}

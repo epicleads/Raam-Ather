@@ -206,13 +206,23 @@ const HeroSlider = memo(function HeroSlider({ slides }: { slides: VideoSlide[] }
       <div className="absolute inset-0 z-30" style={{ contain: 'layout style' }}>
         <div className="absolute text-white left-1/2 bottom-8 md:bottom-12 -translate-x-1/2 text-center px-4 w-full transition-all duration-500 ease-out transform" style={{ contain: 'layout style' }}>
           <div className="transform transition-all duration-400 delay-300 md:duration-500 md:delay-500">
-            <TestRideButton
-              variant="primary"
-              size="lg"
-              className="bg-[#FF6B35] hover:bg-[#F77F00] text-white rounded-lg font-semibold font-neurial px-8 py-3 text-base transition-all duration-200 active:scale-95 md:px-10 md:py-4 md:text-lg md:duration-300 md:hover:scale-105 md:hover:shadow-lg md:hover:shadow-orange-500/30"
-            >
-              Book Test Drive
-            </TestRideButton>
+            <div className="relative inline-block group">
+              <TestRideButton
+                variant="primary"
+                size="lg"
+                className="relative overflow-hidden bg-gradient-to-br from-[#1a4d2e] via-[#2d6a4f] to-[#52b788] hover:from-[#2d6a4f] hover:via-[#52b788] hover:to-[#74c69d] text-white rounded-xl font-bold font-neurial px-8 py-3 text-sm transition-all duration-300 active:translate-y-1 md:px-10 md:py-4 md:text-base shadow-[0_6px_0_rgb(26,77,46),0_10px_20px_rgba(26,77,46,0.6)] hover:shadow-[0_4px_0_rgb(45,106,79),0_8px_25px_rgba(82,183,136,0.7)] active:shadow-[0_2px_0_rgb(26,77,46),0_5px_15px_rgba(26,77,46,0.5)]"
+              >
+                <span className="relative z-10 flex items-center gap-2 justify-center tracking-wide drop-shadow-lg">
+                  <svg className="w-4 h-4 md:w-5 md:h-5 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  Book Test Ride
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/10 opacity-100 group-hover:opacity-80 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </TestRideButton>
+            </div>
           </div>
         </div>
       </div>

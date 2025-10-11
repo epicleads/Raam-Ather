@@ -172,36 +172,36 @@ export default function DesktopHeader({ data }: HeaderProps) {
                     ) : (
                       <Link
                         href={item.href}
-                        className={`px-2 sm:px-3 lg:px-3 xl:px-4 py-1.5 sm:py-2 lg:py-2 xl:py-2.5 text-xs sm:text-xs lg:text-xs xl:text-sm font-semibold font-neurial rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 ${
+                        className={`group relative px-2 sm:px-3 lg:px-3 xl:px-4 py-1.5 sm:py-2 lg:py-2 xl:py-2.5 text-xs sm:text-xs lg:text-xs xl:text-sm font-bold font-neurial rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 ${
                           isScrolled
                             ? isNavItemActive(item)
-                              ? 'text-gray-900 bg-gray-100 border border-gray-300'
-                              : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 border border-transparent hover:border-gray-200'
+                              ? 'text-gray-900 bg-gray-100 border border-gray-300 shadow-sm'
+                              : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 border border-transparent hover:border-gray-200 hover:shadow-sm'
                             : isNavItemActive(item)
-                              ? 'text-white bg-white/20 border border-white/30 backdrop-blur-md shadow-lg'
-                              : 'text-white hover:text-white hover:bg-white/15 border border-transparent hover:border-white/30 [text-shadow:_0_1px_8px_rgb(0_0_0_/_50%)] hover:backdrop-blur-md hover:shadow-lg'
+                              ? 'text-white bg-white/30 border border-white/50 backdrop-blur-md shadow-lg [text-shadow:_0_2px_12px_rgb(0_0_0_/_80%)]'
+                              : 'text-white border border-transparent [text-shadow:_0_2px_12px_rgb(0_0_0_/_80%)] hover:bg-white/20 hover:border-white/40 hover:backdrop-blur-md hover:shadow-lg hover:[text-shadow:_0_2px_16px_rgb(0_0_0_/_90%)]'
                         }`}
                       >
-                        <span className="whitespace-nowrap">{item.label}</span>
+                        <span className="relative z-10 whitespace-nowrap">{item.label}</span>
                       </Link>
                     )
                   ) : (
                     <button
-                      className={`flex items-center px-2 sm:px-3 lg:px-3 xl:px-4 py-1.5 sm:py-2 lg:py-2 xl:py-2.5 text-xs sm:text-xs lg:text-xs xl:text-sm font-semibold font-neurial rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 ${
+                      className={`group relative flex items-center px-2 sm:px-3 lg:px-3 xl:px-4 py-1.5 sm:py-2 lg:py-2 xl:py-2.5 text-xs sm:text-xs lg:text-xs xl:text-sm font-bold font-neurial rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 ${
                         isScrolled
                           ? isNavItemActive(item)
-                            ? 'text-gray-900 bg-gray-100 border border-gray-300'
-                            : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 border border-transparent hover:border-gray-200'
+                            ? 'text-gray-900 bg-gray-100 border border-gray-300 shadow-sm'
+                            : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 border border-transparent hover:border-gray-200 hover:shadow-sm'
                           : isNavItemActive(item)
-                            ? 'text-white bg-white/20 border border-white/30 backdrop-blur-md shadow-lg'
-                            : 'text-white hover:text-white hover:bg-white/15 border border-transparent hover:border-white/30 [text-shadow:_0_1px_8px_rgb(0_0_0_/_50%)] hover:backdrop-blur-md hover:shadow-lg'
+                            ? 'text-white bg-white/30 border border-white/50 backdrop-blur-md shadow-lg [text-shadow:_0_2px_12px_rgb(0_0_0_/_80%)]'
+                            : 'text-white border border-transparent [text-shadow:_0_2px_12px_rgb(0_0_0_/_80%)] hover:bg-white/20 hover:border-white/40 hover:backdrop-blur-md hover:shadow-lg hover:[text-shadow:_0_2px_16px_rgb(0_0_0_/_90%)]'
                       }`}
                       aria-expanded={activeDropdown === item.label}
                       aria-haspopup="true"
                     >
-                      <span className="whitespace-nowrap">{item.label}</span>
+                      <span className="relative z-10 whitespace-nowrap">{item.label}</span>
                       {item.dropdown && (
-                        <ChevronDown className={`ml-0.5 sm:ml-1 lg:ml-1 xl:ml-2 w-2.5 sm:w-3 lg:w-3 h-2.5 sm:h-3 lg:h-3 transition-transform duration-300 ${
+                        <ChevronDown className={`relative z-10 ml-0.5 sm:ml-1 lg:ml-1 xl:ml-2 w-2.5 sm:w-3 lg:w-3 h-2.5 sm:h-3 lg:h-3 transition-transform duration-300 ${
                           activeDropdown === item.label ? 'rotate-180' : ''
                         }`} />
                       )}
@@ -250,61 +250,53 @@ export default function DesktopHeader({ data }: HeaderProps) {
             <div className="flex items-center space-x-2 xl:space-x-3 flex-shrink-0">
               {data.ctas.map((cta) => (
                 cta.label === 'Book Test Ride' ? (
-                  <motion.button
+                  <button
                     key={cta.label}
                     onClick={openTestRideForm}
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`group relative inline-flex items-center px-2 sm:px-3 lg:px-4 xl:px-5 py-1.5 sm:py-2 lg:py-2.5 xl:py-2.5 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl font-semibold font-neurial text-xs sm:text-xs lg:text-sm xl:text-sm transition-all duration-500 overflow-hidden ${
+                    className={`group relative inline-flex items-center px-2 sm:px-3 lg:px-4 xl:px-5 py-1.5 sm:py-2 lg:py-2.5 xl:py-2.5 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl font-semibold font-neurial text-xs sm:text-xs lg:text-sm xl:text-sm transition-all duration-300 ${
                       cta.type === 'primary'
-                        ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg hover:shadow-2xl hover:shadow-green-500/50'
+                        ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg hover:shadow-xl'
                         : isScrolled
-                          ? 'text-black border border-gray-400 hover:bg-gray-100 rounded-xl'
+                          ? 'text-black border border-gray-400 hover:bg-gray-100 rounded-xl shadow-sm hover:shadow-md'
                           : 'text-white border border-white/80 hover:bg-white/15 rounded-xl hover:backdrop-blur-md [text-shadow:_0_1px_8px_rgb(0_0_0_/_50%)] hover:shadow-lg'
                     }`}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <Zap className="w-3 sm:w-3 lg:w-4 xl:w-4 h-3 sm:h-3 lg:h-4 xl:h-4 mr-1 sm:mr-1 lg:mr-2 xl:mr-2 relative z-10" />
                     <span className="relative z-10 whitespace-nowrap">{cta.label}</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-                  </motion.button>
+                  </button>
                 ) : (
                   <Link
                     key={cta.label}
                     href={cta.href}
-                    className={`group relative inline-flex items-center px-2 sm:px-3 lg:px-4 xl:px-5 py-1.5 sm:py-2 lg:py-2.5 xl:py-2.5 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl font-semibold font-neurial text-xs sm:text-xs lg:text-sm xl:text-sm transition-all duration-500 overflow-hidden ${
+                    className={`group relative inline-flex items-center px-2 sm:px-3 lg:px-4 xl:px-5 py-1.5 sm:py-2 lg:py-2.5 xl:py-2.5 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl font-semibold font-neurial text-xs sm:text-xs lg:text-sm xl:text-sm transition-all duration-300 ${
                       cta.type === 'primary'
-                        ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg hover:shadow-2xl hover:shadow-green-500/50'
+                        ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg hover:shadow-xl'
                         : isScrolled
-                          ? 'text-black border border-gray-400 hover:bg-gray-100 rounded-xl'
+                          ? 'text-black border border-gray-400 hover:bg-gray-100 rounded-xl shadow-sm hover:shadow-md'
                           : 'text-white border border-white/80 hover:bg-white/15 rounded-xl hover:backdrop-blur-md [text-shadow:_0_1px_8px_rgb(0_0_0_/_50%)] hover:shadow-lg'
                     }`}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     {cta.icon && <span className="mr-1 sm:mr-1 lg:mr-2 xl:mr-2 relative z-10">{cta.icon}</span>}
                     <span className="relative z-10 whitespace-nowrap">{cta.label}</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
                   </Link>
                 )
               ))}
               
               {/* Premium Hamburger Menu */}
-              <motion.button
+              <button
                 onClick={() => {
                   setIsMobileMenuOpen(true);
                   setIsSidebarOpen(true);
                 }}
-                whileHover={{ scale: 1.1, rotate: 90 }}
-                whileTap={{ scale: 0.9 }}
                 className={`p-1.5 sm:p-2 lg:p-2.5 xl:p-3 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 ${
                   isScrolled
-                    ? 'border border-gray-300 hover:bg-gray-50 hover:border-gray-400'
+                    ? 'border border-gray-300 hover:bg-gray-50 hover:border-gray-400 shadow-sm hover:shadow-md'
                     : 'border border-white/80 hover:bg-white/15 hover:border-white hover:backdrop-blur-md hover:shadow-lg'
                 }`}
                 aria-label="Open menu"
               >
                 <Menu className={`w-3 sm:w-4 lg:w-4 xl:w-5 h-3 sm:h-4 lg:h-4 xl:h-5 ${isScrolled ? 'text-gray-700' : 'text-white [filter:_drop-shadow(0_1px_4px_rgb(0_0_0_/_50%))]'}`} />
-              </motion.button>
+              </button>
             </div>
           </div>
         </div>
@@ -349,18 +341,16 @@ export default function DesktopHeader({ data }: HeaderProps) {
                     style={{ maxHeight: '40px' }}
                   />
                 </Link>
-                <motion.button
+                <button
                   onClick={() => {
                 setIsMobileMenuOpen(false);
                 setIsSidebarOpen(false);
               }}
-                  whileHover={{ scale: 1.1, rotate: 90 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-3 hover:bg-gray-100 rounded-2xl transition-all duration-300 border border-gray-300 hover:border-gray-400"
+                  className="p-3 hover:bg-gray-100 rounded-2xl transition-all duration-300 border border-gray-300 hover:border-gray-400 shadow-sm hover:shadow-md"
                   aria-label="Close menu"
                 >
                   <X className="w-6 h-6 text-gray-700" />
-                </motion.button>
+                </button>
               </div>
 
               {/* Navigation */}
