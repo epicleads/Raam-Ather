@@ -5,7 +5,7 @@ export const heroFallbackData: HeroItem[] = [
   {
     id: "1",
     type: "image",
-    src: "/assets/desktophero.jpeg",
+    src: "/assets/athernewhero1.jpg",
     mobileSrc: "/assets/mobilehero.jpeg",
     alt: "Ather 450 electric scooter on city road",
     title: "The 2025 Ather",
@@ -20,25 +20,25 @@ export const heroFallbackData: HeroItem[] = [
       href: "/offers",
     },
   },
-  {
-    id: "2",
-    type: "image",
-    src: "/assets/Blog2.webp",
-    mobileSrc: "/Ather-Assets/Home/Rizta-most-awarded-ev-m.webp",
-    alt: "Ather electric scooter performance video",
-    title: "Performance",
-    subtitle: "Experience Electric Excellence",
-    duration: 0, // 0 for videos (handled by onended event)
-    fallbackSrc: "/Ather-Assets/450-apex/450apex.png", // Fallback image for video
-    primaryCTA: {
-      label: "Book Test Ride",
-      href: "/book-ride",
-    },
-    secondaryCTA: {
-      label: "Test Ride",
-      href: "/test-ride",
-    },
-  },
+  // {
+  //   id: "2",
+  //   type: "image",
+  //   src: "/assets/Blog2.webp",
+  //   mobileSrc: "/Ather-Assets/Home/Rizta-most-awarded-ev-m.webp",
+  //   alt: "Ather electric scooter performance video",
+  //   title: "Performance",
+  //   subtitle: "Experience Electric Excellence",
+  //   duration: 0, // 0 for videos (handled by onended event)
+  //   fallbackSrc: "/Ather-Assets/450-apex/450apex.png", // Fallback image for video
+  //   primaryCTA: {
+  //     label: "Book Test Ride",
+  //     href: "/book-ride",
+  //   },
+  //   secondaryCTA: {
+  //     label: "Test Ride",
+  //     href: "/test-ride",
+  //   },
+  // },
   // {
   //   id: "3",
   //   type: "image",
