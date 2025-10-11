@@ -15,10 +15,11 @@ export default function DesktopHeader({ data }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
   const modal = useTestDriveModal();
   const pathname = usePathname();
   const { setIsSidebarOpen } = useSidebar();
-  
+
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Function to check if a nav item is active
@@ -35,50 +36,12 @@ export default function DesktopHeader({ data }: HeaderProps) {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const scrollThreshold = viewportHeight * 0.7; // 70vh
 
-      // setIsScrolled is not defined in this component, so remove or define it if needed.
-      // If you want to track scrolled state, define:
-      // const [isScrolled, setIsScrolled] = useState(false);
-      // For now, comment out or remove the following line to fix the error:
-      // setIsScrolled(currentScrollY > 60);
+      // Set isScrolled based on 70vh threshold
+      setIsScrolled(currentScrollY > scrollThreshold);
 
-      // Dynamic theme detection based on page sections
-      const darkSections = document.querySelectorAll('[data-theme="dark"], .bg-black, .bg-gray-900, .bg-slate-900');
-      const lightSections = document.querySelectorAll('[data-theme="light"], .bg-white, .bg-gray-50, .bg-slate-50');
-      
-      // let currentTheme = false; // Removed unused variable // default to light
-      
-      // Check which section we're currently in
-      darkSections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= 100 && rect.bottom >= 100) {
-          // currentTheme = true; // Removed unused variable // dark theme
-        }
-      });
-      
-      // Override with light if we're specifically in a light section
-      lightSections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= 100 && rect.bottom >= 100) {
-          // currentTheme = false; // light theme // Removed unused variable
-        }
-      });
-      
-      // If at the very top (hero section), check hero background
-      if (currentScrollY < 100) {
-        const hero = document.querySelector('.hero, [class*="hero"], [class*="banner"]');
-        if (hero) {
-          const heroStyles = window.getComputedStyle(hero);
-          const bgColor = heroStyles.backgroundColor;
-          // Check if background is dark
-          if (bgColor.includes('rgb(0, 0, 0)') || bgColor.includes('rgb(17, 24, 39)') || hero.classList.contains('bg-black') || hero.classList.contains('bg-gray-900')) {
-            // currentTheme = true; // Removed unused variable
-          }
-        }
-      }
-      
-      // setIsDarkTheme(currentTheme); // Removed unused state
-      
       // Apple-style scroll behavior
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         // Scrolling down - hide header
@@ -87,7 +50,7 @@ export default function DesktopHeader({ data }: HeaderProps) {
         // Scrolling up or near top - show header
         setIsVisible(true);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
@@ -126,14 +89,23 @@ export default function DesktopHeader({ data }: HeaderProps) {
     modal.openManually();
   };
 
-  // Plain off-white header styles
+  // Header styles based on scroll position
   const getHeaderStyles = () => {
-    return {
-      className: 'bg-white shadow-lg border border-gray-200',
-      hoverClassName: 'hover:bg-gray-50',
-      textColor: 'text-gray-900',
-      textColorSecondary: 'text-gray-700'
-    };
+    if (isScrolled) {
+      return {
+        className: 'bg-white shadow-lg border border-gray-200',
+        hoverClassName: 'hover:bg-gray-50',
+        textColor: 'text-gray-900',
+        textColorSecondary: 'text-gray-700'
+      };
+    } else {
+      return {
+        className: 'bg-transparent',
+        hoverClassName: '',
+        textColor: 'text-white',
+        textColorSecondary: 'text-white/90'
+      };
+    }
   };
 
   const headerStyles = getHeaderStyles();
@@ -200,10 +172,14 @@ export default function DesktopHeader({ data }: HeaderProps) {
                     ) : (
                       <Link
                         href={item.href}
-                        className={`px-2 sm:px-3 lg:px-3 xl:px-4 py-1.5 sm:py-2 lg:py-2 xl:py-2.5 text-xs sm:text-xs lg:text-xs xl:text-sm font-medium font-neurial rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 ${
-                          isNavItemActive(item)
-                            ? 'text-gray-900 bg-gray-100 border border-gray-300'
-                            : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 border border-transparent hover:border-gray-200'
+                        className={`px-2 sm:px-3 lg:px-3 xl:px-4 py-1.5 sm:py-2 lg:py-2 xl:py-2.5 text-xs sm:text-xs lg:text-xs xl:text-sm font-semibold font-neurial rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 ${
+                          isScrolled
+                            ? isNavItemActive(item)
+                              ? 'text-gray-900 bg-gray-100 border border-gray-300'
+                              : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 border border-transparent hover:border-gray-200'
+                            : isNavItemActive(item)
+                              ? 'text-white bg-white/20 border border-white/30 backdrop-blur-md shadow-lg'
+                              : 'text-white hover:text-white hover:bg-white/15 border border-transparent hover:border-white/30 [text-shadow:_0_1px_8px_rgb(0_0_0_/_50%)] hover:backdrop-blur-md hover:shadow-lg'
                         }`}
                       >
                         <span className="whitespace-nowrap">{item.label}</span>
@@ -211,10 +187,14 @@ export default function DesktopHeader({ data }: HeaderProps) {
                     )
                   ) : (
                     <button
-                      className={`flex items-center px-2 sm:px-3 lg:px-3 xl:px-4 py-1.5 sm:py-2 lg:py-2 xl:py-2.5 text-xs sm:text-xs lg:text-xs xl:text-sm font-medium font-neurial rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 ${
-                        isNavItemActive(item)
-                          ? 'text-gray-900 bg-gray-100 border border-gray-300'
-                          : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 border border-transparent hover:border-gray-200'
+                      className={`flex items-center px-2 sm:px-3 lg:px-3 xl:px-4 py-1.5 sm:py-2 lg:py-2 xl:py-2.5 text-xs sm:text-xs lg:text-xs xl:text-sm font-semibold font-neurial rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 ${
+                        isScrolled
+                          ? isNavItemActive(item)
+                            ? 'text-gray-900 bg-gray-100 border border-gray-300'
+                            : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 border border-transparent hover:border-gray-200'
+                          : isNavItemActive(item)
+                            ? 'text-white bg-white/20 border border-white/30 backdrop-blur-md shadow-lg'
+                            : 'text-white hover:text-white hover:bg-white/15 border border-transparent hover:border-white/30 [text-shadow:_0_1px_8px_rgb(0_0_0_/_50%)] hover:backdrop-blur-md hover:shadow-lg'
                       }`}
                       aria-expanded={activeDropdown === item.label}
                       aria-haspopup="true"
@@ -275,10 +255,12 @@ export default function DesktopHeader({ data }: HeaderProps) {
                     onClick={openTestRideForm}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`group relative inline-flex items-center px-2 sm:px-3 lg:px-4 xl:px-5 py-1.5 sm:py-2 lg:py-2.5 xl:py-2.5 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl font-medium font-neurial text-xs sm:text-xs lg:text-sm xl:text-sm transition-all duration-500 overflow-hidden ${
+                    className={`group relative inline-flex items-center px-2 sm:px-3 lg:px-4 xl:px-5 py-1.5 sm:py-2 lg:py-2.5 xl:py-2.5 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl font-semibold font-neurial text-xs sm:text-xs lg:text-sm xl:text-sm transition-all duration-500 overflow-hidden ${
                       cta.type === 'primary'
                         ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg hover:shadow-2xl hover:shadow-green-500/50'
-                        : 'text-black border border-gray-400 hover:bg-gray-100 rounded-xl'
+                        : isScrolled
+                          ? 'text-black border border-gray-400 hover:bg-gray-100 rounded-xl'
+                          : 'text-white border border-white/80 hover:bg-white/15 rounded-xl hover:backdrop-blur-md [text-shadow:_0_1px_8px_rgb(0_0_0_/_50%)] hover:shadow-lg'
                     }`}
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -290,10 +272,12 @@ export default function DesktopHeader({ data }: HeaderProps) {
                   <Link
                     key={cta.label}
                     href={cta.href}
-                    className={`group relative inline-flex items-center px-2 sm:px-3 lg:px-4 xl:px-5 py-1.5 sm:py-2 lg:py-2.5 xl:py-2.5 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl font-medium font-neurial text-xs sm:text-xs lg:text-sm xl:text-sm transition-all duration-500 overflow-hidden ${
+                    className={`group relative inline-flex items-center px-2 sm:px-3 lg:px-4 xl:px-5 py-1.5 sm:py-2 lg:py-2.5 xl:py-2.5 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl font-semibold font-neurial text-xs sm:text-xs lg:text-sm xl:text-sm transition-all duration-500 overflow-hidden ${
                       cta.type === 'primary'
                         ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg hover:shadow-2xl hover:shadow-green-500/50'
-                        : 'text-black border border-gray-400 hover:bg-gray-100 rounded-xl'
+                        : isScrolled
+                          ? 'text-black border border-gray-400 hover:bg-gray-100 rounded-xl'
+                          : 'text-white border border-white/80 hover:bg-white/15 rounded-xl hover:backdrop-blur-md [text-shadow:_0_1px_8px_rgb(0_0_0_/_50%)] hover:shadow-lg'
                     }`}
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-emerald-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -312,10 +296,14 @@ export default function DesktopHeader({ data }: HeaderProps) {
                 }}
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-1.5 sm:p-2 lg:p-2.5 xl:p-3 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 border border-gray-300 hover:bg-gray-50 hover:border-gray-400"
+                className={`p-1.5 sm:p-2 lg:p-2.5 xl:p-3 rounded-lg sm:rounded-xl lg:rounded-xl xl:rounded-2xl transition-all duration-300 ${
+                  isScrolled
+                    ? 'border border-gray-300 hover:bg-gray-50 hover:border-gray-400'
+                    : 'border border-white/80 hover:bg-white/15 hover:border-white hover:backdrop-blur-md hover:shadow-lg'
+                }`}
                 aria-label="Open menu"
               >
-                <Menu className="w-3 sm:w-4 lg:w-4 xl:w-5 h-3 sm:h-4 lg:h-4 xl:h-5 text-gray-700" />
+                <Menu className={`w-3 sm:w-4 lg:w-4 xl:w-5 h-3 sm:h-4 lg:h-4 xl:h-5 ${isScrolled ? 'text-gray-700' : 'text-white [filter:_drop-shadow(0_1px_4px_rgb(0_0_0_/_50%))]'}`} />
               </motion.button>
             </div>
           </div>

@@ -15,6 +15,7 @@ export default function MobileHeader({ data }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
   const modal = useTestDriveModal();
   const pathname = usePathname();
   const { setIsSidebarOpen } = useSidebar();
@@ -32,28 +33,19 @@ export default function MobileHeader({ data }: HeaderProps) {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      // Removed setIsScrolled because it is not defined or used elsewhere
+      const viewportHeight = window.innerHeight;
+      const scrollThreshold = viewportHeight * 0.7; // 70vh
 
-      // Theme detection
-      const darkSections = document.querySelectorAll('[data-theme="dark"], .bg-black, .bg-gray-900');
-      // let currentTheme = false; // Removed unused variable
-      
-      darkSections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= 100 && rect.bottom >= 100) {
-          // currentTheme = true; // Removed unused variable
-        }
-      });
-      
-      // setIsDarkTheme(currentTheme); // Removed unused state
-      
+      // Set isScrolled based on 70vh threshold
+      setIsScrolled(currentScrollY > scrollThreshold);
+
       // Hide/show header
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false);
       } else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
         setIsVisible(true);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
@@ -98,8 +90,12 @@ export default function MobileHeader({ data }: HeaderProps) {
         }}
       >
         <header
-          className="bg-white shadow-lg border border-gray-200 rounded-3xl overflow-hidden"
-          style={{ 
+          className={`rounded-3xl overflow-hidden transition-all duration-500 ${
+            isScrolled
+              ? 'bg-white shadow-lg border border-gray-200'
+              : 'bg-transparent'
+          }`}
+          style={{
             width: '100%',
             maxWidth: '100%',
             boxSizing: 'border-box'
@@ -129,14 +125,18 @@ export default function MobileHeader({ data }: HeaderProps) {
                   href={`tel:${data.contact.phone}`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex items-center px-2 py-1.5 text-black border border-gray-400 rounded-xl font-medium font-neurial text-xs hover:bg-gray-100 transition-all duration-500"
+                  className={`flex items-center px-2 py-1.5 rounded-xl font-semibold font-neurial text-xs transition-all duration-500 ${
+                    isScrolled
+                      ? 'text-black border border-gray-400 hover:bg-gray-100'
+                      : 'text-white border border-white/80 hover:bg-white/15 hover:backdrop-blur-md hover:shadow-lg [text-shadow:_0_1px_6px_rgb(0_0_0_/_50%)]'
+                  }`}
                   style={{ minWidth: 0, maxWidth: '100%' }}
                 >
                   <Phone className="w-2.5 h-2.5 mr-1 flex-shrink-0" />
                   <span className="hidden sm:inline truncate">Call Now</span>
                   <span className="sm:hidden">Call</span>
                 </motion.a>
-                
+
                 {/* Mobile Hamburger */}
                 <motion.button
                   onClick={() => {
@@ -145,10 +145,14 @@ export default function MobileHeader({ data }: HeaderProps) {
                   }}
                   whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
-                  className="p-1.5 rounded-lg transition-all duration-300 border border-gray-300 hover:bg-gray-50 hover:border-gray-400 flex-shrink-0"
+                  className={`p-1.5 rounded-lg transition-all duration-300 flex-shrink-0 ${
+                    isScrolled
+                      ? 'border border-gray-300 hover:bg-gray-50 hover:border-gray-400'
+                      : 'border border-white/80 hover:bg-white/15 hover:border-white hover:backdrop-blur-md hover:shadow-lg'
+                  }`}
                   aria-label="Open menu"
                 >
-                  <Menu className="w-3 h-3 text-gray-700" />
+                  <Menu className={`w-3 h-3 ${isScrolled ? 'text-gray-700' : 'text-white [filter:_drop-shadow(0_1px_4px_rgb(0_0_0_/_50%))]'}`} />
                 </motion.button>
               </div>
             </div>
