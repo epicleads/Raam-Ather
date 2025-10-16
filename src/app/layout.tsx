@@ -152,14 +152,14 @@ export default function RootLayout({
           media="(min-width: 768px)"
         />
 
-        {/* ✅ Google Tag Manager */}
+        {/* ✅ Google Tag Manager - Marketing Conversion & Event Tracking */}
         <Script id="gtm-script" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-5Q2GNS22');
+            })(window,document,'script','dataLayer','GTM-TL7CZDW');
           `}
         </Script>
       </head>
@@ -167,10 +167,10 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased font-sans`}
         suppressHydrationWarning
       >
-        {/* ✅ Google Tag Manager (noscript) */}
+        {/* ✅ Google Tag Manager (noscript) - Fallback for users with JS disabled */}
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-5Q2GNS22"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-TL7CZDW"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
