@@ -20,25 +20,25 @@ export const heroFallbackData: HeroItem[] = [
       href: "/offers",
     },
   },
-  {
-    id: "1",
-    type: "image",
-    src: "/assets/d1.jpeg",
-    mobileSrc: "/assets/m1.jpeg",
-    alt: "Ather electric scooter performance video",
-    title: "Performance",
-    subtitle: "Experience Electric Excellence",
-    duration: 0, // 0 for videos (handled by onended event)
-    fallbackSrc: "/Ather-Assets/450-apex/450apex.png", // Fallback image for video
-    primaryCTA: {
-      label: "Book Test Ride",
-      href: "/book-ride",
-    },
-    secondaryCTA: {
-      label: "Test Ride",
-      href: "/test-ride",
-    },
-  },
+  // {
+  //   id: "2",
+  //   type: "image",
+  //   src: "/assets/d1.jpeg",
+  //   mobileSrc: "/assets/m1.jpeg",
+  //   alt: "Ather electric scooter performance video",
+  //   title: "Performance",
+  //   subtitle: "Experience Electric Excellence",
+  //   duration: 0, // 0 for videos (handled by onended event)
+  //   fallbackSrc: "/Ather-Assets/450-apex/450apex.png", // Fallback image for video
+  //   primaryCTA: {
+  //     label: "Book Test Ride",
+  //     href: "/book-ride",
+  //   },
+  //   secondaryCTA: {
+  //     label: "Test Ride",
+  //     href: "/test-ride",
+  //   },
+  // },
   // {
   //   id: "3",
   //   type: "image",
