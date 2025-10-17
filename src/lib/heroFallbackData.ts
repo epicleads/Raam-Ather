@@ -3,7 +3,7 @@ import type { HeroItem } from "@/app/Components/home-hero/home-hero.types";
 
 export const heroFallbackData: HeroItem[] = [
   {
-    id: "1",
+    id: "2",
     type: "image",
     src: "/assets/athernewhero1.jpg",
     mobileSrc: "/assets/m2.jpeg",
@@ -21,7 +21,7 @@ export const heroFallbackData: HeroItem[] = [
     },
   },
   {
-    id: "2",
+    id: "1",
     type: "image",
     src: "/assets/d1.jpeg",
     mobileSrc: "/assets/m1.jpeg",
